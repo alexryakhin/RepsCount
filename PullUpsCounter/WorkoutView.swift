@@ -12,7 +12,7 @@ struct WorkoutView: View {
 
     @FetchRequest private var workouts: FetchedResults<Workout>
     private var workoutSets: [WorkoutSet] {
-        let set = workouts[safe: 0]?.workoutSets as? Set<WorkoutSet> ?? []
+        let set = workouts.first?.workoutSets as? Set<WorkoutSet> ?? []
         return set.sorted {
             $0.timestamp ?? .now < $1.timestamp ?? .now
         }
@@ -36,7 +36,7 @@ struct WorkoutView: View {
             Section {
                 ForEach(workoutSets) { workoutSet in
                     HStack {
-                        Text("Set: \(workoutSet.amount)")
+                        Text("**\(workoutSet.amount)** \(workoutSet.amount > 1 ? Common.reps : Common.rep)")
                         Spacer()
                         Text((workoutSet.timestamp ?? .now).formatted(date: .omitted, time: .shortened))
                             .foregroundStyle(.secondary)
@@ -46,19 +46,33 @@ struct WorkoutView: View {
             }
 
             Section("Total") {
-                Text("Total: \(totalAmount)")
-                    .bold()
+                Text("Reps: **\(totalAmount)**")
+                Text("Sets: **\(workoutSets.count)**")
+                if workoutSets.count > 1,
+                   let firstSetDate = workoutSets.first?.timestamp,
+                   let lastSetDate = workoutSets.last?.timestamp {
+                    let distance = firstSetDate.distance(to: lastSetDate)
+                    Text("Time: **\(timeFormatter.string(from: distance)!)**")
+                }
             }
         }
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                EditButton()
-            }
             ToolbarItem {
                 Button {
                     isShowingAlert = true
                 } label: {
                     Label("Add Item", systemImage: "plus")
+                }
+            }
+            ToolbarItem(placement: .principal) {
+                VStack {
+                    Text(workouts.first?.name ?? "")
+                        .font(.headline)
+                    if let date = workouts.first?.timestamp {
+                        Text(date.formatted(date: .abbreviated, time: .shortened))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
                 }
             }
         }
@@ -68,6 +82,7 @@ struct WorkoutView: View {
                 addItem()
             }
         }
+        .navigationBarTitleDisplayMode(.inline)
     }
 
     private func addItem() {
@@ -78,7 +93,7 @@ struct WorkoutView: View {
             newItem.timestamp = .now
             newItem.id = UUID().uuidString
             newItem.amount = amount
-            newItem.workout = workouts[safe: 0]
+            newItem.workout = workouts.first
             save()
         }
     }
@@ -102,9 +117,9 @@ struct WorkoutView: View {
     }
 }
 
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
+private let timeFormatter: DateComponentsFormatter = {
+    let formatter = DateComponentsFormatter()
+    formatter.unitsStyle = .abbreviated
+    formatter.allowedUnits = [.hour, .minute, .second]
     return formatter
 }()

@@ -1,0 +1,11 @@
+input_dir: Localizable/
+output_dir: Generated/
+
+strings:
+  inputs:
+    - en.lproj/Common.strings
+  outputs:
+    - templateName: structured-swift5
+      output: Common.swift
+      params:
+        enumName: Common

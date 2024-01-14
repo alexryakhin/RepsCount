@@ -17,39 +17,55 @@ struct ContentView: View {
     )
     private var workouts: FetchedResults<Workout>
 
+    @State private var isShowingAlert = false
+    @State private var alertInput = ""
+
     var body: some View {
         NavigationView {
             List {
                 ForEach(workouts) { workout in
                     NavigationLink {
                         WorkoutView(workoutId: workout.id ?? "")
-                            .navigationTitle(workout.name ?? "default name")
-                            .navigationBarTitleDisplayMode(.inline)
                     } label: {
-                        Text(workout.name ?? "default name")
+                        VStack(alignment: .leading) {
+                            Text(workout.name ?? "default name")
+                                .font(.headline)
+                                .foregroundStyle(.primary)
+                            if let date = workout.timestamp {
+                                Text(date.formatted(date: .abbreviated, time: .shortened))
+                                    .font(.subheadline)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
                     }
                 }
                 .onDelete(perform: deleteItems)
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
                 ToolbarItem {
-                    Button(action: addItem) {
+                    Button {
+                        isShowingAlert = true
+                    } label: {
                         Label("Add Item", systemImage: "plus")
                     }
                 }
             }
-            .navigationTitle("Pull-ups counter")
+            .navigationTitle("Workout reps counter")
+            .alert("Enter a workout name", isPresented: $isShowingAlert) {
+                TextField("Name", text: $alertInput)
+                Button("Add") {
+                    addItem()
+                }
+            }
         }
     }
 
     private func addItem() {
+        defer { alertInput = "" }
         withAnimation {
             let newItem = Workout(context: viewContext)
             newItem.timestamp = .now
-            newItem.name = Date.now.formatted(date: .abbreviated, time: .shortened)
+            newItem.name = alertInput
             newItem.id = UUID().uuidString
             save()
         }
@@ -73,3 +89,5 @@ struct ContentView: View {
         }
     }
 }
+
+//
