@@ -36,7 +36,7 @@ struct WorkoutView: View {
             Section {
                 ForEach(workoutSets) { workoutSet in
                     HStack {
-                        Text("**\(workoutSet.amount)** \(workoutSet.amount > 1 ? Common.reps : Common.rep)")
+                        Text("\(workoutSet.amount) reps")
                         Spacer()
                         Text((workoutSet.timestamp ?? .now).formatted(date: .omitted, time: .shortened))
                             .foregroundStyle(.secondary)
@@ -46,13 +46,13 @@ struct WorkoutView: View {
             }
 
             Section("Total") {
-                Text("Reps: **\(totalAmount)**")
-                Text("Sets: **\(workoutSets.count)**")
+                Text("Reps: \(totalAmount)")
+                Text("Sets: \(workoutSets.count)")
                 if workoutSets.count > 1,
                    let firstSetDate = workoutSets.first?.timestamp,
                    let lastSetDate = workoutSets.last?.timestamp {
                     let distance = firstSetDate.distance(to: lastSetDate)
-                    Text("Time: **\(timeFormatter.string(from: distance)!)**")
+                    Text("Time: \(timeFormatter.string(from: distance)!)")
                 }
             }
         }
@@ -76,7 +76,7 @@ struct WorkoutView: View {
                 }
             }
         }
-        .alert("Enter pull-ups amount", isPresented: $isShowingAlert) {
+        .alert("Enter the amount of reps", isPresented: $isShowingAlert) {
             TextField("Amount", text: $alertInput)
             Button("Add") {
                 addItem()

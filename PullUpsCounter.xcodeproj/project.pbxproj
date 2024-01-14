@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		021658172B54150E009EAF77 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 021658162B54150E009EAF77 /* swiftgen.yml */; };
+		0216581A2B543395009EAF77 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 021658192B543395009EAF77 /* Localizable.xcstrings */; };
 		024C4E052B52D32D00032346 /* PullUpsCounterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C4E042B52D32D00032346 /* PullUpsCounterApp.swift */; };
 		024C4E072B52D32D00032346 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C4E062B52D32D00032346 /* ContentView.swift */; };
 		024C4E092B52D32E00032346 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 024C4E082B52D32E00032346 /* Assets.xcassets */; };
@@ -16,12 +16,10 @@
 		024C4E112B52D32E00032346 /* PullUpsCounter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 024C4E0F2B52D32E00032346 /* PullUpsCounter.xcdatamodeld */; };
 		024C4E1A2B52D4F200032346 /* WorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C4E192B52D4F200032346 /* WorkoutView.swift */; };
 		024C4E1C2B53112A00032346 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C4E1B2B53112A00032346 /* Extensions.swift */; };
-		024C4E222B53F51600032346 /* Common.strings in Resources */ = {isa = PBXBuildFile; fileRef = 024C4E242B53F51600032346 /* Common.strings */; };
-		02A45EE82B53FD1D0060DFF0 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A45EE72B53FD1D0060DFF0 /* Common.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		021658162B54150E009EAF77 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
+		021658192B543395009EAF77 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		024C4E012B52D32D00032346 /* PullUpsCounter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PullUpsCounter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		024C4E042B52D32D00032346 /* PullUpsCounterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullUpsCounterApp.swift; sourceTree = "<group>"; };
 		024C4E062B52D32D00032346 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -33,9 +31,6 @@
 		024C4E132B52D32E00032346 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		024C4E192B52D4F200032346 /* WorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutView.swift; sourceTree = "<group>"; };
 		024C4E1B2B53112A00032346 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		024C4E232B53F51600032346 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Common.strings; sourceTree = "<group>"; };
-		024C4E252B53F51900032346 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Common.strings; sourceTree = "<group>"; };
-		02A45EE72B53FD1D0060DFF0 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,28 +88,10 @@
 		024C4E1D2B53F32D00032346 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				021658162B54150E009EAF77 /* swiftgen.yml */,
 				024C4E082B52D32E00032346 /* Assets.xcassets */,
-				024C4E1F2B53F39500032346 /* Generated */,
-				024C4E1E2B53F37800032346 /* Localizable */,
+				021658192B543395009EAF77 /* Localizable.xcstrings */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		024C4E1E2B53F37800032346 /* Localizable */ = {
-			isa = PBXGroup;
-			children = (
-				024C4E242B53F51600032346 /* Common.strings */,
-			);
-			path = Localizable;
-			sourceTree = "<group>";
-		};
-		024C4E1F2B53F39500032346 /* Generated */ = {
-			isa = PBXGroup;
-			children = (
-				02A45EE72B53FD1D0060DFF0 /* Common.swift */,
-			);
-			path = Generated;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +104,6 @@
 				024C4DFD2B52D32D00032346 /* Sources */,
 				024C4DFE2B52D32D00032346 /* Frameworks */,
 				024C4DFF2B52D32D00032346 /* Resources */,
-				021658182B542FFD009EAF77 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -178,33 +154,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				024C4E0C2B52D32E00032346 /* Preview Assets.xcassets in Resources */,
+				0216581A2B543395009EAF77 /* Localizable.xcstrings in Resources */,
 				024C4E092B52D32E00032346 /* Assets.xcassets in Resources */,
-				024C4E222B53F51600032346 /* Common.strings in Resources */,
-				021658172B54150E009EAF77 /* swiftgen.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		021658182B542FFD009EAF77 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ -f $TARGET_NAME/Resources/swiftgen.yml ]; then\n  \"${TARGET_NAME}/Resources/SwiftGen/bin/swiftgen\" config run --config $TARGET_NAME/Resources/swiftgen.yml\nelse\n  echo \"warning: SwiftGen config not found\"\n  exit 1\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		024C4DFD2B52D32D00032346 /* Sources */ = {
@@ -217,23 +172,10 @@
 				024C4E072B52D32D00032346 /* ContentView.swift in Sources */,
 				024C4E052B52D32D00032346 /* PullUpsCounterApp.swift in Sources */,
 				024C4E1A2B52D4F200032346 /* WorkoutView.swift in Sources */,
-				02A45EE82B53FD1D0060DFF0 /* Common.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		024C4E242B53F51600032346 /* Common.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				024C4E232B53F51600032346 /* en */,
-				024C4E252B53F51900032346 /* ru */,
-			);
-			name = Common.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		024C4E142B52D32E00032346 /* Debug */ = {

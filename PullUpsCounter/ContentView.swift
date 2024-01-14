@@ -28,7 +28,7 @@ struct ContentView: View {
                         WorkoutView(workoutId: workout.id ?? "")
                     } label: {
                         VStack(alignment: .leading) {
-                            Text(workout.name ?? "default name")
+                            Text(workout.name ?? "Default name")
                                 .font(.headline)
                                 .foregroundStyle(.primary)
                             if let date = workout.timestamp {
@@ -46,13 +46,14 @@ struct ContentView: View {
                     Button {
                         isShowingAlert = true
                     } label: {
-                        Label("Add Item", systemImage: "plus")
+                        Image(systemName: "plus")
                     }
                 }
             }
             .navigationTitle("Workout reps counter")
             .alert("Enter a workout name", isPresented: $isShowingAlert) {
                 TextField("Name", text: $alertInput)
+                Button("Cancel", role: .cancel) { }
                 Button("Add") {
                     addItem()
                 }
@@ -62,6 +63,7 @@ struct ContentView: View {
 
     private func addItem() {
         defer { alertInput = "" }
+        guard !alertInput.isEmpty else { return }
         withAnimation {
             let newItem = Workout(context: viewContext)
             newItem.timestamp = .now
@@ -89,5 +91,3 @@ struct ContentView: View {
         }
     }
 }
-
-//
