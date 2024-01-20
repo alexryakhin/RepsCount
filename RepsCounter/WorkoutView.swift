@@ -78,6 +78,7 @@ struct WorkoutView: View {
         }
         .alert("Enter the amount of reps", isPresented: $isShowingAlert) {
             TextField("Amount", text: $alertInput)
+                .keyboardType(.numberPad)
             Button("Add") {
                 addItem()
             }

@@ -173,6 +173,22 @@
         }
       }
     },
+    "Reps counter" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Счетчик подходов"
+          }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prilazni brojač"
+          }
+        }
+      }
+    },
     "Reps: %lld" : {
       "localizations" : {
         "ru" : {
@@ -188,6 +204,9 @@
           }
         }
       }
+    },
+    "Select a date" : {
+
     },
     "Sets: %lld" : {
       "localizations" : {
@@ -233,22 +252,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ukupno"
-          }
-        }
-      }
-    },
-    "Workout reps counter" : {
-      "localizations" : {
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Счетчик подходов"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Brojač ponavljanja treninga"
           }
         }
       }

@@ -17,47 +17,92 @@ struct ContentView: View {
     )
     private var workouts: FetchedResults<Workout>
 
+    private var groupedWorkouts: [Date: [Workout]] {
+        Dictionary(grouping: workouts, by: { workout in
+            // Use only the day component for grouping
+            let components = Calendar.current.dateComponents([.year, .month, .day], from: workout.timestamp ?? .now)
+            return Calendar.current.date(from: components)!
+        })
+    }
+
     @State private var isShowingAlert = false
     @State private var alertInput = ""
+    @State private var dateSelection = Date()
+
+    private var dateSelectionWithTimeOmitted: Date {
+        let components = Calendar.current.dateComponents([.year, .month, .day], from: dateSelection)
+        return Calendar.current.date(from: components)!
+    }
 
     var body: some View {
         NavigationView {
             List {
-                ForEach(workouts) { workout in
-                    NavigationLink {
-                        WorkoutView(workoutId: workout.id ?? "")
-                    } label: {
-                        VStack(alignment: .leading) {
-                            Text(workout.name ?? "Default name")
-                                .font(.headline)
-                                .foregroundStyle(.primary)
-                            if let date = workout.timestamp {
-                                Text(date.formatted(date: .abbreviated, time: .shortened))
-                                    .font(.subheadline)
-                                    .foregroundStyle(.secondary)
-                            }
-                        }
+                if Calendar.current.isDateInToday(dateSelection) {
+                    ForEach(groupedWorkouts.keys.sorted(by: >), id: \.self) { date in
+                        sectionForDate(date)
                     }
+                } else {
+                    sectionForDate(dateSelectionWithTimeOmitted)
                 }
-                .onDelete(perform: deleteItems)
             }
             .toolbar {
-                ToolbarItem {
+                ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         isShowingAlert = true
                     } label: {
                         Image(systemName: "plus")
                     }
                 }
+                ToolbarItem(placement: .topBarLeading) {
+                    DatePicker(selection: $dateSelection, in: ...Date.now, displayedComponents: .date) {
+                        Text("Select a date")
+                    }
+                    .labelsHidden()
+                }
             }
-            .navigationTitle("Workout reps counter")
+            .navigationTitle("Reps counter")
             .alert("Enter a workout name", isPresented: $isShowingAlert) {
                 TextField("Name", text: $alertInput)
+                    .autocorrectionDisabled()
                 Button("Cancel", role: .cancel) { }
                 Button("Add") {
                     addItem()
                 }
             }
+            .overlay {
+                if groupedWorkouts[dateSelectionWithTimeOmitted] == nil {
+                    ContentUnavailableView.search
+                }
+            }
+            .animation(.easeIn, value: dateSelection)
+        }
+    }
+
+    @ViewBuilder
+    private func sectionForDate(_ date: Date) -> some View {
+        let workoutsInDate = groupedWorkouts[date] ?? []
+        Section {
+            ForEach(workoutsInDate) { workout in
+                NavigationLink {
+                    WorkoutView(workoutId: workout.id ?? "")
+                } label: {
+                    VStack(alignment: .leading) {
+                        Text(workout.name ?? "Default name")
+                            .font(.headline)
+                            .foregroundStyle(.primary)
+                        if let date = workout.timestamp {
+                            Text(date.formatted(date: .omitted, time: .shortened))
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                }
+            }
+            .onDelete { indices in
+                deleteElements(at: indices, for: date)
+            }
+        } header: {
+            Text(date.formatted(date: .complete, time: .omitted))
         }
     }
 
@@ -73,11 +118,15 @@ struct ContentView: View {
         }
     }
 
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { workouts[$0] }.forEach(viewContext.delete)
-            save()
+    func deleteElements(at indices: IndexSet, for date: Date) {
+        if let workouts = groupedWorkouts[date] {
+            withAnimation {
+                indices
+                    .map { workouts[$0] }
+                    .forEach(viewContext.delete)
+            }
         }
+        save()
     }
 
     private func save() {
