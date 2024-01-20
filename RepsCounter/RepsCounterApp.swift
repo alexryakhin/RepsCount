@@ -1,6 +1,6 @@
 //
-//  PullUpsCounterApp.swift
-//  PullUpsCounter
+//  RepsCounterApp.swift
+//  RepsCounter
 //
 //  Created by Aleksandr Riakhin on 1/13/24.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct PullUpsCounterApp: App {
+struct RepsCounterApp: App {
     let persistenceController = PersistenceController.shared
 
     var body: some Scene {

@@ -1,6 +1,6 @@
 //
 //  WorkoutView.swift
-//  PullUpsCounter
+//  RepsCounter
 //
 //  Created by Aleksandr Riakhin on 1/13/24.
 //
@@ -61,7 +61,7 @@ struct WorkoutView: View {
                 Button {
                     isShowingAlert = true
                 } label: {
-                    Label("Add Item", systemImage: "plus")
+                    Image(systemName: "plus")
                 }
             }
             ToolbarItem(placement: .principal) {

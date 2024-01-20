@@ -1,6 +1,6 @@
 //
 //  Extensions.swift
-//  PullUpsCounter
+//  RepsCounter
 //
 //  Created by Aleksandr Riakhin on 1/13/24.
 //
