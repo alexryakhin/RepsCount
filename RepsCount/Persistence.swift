@@ -1,6 +1,6 @@
 //
 //  Persistence.swift
-//  RepsCounter
+//  RepsCount
 //
 //  Created by Aleksandr Riakhin on 1/13/24.
 //
@@ -13,7 +13,7 @@ struct PersistenceController {
     let container: NSPersistentCloudKitContainer
 
     init(inMemory: Bool = false) {
-        container = NSPersistentCloudKitContainer(name: "RepsCounter")
+        container = NSPersistentCloudKitContainer(name: "RepsCount")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }

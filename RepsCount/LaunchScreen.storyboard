@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="figure.core.training" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="wzg-7f-uT6">
+                                <rect key="frame" x="76.666666666666686" y="632.66666666666663" width="240" height="130.66666666666663"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="140" id="l4s-uc-uRY"/>
+                                    <constraint firstAttribute="width" constant="240" id="yzd-wg-s2R"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="bottom" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="NXC-bK-D46">
+                                <rect key="frame" x="16" y="356" width="361" height="140"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="figure.strengthtraining.traditional" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="MoF-SX-B7m">
+                                        <rect key="frame" x="0.0" y="-1" width="180.66666666666666" height="142"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="figure.jumprope" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="NNe-5H-wVS">
+                                        <rect key="frame" x="180.66666666666663" y="-2" width="180.33333333333337" height="144.33333333333334"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="140" id="kdo-Rh-QWC"/>
+                                </constraints>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reps Counter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9QG-cc-wqS">
+                                <rect key="frame" x="79.666666666666686" y="174" width="234" height="44.333333333333343"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="37"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="9QG-cc-wqS" firstAttribute="top" secondItem="Bcu-3y-fUS" secondAttribute="top" constant="115" id="2uy-KZ-TCJ"/>
+                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="bottom" secondItem="wzg-7f-uT6" secondAttribute="bottom" constant="50" id="4n3-7x-nkg"/>
+                            <constraint firstItem="9QG-cc-wqS" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Ix2-ep-Wh3"/>
+                            <constraint firstItem="wzg-7f-uT6" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="JJo-HX-07x"/>
+                            <constraint firstItem="NXC-bK-D46" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" constant="16" id="VCk-H7-CaP"/>
+                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="trailing" secondItem="NXC-bK-D46" secondAttribute="trailing" constant="16" id="VSP-7e-yU7"/>
+                            <constraint firstItem="NXC-bK-D46" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="W1q-tX-azX"/>
+                            <constraint firstItem="NXC-bK-D46" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="zr6-Om-Uf2"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="52.671755725190835" y="374.64788732394368"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="figure.core.training" catalog="system" width="128" height="48"/>
+        <image name="figure.jumprope" catalog="system" width="79" height="128"/>
+        <image name="figure.strengthtraining.traditional" catalog="system" width="128" height="119"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

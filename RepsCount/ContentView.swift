@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  RepsCounter
+//  RepsCount
 //
 //  Created by Aleksandr Riakhin on 1/13/24.
 //
@@ -36,13 +36,33 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            List {
-                if Calendar.current.isDateInToday(dateSelection) {
-                    ForEach(groupedWorkouts.keys.sorted(by: >), id: \.self) { date in
-                        sectionForDate(date)
-                    }
+            Group {
+                if groupedWorkouts.isEmpty {
+                    ContentUnavailableView(
+                        "No workouts yet",
+                        systemImage: "figure.strengthtraining.functional",
+                        description: Text("Tap on a plus button to add a new exercise!")
+                    )
                 } else {
-                    sectionForDate(dateSelectionWithTimeOmitted)
+                    List {
+                        if Calendar.current.isDateInToday(dateSelection) {
+                            ForEach(groupedWorkouts.keys.sorted(by: >), id: \.self) { date in
+                                sectionForDate(date)
+                            }
+                        } else {
+                            sectionForDate(dateSelectionWithTimeOmitted)
+                        }
+                    }
+                    .overlay {
+                        if !Calendar.current.isDateInToday(dateSelection),
+                            groupedWorkouts[dateSelectionWithTimeOmitted] == nil {
+                            ContentUnavailableView(
+                                "No workouts",
+                                systemImage: "figure.strengthtraining.functional",
+                                description: Text("No workouts for this date!")
+                            )
+                        }
+                    }
                 }
             }
             .toolbar {
@@ -69,12 +89,10 @@ struct ContentView: View {
                     addItem()
                 }
             }
-            .overlay {
-                if groupedWorkouts[dateSelectionWithTimeOmitted] == nil {
-                    ContentUnavailableView.search
-                }
-            }
             .animation(.easeIn, value: dateSelection)
+        }
+        .onAppear {
+            LocationManager.shared.initiateLocationManager()
         }
     }
 
@@ -107,14 +125,22 @@ struct ContentView: View {
     }
 
     private func addItem() {
-        defer { alertInput = "" }
         guard !alertInput.isEmpty else { return }
-        withAnimation {
+        Task { @MainActor in
             let newItem = Workout(context: viewContext)
             newItem.timestamp = .now
             newItem.name = alertInput
             newItem.id = UUID().uuidString
-            save()
+            if let location = await LocationManager.shared.getCurrentLocation() {
+                newItem.latitude = location.latitude
+                newItem.longitude = location.longitude
+                newItem.address = location.address
+                print(location)
+            }
+            withAnimation {
+                save()
+            }
+            alertInput = ""
         }
     }
 

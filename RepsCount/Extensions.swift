@@ -1,6 +1,6 @@
 //
 //  Extensions.swift
-//  RepsCounter
+//  RepsCount
 //
 //  Created by Aleksandr Riakhin on 1/13/24.
 //

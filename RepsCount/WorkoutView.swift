@@ -1,11 +1,12 @@
 //
 //  WorkoutView.swift
-//  RepsCounter
+//  RepsCount
 //
 //  Created by Aleksandr Riakhin on 1/13/24.
 //
 
 import SwiftUI
+import MapKit
 
 struct WorkoutView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -19,6 +20,9 @@ struct WorkoutView: View {
     }
     private var totalAmount: Int {
         Int(workoutSets.map { $0.amount }.reduce(0, +))
+    }
+    private var isEditable: Bool {
+        Calendar.current.isDateInToday(workouts.first?.timestamp ?? .now)
     }
     @State private var isShowingAlert = false
     @State private var alertInput = ""
@@ -42,7 +46,9 @@ struct WorkoutView: View {
                             .foregroundStyle(.secondary)
                     }
                 }
-                .onDelete(perform: deleteItems)
+                .if(isEditable, transform: { view in
+                    view.onDelete(perform: deleteItems)
+                })
             }
 
             Section("Total") {
@@ -55,13 +61,31 @@ struct WorkoutView: View {
                     Text("Time: \(timeFormatter.string(from: distance)!)")
                 }
             }
+
+            if let latitude = workouts.first?.latitude, let longitude = workouts.first?.longitude {
+                let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
+                Section("Map") {
+                    Map(position: .constant(MapCameraPosition.region(MKCoordinateRegion(center: location, span: span)))) {
+                        Marker(workouts.first?.name ?? "", coordinate: location)
+                    }
+                    .frame(height: 200)
+                    .allowsHitTesting(false)
+                    if let address = workouts.first?.address {
+                        Text(address) .bold()
+                    }
+                }
+            }
+
         }
         .toolbar {
-            ToolbarItem {
-                Button {
-                    isShowingAlert = true
-                } label: {
-                    Image(systemName: "plus")
+            if isEditable {
+                ToolbarItem {
+                    Button {
+                        isShowingAlert = true
+                    } label: {
+                        Image(systemName: "plus")
+                    }
                 }
             }
             ToolbarItem(placement: .principal) {

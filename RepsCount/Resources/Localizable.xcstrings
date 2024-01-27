@@ -157,6 +157,22 @@
         }
       }
     },
+    "Map" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Карта"
+          }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mapa"
+          }
+        }
+      }
+    },
     "Name" : {
       "localizations" : {
         "ru" : {
@@ -169,6 +185,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ime"
+          }
+        }
+      }
+    },
+    "No workouts" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нет упражнений"
+          }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nema treninga"
+          }
+        }
+      }
+    },
+    "No workouts for this date!" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нету упражнений в этот день"
+          }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nema treninga za ovaj datum!"
+          }
+        }
+      }
+    },
+    "No workouts yet" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пока нету упражнений"
+          }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Još nema treninga"
           }
         }
       }
@@ -206,7 +270,20 @@
       }
     },
     "Select a date" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выберите день"
+          }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Izaberite datum"
+          }
+        }
+      }
     },
     "Sets: %lld" : {
       "localizations" : {
@@ -220,6 +297,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pristupi: %lld"
+          }
+        }
+      }
+    },
+    "Tap on a plus button to add a new exercise!" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нажмите на плюс что бы добавить упражнение"
+          }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dodirnite dugme plus da dodate novu vežbu!"
           }
         }
       }
