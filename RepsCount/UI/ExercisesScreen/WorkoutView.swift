@@ -9,6 +9,8 @@ import SwiftUI
 import MapKit
 
 struct WorkoutView: View {
+    @AppStorage("measurementUnit") var measurementUnit: MeasurementUnit = .kilograms
+
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest private var workouts: FetchedResults<Workout>
@@ -42,8 +44,14 @@ struct WorkoutView: View {
                 Section("Sets") {
                     ForEach(Array(workoutSets.enumerated()), id: \.offset) { offset, workoutSet in
                         HStack {
-                            Text("#\(offset + 1): \(workoutSet.amount) reps")
-                                .fontWeight(.semibold)
+                            if workoutSet.weight > 0 {
+                                let converted: String = measurementUnit.convertFromKilograms(workoutSet.weight)
+                                Text("#\(offset + 1): \(workoutSet.amount) reps, \(converted)")
+                                    .fontWeight(.semibold)
+                            } else {
+                                Text("#\(offset + 1): \(workoutSet.amount) reps")
+                                    .fontWeight(.semibold)
+                            }
                             Spacer()
                             Text((workoutSet.timestamp ?? .now).formatted(date: .omitted, time: .shortened))
                                 .foregroundStyle(.secondary)
@@ -69,7 +77,10 @@ struct WorkoutView: View {
                 }
             }
 
-            if let latitude = workouts.first?.latitude, let longitude = workouts.first?.longitude {
+            if let latitude = workouts.first?.latitude,
+               let longitude = workouts.first?.longitude,
+               latitude != 0,
+               longitude != 0 {
                 let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
                 let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
                 Section("Map") {
@@ -101,7 +112,7 @@ struct WorkoutView: View {
         .alert("Enter the amount of reps", isPresented: $isShowingAlert) {
             TextField("Amount", text: $amountInput)
                 .keyboardType(.numberPad)
-            TextField("Weight (optional)", text: $weightInput)
+            TextField("Weight, \(Text(measurementUnit.shortName)) (optional)", text: $weightInput)
                 .keyboardType(.decimalPad)
             Button("Add") {
                 addItem()
@@ -128,7 +139,7 @@ struct WorkoutView: View {
                             Circle().strokeBorder()
                         }
                 }
-                .padding()
+                .padding(30)
             }
         }
     }
@@ -144,7 +155,8 @@ struct WorkoutView: View {
             newItem.amount = amount
             newItem.workout = workouts.first
             if let weight = Double(weightInput) {
-                newItem.weight = weight
+                let kilograms = measurementUnit.convertToKilograms(weight)
+                newItem.weight = kilograms.value
             }
             save()
         }

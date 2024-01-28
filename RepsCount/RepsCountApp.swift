@@ -13,7 +13,7 @@ struct RepsCountApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabViewScreen()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .fontDesign(.rounded)
         }

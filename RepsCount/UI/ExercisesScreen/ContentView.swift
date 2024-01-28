@@ -8,8 +8,9 @@
 import SwiftUI
 import CoreData
 
-struct ContentView: View {
+struct ExercisesView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @AppStorage("savesLocation") var savesLocation: Bool = true
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \WorkoutSet.timestamp, ascending: true)],
@@ -55,7 +56,6 @@ struct ContentView: View {
                     }
                     .overlay {
                         if let dateSelection,
-//                           !Calendar.current.isDateInToday(dateSelection),
                            let date = dateSelectionWithTimeOmitted(for: dateSelection),
                            groupedWorkouts[date] == nil {
                             ContentUnavailableView(
@@ -107,11 +107,13 @@ struct ContentView: View {
                             Circle().strokeBorder()
                         }
                 }
-                .padding()
+                .padding(30)
             }
         }
         .onAppear {
-            LocationManager.shared.initiateLocationManager()
+            if savesLocation {
+                LocationManager.shared.initiateLocationManager()
+            }
         }
     }
 
@@ -150,11 +152,11 @@ struct ContentView: View {
             newItem.timestamp = .now
             newItem.name = alertInput
             newItem.id = UUID().uuidString
-            if let location = await LocationManager.shared.getCurrentLocation() {
+            if savesLocation, let location = await LocationManager.shared.getCurrentLocation() {
                 newItem.latitude = location.latitude
                 newItem.longitude = location.longitude
                 newItem.address = location.address
-                print(location)
+                debugPrint(location)
             }
             withAnimation {
                 save()
@@ -184,4 +186,8 @@ struct ContentView: View {
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
     }
+}
+
+#Preview {
+    ExercisesView()
 }

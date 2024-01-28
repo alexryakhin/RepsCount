@@ -22,6 +22,11 @@
 		025F49D52B65604000C571FF /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F49D42B65604000C571FF /* DatePickerView.swift */; };
 		02FC1F4D2B656090008F5D8D /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC1F4C2B656090008F5D8D /* CustomDatePicker.swift */; };
 		02FC1F4F2B6561D2008F5D8D /* ChildSizeReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC1F4E2B6561D2008F5D8D /* ChildSizeReader.swift */; };
+		02FC1F542B664E02008F5D8D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC1F532B664E02008F5D8D /* SettingsView.swift */; };
+		02FC1F572B6653B9008F5D8D /* TabViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC1F562B6653B9008F5D8D /* TabViewScreen.swift */; };
+		02FC1F592B665FAE008F5D8D /* MeasurementUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC1F582B665FAE008F5D8D /* MeasurementUnit.swift */; };
+		02FC1F5B2B6668FB008F5D8D /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC1F5A2B6668FB008F5D8D /* GlobalConstants.swift */; };
+		02FC1F5D2B666939008F5D8D /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC1F5C2B666939008F5D8D /* String+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +48,11 @@
 		025F49D42B65604000C571FF /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		02FC1F4C2B656090008F5D8D /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
 		02FC1F4E2B6561D2008F5D8D /* ChildSizeReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildSizeReader.swift; sourceTree = "<group>"; };
+		02FC1F532B664E02008F5D8D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		02FC1F562B6653B9008F5D8D /* TabViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewScreen.swift; sourceTree = "<group>"; };
+		02FC1F582B665FAE008F5D8D /* MeasurementUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementUnit.swift; sourceTree = "<group>"; };
+		02FC1F5A2B6668FB008F5D8D /* GlobalConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
+		02FC1F5C2B666939008F5D8D /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,8 +87,7 @@
 			children = (
 				024C4E042B52D32D00032346 /* RepsCountApp.swift */,
 				024C4E1D2B53F32D00032346 /* Resources */,
-				024C4E062B52D32D00032346 /* ContentView.swift */,
-				024C4E192B52D4F200032346 /* WorkoutView.swift */,
+				02FC1F502B664DD2008F5D8D /* UI */,
 				024C4E1B2B53112A00032346 /* Extensions.swift */,
 				024C4E0D2B52D32E00032346 /* Persistence.swift */,
 				025573432B5D8EF3001DF4B6 /* View+Extension.swift */,
@@ -86,6 +95,9 @@
 				025F49D42B65604000C571FF /* DatePickerView.swift */,
 				02FC1F4C2B656090008F5D8D /* CustomDatePicker.swift */,
 				02FC1F4E2B6561D2008F5D8D /* ChildSizeReader.swift */,
+				02FC1F582B665FAE008F5D8D /* MeasurementUnit.swift */,
+				02FC1F5A2B6668FB008F5D8D /* GlobalConstants.swift */,
+				02FC1F5C2B666939008F5D8D /* String+Ext.swift */,
 				025573412B5BA5E2001DF4B6 /* LaunchScreen.storyboard */,
 				024C4E122B52D32E00032346 /* RepsCount.entitlements */,
 				024C4E132B52D32E00032346 /* Info.plist */,
@@ -110,6 +122,41 @@
 				021658192B543395009EAF77 /* Localizable.xcstrings */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		02FC1F502B664DD2008F5D8D /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				02FC1F552B6653A3008F5D8D /* TabView */,
+				02FC1F522B664DE4008F5D8D /* SettingsScreen */,
+				02FC1F512B664DD9008F5D8D /* ExercisesScreen */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		02FC1F512B664DD9008F5D8D /* ExercisesScreen */ = {
+			isa = PBXGroup;
+			children = (
+				024C4E062B52D32D00032346 /* ContentView.swift */,
+				024C4E192B52D4F200032346 /* WorkoutView.swift */,
+			);
+			path = ExercisesScreen;
+			sourceTree = "<group>";
+		};
+		02FC1F522B664DE4008F5D8D /* SettingsScreen */ = {
+			isa = PBXGroup;
+			children = (
+				02FC1F532B664E02008F5D8D /* SettingsView.swift */,
+			);
+			path = SettingsScreen;
+			sourceTree = "<group>";
+		};
+		02FC1F552B6653A3008F5D8D /* TabView */ = {
+			isa = PBXGroup;
+			children = (
+				02FC1F562B6653B9008F5D8D /* TabViewScreen.swift */,
+			);
+			path = TabView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,10 +239,15 @@
 				024C4E0E2B52D32E00032346 /* Persistence.swift in Sources */,
 				025F49D52B65604000C571FF /* DatePickerView.swift in Sources */,
 				024C4E072B52D32D00032346 /* ContentView.swift in Sources */,
+				02FC1F572B6653B9008F5D8D /* TabViewScreen.swift in Sources */,
+				02FC1F5B2B6668FB008F5D8D /* GlobalConstants.swift in Sources */,
 				025F49D32B6501C200C571FF /* LocationManager.swift in Sources */,
+				02FC1F592B665FAE008F5D8D /* MeasurementUnit.swift in Sources */,
 				02FC1F4F2B6561D2008F5D8D /* ChildSizeReader.swift in Sources */,
 				024C4E052B52D32D00032346 /* RepsCountApp.swift in Sources */,
+				02FC1F542B664E02008F5D8D /* SettingsView.swift in Sources */,
 				025573442B5D8EF3001DF4B6 /* View+Extension.swift in Sources */,
+				02FC1F5D2B666939008F5D8D /* String+Ext.swift in Sources */,
 				024C4E1A2B52D4F200032346 /* WorkoutView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -330,7 +382,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = RepsCount/RepsCount.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"RepsCount/Preview Content\"";
 				DEVELOPMENT_TEAM = 69S862NXBP;
 				ENABLE_PREVIEWS = YES;
@@ -366,7 +418,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = RepsCount/RepsCount.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"RepsCount/Preview Content\"";
 				DEVELOPMENT_TEAM = 69S862NXBP;
 				ENABLE_PREVIEWS = YES;
