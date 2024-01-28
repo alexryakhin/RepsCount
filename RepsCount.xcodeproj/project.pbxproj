@@ -19,6 +19,9 @@
 		025573422B5BA5E2001DF4B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 025573412B5BA5E2001DF4B6 /* LaunchScreen.storyboard */; };
 		025573442B5D8EF3001DF4B6 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025573432B5D8EF3001DF4B6 /* View+Extension.swift */; };
 		025F49D32B6501C200C571FF /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F49D22B6501C200C571FF /* LocationManager.swift */; };
+		025F49D52B65604000C571FF /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F49D42B65604000C571FF /* DatePickerView.swift */; };
+		02FC1F4D2B656090008F5D8D /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC1F4C2B656090008F5D8D /* CustomDatePicker.swift */; };
+		02FC1F4F2B6561D2008F5D8D /* ChildSizeReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC1F4E2B6561D2008F5D8D /* ChildSizeReader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +40,9 @@
 		025573412B5BA5E2001DF4B6 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		025573432B5D8EF3001DF4B6 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		025F49D22B6501C200C571FF /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		025F49D42B65604000C571FF /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
+		02FC1F4C2B656090008F5D8D /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
+		02FC1F4E2B6561D2008F5D8D /* ChildSizeReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildSizeReader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +83,9 @@
 				024C4E0D2B52D32E00032346 /* Persistence.swift */,
 				025573432B5D8EF3001DF4B6 /* View+Extension.swift */,
 				025F49D22B6501C200C571FF /* LocationManager.swift */,
+				025F49D42B65604000C571FF /* DatePickerView.swift */,
+				02FC1F4C2B656090008F5D8D /* CustomDatePicker.swift */,
+				02FC1F4E2B6561D2008F5D8D /* ChildSizeReader.swift */,
 				025573412B5BA5E2001DF4B6 /* LaunchScreen.storyboard */,
 				024C4E122B52D32E00032346 /* RepsCount.entitlements */,
 				024C4E132B52D32E00032346 /* Info.plist */,
@@ -177,11 +186,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02FC1F4D2B656090008F5D8D /* CustomDatePicker.swift in Sources */,
 				024C4E112B52D32E00032346 /* RepsCount.xcdatamodeld in Sources */,
 				024C4E1C2B53112A00032346 /* Extensions.swift in Sources */,
 				024C4E0E2B52D32E00032346 /* Persistence.swift in Sources */,
+				025F49D52B65604000C571FF /* DatePickerView.swift in Sources */,
 				024C4E072B52D32D00032346 /* ContentView.swift in Sources */,
 				025F49D32B6501C200C571FF /* LocationManager.swift in Sources */,
+				02FC1F4F2B6561D2008F5D8D /* ChildSizeReader.swift in Sources */,
 				024C4E052B52D32D00032346 /* RepsCountApp.swift in Sources */,
 				025573442B5D8EF3001DF4B6 /* View+Extension.swift in Sources */,
 				024C4E1A2B52D4F200032346 /* WorkoutView.swift in Sources */,
@@ -326,7 +338,7 @@
 				INFOPLIST_FILE = RepsCount/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Reps Counter";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.sports";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "That's only needed to save your workout's location";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "That's only needed to save your exercise's location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -362,7 +374,7 @@
 				INFOPLIST_FILE = RepsCount/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Reps Counter";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.sports";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "That's only needed to save your workout's location";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "That's only needed to save your exercise's location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

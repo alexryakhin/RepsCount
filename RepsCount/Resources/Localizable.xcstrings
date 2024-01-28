@@ -1,7 +1,18 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "#%lld: %lld reps" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "#%1$lld: %2$lld reps"
+          }
+        }
+      }
+    },
     "%lld reps" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -270,6 +281,7 @@
       }
     },
     "Select a date" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -284,6 +296,9 @@
           }
         }
       }
+    },
+    "Sets" : {
+
     },
     "Sets: %lld" : {
       "localizations" : {
@@ -348,6 +363,9 @@
           }
         }
       }
+    },
+    "Weight (optional)" : {
+
     }
   },
   "version" : "1.0"

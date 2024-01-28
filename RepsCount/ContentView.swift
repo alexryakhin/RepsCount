@@ -27,11 +27,11 @@ struct ContentView: View {
 
     @State private var isShowingAlert = false
     @State private var alertInput = ""
-    @State private var dateSelection = Date()
+    @State private var dateSelection: Date?
 
-    private var dateSelectionWithTimeOmitted: Date {
-        let components = Calendar.current.dateComponents([.year, .month, .day], from: dateSelection)
-        return Calendar.current.date(from: components)!
+    private func dateSelectionWithTimeOmitted(for date: Date) -> Date? {
+        let components = Calendar.current.dateComponents([.year, .month, .day], from: date)
+        return Calendar.current.date(from: components)
     }
 
     var body: some View {
@@ -45,17 +45,19 @@ struct ContentView: View {
                     )
                 } else {
                     List {
-                        if Calendar.current.isDateInToday(dateSelection) {
+                        if dateSelection == nil {
                             ForEach(groupedWorkouts.keys.sorted(by: >), id: \.self) { date in
                                 sectionForDate(date)
                             }
-                        } else {
-                            sectionForDate(dateSelectionWithTimeOmitted)
+                        } else if let dateSelection, let date = dateSelectionWithTimeOmitted(for: dateSelection) {
+                            sectionForDate(date)
                         }
                     }
                     .overlay {
-                        if !Calendar.current.isDateInToday(dateSelection),
-                            groupedWorkouts[dateSelectionWithTimeOmitted] == nil {
+                        if let dateSelection,
+//                           !Calendar.current.isDateInToday(dateSelection),
+                           let date = dateSelectionWithTimeOmitted(for: dateSelection),
+                           groupedWorkouts[date] == nil {
                             ContentUnavailableView(
                                 "No workouts",
                                 systemImage: "figure.strengthtraining.functional",
@@ -67,17 +69,17 @@ struct ContentView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        isShowingAlert = true
-                    } label: {
-                        Image(systemName: "plus")
+                    if let dateSelection {
+                        Button {
+                            self.dateSelection = nil
+                        } label: {
+                            Image(systemName: "calendar.badge.minus")
+                        }
+                        .tint(.red)
                     }
                 }
                 ToolbarItem(placement: .topBarLeading) {
-                    DatePicker(selection: $dateSelection, in: ...Date.now, displayedComponents: .date) {
-                        Text("Select a date")
-                    }
-                    .labelsHidden()
+                    CustomDatePicker(date: $dateSelection, minDate: nil, maxDate: Date.now, pickerMode: .date)
                 }
             }
             .navigationTitle("Reps counter")
@@ -90,6 +92,23 @@ struct ContentView: View {
                 }
             }
             .animation(.easeIn, value: dateSelection)
+            .overlay(alignment: .bottomTrailing) {
+                Button {
+                    isShowingAlert = true
+                } label: {
+                    Image(systemName: "plus")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 24, height: 24)
+                        .bold()
+                        .padding(16)
+                        .background(in: Circle())
+                        .overlay {
+                            Circle().strokeBorder()
+                        }
+                }
+                .padding()
+            }
         }
         .onAppear {
             LocationManager.shared.initiateLocationManager()

@@ -25,7 +25,8 @@ struct WorkoutView: View {
         Calendar.current.isDateInToday(workouts.first?.timestamp ?? .now)
     }
     @State private var isShowingAlert = false
-    @State private var alertInput = ""
+    @State private var amountInput = ""
+    @State private var weightInput = ""
 
     init(workoutId: String) {
         _workouts = FetchRequest(
@@ -37,28 +38,34 @@ struct WorkoutView: View {
 
     var body: some View {
         List {
-            Section {
-                ForEach(workoutSets) { workoutSet in
-                    HStack {
-                        Text("\(workoutSet.amount) reps")
-                        Spacer()
-                        Text((workoutSet.timestamp ?? .now).formatted(date: .omitted, time: .shortened))
-                            .foregroundStyle(.secondary)
+            if !workoutSets.isEmpty {
+                Section("Sets") {
+                    ForEach(Array(workoutSets.enumerated()), id: \.offset) { offset, workoutSet in
+                        HStack {
+                            Text("#\(offset + 1): \(workoutSet.amount) reps")
+                                .fontWeight(.semibold)
+                            Spacer()
+                            Text((workoutSet.timestamp ?? .now).formatted(date: .omitted, time: .shortened))
+                                .foregroundStyle(.secondary)
+                        }
                     }
+                    .if(isEditable, transform: { view in
+                        view.onDelete(perform: deleteItems)
+                    })
                 }
-                .if(isEditable, transform: { view in
-                    view.onDelete(perform: deleteItems)
-                })
             }
 
             Section("Total") {
                 Text("Reps: \(totalAmount)")
+                    .fontWeight(.semibold)
                 Text("Sets: \(workoutSets.count)")
+                    .fontWeight(.semibold)
                 if workoutSets.count > 1,
                    let firstSetDate = workoutSets.first?.timestamp,
                    let lastSetDate = workoutSets.last?.timestamp {
                     let distance = firstSetDate.distance(to: lastSetDate)
                     Text("Time: \(timeFormatter.string(from: distance)!)")
+                        .fontWeight(.semibold)
                 }
             }
 
@@ -72,22 +79,13 @@ struct WorkoutView: View {
                     .frame(height: 200)
                     .allowsHitTesting(false)
                     if let address = workouts.first?.address {
-                        Text(address) .bold()
+                        Text(address)
+                            .fontWeight(.semibold)
                     }
                 }
             }
-
         }
         .toolbar {
-            if isEditable {
-                ToolbarItem {
-                    Button {
-                        isShowingAlert = true
-                    } label: {
-                        Image(systemName: "plus")
-                    }
-                }
-            }
             ToolbarItem(placement: .principal) {
                 VStack {
                     Text(workouts.first?.name ?? "")
@@ -101,24 +99,53 @@ struct WorkoutView: View {
             }
         }
         .alert("Enter the amount of reps", isPresented: $isShowingAlert) {
-            TextField("Amount", text: $alertInput)
+            TextField("Amount", text: $amountInput)
                 .keyboardType(.numberPad)
+            TextField("Weight (optional)", text: $weightInput)
+                .keyboardType(.decimalPad)
             Button("Add") {
                 addItem()
             }
+            Button("Cancel", role: .cancel) {
+                amountInput = ""
+                weightInput = ""
+            }
         }
         .navigationBarTitleDisplayMode(.inline)
+        .overlay(alignment: .bottomTrailing) {
+            if isEditable {
+                Button {
+                    isShowingAlert = true
+                } label: {
+                    Image(systemName: "plus")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 24, height: 24)
+                        .bold()
+                        .padding(16)
+                        .background(in: Circle())
+                        .overlay {
+                            Circle().strokeBorder()
+                        }
+                }
+                .padding()
+            }
+        }
     }
 
     private func addItem() {
-        defer { alertInput = "" }
-        guard let amount = Int64(alertInput) else { return }
+        defer { amountInput = "" }
+        defer { weightInput = "" }
+        guard let amount = Int64(amountInput) else { return }
         withAnimation {
             let newItem = WorkoutSet(context: viewContext)
             newItem.timestamp = .now
             newItem.id = UUID().uuidString
             newItem.amount = amount
             newItem.workout = workouts.first
+            if let weight = Double(weightInput) {
+                newItem.weight = weight
+            }
             save()
         }
     }
