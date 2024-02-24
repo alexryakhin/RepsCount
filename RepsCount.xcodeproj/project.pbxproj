@@ -214,6 +214,8 @@
 				Base,
 				ru,
 				"sr-Latn",
+				de,
+				fr,
 			);
 			mainGroup = 024C4DF82B52D32D00032346;
 			productRefGroup = 024C4E022B52D32D00032346 /* Products */;

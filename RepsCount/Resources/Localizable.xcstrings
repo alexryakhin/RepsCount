@@ -3,6 +3,34 @@
   "strings" : {
     "#%lld: %lld reps" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "#%1$lld: %#@arg2@"
+          },
+          "substitutions" : {
+            "arg2" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg Vertreter"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg Vertreter"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -109,6 +137,34 @@
     },
     "#%lld: %lld reps, %@" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "#%1$lld: %#@arg2@, %3$@"
+          },
+          "substitutions" : {
+            "arg2" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg Vertreter"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg Vertreter"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -181,6 +237,18 @@
     },
     "About app" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Über App"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À propos de l'application"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -197,6 +265,18 @@
     },
     "About App" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Über App"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À propos de l'application"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -213,6 +293,18 @@
     },
     "Add" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hinzufügen"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -229,6 +321,18 @@
     },
     "Add notes" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notizen hinzufügen"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter des notes"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -245,6 +349,18 @@
     },
     "Amount" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Menge"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Montant"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -261,6 +377,18 @@
     },
     "Cancel" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stornieren"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annuler"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -277,6 +405,18 @@
     },
     "Choose a measurement unit" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wählen Sie eine Maßeinheit"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez une unité de mesure"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -293,6 +433,18 @@
     },
     "Contact me" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kontaktiere mich"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contactez moi"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -309,6 +461,18 @@
     },
     "Enter a workout name" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geben Sie einen Trainingsnamen ein"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entrez un nom d'entraînement"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -325,6 +489,18 @@
     },
     "Enter the amount of reps" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geben Sie die Anzahl der Wiederholungen ein"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entrez le nombre de répétitions"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -341,6 +517,18 @@
     },
     "Exercises" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Übungen"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Des exercices"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -357,6 +545,18 @@
     },
     "Have questions, suggestions, or feedback? I'd love to hear from you. Reach out to get support on Instagram or Twitter!" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haben Sie Fragen, Anregungen oder Feedback? Ich würde gerne von Ihnen hören. Kontaktieren Sie uns, um Unterstützung auf Instagram oder Twitter zu erhalten!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous avez des questions, des suggestions ou des commentaires ? J'aimerais avoir de vos nouvelles. Contactez-nous pour obtenir de l'aide sur Instagram ou Twitter !"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -373,6 +573,18 @@
     },
     "Instagram" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instagram"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instagram"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -390,6 +602,18 @@
     "kg" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "kg"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "kg"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -407,6 +631,18 @@
     "Kilograms" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kilogramm"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kilogrammes"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -424,6 +660,18 @@
     "lb" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "lb"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "lb"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -440,6 +688,18 @@
     },
     "Map" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Karte"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carte"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -456,6 +716,18 @@
     },
     "Name" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nom"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -472,6 +744,18 @@
     },
     "No workouts" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kein Training"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas d'entraînement"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -488,6 +772,18 @@
     },
     "No workouts for this date!" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Für dieses Datum gibt es kein Training!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas d'entraînement pour cette date !"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -504,6 +800,18 @@
     },
     "No workouts yet" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noch kein Training"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas encore d'entraînement"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -520,6 +828,18 @@
     },
     "Notes" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anmerkungen"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remarques"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -537,6 +857,18 @@
     "Pounds" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pfund"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Livres sterling"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -553,6 +885,18 @@
     },
     "Reps counter" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wiederholungszähler"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compteur de répétitions"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -569,6 +913,18 @@
     },
     "Reps: %lld" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vertreter: %lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Représentants : %lld"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -585,6 +941,18 @@
     },
     "Review the app" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Überprüfen Sie die App"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Consultez l'application"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -601,6 +969,18 @@
     },
     "Save" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Speichern"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sauvegarder"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -617,6 +997,18 @@
     },
     "Save location" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sicherer Ort"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrer l'emplacement"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -633,6 +1025,18 @@
     },
     "Sets" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sets"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ensembles"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -649,6 +1053,18 @@
     },
     "Sets: %lld" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Setzt: %lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ensembles : %lld"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -665,6 +1081,18 @@
     },
     "Settings" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paramètres"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -682,6 +1110,18 @@
     "st" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "st"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "st"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -698,6 +1138,18 @@
     },
     "Start typing" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anfangen zu tippen"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commencer à écrire"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -715,6 +1167,18 @@
     "Stones" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Steine"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Des pierres"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -731,6 +1195,18 @@
     },
     "Tap on a plus button to add a new exercise!" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tippen Sie auf eine Plus-Schaltfläche, um eine neue Übung hinzuzufügen!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appuyez sur un bouton plus pour ajouter un nouvel exercice !"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -747,6 +1223,18 @@
     },
     "Time: %@" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zeit: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temps: %@"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -763,6 +1251,18 @@
     },
     "Total" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gesamt"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -779,6 +1279,18 @@
     },
     "Twitter" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Twitter"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Twitter"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -795,6 +1307,18 @@
     },
     "Version" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ausführung"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -811,6 +1335,18 @@
     },
     "Weight, %@ (optional)" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gewicht, %@ (optional)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poids, %@ (facultatif)"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -827,6 +1363,18 @@
     },
     "Welcome to RepsCount, your companion for tracking and improving your workout performance!\n\nI created this app because I myself needed something simple yet powerful to track my progress, and it's pretty hard to do it just in Notes App.\n\nIf you like the app, please leave a review" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Willkommen bei RepsCount, Ihrem Begleiter zum Verfolgen und Verbessern Ihrer Trainingsleistung!\n\nIch habe diese App erstellt, weil ich selbst etwas Einfaches, aber Leistungsstarkes brauchte, um meinen Fortschritt zu verfolgen, und es ist ziemlich schwierig, dies nur in der Notes-App zu tun.\n\nWenn Ihnen die App gefällt, hinterlassen Sie bitte eine Bewertung"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bienvenue sur RepsCount, votre compagnon pour suivre et améliorer vos performances d'entraînement !\n\nJ'ai créé cette application parce que j'avais moi-même besoin de quelque chose de simple mais puissant pour suivre mes progrès, et il est assez difficile de le faire uniquement dans l'application Notes.\n\nSi vous aimez l'application, veuillez laisser un commentaire"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -843,6 +1391,18 @@
     },
     "What's new" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Was ist neu"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quoi de neuf"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
