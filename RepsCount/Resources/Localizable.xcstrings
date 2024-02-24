@@ -70,6 +70,40 @@
               }
             }
           }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "№%1$lld: %#@arg2@"
+          },
+          "substitutions" : {
+            "arg2" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "few" : {
+                    "stringUnit" : {
+                      "state" : "new",
+                      "value" : "%arg reps"
+                    }
+                  },
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "new",
+                      "value" : "%arg rep"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "new",
+                      "value" : "%arg reps"
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -152,11 +186,30 @@
             "state" : "translated",
             "value" : "О приложении"
           }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O aplikaciji"
+          }
         }
       }
     },
     "About App" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "О приложении"
+          }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O aplikaciji"
+          }
+        }
+      }
     },
     "Add" : {
       "localizations" : {
@@ -175,7 +228,20 @@
       }
     },
     "Add notes" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавить заметки"
+          }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dodajte beleške"
+          }
+        }
+      }
     },
     "Amount" : {
       "localizations" : {
@@ -226,7 +292,20 @@
       }
     },
     "Contact me" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Связаться со мной"
+          }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kontaktiraj me"
+          }
+        }
+      }
     },
     "Enter a workout name" : {
       "localizations" : {
@@ -277,10 +356,36 @@
       }
     },
     "Have questions, suggestions, or feedback? I'd love to hear from you. Reach out to get support on Instagram or Twitter!" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Есть вопросы, предложения или отзывы? Я хотел бы услышать ваше мнение. Обратитесь за поддержкой в Instagram или Twitter!"
+          }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imate pitanja, sugestije ili povratne informacije? Voleo bih da čujem od vas. Obratite se da dobijete podršku na Instagramu ili Tvitteru!"
+          }
+        }
+      }
     },
     "Instagram" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instagram"
+          }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instagram"
+          }
+        }
+      }
     },
     "kg" : {
       "extractionState" : "manual",
@@ -414,7 +519,20 @@
       }
     },
     "Notes" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Примечания"
+          }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Napomene"
+          }
+        }
+      }
     },
     "Pounds" : {
       "extractionState" : "manual",
@@ -466,10 +584,36 @@
       }
     },
     "Review the app" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Оценить приложение"
+          }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pregledajte aplikaciju"
+          }
+        }
+      }
     },
     "Save" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сохранить"
+          }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sačuvati"
+          }
+        }
+      }
     },
     "Save location" : {
       "localizations" : {
@@ -553,7 +697,20 @@
       }
     },
     "Start typing" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Начните печатать"
+          }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Počnite da kucate"
+          }
+        }
+      }
     },
     "Stones" : {
       "extractionState" : "manual",
@@ -621,18 +778,33 @@
       }
     },
     "Twitter" : {
-
-    },
-    "Version" : {
-
-    },
-    "Version: %@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Версия: %@"
+            "value" : "Twitter"
+          }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tvitter"
+          }
+        }
+      }
+    },
+    "Version" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Версия"
+          }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version"
           }
         }
       }
@@ -654,10 +826,36 @@
       }
     },
     "Welcome to RepsCount, your companion for tracking and improving your workout performance!\n\nI created this app because I myself needed something simple yet powerful to track my progress, and it's pretty hard to do it just in Notes App.\n\nIf you like the app, please leave a review" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добро пожаловать в RepsCount, вашего помощника для отслеживания и улучшения результатов тренировок!\n\nЯ создал это приложение, потому что мне самому нужно было что-то простое, но мощное для отслеживания моего прогресса, а сделать это только в приложении «Заметки» довольно сложно.\n\nЕсли вам понравилось приложение, пожалуйста, оставьте отзыв"
+          }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dobrodošli u RepsCount, vašeg saputnika za praćenje i poboljšanje performansi vašeg vežbanja!\n\nNapravio sam ovu aplikaciju jer mi je lično bilo potrebno nešto jednostavno, ali moćno da pratim svoj napredak, a prilično je teško to učiniti samo u aplikaciji Notes.\n\nAko vam se sviđa aplikacija, ostavite recenziju"
+          }
+        }
+      }
     },
     "What's new" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Что нового"
+          }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Šta je novo"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"
