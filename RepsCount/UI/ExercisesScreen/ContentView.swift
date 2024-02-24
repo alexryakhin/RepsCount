@@ -7,8 +7,12 @@
 
 import SwiftUI
 import CoreData
+import StoreKit
 
 struct ExercisesView: View {
+    @Environment(\.requestReview) var requestReview
+    @AppStorage("isReviewRequested") var isReviewRequested = false
+
     @Environment(\.managedObjectContext) private var viewContext
     @AppStorage("savesLocation") var savesLocation: Bool = true
 
@@ -69,7 +73,7 @@ struct ExercisesView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    if let dateSelection {
+                    if dateSelection != nil {
                         Button {
                             self.dateSelection = nil
                         } label: {
@@ -160,6 +164,10 @@ struct ExercisesView: View {
             }
             withAnimation {
                 save()
+            }
+            if workouts.count > 15, !isReviewRequested {
+                isReviewRequested = true
+                requestReview()
             }
             alertInput = ""
         }

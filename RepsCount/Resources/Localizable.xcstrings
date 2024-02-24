@@ -155,6 +155,9 @@
         }
       }
     },
+    "About App" : {
+
+    },
     "Add" : {
       "localizations" : {
         "ru" : {
@@ -170,6 +173,9 @@
           }
         }
       }
+    },
+    "Add notes" : {
+
     },
     "Amount" : {
       "localizations" : {
@@ -219,6 +225,9 @@
         }
       }
     },
+    "Contact me" : {
+
+    },
     "Enter a workout name" : {
       "localizations" : {
         "ru" : {
@@ -266,6 +275,12 @@
           }
         }
       }
+    },
+    "Have questions, suggestions, or feedback? I'd love to hear from you. Reach out to get support on Instagram or Twitter!" : {
+
+    },
+    "Instagram" : {
+
     },
     "kg" : {
       "extractionState" : "manual",
@@ -398,6 +413,9 @@
         }
       }
     },
+    "Notes" : {
+
+    },
     "Pounds" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -446,6 +464,12 @@
           }
         }
       }
+    },
+    "Review the app" : {
+
+    },
+    "Save" : {
+
     },
     "Save location" : {
       "localizations" : {
@@ -528,6 +552,9 @@
         }
       }
     },
+    "Start typing" : {
+
+    },
     "Stones" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -593,7 +620,14 @@
         }
       }
     },
+    "Twitter" : {
+
+    },
+    "Version" : {
+
+    },
     "Version: %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -618,6 +652,12 @@
           }
         }
       }
+    },
+    "Welcome to RepsCount, your companion for tracking and improving your workout performance!\n\nI created this app because I myself needed something simple yet powerful to track my progress, and it's pretty hard to do it just in Notes App.\n\nIf you like the app, please leave a review" : {
+
+    },
+    "What's new" : {
+
     }
   },
   "version" : "1.0"

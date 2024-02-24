@@ -20,6 +20,7 @@
 		025573442B5D8EF3001DF4B6 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025573432B5D8EF3001DF4B6 /* View+Extension.swift */; };
 		025F49D32B6501C200C571FF /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F49D22B6501C200C571FF /* LocationManager.swift */; };
 		025F49D52B65604000C571FF /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F49D42B65604000C571FF /* DatePickerView.swift */; };
+		02E834772B8A21FD006C98DA /* AboutAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E834762B8A21FD006C98DA /* AboutAppView.swift */; };
 		02FC1F4D2B656090008F5D8D /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC1F4C2B656090008F5D8D /* CustomDatePicker.swift */; };
 		02FC1F4F2B6561D2008F5D8D /* ChildSizeReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC1F4E2B6561D2008F5D8D /* ChildSizeReader.swift */; };
 		02FC1F542B664E02008F5D8D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC1F532B664E02008F5D8D /* SettingsView.swift */; };
@@ -46,6 +47,7 @@
 		025573432B5D8EF3001DF4B6 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		025F49D22B6501C200C571FF /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		025F49D42B65604000C571FF /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
+		02E834762B8A21FD006C98DA /* AboutAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppView.swift; sourceTree = "<group>"; };
 		02FC1F4C2B656090008F5D8D /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
 		02FC1F4E2B6561D2008F5D8D /* ChildSizeReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildSizeReader.swift; sourceTree = "<group>"; };
 		02FC1F532B664E02008F5D8D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -124,6 +126,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		02E834752B8A21EB006C98DA /* AboutAppScreen */ = {
+			isa = PBXGroup;
+			children = (
+				02E834762B8A21FD006C98DA /* AboutAppView.swift */,
+			);
+			path = AboutAppScreen;
+			sourceTree = "<group>";
+		};
 		02FC1F502B664DD2008F5D8D /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +156,7 @@
 		02FC1F522B664DE4008F5D8D /* SettingsScreen */ = {
 			isa = PBXGroup;
 			children = (
+				02E834752B8A21EB006C98DA /* AboutAppScreen */,
 				02FC1F532B664E02008F5D8D /* SettingsView.swift */,
 			);
 			path = SettingsScreen;
@@ -242,6 +253,7 @@
 				02FC1F572B6653B9008F5D8D /* TabViewScreen.swift in Sources */,
 				02FC1F5B2B6668FB008F5D8D /* GlobalConstants.swift in Sources */,
 				025F49D32B6501C200C571FF /* LocationManager.swift in Sources */,
+				02E834772B8A21FD006C98DA /* AboutAppView.swift in Sources */,
 				02FC1F592B665FAE008F5D8D /* MeasurementUnit.swift in Sources */,
 				02FC1F4F2B6561D2008F5D8D /* ChildSizeReader.swift in Sources */,
 				024C4E052B52D32D00032346 /* RepsCountApp.swift in Sources */,
@@ -382,7 +394,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = RepsCount/RepsCount.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"RepsCount/Preview Content\"";
 				DEVELOPMENT_TEAM = 69S862NXBP;
 				ENABLE_PREVIEWS = YES;
@@ -418,7 +430,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = RepsCount/RepsCount.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"RepsCount/Preview Content\"";
 				DEVELOPMENT_TEAM = 69S862NXBP;
 				ENABLE_PREVIEWS = YES;

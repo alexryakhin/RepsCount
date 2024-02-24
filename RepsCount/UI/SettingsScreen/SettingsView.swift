@@ -28,20 +28,14 @@ struct SettingsView: View {
 
                 Section {
                     NavigationLink {
-                        Text("About app")
+                        AboutAppView()
                     } label: {
                         Text("About app")
                     }
-                } footer: {
-                    Text("Version: \(currentFullAppVersion)")
                 }
             }
             .navigationTitle("Settings")
         }
-    }
-
-    var currentFullAppVersion: String {
-        String(GlobalConstant.appVersion ?? "-", GlobalConstant.buildVersion ?? "–", separator: ".")
     }
 }
 
