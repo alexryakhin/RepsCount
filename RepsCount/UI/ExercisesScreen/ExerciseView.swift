@@ -1,5 +1,5 @@
 //
-//  WorkoutView.swift
+//  ExerciseView.swift
 //  RepsCount
 //
 //  Created by Aleksandr Riakhin on 1/13/24.
@@ -8,33 +8,33 @@
 import SwiftUI
 import MapKit
 
-struct WorkoutView: View {
+struct ExerciseView: View {
     @AppStorage("measurementUnit") var measurementUnit: MeasurementUnit = .kilograms
 
     @Environment(\.managedObjectContext) private var viewContext
     @FocusState private var isNotesInputFocused: Bool
-    @FetchRequest private var workouts: FetchedResults<Workout>
-    private var workoutSets: [WorkoutSet] {
-        let set = workouts.first?.workoutSets as? Set<WorkoutSet> ?? []
+    @FetchRequest private var exercises: FetchedResults<Exercise>
+    private var exerciseSets: [ExerciseSet] {
+        let set = exercises.first?.exerciseSets as? Set<ExerciseSet> ?? []
         return set.sorted {
             $0.timestamp ?? .now < $1.timestamp ?? .now
         }
     }
     private var totalAmount: Int {
-        Int(workoutSets.map { $0.amount }.reduce(0, +))
+        Int(exerciseSets.map { $0.amount }.reduce(0, +))
     }
     private var isEditable: Bool {
-        Calendar.current.isDateInToday(workouts.first?.timestamp ?? .now)
+        Calendar.current.isDateInToday(exercises.first?.timestamp ?? .now)
     }
     @State private var isShowingAlert = false
     @State private var amountInput = ""
     @State private var weightInput = ""
     @State private var notesInput: String = ""
 
-    init(workoutId: String) {
-        _workouts = FetchRequest(
+    init(exerciseId: String) {
+        _exercises = FetchRequest(
             sortDescriptors: [],
-            predicate: NSPredicate(format: "id = %@", workoutId),
+            predicate: NSPredicate(format: "id = %@", exerciseId),
             animation: .default
         )
     }
@@ -49,9 +49,9 @@ struct WorkoutView: View {
         .toolbar {
             ToolbarItem(placement: .principal) {
                 VStack {
-                    Text(workouts.first?.name ?? "")
+                    Text(exercises.first?.name ?? "")
                         .font(.headline)
-                    if let date = workouts.first?.timestamp {
+                    if let date = exercises.first?.timestamp {
                         Text(date.formatted(date: .abbreviated, time: .shortened))
                             .font(.caption)
                             .foregroundStyle(.secondary)
@@ -96,20 +96,20 @@ struct WorkoutView: View {
 
     @ViewBuilder
     private var setsSection: some View {
-        if !workoutSets.isEmpty {
+        if !exerciseSets.isEmpty {
             Section("Sets") {
-                ForEach(Array(workoutSets.enumerated()), id: \.offset) { offset, workoutSet in
+                ForEach(Array(exerciseSets.enumerated()), id: \.offset) { offset, exerciseSet in
                     HStack {
-                        if workoutSet.weight > 0 {
-                            let converted: String = measurementUnit.convertFromKilograms(workoutSet.weight)
-                            Text("#\(offset + 1): \(workoutSet.amount) reps, \(converted)")
+                        if exerciseSet.weight > 0 {
+                            let converted: String = measurementUnit.convertFromKilograms(exerciseSet.weight)
+                            Text("#\(offset + 1): \(exerciseSet.amount) reps, \(converted)")
                                 .fontWeight(.semibold)
                         } else {
-                            Text("#\(offset + 1): \(workoutSet.amount) reps")
+                            Text("#\(offset + 1): \(exerciseSet.amount) reps")
                                 .fontWeight(.semibold)
                         }
                         Spacer()
-                        Text((workoutSet.timestamp ?? .now).formatted(date: .omitted, time: .shortened))
+                        Text((exerciseSet.timestamp ?? .now).formatted(date: .omitted, time: .shortened))
                             .foregroundStyle(.secondary)
                     }
                 }
@@ -124,11 +124,11 @@ struct WorkoutView: View {
         Section("Total") {
             Text("Reps: \(totalAmount)")
                 .fontWeight(.semibold)
-            Text("Sets: \(workoutSets.count)")
+            Text("Sets: \(exerciseSets.count)")
                 .fontWeight(.semibold)
-            if workoutSets.count > 1,
-               let firstSetDate = workoutSets.first?.timestamp,
-               let lastSetDate = workoutSets.last?.timestamp {
+            if exerciseSets.count > 1,
+               let firstSetDate = exerciseSets.first?.timestamp,
+               let lastSetDate = exerciseSets.last?.timestamp {
                 let distance = firstSetDate.distance(to: lastSetDate)
                 Text("Time: \(timeFormatter.string(from: distance)!)")
                     .fontWeight(.semibold)
@@ -138,21 +138,21 @@ struct WorkoutView: View {
 
     @ViewBuilder
     private var mapSection: some View {
-        if let latitude = workouts.first?.latitude,
-           let longitude = workouts.first?.longitude,
+        if let latitude = exercises.first?.latitude,
+           let longitude = exercises.first?.longitude,
            latitude != 0,
            longitude != 0 {
             let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             let span = MKCoordinateSpan(latitudeDelta: 0.007, longitudeDelta: 0.007)
             Section("Map") {
                 Map(position: .constant(MapCameraPosition.region(MKCoordinateRegion(center: location, span: span)))) {
-                    Marker(workouts.first?.name ?? "", coordinate: location)
+                    Marker(exercises.first?.name ?? "", coordinate: location)
                 }
                 .frame(height: 200)
                 .allowsHitTesting(false)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
 
-                if let address = workouts.first?.address {
+                if let address = exercises.first?.address {
                     Text(address)
                         .fontWeight(.semibold)
                 }
@@ -163,7 +163,7 @@ struct WorkoutView: View {
     @ViewBuilder
     private var notesSection: some View {
         Section("Notes") {
-            if let notes = workouts.first?.notes {
+            if let notes = exercises.first?.notes {
                 TextEditor(text: $notesInput)
                     .fontWeight(.medium)
                     .focused($isNotesInputFocused)
@@ -178,19 +178,19 @@ struct WorkoutView: View {
                     }
                 if isNotesInputFocused {
                     Button("Save") {
-                        workouts.first?.notes = notesInput
+                        exercises.first?.notes = notesInput
                         isNotesInputFocused = false
                         save()
                     }
                 }
             } else {
                 Button("Add notes") {
-                    workouts.first?.notes = ""
+                    exercises.first?.notes = ""
                 }
             }
         }
         .onAppear {
-            notesInput = workouts.first?.notes ?? ""
+            notesInput = exercises.first?.notes ?? ""
         }
     }
 
@@ -199,11 +199,11 @@ struct WorkoutView: View {
         defer { weightInput = "" }
         guard let amount = Int64(amountInput) else { return }
         withAnimation {
-            let newItem = WorkoutSet(context: viewContext)
+            let newItem = ExerciseSet(context: viewContext)
             newItem.timestamp = .now
             newItem.id = UUID().uuidString
             newItem.amount = amount
-            newItem.workout = workouts.first
+            newItem.exercise = exercises.first
             if let weight = Double(weightInput) {
                 let kilograms = measurementUnit.convertToKilograms(weight)
                 newItem.weight = kilograms.value
@@ -214,7 +214,7 @@ struct WorkoutView: View {
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
-            offsets.map { workoutSets[$0] }.forEach(viewContext.delete)
+            offsets.map { exerciseSets[$0] }.forEach(viewContext.delete)
             save()
         }
     }
