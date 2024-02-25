@@ -17,15 +17,15 @@ struct ExercisesView: View {
     @AppStorage("savesLocation") var savesLocation: Bool = true
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \WorkoutSet.timestamp, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \ExerciseSet.timestamp, ascending: false)],
         animation: .default
     )
-    private var workouts: FetchedResults<Workout>
+    private var exercises: FetchedResults<Exercise>
 
-    private var groupedWorkouts: [Date: [Workout]] {
-        Dictionary(grouping: workouts, by: { workout in
+    private var groupedExercises: [Date: [Exercise]] {
+        Dictionary(grouping: exercises, by: { exercise in
             // Use only the day component for grouping
-            let components = Calendar.current.dateComponents([.year, .month, .day], from: workout.timestamp ?? .now)
+            let components = Calendar.current.dateComponents([.year, .month, .day], from: exercise.timestamp ?? .now)
             return Calendar.current.date(from: components)!
         })
     }
@@ -42,16 +42,16 @@ struct ExercisesView: View {
     var body: some View {
         NavigationView {
             Group {
-                if groupedWorkouts.isEmpty {
+                if groupedExercises.isEmpty {
                     ContentUnavailableView(
-                        "No workouts yet",
+                        "No exercises yet",
                         systemImage: "figure.strengthtraining.functional",
                         description: Text("Tap on a plus button to add a new exercise!")
                     )
                 } else {
                     List {
                         if dateSelection == nil {
-                            ForEach(groupedWorkouts.keys.sorted(by: >), id: \.self) { date in
+                            ForEach(groupedExercises.keys.sorted(by: >), id: \.self) { date in
                                 sectionForDate(date)
                             }
                         } else if let dateSelection, let date = dateSelectionWithTimeOmitted(for: dateSelection) {
@@ -61,11 +61,11 @@ struct ExercisesView: View {
                     .overlay {
                         if let dateSelection,
                            let date = dateSelectionWithTimeOmitted(for: dateSelection),
-                           groupedWorkouts[date] == nil {
+                           groupedExercises[date] == nil {
                             ContentUnavailableView(
-                                "No workouts",
+                                "No exercises",
                                 systemImage: "figure.strengthtraining.functional",
-                                description: Text("No workouts for this date!")
+                                description: Text("No exercises for this date!")
                             )
                         }
                     }
@@ -87,7 +87,7 @@ struct ExercisesView: View {
                 }
             }
             .navigationTitle("Reps counter")
-            .alert("Enter a workout name", isPresented: $isShowingAlert) {
+            .alert("Enter a exercise name", isPresented: $isShowingAlert) {
                 TextField("Name", text: $alertInput)
                     .autocorrectionDisabled()
                 Button("Cancel", role: .cancel) { }
@@ -123,17 +123,17 @@ struct ExercisesView: View {
 
     @ViewBuilder
     private func sectionForDate(_ date: Date) -> some View {
-        let workoutsInDate = groupedWorkouts[date] ?? []
+        let exercisesInDate = groupedExercises[date] ?? []
         Section {
-            ForEach(workoutsInDate) { workout in
+            ForEach(exercisesInDate) { exercise in
                 NavigationLink {
-                    WorkoutView(workoutId: workout.id ?? "")
+                    ExerciseView(exerciseId: exercise.id ?? "")
                 } label: {
                     VStack(alignment: .leading) {
-                        Text(workout.name ?? "Default name")
+                        Text(exercise.name ?? "Default name")
                             .font(.headline)
                             .foregroundStyle(.primary)
-                        if let date = workout.timestamp {
+                        if let date = exercise.timestamp {
                             Text(date.formatted(date: .omitted, time: .shortened))
                                 .font(.subheadline)
                                 .foregroundStyle(.secondary)
@@ -152,7 +152,7 @@ struct ExercisesView: View {
     private func addItem() {
         guard !alertInput.isEmpty else { return }
         Task { @MainActor in
-            let newItem = Workout(context: viewContext)
+            let newItem = Exercise(context: viewContext)
             newItem.timestamp = .now
             newItem.name = alertInput
             newItem.id = UUID().uuidString
@@ -165,7 +165,7 @@ struct ExercisesView: View {
             withAnimation {
                 save()
             }
-            if workouts.count > 15, !isReviewRequested {
+            if exercises.count > 15, !isReviewRequested {
                 isReviewRequested = true
                 requestReview()
             }
@@ -174,10 +174,10 @@ struct ExercisesView: View {
     }
 
     func deleteElements(at indices: IndexSet, for date: Date) {
-        if let workouts = groupedWorkouts[date] {
+        if let exercises = groupedExercises[date] {
             withAnimation {
                 indices
-                    .map { workouts[$0] }
+                    .map { exercises[$0] }
                     .forEach(viewContext.delete)
             }
         }
