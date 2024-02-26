@@ -31,7 +31,7 @@ struct ExercisesView: View {
     }
 
     @State private var isShowingAlert = false
-    @State private var alertInput = ""
+    @State private var addExerciseViewSize: CGSize = .zero
     @State private var dateSelection: Date?
 
     private func dateSelectionWithTimeOmitted(for date: Date) -> Date? {
@@ -87,13 +87,23 @@ struct ExercisesView: View {
                 }
             }
             .navigationTitle("Reps counter")
-            .alert("Enter a exercise name", isPresented: $isShowingAlert) {
-                TextField("Name", text: $alertInput)
-                    .autocorrectionDisabled()
-                Button("Cancel", role: .cancel) { }
-                Button("Add") {
-                    addItem()
+//            .alert("Enter a exercise name", isPresented: $isShowingAlert) {
+//                TextField("Name", text: $alertInput)
+//                    .autocorrectionDisabled()
+//                Button("Cancel", role: .cancel) { }
+//                Button("Add") {
+//                    addItem()
+//                }
+//            }
+            .sheet(isPresented: $isShowingAlert) {
+                ChildSizeReader(size: $addExerciseViewSize) {
+                    AddExerciseView()
                 }
+                .presentationDetents([.height(addExerciseViewSize.height > 345 ? 344 : addExerciseViewSize.height)])
+                    .presentationDragIndicator(.visible)
+                    .onChange(of: addExerciseViewSize) {
+                        print($0.height)
+                    }
             }
             .animation(.easeIn, value: dateSelection)
             .overlay(alignment: .bottomTrailing) {
@@ -150,27 +160,27 @@ struct ExercisesView: View {
     }
 
     private func addItem() {
-        guard !alertInput.isEmpty else { return }
-        Task { @MainActor in
-            let newItem = Exercise(context: viewContext)
-            newItem.timestamp = .now
-            newItem.name = alertInput
-            newItem.id = UUID().uuidString
-            if savesLocation, let location = await LocationManager.shared.getCurrentLocation() {
-                newItem.latitude = location.latitude
-                newItem.longitude = location.longitude
-                newItem.address = location.address
-                debugPrint(location)
-            }
-            withAnimation {
-                save()
-            }
-            if exercises.count > 15, !isReviewRequested {
-                isReviewRequested = true
-                requestReview()
-            }
-            alertInput = ""
-        }
+//        guard !alertInput.isEmpty else { return }
+//        Task { @MainActor in
+//            let newItem = Exercise(context: viewContext)
+//            newItem.timestamp = .now
+//            newItem.name = alertInput
+//            newItem.id = UUID().uuidString
+//            if savesLocation, let location = await LocationManager.shared.getCurrentLocation() {
+//                newItem.latitude = location.latitude
+//                newItem.longitude = location.longitude
+//                newItem.address = location.address
+//                debugPrint(location)
+//            }
+//            withAnimation {
+//                save()
+//            }
+//            if exercises.count > 15, !isReviewRequested {
+//                isReviewRequested = true
+//                requestReview()
+//            }
+//            alertInput = ""
+//        }
     }
 
     func deleteElements(at indices: IndexSet, for date: Date) {

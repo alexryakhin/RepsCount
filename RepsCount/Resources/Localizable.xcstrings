@@ -403,6 +403,12 @@
         }
       }
     },
+    "Category" : {
+
+    },
+    "Choose" : {
+
+    },
     "Choose a measurement unit" : {
       "localizations" : {
         "de" : {
@@ -430,6 +436,9 @@
           }
         }
       }
+    },
+    "Choose an exercise" : {
+
     },
     "Contact me" : {
       "localizations" : {
@@ -460,6 +469,7 @@
       }
     },
     "Enter a exercise name" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -486,6 +496,9 @@
           }
         }
       }
+    },
+    "Enter exercise name" : {
+
     },
     "Enter the amount of reps" : {
       "localizations" : {
@@ -514,6 +527,9 @@
           }
         }
       }
+    },
+    "Exercise" : {
+
     },
     "Exercises" : {
       "localizations" : {
@@ -715,6 +731,7 @@
       }
     },
     "Name" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -853,6 +870,9 @@
           }
         }
       }
+    },
+    "Or add a new exercise to the list" : {
+
     },
     "Pounds" : {
       "extractionState" : "manual",
@@ -1022,6 +1042,12 @@
           }
         }
       }
+    },
+    "Select a category" : {
+
+    },
+    "Select an exercise" : {
+
     },
     "Sets" : {
       "localizations" : {
