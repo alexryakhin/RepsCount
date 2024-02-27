@@ -21,6 +21,8 @@
 		025573442B5D8EF3001DF4B6 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025573432B5D8EF3001DF4B6 /* View+Extension.swift */; };
 		025F49D32B6501C200C571FF /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F49D22B6501C200C571FF /* LocationManager.swift */; };
 		025F49D52B65604000C571FF /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F49D42B65604000C571FF /* DatePickerView.swift */; };
+		0294FDA92B8DB59200D9186C /* ExercisesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0294FDA82B8DB59200D9186C /* ExercisesViewModel.swift */; };
+		0294FDAB2B8DB8E000D9186C /* AddExerciseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0294FDAA2B8DB8E000D9186C /* AddExerciseViewModel.swift */; };
 		02E834772B8A21FD006C98DA /* AboutAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E834762B8A21FD006C98DA /* AboutAppView.swift */; };
 		02E834872B8BAA68006C98DA /* AddExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E834862B8BAA68006C98DA /* AddExerciseView.swift */; };
 		02FC1F4D2B656090008F5D8D /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC1F4C2B656090008F5D8D /* CustomDatePicker.swift */; };
@@ -50,6 +52,8 @@
 		025573432B5D8EF3001DF4B6 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		025F49D22B6501C200C571FF /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		025F49D42B65604000C571FF /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
+		0294FDA82B8DB59200D9186C /* ExercisesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesViewModel.swift; sourceTree = "<group>"; };
+		0294FDAA2B8DB8E000D9186C /* AddExerciseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExerciseViewModel.swift; sourceTree = "<group>"; };
 		02E834762B8A21FD006C98DA /* AboutAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppView.swift; sourceTree = "<group>"; };
 		02E834862B8BAA68006C98DA /* AddExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExerciseView.swift; sourceTree = "<group>"; };
 		02FC1F4C2B656090008F5D8D /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
@@ -118,6 +122,15 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		0294FDA72B8DB57E00D9186C /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				024C4E062B52D32D00032346 /* ExercisesView.swift */,
+				0294FDA82B8DB59200D9186C /* ExercisesViewModel.swift */,
+			);
+			path = MainScreen;
+			sourceTree = "<group>";
+		};
 		02E834752B8A21EB006C98DA /* AboutAppScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				02E834862B8BAA68006C98DA /* AddExerciseView.swift */,
+				0294FDAA2B8DB8E000D9186C /* AddExerciseViewModel.swift */,
 			);
 			path = AddExercise;
 			sourceTree = "<group>";
@@ -208,9 +222,9 @@
 		02FC1F512B664DD9008F5D8D /* ExercisesScreen */ = {
 			isa = PBXGroup;
 			children = (
+				0294FDA72B8DB57E00D9186C /* MainScreen */,
 				02E834852B8BAA55006C98DA /* Details */,
 				02E834842B8BAA4C006C98DA /* AddExercise */,
-				024C4E062B52D32D00032346 /* ExercisesView.swift */,
 			);
 			path = ExercisesScreen;
 			sourceTree = "<group>";
@@ -310,6 +324,8 @@
 			files = (
 				02FC1F4D2B656090008F5D8D /* CustomDatePicker.swift in Sources */,
 				022ACF822B8C64C800764C6D /* ViewWithBackground.swift in Sources */,
+				0294FDAB2B8DB8E000D9186C /* AddExerciseViewModel.swift in Sources */,
+				0294FDA92B8DB59200D9186C /* ExercisesViewModel.swift in Sources */,
 				024C4E112B52D32E00032346 /* RepsCount.xcdatamodeld in Sources */,
 				024C4E1C2B53112A00032346 /* Extensions.swift in Sources */,
 				024C4E0E2B52D32E00032346 /* Persistence.swift in Sources */,

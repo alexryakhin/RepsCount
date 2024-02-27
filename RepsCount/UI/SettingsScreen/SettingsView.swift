@@ -24,6 +24,9 @@ struct SettingsView: View {
                     }
 
                     Toggle("Save location", isOn: $savesLocation)
+
+                    // TODO: edit exercises list
+//                    Text("Edit exercises list")
                 }
 
                 Section {

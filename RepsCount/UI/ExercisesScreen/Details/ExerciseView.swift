@@ -66,10 +66,12 @@ struct ExerciseView: View {
                 .keyboardType(.decimalPad)
             Button("Add") {
                 addItem()
+                isShowingAlert = false
             }
             Button("Cancel", role: .cancel) {
                 amountInput = ""
                 weightInput = ""
+                isShowingAlert = false
             }
         }
         .navigationBarTitleDisplayMode(.inline)

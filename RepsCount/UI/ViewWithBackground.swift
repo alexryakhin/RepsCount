@@ -17,7 +17,7 @@ protocol ViewWithBackground: View {
 
 extension ViewWithBackground {
     var background: some View {
-        Color(uiColor: UIColor.secondarySystemBackground)
+        Color(uiColor: UIColor.systemBackground)
     }
 
     var body: some View {

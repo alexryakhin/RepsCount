@@ -7,36 +7,20 @@
 
 import SwiftUI
 import CoreData
-import StoreKit
 
 struct ExercisesView: View {
-    @Environment(\.requestReview) var requestReview
-    @AppStorage("isReviewRequested") var isReviewRequested = false
-
-    @Environment(\.managedObjectContext) private var viewContext
     @AppStorage("savesLocation") var savesLocation: Bool = true
+    @StateObject private var viewModel = ExercisesViewModel()
 
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \ExerciseSet.timestamp, ascending: false)],
-        animation: .default
-    )
-    private var exercises: FetchedResults<Exercise>
+    @State private var isChoosingExercise = false
+    @State private var dateSelection: Date?
 
     private var groupedExercises: [Date: [Exercise]] {
-        Dictionary(grouping: exercises, by: { exercise in
+        Dictionary(grouping: viewModel.exercises, by: { exercise in
             // Use only the day component for grouping
             let components = Calendar.current.dateComponents([.year, .month, .day], from: exercise.timestamp ?? .now)
             return Calendar.current.date(from: components)!
         })
-    }
-
-    @State private var isShowingAlert = false
-    @State private var addExerciseViewSize: CGSize = .zero
-    @State private var dateSelection: Date?
-
-    private func dateSelectionWithTimeOmitted(for date: Date) -> Date? {
-        let components = Calendar.current.dateComponents([.year, .month, .day], from: date)
-        return Calendar.current.date(from: components)
     }
 
     var body: some View {
@@ -87,28 +71,19 @@ struct ExercisesView: View {
                 }
             }
             .navigationTitle("Reps counter")
-//            .alert("Enter a exercise name", isPresented: $isShowingAlert) {
-//                TextField("Name", text: $alertInput)
-//                    .autocorrectionDisabled()
-//                Button("Cancel", role: .cancel) { }
-//                Button("Add") {
-//                    addItem()
-//                }
-//            }
-            .sheet(isPresented: $isShowingAlert) {
-                ChildSizeReader(size: $addExerciseViewSize) {
-                    AddExerciseView()
+            .sheet(isPresented: $isChoosingExercise, onDismiss: {
+                withAnimation {
+                    viewModel.fetchExercises()
                 }
-                .presentationDetents([.height(addExerciseViewSize.height > 345 ? 344 : addExerciseViewSize.height)])
+            }) {
+                AddExerciseView(isPresented: $isChoosingExercise)
+                    .presentationDetents([.height(310)])
                     .presentationDragIndicator(.visible)
-                    .onChange(of: addExerciseViewSize) {
-                        print($0.height)
-                    }
             }
             .animation(.easeIn, value: dateSelection)
             .overlay(alignment: .bottomTrailing) {
                 Button {
-                    isShowingAlert = true
+                    isChoosingExercise = true
                 } label: {
                     Image(systemName: "plus")
                         .resizable()
@@ -140,7 +115,7 @@ struct ExercisesView: View {
                     ExerciseView(exerciseId: exercise.id ?? "")
                 } label: {
                     VStack(alignment: .leading) {
-                        Text(exercise.name ?? "Default name")
+                        Text(exercise.displayName)
                             .font(.headline)
                             .foregroundStyle(.primary)
                         if let date = exercise.timestamp {
@@ -159,50 +134,19 @@ struct ExercisesView: View {
         }
     }
 
-    private func addItem() {
-//        guard !alertInput.isEmpty else { return }
-//        Task { @MainActor in
-//            let newItem = Exercise(context: viewContext)
-//            newItem.timestamp = .now
-//            newItem.name = alertInput
-//            newItem.id = UUID().uuidString
-//            if savesLocation, let location = await LocationManager.shared.getCurrentLocation() {
-//                newItem.latitude = location.latitude
-//                newItem.longitude = location.longitude
-//                newItem.address = location.address
-//                debugPrint(location)
-//            }
-//            withAnimation {
-//                save()
-//            }
-//            if exercises.count > 15, !isReviewRequested {
-//                isReviewRequested = true
-//                requestReview()
-//            }
-//            alertInput = ""
-//        }
-    }
-
     func deleteElements(at indices: IndexSet, for date: Date) {
         if let exercises = groupedExercises[date] {
             withAnimation {
                 indices
                     .map { exercises[$0] }
-                    .forEach(viewContext.delete)
+                    .forEach { viewModel.deleteExercise($0) }
             }
         }
-        save()
     }
 
-    private func save() {
-        do {
-            try viewContext.save()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
+    private func dateSelectionWithTimeOmitted(for date: Date) -> Date? {
+        let components = Calendar.current.dateComponents([.year, .month, .day], from: date)
+        return Calendar.current.date(from: components)
     }
 }
 
