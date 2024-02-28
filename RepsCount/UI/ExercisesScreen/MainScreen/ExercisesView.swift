@@ -112,7 +112,7 @@ struct ExercisesView: View {
         Section {
             ForEach(exercisesInDate) { exercise in
                 NavigationLink {
-                    ExerciseView(exerciseId: exercise.id ?? "")
+                    ExerciseDetailsView(exercise: exercise)
                 } label: {
                     VStack(alignment: .leading) {
                         Text(exercise.displayName)

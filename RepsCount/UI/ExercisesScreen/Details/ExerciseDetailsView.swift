@@ -1,5 +1,5 @@
 //
-//  ExerciseView.swift
+//  ExerciseDetailsView.swift
 //  RepsCount
 //
 //  Created by Aleksandr Riakhin on 1/13/24.
@@ -8,14 +8,19 @@
 import SwiftUI
 import MapKit
 
-struct ExerciseView: View {
+struct ExerciseDetailsView: View {
     @AppStorage("measurementUnit") var measurementUnit: MeasurementUnit = .kilograms
-
     @Environment(\.managedObjectContext) private var viewContext
     @FocusState private var isNotesInputFocused: Bool
-    @FetchRequest private var exercises: FetchedResults<Exercise>
+    @State private var isShowingAlert = false
+    @State private var amountInput = ""
+    @State private var weightInput = ""
+    @State private var notesInput = ""
+
+    private let exercise: Exercise
+
     private var exerciseSets: [ExerciseSet] {
-        let set = exercises.first?.exerciseSets as? Set<ExerciseSet> ?? []
+        let set = exercise.exerciseSets as? Set<ExerciseSet> ?? []
         return set.sorted {
             $0.timestamp ?? .now < $1.timestamp ?? .now
         }
@@ -24,19 +29,11 @@ struct ExerciseView: View {
         Int(exerciseSets.map { $0.amount }.reduce(0, +))
     }
     private var isEditable: Bool {
-        Calendar.current.isDateInToday(exercises.first?.timestamp ?? .now)
+        Calendar.current.isDateInToday(exercise.timestamp ?? .now)
     }
-    @State private var isShowingAlert = false
-    @State private var amountInput = ""
-    @State private var weightInput = ""
-    @State private var notesInput: String = ""
 
-    init(exerciseId: String) {
-        _exercises = FetchRequest(
-            sortDescriptors: [],
-            predicate: NSPredicate(format: "id = %@", exerciseId),
-            animation: .default
-        )
+    init(exercise: Exercise) {
+        self.exercise = exercise
     }
 
     var body: some View {
@@ -49,9 +46,9 @@ struct ExerciseView: View {
         .toolbar {
             ToolbarItem(placement: .principal) {
                 VStack {
-                    Text(exercises.first?.name ?? "")
+                    Text(exercise.name ?? "")
                         .font(.headline)
-                    if let date = exercises.first?.timestamp {
+                    if let date = exercise.timestamp {
                         Text(date.formatted(date: .abbreviated, time: .shortened))
                             .font(.caption)
                             .foregroundStyle(.secondary)
@@ -140,21 +137,21 @@ struct ExerciseView: View {
 
     @ViewBuilder
     private var mapSection: some View {
-        if let latitude = exercises.first?.latitude,
-           let longitude = exercises.first?.longitude,
-           latitude != 0,
+        let latitude = exercise.latitude
+        let longitude = exercise.longitude
+        if latitude != 0,
            longitude != 0 {
             let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             let span = MKCoordinateSpan(latitudeDelta: 0.007, longitudeDelta: 0.007)
             Section("Map") {
                 Map(position: .constant(MapCameraPosition.region(MKCoordinateRegion(center: location, span: span)))) {
-                    Marker(exercises.first?.name ?? "", coordinate: location)
+                    Marker(exercise.name ?? "", coordinate: location)
                 }
                 .frame(height: 200)
                 .allowsHitTesting(false)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
 
-                if let address = exercises.first?.address {
+                if let address = exercise.address {
                     Text(address)
                         .fontWeight(.semibold)
                 }
@@ -165,7 +162,7 @@ struct ExerciseView: View {
     @ViewBuilder
     private var notesSection: some View {
         Section("Notes") {
-            if let notes = exercises.first?.notes {
+            if exercise.notes != nil {
                 TextEditor(text: $notesInput)
                     .fontWeight(.medium)
                     .focused($isNotesInputFocused)
@@ -180,19 +177,19 @@ struct ExerciseView: View {
                     }
                 if isNotesInputFocused {
                     Button("Save") {
-                        exercises.first?.notes = notesInput
+                        exercise.notes = notesInput
                         isNotesInputFocused = false
                         save()
                     }
                 }
             } else {
                 Button("Add notes") {
-                    exercises.first?.notes = ""
+                    exercise.notes = ""
                 }
             }
         }
         .onAppear {
-            notesInput = exercises.first?.notes ?? ""
+            notesInput = exercise.notes ?? ""
         }
     }
 
@@ -205,7 +202,7 @@ struct ExerciseView: View {
             newItem.timestamp = .now
             newItem.id = UUID().uuidString
             newItem.amount = amount
-            newItem.exercise = exercises.first
+            newItem.exercise = exercise
             if let weight = Double(weightInput) {
                 let kilograms = measurementUnit.convertToKilograms(weight)
                 newItem.weight = kilograms.value
@@ -225,10 +222,7 @@ struct ExerciseView: View {
         do {
             try viewContext.save()
         } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            print("Error with saving on details screen, \(error.localizedDescription)")
         }
     }
 }
