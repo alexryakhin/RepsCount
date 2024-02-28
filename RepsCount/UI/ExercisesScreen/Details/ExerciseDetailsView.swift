@@ -46,7 +46,7 @@ struct ExerciseDetailsView: View {
         .toolbar {
             ToolbarItem(placement: .principal) {
                 VStack {
-                    Text(exercise.name ?? "")
+                    Text(LocalizedStringKey(exercise.name ?? ""))
                         .font(.headline)
                     if let date = exercise.timestamp {
                         Text(date.formatted(date: .abbreviated, time: .shortened))

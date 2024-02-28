@@ -26,7 +26,8 @@ public enum GlobalConstant {
             "Leg Press",
             "Deadlifts",
             "Leg Curls",
-            "Calf Raises"
+            "Calf Raises",
+            "Toe raises"
         ],
         "Core": [
             "Crunches",

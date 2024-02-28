@@ -115,9 +115,11 @@ struct ExercisesView: View {
                     ExerciseDetailsView(exercise: exercise)
                 } label: {
                     VStack(alignment: .leading) {
-                        Text(exercise.displayName)
+                        Text(LocalizedStringKey(exercise.name ?? ""))
                             .font(.headline)
                             .foregroundStyle(.primary)
+                        + Text(", ")
+                        + Text(LocalizedStringKey(exercise.category ?? ""))
                         if let date = exercise.timestamp {
                             Text(date.formatted(date: .omitted, time: .shortened))
                                 .font(.subheadline)

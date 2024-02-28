@@ -27,10 +27,3 @@ final class PersistenceController {
         container.viewContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
     }
 }
-
-extension Exercise {
-    var displayName: String {
-
-        "\((name ?? "").localized()), \((category ?? "").localized())"
-    }
-}

@@ -16,23 +16,10 @@ extension Collection {
 }
 
 extension String {
-    static func localizedString(
-        for key: String,
-        locale: Locale = .current
-    ) -> String {
-
-        let language = locale.language.languageCode?.identifier
-        let path = Bundle.main.path(forResource: language, ofType: "lproj")!
-        let bundle = Bundle(path: path)!
-        let localizedString = NSLocalizedString(key, bundle: bundle, comment: "")
-
-        return localizedString
-    }
-
-    func localized(locale: Locale = .current) -> String {
-        let language = locale.language.languageCode?.identifier
-        let path = Bundle.main.path(forResource: language, ofType: "lproj")!
-        let bundle = Bundle(path: path)!
+    var localized: String {
+        let language = Locale.current.language.languageCode?.identifier
+        guard let path = Bundle.main.path(forResource: language, ofType: "lproj") else { return self }
+        guard let bundle = Bundle(path: path) else { return self }
         let localizedString = NSLocalizedString(self, bundle: bundle, comment: "")
 
         return localizedString
