@@ -162,29 +162,23 @@ struct ExerciseDetailsView: View {
     @ViewBuilder
     private var notesSection: some View {
         Section("Notes") {
-            if exercise.notes != nil {
-                TextEditor(text: $notesInput)
-                    .fontWeight(.medium)
-                    .focused($isNotesInputFocused)
-                    .padding(.bottom, -16)
-                    .overlay(alignment: .leading) {
-                        if notesInput.isEmpty {
-                            Text("Start typing")
-                                .foregroundStyle(.secondary)
-                                .allowsHitTesting(false)
-                                .padding(.horizontal, 4)
-                        }
-                    }
-                if isNotesInputFocused {
-                    Button("Save") {
-                        exercise.notes = notesInput
-                        isNotesInputFocused = false
-                        save()
+            TextEditor(text: $notesInput)
+                .fontWeight(.medium)
+                .focused($isNotesInputFocused)
+                .padding(.bottom, -16)
+                .overlay(alignment: .leading) {
+                    if notesInput.isEmpty {
+                        Text("Start typing")
+                            .foregroundStyle(.secondary)
+                            .allowsHitTesting(false)
+                            .padding(.horizontal, 4)
                     }
                 }
-            } else {
-                Button("Add notes") {
-                    exercise.notes = ""
+            if isNotesInputFocused {
+                Button("Save") {
+                    exercise.notes = notesInput
+                    isNotesInputFocused = false
+                    save()
                 }
             }
         }
