@@ -35,7 +35,7 @@ struct AddExerciseView: ViewWithBackground {
                         .font(.system(.headline, weight: .semibold))
                     Picker(selection: $viewModel.selectedCategory) {
                         ForEach(exerciseCategories, id: \.self) { category in
-                            Text(category)
+                            Text(LocalizedStringKey(category))
                         }
                     } label: {
                         Text("Select a category")
@@ -63,7 +63,7 @@ struct AddExerciseView: ViewWithBackground {
                     } else {
                         Picker(selection: $viewModel.selectedExercise) {
                             ForEach(exercises, id: \.self) { exercise in
-                                Text(exercise)
+                                Text(LocalizedStringKey(exercise))
                             }
                         } label: {
                             Text("Select an exercise")

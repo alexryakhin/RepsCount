@@ -16,9 +16,15 @@ final class AddExerciseViewModel: ObservableObject {
 
     @Published var exerciseCategories: [String: [String]] = [:]
 
-    @Published var text = ""
-    @Published var selectedCategory = ""
-    @Published var selectedExercise = ""
+    @Published var text = String()
+    @Published var selectedCategory = String() {
+        willSet {
+            if let firstExercise = exerciseCategories[newValue]?.first {
+                selectedExercise = firstExercise
+            }
+        }
+    }
+    @Published var selectedExercise = String()
 
     init() {
         fetchCategories()
@@ -53,9 +59,6 @@ final class AddExerciseViewModel: ObservableObject {
                 }
                 if let firstCategory = exerciseCategories.keys.sorted().first {
                     selectedCategory = firstCategory
-                }
-                if let firstExercise = exerciseCategories[selectedCategory]?.first {
-                    selectedExercise = firstExercise
                 }
             }
         } catch {

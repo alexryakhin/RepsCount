@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import SwiftUI
 
 final class PersistenceController {
     static let shared = PersistenceController()
@@ -29,6 +30,7 @@ final class PersistenceController {
 
 extension Exercise {
     var displayName: String {
-        "\(name ?? ""), \(category ?? "")"
+
+        "\((name ?? "").localized()), \((category ?? "").localized())"
     }
 }

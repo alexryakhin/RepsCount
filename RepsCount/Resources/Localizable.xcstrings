@@ -375,6 +375,83 @@
         }
       }
     },
+    "Arms" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Руки"
+          }
+        }
+      }
+    },
+    "Back" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Спина"
+          }
+        }
+      }
+    },
+    "Barbell Rows" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тяга штанги в наклоне"
+          }
+        }
+      }
+    },
+    "Bench Press" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жим штанги лежа"
+          }
+        }
+      }
+    },
+    "Bicep Curls" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Подъем штанги на бицепс"
+          }
+        }
+      }
+    },
+    "Cable Crossover" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кроссовер с кабелем"
+          }
+        }
+      }
+    },
+    "Calf Raises" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Подъем на носках"
+          }
+        }
+      }
+    },
     "Cancel" : {
       "localizations" : {
         "de" : {
@@ -404,10 +481,46 @@
       }
     },
     "Category" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Категория"
+          }
+        }
+      }
+    },
+    "Chest" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Грудь"
+          }
+        }
+      }
+    },
+    "Chest Press" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жим гантелей лежа"
+          }
+        }
+      }
     },
     "Choose" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выбрать"
+          }
+        }
+      }
     },
     "Choose a measurement unit" : {
       "localizations" : {
@@ -438,7 +551,14 @@
       }
     },
     "Choose an exercise" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выберите упражнение"
+          }
+        }
+      }
     },
     "Contact me" : {
       "localizations" : {
@@ -468,37 +588,81 @@
         }
       }
     },
-    "Enter a exercise name" : {
-      "extractionState" : "stale",
+    "Core" : {
+      "extractionState" : "manual",
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Geben Sie einen Übungsnamen ein"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Entrez un nom d'exercice"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Введите название упражнения"
+            "value" : "Корпус"
           }
-        },
-        "sr-Latn" : {
+        }
+      }
+    },
+    "Crunches" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Unesite naziv vežbe"
+            "value" : "Жим живота"
+          }
+        }
+      }
+    },
+    "Deadlifts" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мертвая тяга"
+          }
+        }
+      }
+    },
+    "Dips" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отжимания на брусьях"
+          }
+        }
+      }
+    },
+    "Dumbbell Flyes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Разведение гантелей"
+          }
+        }
+      }
+    },
+    "Dumbbell Rows" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тяга гантелей"
           }
         }
       }
     },
     "Enter exercise name" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите название упражнения"
+          }
+        }
+      }
     },
     "Enter the amount of reps" : {
       "localizations" : {
@@ -529,7 +693,14 @@
       }
     },
     "Exercise" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Упражнение"
+          }
+        }
+      }
     },
     "Exercises" : {
       "localizations" : {
@@ -559,6 +730,39 @@
         }
       }
     },
+    "Face Pulls" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тяга к лицу"
+          }
+        }
+      }
+    },
+    "Front Raises" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Передние подъемы"
+          }
+        }
+      }
+    },
+    "Hammer Curls" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Молотковые подъемы"
+          }
+        }
+      }
+    },
     "Have questions, suggestions, or feedback? I'd love to hear from you. Reach out to get support on Instagram or Twitter!" : {
       "localizations" : {
         "de" : {
@@ -583,6 +787,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Imate pitanja, sugestije ili povratne informacije? Voleo bih da čujem od vas. Obratite se da dobijete podršku na Instagramu ili Tvitteru!"
+          }
+        }
+      }
+    },
+    "Incline Bench Press" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жим гантелей на наклонной скамье"
           }
         }
       }
@@ -673,6 +888,28 @@
         }
       }
     },
+    "Lat Pulldowns" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тяга верхнего блока"
+          }
+        }
+      }
+    },
+    "Lateral Raises" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Боковые подъемы"
+          }
+        }
+      }
+    },
     "lb" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -702,6 +939,61 @@
         }
       }
     },
+    "Leg Curls" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сгибание ног"
+          }
+        }
+      }
+    },
+    "Leg Press" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жим ногами"
+          }
+        }
+      }
+    },
+    "Leg Raises" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Подъем ног"
+          }
+        }
+      }
+    },
+    "Legs" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ноги"
+          }
+        }
+      }
+    },
+    "Lunges" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выпады"
+          }
+        }
+      }
+    },
     "Map" : {
       "localizations" : {
         "de" : {
@@ -726,35 +1018,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mapa"
-          }
-        }
-      }
-    },
-    "Name" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Name"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nom"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Название"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ime"
           }
         }
       }
@@ -871,6 +1134,17 @@
         }
       }
     },
+    "Oblique Twist" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поворот корпуса"
+          }
+        }
+      }
+    },
     "Pounds" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -896,6 +1170,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pounds"
+          }
+        }
+      }
+    },
+    "Pull-ups" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Подтягивания"
+          }
+        }
+      }
+    },
+    "Push-ups" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отжимания"
           }
         }
       }
@@ -984,6 +1280,17 @@
         }
       }
     },
+    "Russian Twist" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Русский поворот"
+          }
+        }
+      }
+    },
     "Save" : {
       "localizations" : {
         "de" : {
@@ -1041,10 +1348,24 @@
       }
     },
     "Select a category" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выберите категорию"
+          }
+        }
+      }
     },
     "Select an exercise" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выберите упражнение"
+          }
+        }
+      }
     },
     "Sets" : {
       "localizations" : {
@@ -1126,6 +1447,50 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Podešavanja"
+          }
+        }
+      }
+    },
+    "Shoulder Press" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жим гантелей сидя"
+          }
+        }
+      }
+    },
+    "Shoulders" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Плечи"
+          }
+        }
+      }
+    },
+    "Shrugs" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поднимание плеч"
+          }
+        }
+      }
+    },
+    "Squats" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Приседания"
           }
         }
       }
@@ -1216,6 +1581,28 @@
         }
       }
     },
+    "Superman" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Супермен"
+          }
+        }
+      }
+    },
+    "T-Bar Rows" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тяга Т-грифа"
+          }
+        }
+      }
+    },
     "Tap on a plus button to add a new exercise!" : {
       "localizations" : {
         "de" : {
@@ -1300,6 +1687,28 @@
         }
       }
     },
+    "Tricep Dips" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отжимания на трицепс"
+          }
+        }
+      }
+    },
+    "Tricep Extension" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Разгибание трицепса"
+          }
+        }
+      }
+    },
     "Twitter" : {
       "localizations" : {
         "de" : {
@@ -1324,6 +1733,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tvitter"
+          }
+        }
+      }
+    },
+    "Upright Rows" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вертикальные подъемы"
           }
         }
       }
