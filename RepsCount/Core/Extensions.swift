@@ -14,14 +14,3 @@ extension Collection {
         return indices.contains(index) ? self[index] : nil
     }
 }
-
-extension String {
-    var localized: String {
-        let language = Locale.current.language.languageCode?.identifier
-        guard let path = Bundle.main.path(forResource: language, ofType: "lproj") else { return self }
-        guard let bundle = Bundle(path: path) else { return self }
-        let localizedString = NSLocalizedString(self, bundle: bundle, comment: "")
-
-        return localizedString
-    }
-}

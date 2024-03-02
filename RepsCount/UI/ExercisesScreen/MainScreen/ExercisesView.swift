@@ -27,11 +27,16 @@ struct ExercisesView: View {
         NavigationView {
             Group {
                 if groupedExercises.isEmpty {
-                    ContentUnavailableView(
-                        "No exercises yet",
-                        systemImage: "figure.strengthtraining.functional",
-                        description: Text("Tap on a plus button to add a new exercise!")
-                    )
+                    VStack {
+                        Spacer()
+                        RCContentUnavailableView(
+                            title: "No exercises yet",
+                            description: "Tap on a plus button to add a new exercise!",
+                            systemImage: "figure.strengthtraining.functional"
+                        )
+                        Spacer()
+                    }
+                    .frame(maxWidth: .infinity, alignment: .center)
                 } else {
                     List {
                         if dateSelection == nil {
@@ -46,10 +51,10 @@ struct ExercisesView: View {
                         if let dateSelection,
                            let date = dateSelectionWithTimeOmitted(for: dateSelection),
                            groupedExercises[date] == nil {
-                            ContentUnavailableView(
-                                "No exercises",
-                                systemImage: "figure.strengthtraining.functional",
-                                description: Text("No exercises for this date!")
+                            RCContentUnavailableView(
+                                title: "No exercises",
+                                description: "No exercises for this date!",
+                                systemImage: "figure.strengthtraining.functional"
                             )
                         }
                     }
@@ -76,9 +81,13 @@ struct ExercisesView: View {
                     viewModel.fetchExercises()
                 }
             }) {
-                AddExerciseView(isPresented: $isChoosingExercise)
-                    .presentationDetents([.height(310)])
-                    .presentationDragIndicator(.visible)
+                if #available(iOS 16.0, *) {
+                    AddExerciseView(isPresented: $isChoosingExercise)
+                        .presentationDetents([.height(310)])
+                        .presentationDragIndicator(.visible)
+                } else {
+                    AddExerciseView(isPresented: $isChoosingExercise)
+                }
             }
             .animation(.easeIn, value: dateSelection)
             .overlay(alignment: .bottomTrailing) {
@@ -89,7 +98,6 @@ struct ExercisesView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 24, height: 24)
-                        .bold()
                         .padding(16)
                         .background(in: Circle())
                         .overlay {
@@ -117,7 +125,7 @@ struct ExercisesView: View {
                     VStack(alignment: .leading) {
                         Text(LocalizedStringKey(exercise.name ?? ""))
                             .font(.headline)
-                            .foregroundStyle(.primary)
+                            .foregroundColor(.primary)
                         + Text(", ")
                         + Text(LocalizedStringKey(exercise.category ?? ""))
                         if let date = exercise.timestamp {

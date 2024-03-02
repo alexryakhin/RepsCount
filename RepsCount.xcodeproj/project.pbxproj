@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0216581A2B543395009EAF77 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 021658192B543395009EAF77 /* Localizable.xcstrings */; };
 		022ACF822B8C64C800764C6D /* ViewWithBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022ACF812B8C64C800764C6D /* ViewWithBackground.swift */; };
+		023223892B93363800C0A73A /* RCContentUnavailableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023223882B93363800C0A73A /* RCContentUnavailableView.swift */; };
 		024C4E052B52D32D00032346 /* RepsCountApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C4E042B52D32D00032346 /* RepsCountApp.swift */; };
 		024C4E072B52D32D00032346 /* ExercisesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C4E062B52D32D00032346 /* ExercisesView.swift */; };
 		024C4E092B52D32E00032346 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 024C4E082B52D32E00032346 /* Assets.xcassets */; };
@@ -37,6 +38,7 @@
 /* Begin PBXFileReference section */
 		021658192B543395009EAF77 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		022ACF812B8C64C800764C6D /* ViewWithBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewWithBackground.swift; sourceTree = "<group>"; };
+		023223882B93363800C0A73A /* RCContentUnavailableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCContentUnavailableView.swift; sourceTree = "<group>"; };
 		024C4E012B52D32D00032346 /* RepsCount.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RepsCount.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		024C4E042B52D32D00032346 /* RepsCountApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsCountApp.swift; sourceTree = "<group>"; };
 		024C4E062B52D32D00032346 /* ExercisesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesView.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				02FC1F4C2B656090008F5D8D /* CustomDatePicker.swift */,
 				025F49D42B65604000C571FF /* DatePickerView.swift */,
 				025573432B5D8EF3001DF4B6 /* View+Extension.swift */,
+				023223882B93363800C0A73A /* RCContentUnavailableView.swift */,
 				02FC1F552B6653A3008F5D8D /* TabView */,
 				02FC1F522B664DE4008F5D8D /* SettingsScreen */,
 				02FC1F512B664DD9008F5D8D /* ExercisesScreen */,
@@ -334,6 +337,7 @@
 				02FC1F572B6653B9008F5D8D /* TabViewScreen.swift in Sources */,
 				02FC1F5B2B6668FB008F5D8D /* GlobalConstants.swift in Sources */,
 				025F49D32B6501C200C571FF /* LocationManager.swift in Sources */,
+				023223892B93363800C0A73A /* RCContentUnavailableView.swift in Sources */,
 				02E834772B8A21FD006C98DA /* AboutAppView.swift in Sources */,
 				02E834872B8BAA68006C98DA /* AddExerciseView.swift in Sources */,
 				02FC1F592B665FAE008F5D8D /* MeasurementUnit.swift in Sources */,
@@ -476,7 +480,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = RepsCount/App/RepsCount.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"RepsCount/Preview Content\"";
 				DEVELOPMENT_TEAM = 69S862NXBP;
 				ENABLE_PREVIEWS = YES;
@@ -491,7 +495,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -517,7 +521,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = RepsCount/App/RepsCount.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"RepsCount/Preview Content\"";
 				DEVELOPMENT_TEAM = 69S862NXBP;
 				ENABLE_PREVIEWS = YES;
@@ -532,7 +536,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

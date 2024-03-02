@@ -81,7 +81,6 @@ struct ExerciseDetailsView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 24, height: 24)
-                        .bold()
                         .padding(16)
                         .background(in: Circle())
                         .overlay {
@@ -142,14 +141,13 @@ struct ExerciseDetailsView: View {
         if latitude != 0,
            longitude != 0 {
             let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-            let span = MKCoordinateSpan(latitudeDelta: 0.007, longitudeDelta: 0.007)
+            let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
+            let region = MKCoordinateRegion(center: location, span: span)
             Section("Map") {
-                Map(position: .constant(MapCameraPosition.region(MKCoordinateRegion(center: location, span: span)))) {
-                    Marker(exercise.name ?? "", coordinate: location)
-                }
-                .frame(height: 200)
-                .allowsHitTesting(false)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
+                Map(coordinateRegion: .constant(region), showsUserLocation: false, annotationItems: [MapMarker(coordinate: location, tint: .red)]) { $0 }
+                    .frame(height: 200)
+                    .allowsHitTesting(false)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
 
                 if let address = exercise.address {
                     Text(address)
@@ -163,7 +161,6 @@ struct ExerciseDetailsView: View {
     private var notesSection: some View {
         Section("Notes") {
             TextEditor(text: $notesInput)
-                .fontWeight(.medium)
                 .focused($isNotesInputFocused)
                 .padding(.bottom, -16)
                 .overlay(alignment: .leading) {
@@ -211,7 +208,7 @@ struct ExerciseDetailsView: View {
             save()
         }
     }
-
+    
     private func save() {
         do {
             try viewContext.save()
@@ -227,3 +224,9 @@ private let timeFormatter: DateComponentsFormatter = {
     formatter.allowedUnits = [.hour, .minute, .second]
     return formatter
 }()
+
+extension MapMarker: Identifiable {
+    public var id: String {
+        UUID().uuidString
+    }
+}

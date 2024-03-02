@@ -67,7 +67,6 @@ struct CustomDatePicker: View {
 
     private func pickerPlaceholder(date: Date?) -> some View {
         pickerPlaceholderText(date: date)
-                .bold()
                 .foregroundColor(isEditing ? Color.accentColor : Color.primary)
                 .frame(height: 24)
                 .fixedSize(horizontal: true, vertical: false)
@@ -77,6 +76,7 @@ struct CustomDatePicker: View {
     private func pickerPlaceholderText(date: Date?) -> some View {
         if let date {
             Text(date, style: pickerMode.textStyle)
+                .bold()
         } else {
             Image(systemName: "calendar")
         }

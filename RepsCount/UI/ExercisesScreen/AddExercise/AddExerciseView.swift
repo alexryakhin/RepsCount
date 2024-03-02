@@ -24,15 +24,17 @@ struct AddExerciseView: ViewWithBackground {
     var content: some View {
         VStack {
             Text("Choose an exercise")
-                .font(.system(.title, weight: .bold))
+                .fontWeight(.bold)
+                .font(.system(.title))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.top, 8)
             Spacer()
             VStack {
                 HStack {
                     Text("Category")
+                        .fontWeight(.semibold)
+                        .font(.system(.headline))
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .font(.system(.headline, weight: .semibold))
                     Picker(selection: $viewModel.selectedCategory) {
                         ForEach(exerciseCategories, id: \.self) { category in
                             Text(LocalizedStringKey(category))
@@ -50,8 +52,9 @@ struct AddExerciseView: ViewWithBackground {
 
                 HStack {
                     Text("Exercise")
+                        .fontWeight(.semibold)
+                        .font(.system(.headline))
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .font(.system(.headline, weight: .semibold))
                     if isAddingNewExercise {
                         TextField("Enter exercise name", text: $viewModel.text)
                             .padding(6)
@@ -88,13 +91,23 @@ struct AddExerciseView: ViewWithBackground {
                 isPresented = false
 //                }
             } label: {
-                Text(isAddingNewExercise ? "Add" : "Choose")
-                    .bold()
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.accentColor.gradient)
-                    .foregroundColor(.white)
-                    .cornerRadius(12)
+                if #available(iOS 16, *) {
+                    Text(isAddingNewExercise ? "Add" : "Choose")
+                        .bold()
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.accentColor.gradient)
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
+                } else {
+                    Text(isAddingNewExercise ? "Add" : "Choose")
+                        .bold()
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.accentColor)
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
+                }
             }
 
 //            Button("Or add a new exercise to the list") {

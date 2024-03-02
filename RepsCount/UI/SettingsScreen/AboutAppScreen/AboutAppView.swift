@@ -9,15 +9,13 @@ import SwiftUI
 import StoreKit
 
 struct AboutAppView: View {
-    @Environment(\.requestReview) var requestReview
-
     var body: some View {
         List {
             Section {
                 Text("Welcome to RepsCount, your companion for tracking and improving your workout performance!\n\nI created this app because I myself needed something simple yet powerful to track my progress, and it's pretty hard to do it just in Notes App.\n\nIf you like the app, please leave a review")
                     .fontWeight(.medium)
                 Button("Review the app") {
-                    requestReview()
+                    SKStoreReviewController.requestReview()
                 }
             }
             Section("Version") {

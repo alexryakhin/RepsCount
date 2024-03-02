@@ -15,7 +15,6 @@ struct RepsCountApp: App {
         WindowGroup {
             TabViewScreen()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                .fontDesign(.rounded)
         }
     }
 }
