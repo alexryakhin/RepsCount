@@ -9,7 +9,6 @@ import SwiftUI
 import CoreData
 
 struct ExercisesView: View {
-    @AppStorage("savesLocation") var savesLocation: Bool = true
     @StateObject private var viewModel = ExercisesViewModel()
 
     @State private var isChoosingExercise = false
@@ -47,6 +46,7 @@ struct ExercisesView: View {
                             sectionForDate(date)
                         }
                     }
+                    .animation(.default, value: viewModel.exercises)
                     .overlay {
                         if let dateSelection,
                            let date = dateSelectionWithTimeOmitted(for: dateSelection),
@@ -76,11 +76,7 @@ struct ExercisesView: View {
                 }
             }
             .navigationTitle("Reps counter")
-            .sheet(isPresented: $isChoosingExercise, onDismiss: {
-                withAnimation {
-                    viewModel.fetchExercises()
-                }
-            }) {
+            .sheet(isPresented: $isChoosingExercise) {
                 if #available(iOS 16.0, *) {
                     AddExerciseView(isPresented: $isChoosingExercise)
                         .presentationDetents([.height(310)])
@@ -108,7 +104,7 @@ struct ExercisesView: View {
             }
         }
         .onAppear {
-            if savesLocation {
+            if viewModel.savesLocation {
                 LocationManager.shared.initiateLocationManager()
             }
         }

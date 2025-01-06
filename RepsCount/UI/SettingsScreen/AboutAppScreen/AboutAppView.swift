@@ -27,7 +27,7 @@ struct AboutAppView: View {
             }
             Section("Contact me") {
                 Text("Have questions, suggestions, or feedback? I'd love to hear from you. Reach out to get support on Instagram or Twitter!")
-                Link("Instagram", destination: URL(string: "https://www.instagram.com/xander1100001")!)
+                Link("Instagram", destination: URL(string: "https://www.instagram.com/ar_x101")!)
                 Link("Twitter", destination: URL(string: "https://www.twitter.com/xander1100001")!)
             }
         }

@@ -9,31 +9,13 @@ import SwiftUI
 import MapKit
 
 struct ExerciseDetailsView: View {
-    @AppStorage("measurementUnit") var measurementUnit: MeasurementUnit = .kilograms
-    @Environment(\.managedObjectContext) private var viewContext
-    @FocusState private var isNotesInputFocused: Bool
     @State private var isShowingAlert = false
-    @State private var amountInput = ""
-    @State private var weightInput = ""
-    @State private var notesInput = ""
+    @FocusState private var isNotesInputFocused: Bool
 
-    private let exercise: Exercise
-
-    private var exerciseSets: [ExerciseSet] {
-        let set = exercise.exerciseSets as? Set<ExerciseSet> ?? []
-        return set.sorted {
-            $0.timestamp ?? .now < $1.timestamp ?? .now
-        }
-    }
-    private var totalAmount: Int {
-        Int(exerciseSets.map { $0.amount }.reduce(0, +))
-    }
-    private var isEditable: Bool {
-        Calendar.current.isDateInToday(exercise.timestamp ?? .now)
-    }
+    @ObservedObject private var viewModel: ExerciseDetailsViewModel
 
     init(exercise: Exercise) {
-        self.exercise = exercise
+        self.viewModel = ExerciseDetailsViewModel(exercise: exercise)
     }
 
     var body: some View {
@@ -46,9 +28,9 @@ struct ExerciseDetailsView: View {
         .toolbar {
             ToolbarItem(placement: .principal) {
                 VStack {
-                    Text(LocalizedStringKey(exercise.name ?? ""))
+                    Text(LocalizedStringKey(viewModel.exercise.name ?? ""))
                         .font(.headline)
-                    if let date = exercise.timestamp {
+                    if let date = viewModel.exercise.timestamp {
                         Text(date.formatted(date: .abbreviated, time: .shortened))
                             .font(.caption)
                             .foregroundStyle(.secondary)
@@ -56,26 +38,26 @@ struct ExerciseDetailsView: View {
                 }
             }
         }
-        .alert("Enter the amount of reps", isPresented: $isShowingAlert) {
-            TextField("Amount", text: $amountInput)
+        .alert("Enter the amount of reps", isPresented: $viewModel.isShowingAlert) {
+            TextField("Amount", text: $viewModel.amountInput)
                 .keyboardType(.numberPad)
-            TextField("Weight, \(Text(measurementUnit.shortName)) (optional)", text: $weightInput)
+            TextField("Weight, \(Text(viewModel.measurementUnit.shortName)) (optional)", text: $viewModel.weightInput)
                 .keyboardType(.decimalPad)
             Button("Add") {
-                addItem()
-                isShowingAlert = false
+                viewModel.addItem()
+                viewModel.isShowingAlert = false
             }
             Button("Cancel", role: .cancel) {
-                amountInput = ""
-                weightInput = ""
-                isShowingAlert = false
+                viewModel.amountInput = ""
+                viewModel.weightInput = ""
+                viewModel.isShowingAlert = false
             }
         }
         .navigationBarTitleDisplayMode(.inline)
         .overlay(alignment: .bottomTrailing) {
-            if isEditable {
+            if viewModel.isEditable {
                 Button {
-                    isShowingAlert = true
+                    viewModel.isShowingAlert = true
                 } label: {
                     Image(systemName: "plus")
                         .resizable()
@@ -90,16 +72,17 @@ struct ExerciseDetailsView: View {
                 .padding(30)
             }
         }
+        .animation(.default, value: viewModel.exerciseSets)
     }
 
     @ViewBuilder
     private var setsSection: some View {
-        if !exerciseSets.isEmpty {
+        if !viewModel.exerciseSets.isEmpty {
             Section("Sets") {
-                ForEach(Array(exerciseSets.enumerated()), id: \.offset) { offset, exerciseSet in
+                ForEach(Array(viewModel.exerciseSets.enumerated()), id: \.offset) { offset, exerciseSet in
                     HStack {
                         if exerciseSet.weight > 0 {
-                            let converted: String = measurementUnit.convertFromKilograms(exerciseSet.weight)
+                            let converted: String = viewModel.measurementUnit.convertFromKilograms(exerciseSet.weight)
                             Text("#\(offset + 1): \(exerciseSet.amount) reps, \(converted)")
                                 .fontWeight(.semibold)
                         } else {
@@ -111,8 +94,8 @@ struct ExerciseDetailsView: View {
                             .foregroundStyle(.secondary)
                     }
                 }
-                .if(isEditable, transform: { view in
-                    view.onDelete(perform: deleteItems)
+                .if(viewModel.isEditable, transform: { view in
+                    view.onDelete(perform: viewModel.deleteItems)
                 })
             }
         }
@@ -120,13 +103,13 @@ struct ExerciseDetailsView: View {
 
     private var totalSection: some View {
         Section("Total") {
-            Text("Reps: \(totalAmount)")
+            Text("Reps: \(viewModel.totalAmount)")
                 .fontWeight(.semibold)
-            Text("Sets: \(exerciseSets.count)")
+            Text("Sets: \(viewModel.exerciseSets.count)")
                 .fontWeight(.semibold)
-            if exerciseSets.count > 1,
-               let firstSetDate = exerciseSets.first?.timestamp,
-               let lastSetDate = exerciseSets.last?.timestamp {
+            if viewModel.exerciseSets.count > 1,
+               let firstSetDate = viewModel.exerciseSets.first?.timestamp,
+               let lastSetDate = viewModel.exerciseSets.last?.timestamp {
                 let distance = firstSetDate.distance(to: lastSetDate)
                 Text("Time: \(timeFormatter.string(from: distance)!)")
                     .fontWeight(.semibold)
@@ -136,8 +119,8 @@ struct ExerciseDetailsView: View {
 
     @ViewBuilder
     private var mapSection: some View {
-        let latitude = exercise.latitude
-        let longitude = exercise.longitude
+        let latitude = viewModel.exercise.latitude
+        let longitude = viewModel.exercise.longitude
         if latitude != 0,
            longitude != 0 {
             let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
@@ -149,7 +132,7 @@ struct ExerciseDetailsView: View {
                     .allowsHitTesting(false)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
 
-                if let address = exercise.address {
+                if let address = viewModel.exercise.address {
                     Text(address)
                         .fontWeight(.semibold)
                 }
@@ -160,11 +143,11 @@ struct ExerciseDetailsView: View {
     @ViewBuilder
     private var notesSection: some View {
         Section("Notes") {
-            TextEditor(text: $notesInput)
+            TextEditor(text: $viewModel.notesInput)
                 .focused($isNotesInputFocused)
                 .padding(.bottom, -16)
                 .overlay(alignment: .leading) {
-                    if notesInput.isEmpty {
+                    if viewModel.notesInput.isEmpty {
                         Text("Start typing")
                             .foregroundStyle(.secondary)
                             .allowsHitTesting(false)
@@ -173,47 +156,14 @@ struct ExerciseDetailsView: View {
                 }
             if isNotesInputFocused {
                 Button("Save") {
-                    exercise.notes = notesInput
+                    viewModel.exercise.notes = viewModel.notesInput
                     isNotesInputFocused = false
-                    save()
+                    viewModel.save()
                 }
             }
         }
         .onAppear {
-            notesInput = exercise.notes ?? ""
-        }
-    }
-
-    private func addItem() {
-        defer { amountInput = "" }
-        defer { weightInput = "" }
-        guard let amount = Int64(amountInput) else { return }
-        withAnimation {
-            let newItem = ExerciseSet(context: viewContext)
-            newItem.timestamp = .now
-            newItem.id = UUID().uuidString
-            newItem.amount = amount
-            newItem.exercise = exercise
-            if let weight = Double(weightInput) {
-                let kilograms = measurementUnit.convertToKilograms(weight)
-                newItem.weight = kilograms.value
-            }
-            save()
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { exerciseSets[$0] }.forEach(viewContext.delete)
-            save()
-        }
-    }
-    
-    private func save() {
-        do {
-            try viewContext.save()
-        } catch {
-            print("Error with saving on details screen, \(error.localizedDescription)")
+            viewModel.notesInput = viewModel.exercise.notes ?? ""
         }
     }
 }

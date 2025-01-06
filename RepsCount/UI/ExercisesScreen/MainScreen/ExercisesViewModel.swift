@@ -10,39 +10,28 @@ import Combine
 import CoreData
 
 final class ExercisesViewModel: ObservableObject {
-    private let persistenceController = PersistenceController.shared
+    private let coreDataStorage: CoreDataStorageInterface
     private var cancellable = Set<AnyCancellable>()
 
     @Published var exercises: [Exercise] = []
-    var savesLocation: Bool {
-        UserDefaults.standard.bool(forKey: "savesLocation")
-    }
+    @AppStorage("savesLocation") var savesLocation: Bool = true
 
     init() {
-        fetchExercises()
-    }
-
-    func fetchExercises() {
-        let request = NSFetchRequest<Exercise>(entityName: "Exercise")
-        do {
-            exercises = try persistenceController.container.viewContext.fetch(request)
-        } catch {
-            print("Error fetching exercises. \(error.localizedDescription)")
-        }
+        coreDataStorage = CoreDataStorage.shared
+        setupBindings()
     }
 
     func deleteExercise(_ exercise: Exercise) {
-        persistenceController.container.viewContext.delete(exercise)
-        save()
+        coreDataStorage.deleteExercise(exercise)
     }
 
-    private func save() {
-        do {
-            try persistenceController.container.viewContext.save()
-            fetchExercises()
-        } catch let error {
-            print("Error with saving data to CD. \(error.localizedDescription)")
-        }
-        objectWillChange.send()
+    private func setupBindings() {
+        coreDataStorage.exercisesPublisher
+            .sink { completion in
+                // TODO: error handle
+            } receiveValue: { [weak self] exercises in
+                self?.exercises = exercises
+            }
+            .store(in: &cancellable)
     }
 }

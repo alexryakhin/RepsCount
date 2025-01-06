@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,7 +14,7 @@
 		024C4E072B52D32D00032346 /* ExercisesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C4E062B52D32D00032346 /* ExercisesView.swift */; };
 		024C4E092B52D32E00032346 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 024C4E082B52D32E00032346 /* Assets.xcassets */; };
 		024C4E0C2B52D32E00032346 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 024C4E0B2B52D32E00032346 /* Preview Assets.xcassets */; };
-		024C4E0E2B52D32E00032346 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C4E0D2B52D32E00032346 /* Persistence.swift */; };
+		024C4E0E2B52D32E00032346 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C4E0D2B52D32E00032346 /* CoreDataService.swift */; };
 		024C4E112B52D32E00032346 /* RepsCount.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 024C4E0F2B52D32E00032346 /* RepsCount.xcdatamodeld */; };
 		024C4E1A2B52D4F200032346 /* ExerciseDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C4E192B52D4F200032346 /* ExerciseDetailsView.swift */; };
 		024C4E1C2B53112A00032346 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024C4E1B2B53112A00032346 /* Extensions.swift */; };
@@ -33,6 +33,9 @@
 		02FC1F592B665FAE008F5D8D /* MeasurementUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC1F582B665FAE008F5D8D /* MeasurementUnit.swift */; };
 		02FC1F5B2B6668FB008F5D8D /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC1F5A2B6668FB008F5D8D /* GlobalConstants.swift */; };
 		02FC1F5D2B666939008F5D8D /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC1F5C2B666939008F5D8D /* String+Ext.swift */; };
+		530AAC212D2BD22200788407 /* CoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530AAC202D2BD22200788407 /* CoreError.swift */; };
+		530AAC232D2BD36800788407 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530AAC222D2BD36400788407 /* CoreDataStorage.swift */; };
+		530E52F32D2C38FE00064589 /* ExerciseDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530E52F22D2C38FE00064589 /* ExerciseDetailsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,7 +47,7 @@
 		024C4E062B52D32D00032346 /* ExercisesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesView.swift; sourceTree = "<group>"; };
 		024C4E082B52D32E00032346 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		024C4E0B2B52D32E00032346 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		024C4E0D2B52D32E00032346 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		024C4E0D2B52D32E00032346 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		024C4E102B52D32E00032346 /* PullUpsCounter.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PullUpsCounter.xcdatamodel; sourceTree = "<group>"; };
 		024C4E122B52D32E00032346 /* RepsCount.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RepsCount.entitlements; sourceTree = "<group>"; };
 		024C4E132B52D32E00032346 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -65,6 +68,9 @@
 		02FC1F582B665FAE008F5D8D /* MeasurementUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementUnit.swift; sourceTree = "<group>"; };
 		02FC1F5A2B6668FB008F5D8D /* GlobalConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		02FC1F5C2B666939008F5D8D /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		530AAC202D2BD22200788407 /* CoreError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreError.swift; sourceTree = "<group>"; };
+		530AAC222D2BD36400788407 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
+		530E52F22D2C38FE00064589 /* ExerciseDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +159,7 @@
 		02E8347F2B8BA17F006C98DA /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				530AAC202D2BD22200788407 /* CoreError.swift */,
 				02FC1F5C2B666939008F5D8D /* String+Ext.swift */,
 				02FC1F5A2B6668FB008F5D8D /* GlobalConstants.swift */,
 				02FC1F582B665FAE008F5D8D /* MeasurementUnit.swift */,
@@ -176,7 +183,8 @@
 			isa = PBXGroup;
 			children = (
 				024C4E0F2B52D32E00032346 /* RepsCount.xcdatamodeld */,
-				024C4E0D2B52D32E00032346 /* Persistence.swift */,
+				024C4E0D2B52D32E00032346 /* CoreDataService.swift */,
+				530AAC222D2BD36400788407 /* CoreDataStorage.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -202,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				024C4E192B52D4F200032346 /* ExerciseDetailsView.swift */,
+				530E52F22D2C38FE00064589 /* ExerciseDetailsViewModel.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -285,7 +294,6 @@
 				};
 			};
 			buildConfigurationList = 024C4DFC2B52D32D00032346 /* Build configuration list for PBXProject "RepsCount" */;
-			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -297,6 +305,7 @@
 				fr,
 			);
 			mainGroup = 024C4DF82B52D32D00032346;
+			preferredProjectObjectVersion = 77;
 			productRefGroup = 024C4E022B52D32D00032346 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -325,13 +334,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				530AAC232D2BD36800788407 /* CoreDataStorage.swift in Sources */,
 				02FC1F4D2B656090008F5D8D /* CustomDatePicker.swift in Sources */,
 				022ACF822B8C64C800764C6D /* ViewWithBackground.swift in Sources */,
 				0294FDAB2B8DB8E000D9186C /* AddExerciseViewModel.swift in Sources */,
 				0294FDA92B8DB59200D9186C /* ExercisesViewModel.swift in Sources */,
 				024C4E112B52D32E00032346 /* RepsCount.xcdatamodeld in Sources */,
 				024C4E1C2B53112A00032346 /* Extensions.swift in Sources */,
-				024C4E0E2B52D32E00032346 /* Persistence.swift in Sources */,
+				024C4E0E2B52D32E00032346 /* CoreDataService.swift in Sources */,
 				025F49D52B65604000C571FF /* DatePickerView.swift in Sources */,
 				024C4E072B52D32D00032346 /* ExercisesView.swift in Sources */,
 				02FC1F572B6653B9008F5D8D /* TabViewScreen.swift in Sources */,
@@ -345,6 +355,8 @@
 				024C4E052B52D32D00032346 /* RepsCountApp.swift in Sources */,
 				02FC1F542B664E02008F5D8D /* SettingsView.swift in Sources */,
 				025573442B5D8EF3001DF4B6 /* View+Extension.swift in Sources */,
+				530AAC212D2BD22200788407 /* CoreError.swift in Sources */,
+				530E52F32D2C38FE00064589 /* ExerciseDetailsViewModel.swift in Sources */,
 				02FC1F5D2B666939008F5D8D /* String+Ext.swift in Sources */,
 				024C4E1A2B52D4F200032346 /* ExerciseDetailsView.swift in Sources */,
 			);
