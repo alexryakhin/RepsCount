@@ -19,56 +19,7 @@ public enum GlobalConstant {
         Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String
     }
 
-    public static let defaultExerciseCategories: [String: [String]] = [
-        "Legs": [
-            "Squats",
-            "Lunges",
-            "Leg Press",
-            "Deadlifts",
-            "Leg Curls",
-            "Calf Raises",
-            "Toe raises"
-        ],
-        "Core": [
-            "Crunches",
-            "Russian Twist",
-            "Leg Raises",
-            "Oblique Twist",
-            "Superman"
-        ],
-        "Arms": [
-            "Bicep Curls",
-            "Tricep Dips",
-            "Hammer Curls",
-            "Tricep Extension",
-            "Push-ups",
-            "Pull-ups"
-        ],
-        "Chest": [
-            "Dips",
-            "Bench Press",
-            "Push-ups",
-            "Dumbbell Flyes",
-            "Chest Press",
-            "Cable Crossover",
-            "Incline Bench Press"
-        ],
-        "Back": [
-            "Pull-ups",
-            "Barbell Rows",
-            "Dumbbell Rows",
-            "Deadlifts",
-            "Lat Pulldowns",
-            "T-Bar Rows",
-            "Face Pulls"
-        ],
-        "Shoulders": [
-            "Shoulder Press",
-            "Lateral Raises",
-            "Front Raises",
-            "Shrugs",
-            "Upright Rows",
-            "Face Pulls"
-        ]
-    ]
+    public static var currentFullAppVersion: String {
+        String(GlobalConstant.appVersion ?? "-", GlobalConstant.buildVersion ?? "–", separator: ".")
+    }
 }

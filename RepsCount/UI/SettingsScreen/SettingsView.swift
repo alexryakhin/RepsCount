@@ -11,6 +11,8 @@ struct SettingsView: View {
     @AppStorage("measurementUnit") var measurementUnit: MeasurementUnit = .kilograms
     @AppStorage("savesLocation") var savesLocation: Bool = true
 
+    private let resolver = DIContainer.shared.resolver
+
     var body: some View {
         NavigationView {
             List {
@@ -31,7 +33,7 @@ struct SettingsView: View {
 
                 Section {
                     NavigationLink {
-                        AboutAppView()
+                        resolver.resolve(AboutAppView.self)!
                     } label: {
                         Text("About app")
                     }
@@ -43,5 +45,5 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView()
+    DIContainer.shared.resolver.resolve(SettingsView.self)!
 }

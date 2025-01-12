@@ -1,5 +1,5 @@
 //
-//  CoreDataStorage.swift
+//  ExerciseStorage.swift
 //  RepsCount
 //
 //  Created by Aleksandr Riakhin on January 6, 2025.
@@ -8,18 +8,18 @@
 import CoreData
 import Combine
 
-protocol CoreDataStorageInterface {
+protocol ExerciseStorageInterface {
     var exercisesPublisher: AnyPublisher<[Exercise], CoreError> { get }
-    var exerciseCategoriesPublisher: AnyPublisher<[String: [String]], CoreError> { get }
+    var exerciseCategoriesPublisher: AnyPublisher<[String: [String: [String]]], CoreError> { get }
 
     func addExercise(category: String, exerciseName: String, savesLocation: Bool)
     func deleteExercise(_ exercise: Exercise)
     func fetchExercises()
 }
 
-class CoreDataStorage: CoreDataStorageInterface {
+class ExerciseStorage: ExerciseStorageInterface {
     private let coreDataService: CoreDataServiceInterface
-    private let locationManager: LocationManager
+    private let locationManager: LocationManagerInterface
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
     private let exercisesSubject = CurrentValueSubject<[Exercise], CoreError>([])
@@ -27,17 +27,15 @@ class CoreDataStorage: CoreDataStorageInterface {
         return exercisesSubject.eraseToAnyPublisher()
     }
 
-    private let exerciseCategoriesSubject = CurrentValueSubject<[String: [String]], CoreError>([:])
-    var exerciseCategoriesPublisher: AnyPublisher<[String: [String]], CoreError> {
+    private let exerciseCategoriesSubject = CurrentValueSubject<[String: [String: [String]]], CoreError>([:])
+    var exerciseCategoriesPublisher: AnyPublisher<[String: [String: [String]]], CoreError> {
         return exerciseCategoriesSubject.eraseToAnyPublisher()
     }
 
-    static let shared: CoreDataStorageInterface = CoreDataStorage(
-        coreDataService: CoreDataService.shared,
-        locationManager: LocationManager.shared
-    )
-
-    private init(coreDataService: CoreDataServiceInterface, locationManager: LocationManager) {
+    init(
+        coreDataService: CoreDataServiceInterface,
+        locationManager: LocationManagerInterface
+    ) {
         self.coreDataService = coreDataService
         self.locationManager = locationManager
         fetchExercises()
@@ -80,27 +78,56 @@ class CoreDataStorage: CoreDataStorageInterface {
         let request = NSFetchRequest<ExerciseModel>(entityName: "ExerciseModel")
         do {
             let models = try coreDataService.context.fetch(request)
-            if models.isEmpty {
+            if models.isEmpty || models.first?.type == nil {
+                models.forEach { model in
+                    coreDataService.context.delete(model)
+                }
                 setDefaultExercises()
             } else {
-                let exerciseCategories = models.reduce(into: [:]) { result, exercise in
-                    result[exercise.category ?? "", default: []].append(exercise.name ?? "")
-                }
-                exerciseCategoriesSubject.send(exerciseCategories)
+                let exerciseTypes = groupExercises(from: models)
+                exerciseCategoriesSubject.send(exerciseTypes)
             }
         } catch {
             print("Error fetching exercises. \(error.localizedDescription)")
         }
     }
 
-    private func setDefaultExercises() {
-        GlobalConstant.defaultExerciseCategories.forEach { category, names in
-            names.forEach { name in
-                let newExerciseModel = ExerciseModel(context: coreDataService.context)
-                newExerciseModel.id = UUID().uuidString
-                newExerciseModel.name = name
-                newExerciseModel.category = category
+    private func groupExercises(from models: [ExerciseModel]) -> [String: [String: [String]]] {
+        var dictionary: [String: [String: [String]]] = [:]
+
+        for model in models {
+            // Get name, type, and category as Strings
+            guard
+                let name = model.name,
+                let typeKey = model.type,
+                let categoryKey = model.category
+            else { continue }
+
+            // Ensure the outer dictionary contains the type key
+            if dictionary[typeKey] == nil {
+                dictionary[typeKey] = [:]
             }
+
+            // Ensure the inner dictionary contains the category key
+            if dictionary[typeKey]?[categoryKey] == nil {
+                dictionary[typeKey]?[categoryKey] = []
+            }
+
+            // Append the exercise name to the innermost array
+            dictionary[typeKey]?[categoryKey]?.append(name)
+        }
+
+        return dictionary
+    }
+
+    private func setDefaultExercises() {
+        ExerciseModelPreset.presets.forEach { preset in
+            let newExerciseModel = ExerciseModel(context: coreDataService.context)
+            newExerciseModel.id = UUID().uuidString
+            newExerciseModel.name = preset.name
+            newExerciseModel.category = preset.category.rawValue
+            newExerciseModel.type = preset.type.rawValue
+            newExerciseModel.metricType = preset.metricType.rawValue
         }
         save()
         fetchCategories()

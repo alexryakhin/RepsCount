@@ -15,10 +15,6 @@ public protocol CoreDataServiceInterface {
 
 public class CoreDataService: CoreDataServiceInterface {
 
-    public static let shared: CoreDataServiceInterface = CoreDataService()
-
-    private init() {}
-
     private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentCloudKitContainer(name: "RepsCount")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in

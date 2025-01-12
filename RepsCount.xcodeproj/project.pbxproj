@@ -34,8 +34,19 @@
 		02FC1F5B2B6668FB008F5D8D /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC1F5A2B6668FB008F5D8D /* GlobalConstants.swift */; };
 		02FC1F5D2B666939008F5D8D /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FC1F5C2B666939008F5D8D /* String+Ext.swift */; };
 		530AAC212D2BD22200788407 /* CoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530AAC202D2BD22200788407 /* CoreError.swift */; };
-		530AAC232D2BD36800788407 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530AAC222D2BD36400788407 /* CoreDataStorage.swift */; };
+		530AAC232D2BD36800788407 /* ExerciseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530AAC222D2BD36400788407 /* ExerciseStorage.swift */; };
 		530E52F32D2C38FE00064589 /* ExerciseDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530E52F22D2C38FE00064589 /* ExerciseDetailsViewModel.swift */; };
+		530E52F82D2C420200064589 /* CalendarScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530E52F72D2C41FC00064589 /* CalendarScreen.swift */; };
+		530E52FB2D2C451C00064589 /* MijickCalendarView in Frameworks */ = {isa = PBXBuildFile; productRef = 530E52FA2D2C451C00064589 /* MijickCalendarView */; };
+		530E52FD2D2D457500064589 /* CalendarEventStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530E52FC2D2D457500064589 /* CalendarEventStorage.swift */; };
+		530E52FF2D2D491100064589 /* DefaultExercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530E52FE2D2D491100064589 /* DefaultExercises.swift */; };
+		530E53032D2DAF2300064589 /* ExerciseMetricType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530E53022D2DAF2300064589 /* ExerciseMetricType.swift */; };
+		5328DDD32D33F55D0086E7D2 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 5328DDD22D33F55D0086E7D2 /* Swinject */; };
+		5328DDD52D33F57D0086E7D2 /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5328DDD42D33F57D0086E7D2 /* ServiceAssembly.swift */; };
+		5328DF512D33F7130086E7D2 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5328DF502D33F7130086E7D2 /* DIContainer.swift */; };
+		5328DF532D33F7B50086E7D2 /* UIAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5328DF522D33F7B50086E7D2 /* UIAssembly.swift */; };
+		5328DF562D340E490086E7D2 /* EditExercisesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5328DF552D340E3E0086E7D2 /* EditExercisesScreen.swift */; };
+		5328DF582D340E820086E7D2 /* EditExercisesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5328DF572D340E810086E7D2 /* EditExercisesViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,8 +80,17 @@
 		02FC1F5A2B6668FB008F5D8D /* GlobalConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		02FC1F5C2B666939008F5D8D /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		530AAC202D2BD22200788407 /* CoreError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreError.swift; sourceTree = "<group>"; };
-		530AAC222D2BD36400788407 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
+		530AAC222D2BD36400788407 /* ExerciseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseStorage.swift; sourceTree = "<group>"; };
 		530E52F22D2C38FE00064589 /* ExerciseDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailsViewModel.swift; sourceTree = "<group>"; };
+		530E52F72D2C41FC00064589 /* CalendarScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarScreen.swift; sourceTree = "<group>"; };
+		530E52FC2D2D457500064589 /* CalendarEventStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventStorage.swift; sourceTree = "<group>"; };
+		530E52FE2D2D491100064589 /* DefaultExercises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultExercises.swift; sourceTree = "<group>"; };
+		530E53022D2DAF2300064589 /* ExerciseMetricType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseMetricType.swift; sourceTree = "<group>"; };
+		5328DDD42D33F57D0086E7D2 /* ServiceAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
+		5328DF502D33F7130086E7D2 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
+		5328DF522D33F7B50086E7D2 /* UIAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAssembly.swift; sourceTree = "<group>"; };
+		5328DF552D340E3E0086E7D2 /* EditExercisesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExercisesScreen.swift; sourceTree = "<group>"; };
+		5328DF572D340E810086E7D2 /* EditExercisesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExercisesViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +98,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				530E52FB2D2C451C00064589 /* MijickCalendarView in Frameworks */,
+				5328DDD32D33F55D0086E7D2 /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,8 +184,10 @@
 				530AAC202D2BD22200788407 /* CoreError.swift */,
 				02FC1F5C2B666939008F5D8D /* String+Ext.swift */,
 				02FC1F5A2B6668FB008F5D8D /* GlobalConstants.swift */,
+				530E52FE2D2D491100064589 /* DefaultExercises.swift */,
 				02FC1F582B665FAE008F5D8D /* MeasurementUnit.swift */,
 				024C4E1B2B53112A00032346 /* Extensions.swift */,
+				530E53022D2DAF2300064589 /* ExerciseMetricType.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -172,6 +196,9 @@
 			isa = PBXGroup;
 			children = (
 				024C4E042B52D32D00032346 /* RepsCountApp.swift */,
+				5328DDD42D33F57D0086E7D2 /* ServiceAssembly.swift */,
+				5328DF522D33F7B50086E7D2 /* UIAssembly.swift */,
+				5328DF502D33F7130086E7D2 /* DIContainer.swift */,
 				025573412B5BA5E2001DF4B6 /* LaunchScreen.storyboard */,
 				024C4E122B52D32E00032346 /* RepsCount.entitlements */,
 				024C4E132B52D32E00032346 /* Info.plist */,
@@ -184,7 +211,8 @@
 			children = (
 				024C4E0F2B52D32E00032346 /* RepsCount.xcdatamodeld */,
 				024C4E0D2B52D32E00032346 /* CoreDataService.swift */,
-				530AAC222D2BD36400788407 /* CoreDataStorage.swift */,
+				530AAC222D2BD36400788407 /* ExerciseStorage.swift */,
+				530E52FC2D2D457500064589 /* CalendarEventStorage.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -226,6 +254,7 @@
 				02FC1F552B6653A3008F5D8D /* TabView */,
 				02FC1F522B664DE4008F5D8D /* SettingsScreen */,
 				02FC1F512B664DD9008F5D8D /* ExercisesScreen */,
+				530E52F62D2C41DD00064589 /* CalendarScreen */,
 				022ACF812B8C64C800764C6D /* ViewWithBackground.swift */,
 			);
 			path = UI;
@@ -244,6 +273,7 @@
 		02FC1F522B664DE4008F5D8D /* SettingsScreen */ = {
 			isa = PBXGroup;
 			children = (
+				5328DF542D340E300086E7D2 /* EditExercisesScreen */,
 				02E834752B8A21EB006C98DA /* AboutAppScreen */,
 				02FC1F532B664E02008F5D8D /* SettingsView.swift */,
 			);
@@ -256,6 +286,23 @@
 				02FC1F562B6653B9008F5D8D /* TabViewScreen.swift */,
 			);
 			path = TabView;
+			sourceTree = "<group>";
+		};
+		530E52F62D2C41DD00064589 /* CalendarScreen */ = {
+			isa = PBXGroup;
+			children = (
+				530E52F72D2C41FC00064589 /* CalendarScreen.swift */,
+			);
+			path = CalendarScreen;
+			sourceTree = "<group>";
+		};
+		5328DF542D340E300086E7D2 /* EditExercisesScreen */ = {
+			isa = PBXGroup;
+			children = (
+				5328DF552D340E3E0086E7D2 /* EditExercisesScreen.swift */,
+				5328DF572D340E810086E7D2 /* EditExercisesViewModel.swift */,
+			);
+			path = EditExercisesScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,6 +352,10 @@
 				fr,
 			);
 			mainGroup = 024C4DF82B52D32D00032346;
+			packageReferences = (
+				530E52F92D2C451C00064589 /* XCRemoteSwiftPackageReference "CalendarView" */,
+				5328DDD12D33F55D0086E7D2 /* XCRemoteSwiftPackageReference "Swinject" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 024C4E022B52D32D00032346 /* Products */;
 			projectDirPath = "";
@@ -334,27 +385,36 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				530AAC232D2BD36800788407 /* CoreDataStorage.swift in Sources */,
+				530AAC232D2BD36800788407 /* ExerciseStorage.swift in Sources */,
+				5328DF512D33F7130086E7D2 /* DIContainer.swift in Sources */,
 				02FC1F4D2B656090008F5D8D /* CustomDatePicker.swift in Sources */,
 				022ACF822B8C64C800764C6D /* ViewWithBackground.swift in Sources */,
 				0294FDAB2B8DB8E000D9186C /* AddExerciseViewModel.swift in Sources */,
 				0294FDA92B8DB59200D9186C /* ExercisesViewModel.swift in Sources */,
 				024C4E112B52D32E00032346 /* RepsCount.xcdatamodeld in Sources */,
+				530E52FD2D2D457500064589 /* CalendarEventStorage.swift in Sources */,
 				024C4E1C2B53112A00032346 /* Extensions.swift in Sources */,
 				024C4E0E2B52D32E00032346 /* CoreDataService.swift in Sources */,
+				5328DF582D340E820086E7D2 /* EditExercisesViewModel.swift in Sources */,
 				025F49D52B65604000C571FF /* DatePickerView.swift in Sources */,
 				024C4E072B52D32D00032346 /* ExercisesView.swift in Sources */,
 				02FC1F572B6653B9008F5D8D /* TabViewScreen.swift in Sources */,
 				02FC1F5B2B6668FB008F5D8D /* GlobalConstants.swift in Sources */,
+				530E52FF2D2D491100064589 /* DefaultExercises.swift in Sources */,
 				025F49D32B6501C200C571FF /* LocationManager.swift in Sources */,
 				023223892B93363800C0A73A /* RCContentUnavailableView.swift in Sources */,
 				02E834772B8A21FD006C98DA /* AboutAppView.swift in Sources */,
+				5328DF562D340E490086E7D2 /* EditExercisesScreen.swift in Sources */,
+				5328DDD52D33F57D0086E7D2 /* ServiceAssembly.swift in Sources */,
 				02E834872B8BAA68006C98DA /* AddExerciseView.swift in Sources */,
+				530E53032D2DAF2300064589 /* ExerciseMetricType.swift in Sources */,
+				5328DF532D33F7B50086E7D2 /* UIAssembly.swift in Sources */,
 				02FC1F592B665FAE008F5D8D /* MeasurementUnit.swift in Sources */,
 				02FC1F4F2B6561D2008F5D8D /* ChildSizeReader.swift in Sources */,
 				024C4E052B52D32D00032346 /* RepsCountApp.swift in Sources */,
 				02FC1F542B664E02008F5D8D /* SettingsView.swift in Sources */,
 				025573442B5D8EF3001DF4B6 /* View+Extension.swift in Sources */,
+				530E52F82D2C420200064589 /* CalendarScreen.swift in Sources */,
 				530AAC212D2BD22200788407 /* CoreError.swift in Sources */,
 				530E52F32D2C38FE00064589 /* ExerciseDetailsViewModel.swift in Sources */,
 				02FC1F5D2B666939008F5D8D /* String+Ext.swift in Sources */,
@@ -507,12 +567,12 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "dor.reps-counter.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -548,12 +608,12 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "dor.reps-counter.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -588,6 +648,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		530E52F92D2C451C00064589 /* XCRemoteSwiftPackageReference "CalendarView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Mijick/CalendarView";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		5328DDD12D33F55D0086E7D2 /* XCRemoteSwiftPackageReference "Swinject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/Swinject";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.9.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		530E52FA2D2C451C00064589 /* MijickCalendarView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 530E52F92D2C451C00064589 /* XCRemoteSwiftPackageReference "CalendarView" */;
+			productName = MijickCalendarView;
+		};
+		5328DDD22D33F55D0086E7D2 /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5328DDD12D33F55D0086E7D2 /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		024C4E0F2B52D32E00032346 /* RepsCount.xcdatamodeld */ = {

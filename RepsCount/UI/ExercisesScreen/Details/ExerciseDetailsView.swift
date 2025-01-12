@@ -14,8 +14,8 @@ struct ExerciseDetailsView: View {
 
     @ObservedObject private var viewModel: ExerciseDetailsViewModel
 
-    init(exercise: Exercise) {
-        self.viewModel = ExerciseDetailsViewModel(exercise: exercise)
+    init(viewModel: ExerciseDetailsViewModel) {
+        self.viewModel = viewModel
     }
 
     var body: some View {
@@ -24,6 +24,9 @@ struct ExerciseDetailsView: View {
             totalSection
             mapSection
             notesSection
+        }
+        .safeAreaInset(edge: .bottom, alignment: .trailing) {
+            addDataButton
         }
         .toolbar {
             ToolbarItem(placement: .principal) {
@@ -40,7 +43,7 @@ struct ExerciseDetailsView: View {
         }
         .alert("Enter the amount of reps", isPresented: $viewModel.isShowingAlert) {
             TextField("Amount", text: $viewModel.amountInput)
-                .keyboardType(.numberPad)
+                .keyboardType(.decimalPad)
             TextField("Weight, \(Text(viewModel.measurementUnit.shortName)) (optional)", text: $viewModel.weightInput)
                 .keyboardType(.decimalPad)
             Button("Add") {
@@ -54,24 +57,6 @@ struct ExerciseDetailsView: View {
             }
         }
         .navigationBarTitleDisplayMode(.inline)
-        .overlay(alignment: .bottomTrailing) {
-            if viewModel.isEditable {
-                Button {
-                    viewModel.isShowingAlert = true
-                } label: {
-                    Image(systemName: "plus")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 24, height: 24)
-                        .padding(16)
-                        .background(in: Circle())
-                        .overlay {
-                            Circle().strokeBorder()
-                        }
-                }
-                .padding(30)
-            }
-        }
         .animation(.default, value: viewModel.exerciseSets)
     }
 
@@ -83,10 +68,10 @@ struct ExerciseDetailsView: View {
                     HStack {
                         if exerciseSet.weight > 0 {
                             let converted: String = viewModel.measurementUnit.convertFromKilograms(exerciseSet.weight)
-                            Text("#\(offset + 1): \(exerciseSet.amount) reps, \(converted)")
+                            Text("#\(offset + 1): \(exerciseSet.amount.formatted()) reps, \(converted)")
                                 .fontWeight(.semibold)
                         } else {
-                            Text("#\(offset + 1): \(exerciseSet.amount) reps")
+                            Text("#\(offset + 1): \(exerciseSet.amount.formatted()) reps")
                                 .fontWeight(.semibold)
                         }
                         Spacer()
@@ -103,7 +88,7 @@ struct ExerciseDetailsView: View {
 
     private var totalSection: some View {
         Section("Total") {
-            Text("Reps: \(viewModel.totalAmount)")
+            Text("Reps: \(viewModel.totalAmount.formatted())")
                 .fontWeight(.semibold)
             Text("Sets: \(viewModel.exerciseSets.count)")
                 .fontWeight(.semibold)
@@ -164,6 +149,26 @@ struct ExerciseDetailsView: View {
         }
         .onAppear {
             viewModel.notesInput = viewModel.exercise.notes ?? ""
+        }
+    }
+
+    @ViewBuilder
+    private var addDataButton: some View {
+        if viewModel.isEditable {
+            Button {
+                viewModel.isShowingAlert = true
+            } label: {
+                Image(systemName: "plus")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 24, height: 24)
+                    .padding(16)
+                    .background(in: Circle())
+                    .overlay {
+                        Circle().strokeBorder()
+                    }
+            }
+            .padding(30)
         }
     }
 }

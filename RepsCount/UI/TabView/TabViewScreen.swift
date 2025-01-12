@@ -8,16 +8,26 @@
 import SwiftUI
 
 struct TabViewScreen: View {
+
+    let resolver = DIContainer.shared.resolver
+
     var body: some View {
         TabView {
-            ExercisesView()
+            resolver.resolve(ExercisesView.self)!
                 .tabItem {
                     Label(
                         title: { Text("Exercises") },
                         icon: { Image(systemName: "dumbbell") }
                     )
                 }
-            SettingsView()
+            resolver.resolve(CalendarScreen.self)!
+                .tabItem {
+                    Label(
+                        title: { Text("Calendar") },
+                        icon: { Image(systemName: "calendar") }
+                    )
+                }
+            resolver.resolve(SettingsView.self)!
                 .tabItem {
                     Label(
                         title: { Text("Settings") },

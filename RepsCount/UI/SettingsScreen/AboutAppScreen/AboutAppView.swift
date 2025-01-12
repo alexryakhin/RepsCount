@@ -19,7 +19,7 @@ struct AboutAppView: View {
                 }
             }
             Section("Version") {
-                Text(currentFullAppVersion)
+                Text(GlobalConstant.currentFullAppVersion)
                     .fontWeight(.medium)
             }
             Section("What's new") {
@@ -32,10 +32,6 @@ struct AboutAppView: View {
             }
         }
         .navigationTitle("About App")
-    }
-
-    var currentFullAppVersion: String {
-        String(GlobalConstant.appVersion ?? "-", GlobalConstant.buildVersion ?? "–", separator: ".")
     }
 
     var whatsNew: String {
@@ -53,6 +49,6 @@ There are several features available for you.\n
 
 #Preview {
     NavigationView {
-        AboutAppView()
+        DIContainer.shared.resolver.resolve(AboutAppView.self)!
     }
 }

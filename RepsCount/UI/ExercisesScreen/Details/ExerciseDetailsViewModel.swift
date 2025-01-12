@@ -15,7 +15,7 @@ class ExerciseDetailsViewModel: ObservableObject {
     @Published var weightInput = ""
     @Published var notesInput = ""
 
-    let coreDataService = CoreDataService.shared
+    private let coreDataService: CoreDataServiceInterface
     let exercise: Exercise
 
     var exerciseSets: [ExerciseSet] {
@@ -24,21 +24,25 @@ class ExerciseDetailsViewModel: ObservableObject {
             $0.timestamp ?? .now < $1.timestamp ?? .now
         }
     }
-    var totalAmount: Int {
-        Int(exerciseSets.map { $0.amount }.reduce(0, +))
+    var totalAmount: Double {
+        exerciseSets.map { $0.amount }.reduce(0, +)
     }
     var isEditable: Bool {
         Calendar.current.isDateInToday(exercise.timestamp ?? .now)
     }
 
-    init(exercise: Exercise) {
+    init(
+        exercise: Exercise,
+        coreDataService: CoreDataServiceInterface
+    ) {
         self.exercise = exercise
+        self.coreDataService = coreDataService
     }
     
     func addItem() {
         defer { amountInput = "" }
         defer { weightInput = "" }
-        guard let amount = Int64(amountInput) else { return }
+        guard let amount = Double(amountInput) else { return }
         let newItem = ExerciseSet(context: coreDataService.context)
         newItem.timestamp = .now
         newItem.id = UUID().uuidString

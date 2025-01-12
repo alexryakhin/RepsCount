@@ -14,9 +14,12 @@ struct Location {
     var address: String?
 }
 
-class LocationManager: NSObject, CLLocationManagerDelegate {
-    static var shared = LocationManager()
+protocol LocationManagerInterface: AnyObject {
+    func initiateLocationManager()
+    func getCurrentLocation() async -> Location?
+}
 
+class LocationManager: NSObject, LocationManagerInterface, CLLocationManagerDelegate {
     private var locationManager = CLLocationManager()
 
     func initiateLocationManager() {

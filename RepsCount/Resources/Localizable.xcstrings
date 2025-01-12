@@ -4,7 +4,28 @@
     ", " : {
 
     },
+    "#%lld: %@ reps" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "#%1$lld: %2$@ reps"
+          }
+        }
+      }
+    },
+    "#%lld: %@ reps, %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "#%1$lld: %2$@ reps, %3$@"
+          }
+        }
+      }
+    },
     "#%lld: %lld reps" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -139,6 +160,7 @@
       }
     },
     "#%lld: %lld reps, %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -237,6 +259,9 @@
           }
         }
       }
+    },
+    "$%lld" : {
+
     },
     "About app" : {
       "localizations" : {
@@ -523,6 +548,9 @@
           }
         }
       }
+    },
+    "Calendar" : {
+
     },
     "Calf Raises" : {
       "extractionState" : "manual",
@@ -866,6 +894,9 @@
         }
       }
     },
+    "Didn't find exercise?" : {
+
+    },
     "Dips" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -952,6 +983,9 @@
           }
         }
       }
+    },
+    "EditExercisesScreen" : {
+
     },
     "Enter exercise name" : {
       "localizations" : {
@@ -1811,7 +1845,11 @@
         }
       }
     },
+    "Reps: %@" : {
+
+    },
     "Reps: %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1953,6 +1991,7 @@
       }
     },
     "Select a category" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1981,6 +2020,7 @@
       }
     },
     "Select an exercise" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2007,6 +2047,15 @@
           }
         }
       }
+    },
+    "Select category" : {
+
+    },
+    "Select exercise" : {
+
+    },
+    "Select type" : {
+
     },
     "Sets" : {
       "localizations" : {
@@ -2550,6 +2599,9 @@
           }
         }
       }
+    },
+    "Type" : {
+
     },
     "Upright Rows" : {
       "extractionState" : "manual",

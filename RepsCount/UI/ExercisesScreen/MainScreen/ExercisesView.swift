@@ -9,9 +9,11 @@ import SwiftUI
 import CoreData
 
 struct ExercisesView: View {
-    @StateObject private var viewModel = ExercisesViewModel()
+    private let resolver = DIContainer.shared.resolver
+    @ObservedObject private var viewModel: ExercisesViewModel
 
     @State private var isChoosingExercise = false
+    @State private var shouldNavigateToEditExercisesScreen = false
     @State private var dateSelection: Date?
 
     private var groupedExercises: [Date: [Exercise]] {
@@ -20,6 +22,10 @@ struct ExercisesView: View {
             let components = Calendar.current.dateComponents([.year, .month, .day], from: exercise.timestamp ?? .now)
             return Calendar.current.date(from: components)!
         })
+    }
+
+    init(viewModel: ExercisesViewModel) {
+        self.viewModel = viewModel
     }
 
     var body: some View {
@@ -34,6 +40,10 @@ struct ExercisesView: View {
                             systemImage: "figure.strengthtraining.functional"
                         )
                         Spacer()
+                        HStack {
+                            Spacer()
+                            addExerciseButton
+                        }
                     }
                     .frame(maxWidth: .infinity, alignment: .center)
                 } else {
@@ -47,6 +57,9 @@ struct ExercisesView: View {
                         }
                     }
                     .animation(.default, value: viewModel.exercises)
+                    .safeAreaInset(edge: .bottom, alignment: .trailing) {
+                        addExerciseButton
+                    }
                     .overlay {
                         if let dateSelection,
                            let date = dateSelectionWithTimeOmitted(for: dateSelection),
@@ -77,35 +90,17 @@ struct ExercisesView: View {
             }
             .navigationTitle("Reps counter")
             .sheet(isPresented: $isChoosingExercise) {
-                if #available(iOS 16.0, *) {
-                    AddExerciseView(isPresented: $isChoosingExercise)
-                        .presentationDetents([.height(310)])
-                        .presentationDragIndicator(.visible)
-                } else {
-                    AddExerciseView(isPresented: $isChoosingExercise)
-                }
+                addExerciseView
             }
             .animation(.easeIn, value: dateSelection)
-            .overlay(alignment: .bottomTrailing) {
-                Button {
-                    isChoosingExercise = true
-                } label: {
-                    Image(systemName: "plus")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 24, height: 24)
-                        .padding(16)
-                        .background(in: Circle())
-                        .overlay {
-                            Circle().strokeBorder()
-                        }
+            .background {
+                NavigationLink(
+                    destination: resolver.resolve(EditExercisesScreen.self)!,
+                    isActive: $shouldNavigateToEditExercisesScreen
+                ) {
+                    EmptyView()
                 }
-                .padding(30)
-            }
-        }
-        .onAppear {
-            if viewModel.savesLocation {
-                LocationManager.shared.initiateLocationManager()
+                .hidden()
             }
         }
     }
@@ -116,7 +111,7 @@ struct ExercisesView: View {
         Section {
             ForEach(exercisesInDate) { exercise in
                 NavigationLink {
-                    ExerciseDetailsView(exercise: exercise)
+                    exerciseDetailsView(for: exercise)
                 } label: {
                     VStack(alignment: .leading) {
                         Text(LocalizedStringKey(exercise.name ?? ""))
@@ -140,7 +135,7 @@ struct ExercisesView: View {
         }
     }
 
-    func deleteElements(at indices: IndexSet, for date: Date) {
+    private func deleteElements(at indices: IndexSet, for date: Date) {
         if let exercises = groupedExercises[date] {
             withAnimation {
                 indices
@@ -154,8 +149,43 @@ struct ExercisesView: View {
         let components = Calendar.current.dateComponents([.year, .month, .day], from: date)
         return Calendar.current.date(from: components)
     }
+
+    private var addExerciseButton: some View {
+        Button {
+            isChoosingExercise = true
+        } label: {
+            Image(systemName: "plus")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 24, height: 24)
+                .padding(16)
+                .background(in: Circle())
+                .overlay {
+                    Circle().strokeBorder()
+                }
+        }
+        .padding(30)
+    }
+
+    @ViewBuilder
+    private var addExerciseView: some View {
+        let config = AddExerciseView.Config(
+            isPresented: $isChoosingExercise,
+            onGoToAddExerciseModel: {
+                isChoosingExercise = false
+                shouldNavigateToEditExercisesScreen = true
+        })
+        resolver.resolve(AddExerciseView.self, argument: config)!
+            .presentationDetents([.medium, .large])
+            .presentationDragIndicator(.visible)
+    }
+
+    @ViewBuilder
+    private func exerciseDetailsView(for exercise: Exercise) -> some View {
+        resolver.resolve(ExerciseDetailsView.self, argument: exercise)!
+    }
 }
 
 #Preview {
-    ExercisesView()
+    DIContainer.shared.resolver.resolve(ExercisesView.self)!
 }
