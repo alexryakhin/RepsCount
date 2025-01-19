@@ -56,6 +56,7 @@
 		53552F2A2D3D0A0600FE8BCF /* AddWorkoutExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53552F262D3D0A0600FE8BCF /* AddWorkoutExerciseView.swift */; };
 		53552F2C2D3D0EFB00FE8BCF /* ListWithDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53552F2B2D3D0EFB00FE8BCF /* ListWithDivider.swift */; };
 		536B07882D3CD97A00166273 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536B07872D3CD97400166273 /* Date+Extension.swift */; };
+		53FF95F32D3D64910023C33E /* SwipeActions in Frameworks */ = {isa = PBXBuildFile; productRef = 53FF95F22D3D64910023C33E /* SwipeActions */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,6 +118,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				530E52FB2D2C451C00064589 /* MijickCalendarView in Frameworks */,
+				53FF95F32D3D64910023C33E /* SwipeActions in Frameworks */,
 				5328DDD32D33F55D0086E7D2 /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -422,6 +424,7 @@
 			packageReferences = (
 				530E52F92D2C451C00064589 /* XCRemoteSwiftPackageReference "CalendarView" */,
 				5328DDD12D33F55D0086E7D2 /* XCRemoteSwiftPackageReference "Swinject" */,
+				53FF95F12D3D64910023C33E /* XCRemoteSwiftPackageReference "SwipeActions" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 024C4E022B52D32D00032346 /* Products */;
@@ -742,6 +745,14 @@
 				minimumVersion = 2.9.1;
 			};
 		};
+		53FF95F12D3D64910023C33E /* XCRemoteSwiftPackageReference "SwipeActions" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/aheze/SwipeActions";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -754,6 +765,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5328DDD12D33F55D0086E7D2 /* XCRemoteSwiftPackageReference "Swinject" */;
 			productName = Swinject;
+		};
+		53FF95F22D3D64910023C33E /* SwipeActions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 53FF95F12D3D64910023C33E /* XCRemoteSwiftPackageReference "SwipeActions" */;
+			productName = SwipeActions;
 		};
 /* End XCSwiftPackageProductDependency section */
 

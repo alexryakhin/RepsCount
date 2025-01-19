@@ -10,8 +10,8 @@ import CoreData
 
 protocol CalendarEventStorageInterface {
     var eventsPublisher: AnyPublisher<[CalendarEvent], CoreError> { get }
-    func addEvent(title: String, date: Date, notes: String?, exercises: Set<ExerciseModel>)
-    func deleteEvent(_ event: CalendarEvent)
+    func addEvent(title: String, date: Date, notes: String?, exercises: Set<ExerciseModel>) throws
+    func deleteEvent(_ event: CalendarEvent) throws
     func fetchEvents()
 }
 
@@ -37,27 +37,23 @@ class CalendarEventStorage: CalendarEventStorageInterface {
         }
     }
 
-    func addEvent(title: String, date: Date, notes: String?, exercises: Set<ExerciseModel>) {
+    func addEvent(title: String, date: Date, notes: String?, exercises: Set<ExerciseModel>) throws {
         let newEvent = CalendarEvent(context: coreDataService.context)
         newEvent.id = UUID().uuidString
         newEvent.title = title
         newEvent.date = date
         newEvent.notes = notes
         newEvent.exercises = NSSet(set: exercises)
-        save()
+        try save()
     }
 
-    func deleteEvent(_ event: CalendarEvent) {
+    func deleteEvent(_ event: CalendarEvent) throws {
         coreDataService.context.delete(event)
-        save()
+        try save()
     }
 
-    private func save() {
-        do {
-            try coreDataService.saveContext()
-            fetchEvents()
-        } catch {
-            print("Failed to save events: \(error.localizedDescription)")
-        }
+    private func save() throws {
+        try coreDataService.saveContext()
+        fetchEvents()
     }
 }

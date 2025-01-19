@@ -44,7 +44,10 @@ final class UIAssembly: Assembly, Identifiable {
         }
 
         container.register(CalendarScreen.self) { resolver in
-            return CalendarScreen()
+            let viewModel = CalendarScreenViewModel(
+                calendarEventStorage: resolver.resolve(CalendarEventStorageInterface.self)!
+            )
+            return CalendarScreen(viewModel: viewModel)
         }
 
         container.register(SettingsView.self) { resolver in

@@ -344,10 +344,16 @@
         }
       }
     },
+    "Add an exercise" : {
+
+    },
     "Add event" : {
 
     },
-    "Add exercises" : {
+    "Add exercise" : {
+
+    },
+    "Add more exercises" : {
 
     },
     "Amount" : {
@@ -1276,9 +1282,6 @@
           }
         }
       }
-    },
-    "Item" : {
-
     },
     "kg" : {
       "extractionState" : "manual",

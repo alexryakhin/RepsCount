@@ -50,7 +50,7 @@ struct AddWorkoutExerciseView: ViewWithBackground {
     var content: some View {
         ScrollView {
             VStack {
-                Text("Choose an exercise")
+                Text("Add an exercise")
                     .fontWeight(.bold)
                     .font(.system(.title))
                     .frame(maxWidth: .infinity, alignment: .leading)

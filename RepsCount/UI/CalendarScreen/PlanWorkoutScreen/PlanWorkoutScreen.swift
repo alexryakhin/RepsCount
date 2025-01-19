@@ -11,12 +11,18 @@ import CoreData
 
 final class PlanWorkoutScreenViewModel: ObservableObject {
 
+    @Published var savedSuccessfully: Bool?
+
     @Published var eventNameText: String = ""
     @Published var eventNameError: String?
 
     @Published var notesText: String = ""
+
     @Published var dateSelection: Date?
+    @Published var dateSelectionError: String?
+
     @Published var selectedExerciseModels: Set<ExerciseModel> = []
+    @Published var selectedExerciseModelsError: String?
 
     private let calendarEventStorage: CalendarEventStorageInterface
 
@@ -28,6 +34,25 @@ final class PlanWorkoutScreenViewModel: ObservableObject {
         guard eventNameText.isEmpty == false else {
             eventNameError = "Name is required"
             return
+        }
+        guard let dateSelection else {
+            dateSelectionError = "Date is required"
+            return
+        }
+        guard selectedExerciseModels.isEmpty == false else {
+            selectedExerciseModelsError = "At least one exercise is required"
+            return
+        }
+        do {
+            try calendarEventStorage.addEvent(
+                title: eventNameText,
+                date: dateSelection,
+                notes: notesText,
+                exercises: selectedExerciseModels
+            )
+            savedSuccessfully = true
+        } catch {
+            savedSuccessfully = false
         }
     }
 }
@@ -60,6 +85,7 @@ struct PlanWorkoutScreen: View {
                 )
                 DateInputView(
                     date: $viewModel.dateSelection,
+                    error: $viewModel.dateSelectionError,
                     header: "Select a date"
                 )
                 VStack(alignment: .leading, spacing: 8) {
@@ -67,51 +93,72 @@ struct PlanWorkoutScreen: View {
                         .font(.subheadline)
                         .padding(.horizontal, 16)
                     if viewModel.selectedExerciseModels.isEmpty {
-                        Text("No exercises added yet.")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                            .frame(maxWidth: .infinity, minHeight: 200)
-                            .background(Color.surface)
-                            .clipShape(RoundedRectangle(cornerRadius: 16))
+                        VStack {
+                            Text("No exercises added yet.")
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                            Button("Add exercise") {
+                                isExerciseSelectionPresented = true
+                            }
+                            .buttonStyle(.borderedProminent)
+                        }
+                        .frame(maxWidth: .infinity, minHeight: 200)
+                        .background(Color.surface)
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                        .overlay {
+                            if let error = viewModel.selectedExerciseModelsError {
+                                Color.red.clipShape(
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .stroke(style: .init(lineWidth: 2))
+                                )
+                                .allowsHitTesting(false)
+                            }
+                        }
+                        if let error = viewModel.selectedExerciseModelsError {
+                            Text(error)
+                                .font(.caption)
+                                .foregroundStyle(.red)
+                                .padding(.horizontal, 16)
+                        }
                     } else {
                         ListWithDivider(viewModel.selectedExerciseModels.sorted(by: {
                             $0.name ?? "" < $1.name ?? ""
                         })) { model in
-                            VStack(alignment: .leading, spacing: 4) {
-                                if let type = model.type,
-                                    let category = model.category,
-                                    let name = model.name {
-                                    Text(name)
-                                        .font(.headline)
-                                    Text([type, category].joined(separator: ", "))
-                                        .font(.subheadline)
-                                        .foregroundStyle(.secondary)
+                            HStack {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    if let type = model.type,
+                                        let category = model.category,
+                                        let name = model.name {
+                                        Text(name)
+                                            .font(.headline)
+                                        Text([type, category].joined(separator: ", "))
+                                            .font(.subheadline)
+                                            .foregroundStyle(.secondary)
+                                    }
                                 }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+
+                                Button {
+                                    viewModel.selectedExerciseModels.remove(model)
+                                } label: {
+                                    Image(systemName: "xmark.circle.fill")
+                                }
+                                .foregroundStyle(.secondary)
                             }
-                            .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.vertical, 12)
                             .padding(.horizontal, 16)
                         }
                         .background(Color.surface)
                         .clipShape(RoundedRectangle(cornerRadius: 16))
 
-//                        VStack {
-//                            ForEach(viewModel.selectedExerciseModels.sorted(by: {
-//                                $0.name ?? "" < $1.name ?? ""
-//                            })) { model in
-//                                VStack {
-//                                    Text(model.name!)
-//                                    Text(model.category!)
-//                                }
-//                            }
-//                        }
+                        Button("Add more exercises") {
+                            isExerciseSelectionPresented = true
+                        }
+                        .padding(.horizontal, 16)
                     }
-                    Button("Add exercises") {
-                        isExerciseSelectionPresented = true
-                    }
-                    .buttonStyle(.borderedProminent)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .animation(.bouncy, value: viewModel.selectedExerciseModels)
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
@@ -147,6 +194,15 @@ struct PlanWorkoutScreen: View {
         }
         .sheet(isPresented: $isExerciseSelectionPresented) {
             addExerciseView
+        }
+        .onChange(of: viewModel.savedSuccessfully) { isSaved in
+            if let isSaved {
+                if isSaved {
+                    dismiss()
+                } else {
+                    // TODO: show error snack or something
+                }
+            }
         }
     }
 

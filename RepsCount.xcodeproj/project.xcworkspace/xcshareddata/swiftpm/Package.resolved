@@ -1,5 +1,5 @@
 {
-  "originHash" : "d44006821ddfffb5e55f11d5de2a468c1fb70f1f1ac9cf9d23325b2b6a6b991d",
+  "originHash" : "3d2aae7a90e6ad1e4eb8f76314bc75066902b223f3f52c836ce7aa173f72740d",
   "pins" : [
     {
       "identity" : "calendarview",
@@ -17,6 +17,15 @@
       "state" : {
         "revision" : "be9dbcc7b86811bc131539a20c6f9c2d3e56919f",
         "version" : "2.9.1"
+      }
+    },
+    {
+      "identity" : "swipeactions",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/aheze/SwipeActions",
+      "state" : {
+        "revision" : "41e6f6dce02d8cfa164f8c5461a41340850ca3ab",
+        "version" : "1.1.0"
       }
     }
   ],

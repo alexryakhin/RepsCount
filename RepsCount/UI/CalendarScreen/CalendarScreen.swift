@@ -7,6 +7,40 @@
 
 import SwiftUI
 import MijickCalendarView
+import Combine
+import CoreData
+import SwipeActions
+
+final class CalendarScreenViewModel: ObservableObject {
+
+    @Published var events: [CalendarEvent] = []
+
+    private let calendarEventStorage: CalendarEventStorageInterface
+    private var cancellable: Set<AnyCancellable> = []
+
+    init(calendarEventStorage: CalendarEventStorageInterface) {
+        self.calendarEventStorage = calendarEventStorage
+        setupBindings()
+    }
+
+    func remove(_ event: CalendarEvent) {
+        do {
+            try calendarEventStorage.deleteEvent(event)
+        } catch {
+            print(error)
+        }
+    }
+
+    func setupBindings() {
+        calendarEventStorage.eventsPublisher
+            .sink { completion in
+                // TODO: error handle
+            } receiveValue: { [weak self] events in
+                self?.events = events
+            }
+            .store(in: &cancellable)
+    }
+}
 
 struct CalendarScreen: View {
     private let resolver = DIContainer.shared.resolver
@@ -15,34 +49,56 @@ struct CalendarScreen: View {
     @State private var selectedMonth: Date = .now
     @State private var selectedRange: MDateRange? = .init()
 
+    @ObservedObject private var viewModel: CalendarScreenViewModel
+
+    private var groupedEvents: [Date: [CalendarEvent]] {
+        Dictionary(grouping: viewModel.events, by: { event in
+            // Use only the day component for grouping
+            (event.date ?? .now).trimmed()
+        })
+    }
+
+    init(viewModel: CalendarScreenViewModel) {
+        self.viewModel = viewModel
+    }
+
     var body: some View {
         NavigationView {
-            VStack {
-                MCalendarView(
-                    selectedDate: $selectedDate,
-                    selectedRange: $selectedRange
-                ) { calendar in
-                    calendar
-                        .firstWeekday(.monday)
-                        .dayView(Price.init)
-                        .startMonth(selectedMonth)
-                        .endMonth(selectedMonth)
-                        .monthLabel(MyMonthLabel.init)
-                }
-                .scrollDisabled(true)
-                .fixedSize(horizontal: false, vertical: true)
-                .padding(.horizontal, 16)
+            ScrollView {
+                VStack {
+                    MCalendarView(
+                        selectedDate: $selectedDate,
+                        selectedRange: $selectedRange
+                    ) { calendar in
+                        calendar
+                            .firstWeekday(.monday)
+                            .dayView(Price.init)
+                            .startMonth(selectedMonth)
+                            .endMonth(selectedMonth)
+                            .monthLabel(MyMonthLabel.init)
+                    }
+                    .scrollDisabled(true)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.horizontal, 16)
 
-                ScrollView {
-                    ForEach(0..<18) { _ in
-                        HStack {
-                            Text("Item")
-
+                    if let selectedDate, let events = groupedEvents[selectedDate.trimmed()] {
+                        ForEach(events) { event in
+                            workoutCard(for: event)
                         }
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 12)
+                    } else {
+                        VStack(spacing: 12) {
+                            Text("No workout scheduled for this day")
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                            NavigationLink("Plan a workout") {
+                                resolver.resolve(PlanWorkoutScreen.self)!
+                            }
+                            .buttonStyle(.bordered)
+                        }
+                        .frame(maxWidth: .infinity, minHeight: 200)
                         .background(Color.surface)
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                        .padding(.horizontal, 16)
                     }
                 }
             }
@@ -60,7 +116,45 @@ struct CalendarScreen: View {
                 Color.background.ignoresSafeArea()
             }
         }
+    }
 
+    @ViewBuilder
+    private func workoutCard(for event: CalendarEvent) -> some View {
+        if let title = event.title {
+            SwipeView {
+                HStack {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(title)
+                            .font(.title)
+                            .bold()
+                        if let exercises = event.exercises as? Set<ExerciseModel> {
+                            let names = exercises.compactMap { exercise in
+                                return exercise.name
+                            }.sorted()
+                            Text(names.joined(separator: ", "))
+                        }
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 12)
+                .background(Color.surface)
+                .clipShape(RoundedRectangle(cornerRadius: 16))
+            } trailingActions: { _ in
+                SwipeAction {
+                    withAnimation {
+                        viewModel.remove(event)
+                    }
+                } label: { flag in
+                    Image(systemName: "trash")
+                        .foregroundStyle(.white)
+                } background: { flag in
+                    Color.red
+                }
+            }
+            .swipeActionCornerRadius(16)
+            .padding(.horizontal, 16)
+        }
     }
 }
 
