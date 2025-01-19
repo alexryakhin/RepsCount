@@ -19,8 +19,7 @@ struct ExercisesView: View {
     private var groupedExercises: [Date: [Exercise]] {
         Dictionary(grouping: viewModel.exercises, by: { exercise in
             // Use only the day component for grouping
-            let components = Calendar.current.dateComponents([.year, .month, .day], from: exercise.timestamp ?? .now)
-            return Calendar.current.date(from: components)!
+            (exercise.timestamp ?? .now).trimmed()
         })
     }
 
@@ -85,7 +84,13 @@ struct ExercisesView: View {
                     }
                 }
                 ToolbarItem(placement: .topBarLeading) {
-                    CustomDatePicker(date: $dateSelection, minDate: nil, maxDate: Date.now, pickerMode: .date)
+                    CustomDatePicker(
+                        date: $dateSelection,
+                        minDate: nil,
+                        maxDate: Date.now,
+                        pickerMode: .date,
+                        labelFont: .system(.body, weight: .bold)
+                    )
                 }
             }
             .navigationTitle("Reps counter")
@@ -155,16 +160,11 @@ struct ExercisesView: View {
             isChoosingExercise = true
         } label: {
             Image(systemName: "plus")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 24, height: 24)
-                .padding(16)
-                .background(in: Circle())
-                .overlay {
-                    Circle().strokeBorder()
-                }
+                .font(.system(size: 24, weight: .semibold, design: .monospaced))
+                .padding(8)
         }
-        .padding(30)
+        .buttonStyle(.bordered)
+        .padding(24)
     }
 
     @ViewBuilder

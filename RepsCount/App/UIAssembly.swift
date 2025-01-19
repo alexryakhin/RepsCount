@@ -61,5 +61,22 @@ final class UIAssembly: Assembly, Identifiable {
             )
             return EditExercisesScreen(viewModel: viewModel)
         }
+
+        container.register(PlanWorkoutScreen.self) { resolver in
+            let viewModel = PlanWorkoutScreenViewModel(
+                calendarEventStorage: resolver.resolve(CalendarEventStorageInterface.self)!
+            )
+            return PlanWorkoutScreen(viewModel: viewModel)
+        }
+
+        container.register(AddWorkoutExerciseView.self) { resolver, config in
+            let viewModel = AddWorkoutExerciseViewModel(
+                exerciseStorage: resolver.resolve(ExerciseStorageInterface.self)!
+            )
+            return AddWorkoutExerciseView(
+                viewModel: viewModel,
+                config: config
+            )
+        }
     }
 }

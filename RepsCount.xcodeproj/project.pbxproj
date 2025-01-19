@@ -47,6 +47,15 @@
 		5328DF532D33F7B50086E7D2 /* UIAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5328DF522D33F7B50086E7D2 /* UIAssembly.swift */; };
 		5328DF562D340E490086E7D2 /* EditExercisesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5328DF552D340E3E0086E7D2 /* EditExercisesScreen.swift */; };
 		5328DF582D340E820086E7D2 /* EditExercisesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5328DF572D340E810086E7D2 /* EditExercisesViewModel.swift */; };
+		53552F1A2D3CE50600FE8BCF /* PlanWorkoutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53552F192D3CE50100FE8BCF /* PlanWorkoutScreen.swift */; };
+		53552F1D2D3CF25000FE8BCF /* RepetitionRulesListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53552F1C2D3CF25000FE8BCF /* RepetitionRulesListScreen.swift */; };
+		53552F1F2D3CF27400FE8BCF /* RepetitionRuleDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53552F1E2D3CF27400FE8BCF /* RepetitionRuleDetailsScreen.swift */; };
+		53552F232D3CF2E400FE8BCF /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53552F222D3CF2DD00FE8BCF /* InputView.swift */; };
+		53552F252D3CFC1F00FE8BCF /* DateInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53552F242D3CFC1F00FE8BCF /* DateInputView.swift */; };
+		53552F292D3D0A0600FE8BCF /* AddWorkoutExerciseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53552F272D3D0A0600FE8BCF /* AddWorkoutExerciseViewModel.swift */; };
+		53552F2A2D3D0A0600FE8BCF /* AddWorkoutExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53552F262D3D0A0600FE8BCF /* AddWorkoutExerciseView.swift */; };
+		53552F2C2D3D0EFB00FE8BCF /* ListWithDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53552F2B2D3D0EFB00FE8BCF /* ListWithDivider.swift */; };
+		536B07882D3CD97A00166273 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536B07872D3CD97400166273 /* Date+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +100,15 @@
 		5328DF522D33F7B50086E7D2 /* UIAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAssembly.swift; sourceTree = "<group>"; };
 		5328DF552D340E3E0086E7D2 /* EditExercisesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExercisesScreen.swift; sourceTree = "<group>"; };
 		5328DF572D340E810086E7D2 /* EditExercisesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExercisesViewModel.swift; sourceTree = "<group>"; };
+		53552F192D3CE50100FE8BCF /* PlanWorkoutScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanWorkoutScreen.swift; sourceTree = "<group>"; };
+		53552F1C2D3CF25000FE8BCF /* RepetitionRulesListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepetitionRulesListScreen.swift; sourceTree = "<group>"; };
+		53552F1E2D3CF27400FE8BCF /* RepetitionRuleDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepetitionRuleDetailsScreen.swift; sourceTree = "<group>"; };
+		53552F222D3CF2DD00FE8BCF /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		53552F242D3CFC1F00FE8BCF /* DateInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputView.swift; sourceTree = "<group>"; };
+		53552F262D3D0A0600FE8BCF /* AddWorkoutExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutExerciseView.swift; sourceTree = "<group>"; };
+		53552F272D3D0A0600FE8BCF /* AddWorkoutExerciseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutExerciseViewModel.swift; sourceTree = "<group>"; };
+		53552F2B2D3D0EFB00FE8BCF /* ListWithDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWithDivider.swift; sourceTree = "<group>"; };
+		536B07872D3CD97400166273 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +199,7 @@
 		02E8347F2B8BA17F006C98DA /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				536B07872D3CD97400166273 /* Date+Extension.swift */,
 				530AAC202D2BD22200788407 /* CoreError.swift */,
 				02FC1F5C2B666939008F5D8D /* String+Ext.swift */,
 				02FC1F5A2B6668FB008F5D8D /* GlobalConstants.swift */,
@@ -246,11 +265,8 @@
 		02FC1F502B664DD2008F5D8D /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				02FC1F4E2B6561D2008F5D8D /* ChildSizeReader.swift */,
-				02FC1F4C2B656090008F5D8D /* CustomDatePicker.swift */,
-				025F49D42B65604000C571FF /* DatePickerView.swift */,
-				025573432B5D8EF3001DF4B6 /* View+Extension.swift */,
-				023223882B93363800C0A73A /* RCContentUnavailableView.swift */,
+				53552F212D3CF2CD00FE8BCF /* Extensions */,
+				53552F202D3CF2B200FE8BCF /* CustomViews */,
 				02FC1F552B6653A3008F5D8D /* TabView */,
 				02FC1F522B664DE4008F5D8D /* SettingsScreen */,
 				02FC1F512B664DD9008F5D8D /* ExercisesScreen */,
@@ -273,6 +289,7 @@
 		02FC1F522B664DE4008F5D8D /* SettingsScreen */ = {
 			isa = PBXGroup;
 			children = (
+				53552F1B2D3CF23500FE8BCF /* RepetitionRulesListScreen */,
 				5328DF542D340E300086E7D2 /* EditExercisesScreen */,
 				02E834752B8A21EB006C98DA /* AboutAppScreen */,
 				02FC1F532B664E02008F5D8D /* SettingsView.swift */,
@@ -291,6 +308,7 @@
 		530E52F62D2C41DD00064589 /* CalendarScreen */ = {
 			isa = PBXGroup;
 			children = (
+				53552F182D3CE4DC00FE8BCF /* PlanWorkoutScreen */,
 				530E52F72D2C41FC00064589 /* CalendarScreen.swift */,
 			);
 			path = CalendarScreen;
@@ -303,6 +321,55 @@
 				5328DF572D340E810086E7D2 /* EditExercisesViewModel.swift */,
 			);
 			path = EditExercisesScreen;
+			sourceTree = "<group>";
+		};
+		53552F182D3CE4DC00FE8BCF /* PlanWorkoutScreen */ = {
+			isa = PBXGroup;
+			children = (
+				53552F282D3D0A0600FE8BCF /* AddWorkoutExercise */,
+				53552F192D3CE50100FE8BCF /* PlanWorkoutScreen.swift */,
+			);
+			path = PlanWorkoutScreen;
+			sourceTree = "<group>";
+		};
+		53552F1B2D3CF23500FE8BCF /* RepetitionRulesListScreen */ = {
+			isa = PBXGroup;
+			children = (
+				53552F1C2D3CF25000FE8BCF /* RepetitionRulesListScreen.swift */,
+				53552F1E2D3CF27400FE8BCF /* RepetitionRuleDetailsScreen.swift */,
+			);
+			path = RepetitionRulesListScreen;
+			sourceTree = "<group>";
+		};
+		53552F202D3CF2B200FE8BCF /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				53552F222D3CF2DD00FE8BCF /* InputView.swift */,
+				53552F242D3CFC1F00FE8BCF /* DateInputView.swift */,
+				02FC1F4C2B656090008F5D8D /* CustomDatePicker.swift */,
+				53552F2B2D3D0EFB00FE8BCF /* ListWithDivider.swift */,
+				025F49D42B65604000C571FF /* DatePickerView.swift */,
+				02FC1F4E2B6561D2008F5D8D /* ChildSizeReader.swift */,
+				023223882B93363800C0A73A /* RCContentUnavailableView.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		53552F212D3CF2CD00FE8BCF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				025573432B5D8EF3001DF4B6 /* View+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		53552F282D3D0A0600FE8BCF /* AddWorkoutExercise */ = {
+			isa = PBXGroup;
+			children = (
+				53552F262D3D0A0600FE8BCF /* AddWorkoutExerciseView.swift */,
+				53552F272D3D0A0600FE8BCF /* AddWorkoutExerciseViewModel.swift */,
+			);
+			path = AddWorkoutExercise;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -385,11 +452,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53552F232D3CF2E400FE8BCF /* InputView.swift in Sources */,
 				530AAC232D2BD36800788407 /* ExerciseStorage.swift in Sources */,
 				5328DF512D33F7130086E7D2 /* DIContainer.swift in Sources */,
 				02FC1F4D2B656090008F5D8D /* CustomDatePicker.swift in Sources */,
+				53552F1F2D3CF27400FE8BCF /* RepetitionRuleDetailsScreen.swift in Sources */,
 				022ACF822B8C64C800764C6D /* ViewWithBackground.swift in Sources */,
 				0294FDAB2B8DB8E000D9186C /* AddExerciseViewModel.swift in Sources */,
+				53552F292D3D0A0600FE8BCF /* AddWorkoutExerciseViewModel.swift in Sources */,
+				53552F2A2D3D0A0600FE8BCF /* AddWorkoutExerciseView.swift in Sources */,
 				0294FDA92B8DB59200D9186C /* ExercisesViewModel.swift in Sources */,
 				024C4E112B52D32E00032346 /* RepsCount.xcdatamodeld in Sources */,
 				530E52FD2D2D457500064589 /* CalendarEventStorage.swift in Sources */,
@@ -397,19 +468,23 @@
 				024C4E0E2B52D32E00032346 /* CoreDataService.swift in Sources */,
 				5328DF582D340E820086E7D2 /* EditExercisesViewModel.swift in Sources */,
 				025F49D52B65604000C571FF /* DatePickerView.swift in Sources */,
+				53552F1D2D3CF25000FE8BCF /* RepetitionRulesListScreen.swift in Sources */,
 				024C4E072B52D32D00032346 /* ExercisesView.swift in Sources */,
 				02FC1F572B6653B9008F5D8D /* TabViewScreen.swift in Sources */,
 				02FC1F5B2B6668FB008F5D8D /* GlobalConstants.swift in Sources */,
 				530E52FF2D2D491100064589 /* DefaultExercises.swift in Sources */,
 				025F49D32B6501C200C571FF /* LocationManager.swift in Sources */,
 				023223892B93363800C0A73A /* RCContentUnavailableView.swift in Sources */,
+				53552F1A2D3CE50600FE8BCF /* PlanWorkoutScreen.swift in Sources */,
 				02E834772B8A21FD006C98DA /* AboutAppView.swift in Sources */,
 				5328DF562D340E490086E7D2 /* EditExercisesScreen.swift in Sources */,
 				5328DDD52D33F57D0086E7D2 /* ServiceAssembly.swift in Sources */,
+				53552F252D3CFC1F00FE8BCF /* DateInputView.swift in Sources */,
 				02E834872B8BAA68006C98DA /* AddExerciseView.swift in Sources */,
 				530E53032D2DAF2300064589 /* ExerciseMetricType.swift in Sources */,
 				5328DF532D33F7B50086E7D2 /* UIAssembly.swift in Sources */,
 				02FC1F592B665FAE008F5D8D /* MeasurementUnit.swift in Sources */,
+				536B07882D3CD97A00166273 /* Date+Extension.swift in Sources */,
 				02FC1F4F2B6561D2008F5D8D /* ChildSizeReader.swift in Sources */,
 				024C4E052B52D32D00032346 /* RepsCountApp.swift in Sources */,
 				02FC1F542B664E02008F5D8D /* SettingsView.swift in Sources */,
@@ -417,6 +492,7 @@
 				530E52F82D2C420200064589 /* CalendarScreen.swift in Sources */,
 				530AAC212D2BD22200788407 /* CoreError.swift in Sources */,
 				530E52F32D2C38FE00064589 /* ExerciseDetailsViewModel.swift in Sources */,
+				53552F2C2D3D0EFB00FE8BCF /* ListWithDivider.swift in Sources */,
 				02FC1F5D2B666939008F5D8D /* String+Ext.swift in Sources */,
 				024C4E1A2B52D4F200032346 /* ExerciseDetailsView.swift in Sources */,
 			);

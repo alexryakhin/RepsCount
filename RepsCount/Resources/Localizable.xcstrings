@@ -260,9 +260,6 @@
         }
       }
     },
-    "$%lld" : {
-
-    },
     "About app" : {
       "localizations" : {
         "de" : {
@@ -347,6 +344,12 @@
         }
       }
     },
+    "Add event" : {
+
+    },
+    "Add exercises" : {
+
+    },
     "Amount" : {
       "localizations" : {
         "de" : {
@@ -374,6 +377,9 @@
           }
         }
       }
+    },
+    "Are you sure?" : {
+
     },
     "Arms" : {
       "extractionState" : "manual",
@@ -1271,6 +1277,9 @@
         }
       }
     },
+    "Item" : {
+
+    },
     "kg" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1617,6 +1626,9 @@
         }
       }
     },
+    "No exercises added yet." : {
+
+    },
     "No exercises for this date!" : {
       "localizations" : {
         "de" : {
@@ -1730,6 +1742,9 @@
         }
       }
     },
+    "Plan a workout" : {
+
+    },
     "Pounds" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1816,6 +1831,12 @@
           }
         }
       }
+    },
+    "RepetitionRuleDetailsScreen" : {
+
+    },
+    "RepetitionRulesListScreen" : {
+
     },
     "Reps counter" : {
       "localizations" : {
@@ -1989,6 +2010,9 @@
           }
         }
       }
+    },
+    "Select" : {
+
     },
     "Select a category" : {
       "extractionState" : "stale",
@@ -2743,6 +2767,12 @@
           }
         }
       }
+    },
+    "Yes" : {
+
+    },
+    "You will lose all data entered." : {
+
     }
   },
   "version" : "1.0"

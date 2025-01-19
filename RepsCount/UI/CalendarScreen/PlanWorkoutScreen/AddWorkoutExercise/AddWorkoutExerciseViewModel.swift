@@ -1,5 +1,5 @@
 //
-//  AddExerciseViewModel.swift
+//  AddWorkoutExerciseViewModel.swift
 //  RepsCount
 //
 //  Created by Aleksandr Riakhin on 2/27/24.
@@ -9,10 +9,11 @@ import SwiftUI
 import CoreData
 import Combine
 
-final class AddExerciseViewModel: ObservableObject {
+final class AddWorkoutExerciseViewModel: ObservableObject {
     private let exerciseStorage: ExerciseStorageInterface
     private var cancellable = Set<AnyCancellable>()
 
+    @Published var exerciseModels: [ExerciseModel] = []
     @Published var exerciseTypes: [String: [String: [String]]] = [:]
 
     @Published var text = String()
@@ -43,19 +44,12 @@ final class AddExerciseViewModel: ObservableObject {
         setupBindings()
     }
 
-    func addExercise(savesLocation: Bool) {
-        guard !selectedType.isEmpty,
-              !selectedCategory.isEmpty,
-              !selectedExercise.isEmpty else {
-            // Handle invalid input (e.g., show an error message to the user)
-            return
+    func findExerciseModel() -> ExerciseModel? {
+        exerciseModels.first { model in
+            model.type == selectedType
+            && model.category == selectedCategory
+            && model.name == selectedExercise
         }
-
-        exerciseStorage.addExercise(
-            category: selectedCategory,
-            exerciseName: selectedExercise,
-            savesLocation: savesLocation
-        )
     }
 
     private func setupBindings() {
@@ -67,6 +61,14 @@ final class AddExerciseViewModel: ObservableObject {
                 if let firstType = types.first {
                     self?.selectedType = firstType.key
                 }
+            }
+            .store(in: &cancellable)
+
+        exerciseStorage.exerciseModelsPublisher
+            .sink { completion in
+                // TODO: error handle
+            } receiveValue: { [weak self] models in
+                self?.exerciseModels = models
             }
             .store(in: &cancellable)
     }

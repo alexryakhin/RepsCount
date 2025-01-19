@@ -10,6 +10,7 @@ import Combine
 
 protocol ExerciseStorageInterface {
     var exercisesPublisher: AnyPublisher<[Exercise], CoreError> { get }
+    var exerciseModelsPublisher: AnyPublisher<[ExerciseModel], CoreError> { get }
     var exerciseCategoriesPublisher: AnyPublisher<[String: [String: [String]]], CoreError> { get }
 
     func addExercise(category: String, exerciseName: String, savesLocation: Bool)
@@ -25,6 +26,11 @@ class ExerciseStorage: ExerciseStorageInterface {
     private let exercisesSubject = CurrentValueSubject<[Exercise], CoreError>([])
     var exercisesPublisher: AnyPublisher<[Exercise], CoreError> {
         return exercisesSubject.eraseToAnyPublisher()
+    }
+
+    private let exerciseModelsSubject = CurrentValueSubject<[ExerciseModel], CoreError>([])
+    var exerciseModelsPublisher: AnyPublisher<[ExerciseModel], CoreError> {
+        return exerciseModelsSubject.eraseToAnyPublisher()
     }
 
     private let exerciseCategoriesSubject = CurrentValueSubject<[String: [String: [String]]], CoreError>([:])
@@ -85,6 +91,7 @@ class ExerciseStorage: ExerciseStorageInterface {
                 setDefaultExercises()
             } else {
                 let exerciseTypes = groupExercises(from: models)
+                exerciseModelsSubject.send(models)
                 exerciseCategoriesSubject.send(exerciseTypes)
             }
         } catch {

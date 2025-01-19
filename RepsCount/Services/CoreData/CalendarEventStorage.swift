@@ -10,7 +10,7 @@ import CoreData
 
 protocol CalendarEventStorageInterface {
     var eventsPublisher: AnyPublisher<[CalendarEvent], CoreError> { get }
-    func addEvent(title: String, date: Date, repeatFrequency: String?, notes: String?, exercises: Set<ExerciseModel>)
+    func addEvent(title: String, date: Date, notes: String?, exercises: Set<ExerciseModel>)
     func deleteEvent(_ event: CalendarEvent)
     func fetchEvents()
 }
@@ -37,12 +37,11 @@ class CalendarEventStorage: CalendarEventStorageInterface {
         }
     }
 
-    func addEvent(title: String, date: Date, repeatFrequency: String?, notes: String?, exercises: Set<ExerciseModel>) {
+    func addEvent(title: String, date: Date, notes: String?, exercises: Set<ExerciseModel>) {
         let newEvent = CalendarEvent(context: coreDataService.context)
         newEvent.id = UUID().uuidString
         newEvent.title = title
         newEvent.date = date
-        newEvent.repeatFrequency = repeatFrequency
         newEvent.notes = notes
         newEvent.exercises = NSSet(set: exercises)
         save()

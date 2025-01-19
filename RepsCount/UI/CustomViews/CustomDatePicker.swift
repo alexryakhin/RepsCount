@@ -20,6 +20,7 @@ struct CustomDatePicker: View {
     private let minDate: Date?
     private let maxDate: Date?
     private let pickerMode: PickerMode
+    private let labelFont: Font?
     private let minuteInterval: Int
 
     @State private var placeholderSize: CGSize = .zero
@@ -27,15 +28,17 @@ struct CustomDatePicker: View {
 
     init(
         date: Binding<Date?>,
-        minDate: Date?,
-        maxDate: Date?,
-        pickerMode: PickerMode,
+        minDate: Date? = nil,
+        maxDate: Date? = nil,
+        pickerMode: PickerMode = .date,
+        labelFont: Font? = nil,
         minuteInterval: Int = 1
     ) {
         self._date = date
         self.minDate = minDate
         self.maxDate = maxDate
         self.pickerMode = pickerMode
+        self.labelFont = labelFont
         self.minuteInterval = minuteInterval
     }
 
@@ -75,8 +78,8 @@ struct CustomDatePicker: View {
     @ViewBuilder
     private func pickerPlaceholderText(date: Date?) -> some View {
         if let date {
-            Text(date, style: pickerMode.textStyle)
-                .bold()
+            Text(date, style: pickerMode.dateStyle)
+                .font(labelFont)
         } else {
             Image(systemName: "calendar")
         }
@@ -84,7 +87,7 @@ struct CustomDatePicker: View {
 }
 
 extension CustomDatePicker.PickerMode {
-    var textStyle: Text.DateStyle {
+    var dateStyle: Text.DateStyle {
         switch self {
         case .date: return .date
         case .dateAndTime: return .date
@@ -103,9 +106,6 @@ extension CustomDatePicker.PickerMode {
 
 #Preview {
     CustomDatePicker(
-        date: .constant(nil),
-        minDate: nil,
-        maxDate: nil,
-        pickerMode: .date
+        date: .constant(nil)
     )
 }

@@ -159,16 +159,11 @@ struct ExerciseDetailsView: View {
                 viewModel.isShowingAlert = true
             } label: {
                 Image(systemName: "plus")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 24, height: 24)
-                    .padding(16)
-                    .background(in: Circle())
-                    .overlay {
-                        Circle().strokeBorder()
-                    }
+                    .font(.system(size: 24, weight: .semibold, design: .monospaced))
+                    .padding(8)
             }
-            .padding(30)
+            .buttonStyle(.bordered)
+            .padding(24)
         }
     }
 }

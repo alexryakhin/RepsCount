@@ -1,22 +1,22 @@
 //
-//  AddExerciseView.swift
+//  AddWorkoutExerciseView.swift
 //  RepsCount
 //
 //  Created by Aleksandr Riakhin on 2/25/24.
 //
 
 import SwiftUI
+import CoreData
 
-struct AddExerciseView: ViewWithBackground {
+struct AddWorkoutExerciseView: ViewWithBackground {
 
     struct Config {
         let isPresented: Binding<Bool>
+        let onSelectExerciseModel: (ExerciseModel) -> Void
         let onGoToAddExerciseModel: () -> Void
     }
 
-    @AppStorage("savesLocation") var savesLocation: Bool = true
-    @ObservedObject private var viewModel: AddExerciseViewModel
-    @State private var isAddingNewExercise = false
+    @ObservedObject private var viewModel: AddWorkoutExerciseViewModel
 
     private let config: Config
 
@@ -40,7 +40,7 @@ struct AddExerciseView: ViewWithBackground {
     }
 
     init(
-        viewModel: AddExerciseViewModel,
+        viewModel: AddWorkoutExerciseViewModel,
         config: Config
     ) {
         self.viewModel = viewModel
@@ -90,21 +90,13 @@ struct AddExerciseView: ViewWithBackground {
                             .fontWeight(.semibold)
                             .font(.system(.headline))
                         Spacer()
-                        if isAddingNewExercise {
-                            TextField("Enter exercise name", text: $viewModel.text)
-                                .padding(6)
-                                .background(Color(uiColor: UIColor.systemBackground))
-                                .clipShape(RoundedRectangle(cornerRadius: 16))
-                                .shadow(radius: 2, x: 0, y: 4)
-                        } else {
-                            Picker("Select exercise", selection: $viewModel.selectedExercise) {
-                                ForEach(exercises, id: \.self) { exercise in
-                                    Text(LocalizedStringKey(exercise)).tag(exercise)
-                                }
+                        Picker("Select exercise", selection: $viewModel.selectedExercise) {
+                            ForEach(exercises, id: \.self) { exercise in
+                                Text(LocalizedStringKey(exercise)).tag(exercise)
                             }
-                            .pickerStyle(MenuPickerStyle())
-                            .buttonStyle(.bordered)
                         }
+                        .pickerStyle(MenuPickerStyle())
+                        .buttonStyle(.bordered)
                     }
                 }
                 .padding(.vertical)
@@ -114,26 +106,27 @@ struct AddExerciseView: ViewWithBackground {
         .safeAreaInset(edge: .bottom) {
             VStack(spacing: 12) {
                 Button {
-                    viewModel.addExercise(savesLocation: savesLocation)
-                    config.isPresented.wrappedValue = false
+                    if let model = viewModel.findExerciseModel() {
+                        config.onSelectExerciseModel(model)
+                    }
                 } label: {
-                    Text("Choose")
+                    Text("Select")
                         .bold()
                         .frame(maxWidth: .infinity)
                         .padding(12)
                         .cornerRadius(12)
                 }
                 .buttonStyle(.borderedProminent)
-                Button {
-                    config.onGoToAddExerciseModel()
-                } label: {
-                    Text("Didn't find exercise?")
-                        .bold()
-                        .frame(maxWidth: .infinity)
-                        .padding(12)
-                        .cornerRadius(12)
-                }
-                .buttonStyle(.bordered)
+//                Button {
+//                    config.onGoToAddExerciseModel()
+//                } label: {
+//                    Text("Didn't find exercise?")
+//                        .bold()
+//                        .frame(maxWidth: .infinity)
+//                        .padding(12)
+//                        .cornerRadius(12)
+//                }
+//                .buttonStyle(.bordered)
             }
             .padding(.vertical, 12)
             .padding(.horizontal, 16)
@@ -142,5 +135,5 @@ struct AddExerciseView: ViewWithBackground {
 }
 
 #Preview {
-    DIContainer.shared.resolver.resolve(AddExerciseView.self)!
+    DIContainer.shared.resolver.resolve(AddWorkoutExerciseView.self)!
 }
