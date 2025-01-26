@@ -17,27 +17,17 @@ final class AddWorkoutExerciseViewModel: ObservableObject {
     @Published var exerciseTypes: [String: [String: [String]]] = [:]
 
     @Published var text = String()
-    @Published var selectedType = String() {
+    @Published var selectedType: String? = nil {
         didSet {
-            if let categories = exerciseTypes[selectedType],
-               let firstCategory = categories.keys.sorted().first {
-                selectedCategory = firstCategory
-            } else {
-                selectedCategory = ""
-            }
+            selectedCategory = nil
         }
     }
-    @Published var selectedCategory = String() {
+    @Published var selectedCategory: String? = nil {
         didSet {
-            if let exercises = exerciseTypes[selectedType]?[selectedCategory],
-               let firstExercise = exercises.sorted().first {
-                selectedExercise = firstExercise
-            } else {
-                selectedExercise = ""
-            }
+            selectedExercise = nil
         }
     }
-    @Published var selectedExercise = String()
+    @Published var selectedExercise: String? = nil
 
     init(exerciseStorage: ExerciseStorageInterface) {
         self.exerciseStorage = exerciseStorage
@@ -58,9 +48,6 @@ final class AddWorkoutExerciseViewModel: ObservableObject {
                 // TODO: error handle
             } receiveValue: { [weak self] types in
                 self?.exerciseTypes = types
-                if let firstType = types.first {
-                    self?.selectedType = firstType.key
-                }
             }
             .store(in: &cancellable)
 

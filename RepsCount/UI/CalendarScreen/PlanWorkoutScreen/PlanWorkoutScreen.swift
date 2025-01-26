@@ -8,6 +8,7 @@
 import SwiftUI
 import Foundation
 import CoreData
+import Flow
 
 final class PlanWorkoutScreenViewModel: ObservableObject {
 
@@ -106,7 +107,7 @@ struct PlanWorkoutScreen: View {
                         .background(Color.surface)
                         .clipShape(RoundedRectangle(cornerRadius: 16))
                         .overlay {
-                            if let error = viewModel.selectedExerciseModelsError {
+                            if viewModel.selectedExerciseModelsError != nil {
                                 Color.red.clipShape(
                                     RoundedRectangle(cornerRadius: 16)
                                         .stroke(style: .init(lineWidth: 2))
@@ -121,35 +122,15 @@ struct PlanWorkoutScreen: View {
                                 .padding(.horizontal, 16)
                         }
                     } else {
-                        ListWithDivider(viewModel.selectedExerciseModels.sorted(by: {
-                            $0.name ?? "" < $1.name ?? ""
-                        })) { model in
-                            HStack {
-                                VStack(alignment: .leading, spacing: 4) {
-                                    if let type = model.type,
-                                        let category = model.category,
-                                        let name = model.name {
-                                        Text(name)
-                                            .font(.headline)
-                                        Text([type, category].joined(separator: ", "))
-                                            .font(.subheadline)
-                                            .foregroundStyle(.secondary)
-                                    }
-                                }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-
-                                Button {
-                                    viewModel.selectedExerciseModels.remove(model)
-                                } label: {
-                                    Image(systemName: "xmark.circle.fill")
-                                }
-                                .foregroundStyle(.secondary)
+                        HFlow {
+                            ForEach(viewModel.selectedExerciseModels.sorted(by: {
+                                $0.name ?? "" < $1.name ?? ""
+                            })) { model in
+                                selectedExerciseCell(model)
                             }
-                            .padding(.vertical, 12)
-                            .padding(.horizontal, 16)
                         }
-                        .background(Color.surface)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .clippedWithBackground()
 
                         Button("Add more exercises") {
                             isExerciseSelectionPresented = true
@@ -219,8 +200,27 @@ struct PlanWorkoutScreen: View {
                 isExerciseSelectionPresented = false
         })
         resolver.resolve(AddWorkoutExerciseView.self, argument: config)!
-            .presentationDetents([.medium, .large])
-            .presentationDragIndicator(.visible)
+    }
+
+    @ViewBuilder
+    private func selectedExerciseCell(_ model: ExerciseModel) -> some View {
+        if let name = model.name {
+            HStack(spacing: 8) {
+                Text(LocalizedStringKey(name))
+                    .font(.callout)
+                    .foregroundStyle(.primary)
+                Button {
+                    viewModel.selectedExerciseModels.remove(model)
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                }
+                .foregroundStyle(.secondary)
+            }
+            .padding(.vertical, 8)
+            .padding(.horizontal, 12)
+            .background(.quaternary)
+            .clipShape(Capsule())
+        }
     }
 }
 

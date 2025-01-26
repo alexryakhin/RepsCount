@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AddExerciseView: ViewWithBackground {
+struct AddExerciseView: View {
 
     struct Config {
         let isPresented: Binding<Bool>
@@ -50,7 +50,7 @@ struct AddExerciseView: ViewWithBackground {
         self.config = config
     }
 
-    var content: some View {
+    var body: some View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 16) {

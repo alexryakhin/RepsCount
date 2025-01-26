@@ -87,7 +87,7 @@ struct CalendarScreen: View {
                         }
                     } else {
                         VStack(spacing: 12) {
-                            Text("No workout scheduled for this day")
+                            Text("No workouts scheduled for this day")
                                 .font(.subheadline)
                                 .foregroundStyle(.secondary)
                             NavigationLink("Plan a workout") {

@@ -344,9 +344,6 @@
         }
       }
     },
-    "Add an exercise" : {
-
-    },
     "Add event" : {
 
     },
@@ -2015,9 +2012,6 @@
         }
       }
     },
-    "Select" : {
-
-    },
     "Select a category" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -2075,15 +2069,6 @@
           }
         }
       }
-    },
-    "Select category" : {
-
-    },
-    "Select exercise" : {
-
-    },
-    "Select type" : {
-
     },
     "Sets" : {
       "localizations" : {
