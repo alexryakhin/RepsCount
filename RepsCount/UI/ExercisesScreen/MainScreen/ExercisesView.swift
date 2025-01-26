@@ -48,19 +48,21 @@ struct ExercisesView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
                 } else {
                     List {
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack {
-                                ForEach(viewModel.sortedUniqueExerciseNames, id: \.self) { name in
-                                    nameFilterButtonView(for: name)
+                        if viewModel.sortedUniqueExerciseNames.count >= 2 {
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack {
+                                    ForEach(viewModel.sortedUniqueExerciseNames, id: \.self) { name in
+                                        nameFilterButtonView(for: name)
+                                    }
                                 }
+                                .scrollTargetLayoutIfAvailable()
                             }
-                            .scrollTargetLayoutIfAvailable()
+                            .scrollTargetBehaviorIfAvailable()
+                            .listRowBackground(Color.clear)
+                            .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                            .listRowSpacing(0)
+                            .listRowSeparator(.hidden, edges: .all)
                         }
-                        .scrollTargetBehaviorIfAvailable()
-                        .listRowBackground(Color.clear)
-                        .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
-                        .listRowSpacing(0)
-                        .listRowSeparator(.hidden, edges: .all)
 
                         if dateSelection == nil {
                             ForEach(groupedExercises.keys.sorted(by: >), id: \.self) { date in

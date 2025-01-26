@@ -227,9 +227,9 @@
 				5328DDD42D33F57D0086E7D2 /* ServiceAssembly.swift */,
 				5328DF522D33F7B50086E7D2 /* UIAssembly.swift */,
 				5328DF502D33F7130086E7D2 /* DIContainer.swift */,
-				025573412B5BA5E2001DF4B6 /* LaunchScreen.storyboard */,
 				024C4E122B52D32E00032346 /* RepsCount.entitlements */,
 				024C4E132B52D32E00032346 /* Info.plist */,
+				025573412B5BA5E2001DF4B6 /* LaunchScreen.storyboard */,
 			);
 			path = App;
 			sourceTree = "<group>";

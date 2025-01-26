@@ -218,7 +218,7 @@ struct PlanWorkoutScreen: View {
             }
             .padding(.vertical, 8)
             .padding(.horizontal, 12)
-            .background(.quaternary)
+            .background(.quinary)
             .clipShape(Capsule())
         }
     }

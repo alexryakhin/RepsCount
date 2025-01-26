@@ -9,17 +9,22 @@ import SwiftUI
 import MijickCalendarView
 import Combine
 import CoreData
-import SwipeActions
+import Flow
 
 final class CalendarScreenViewModel: ObservableObject {
-
+    @AppStorage("savesLocation") var savesLocation: Bool = true
     @Published var events: [CalendarEvent] = []
 
     private let calendarEventStorage: CalendarEventStorageInterface
+    private let exerciseStorage: ExerciseStorageInterface
     private var cancellable: Set<AnyCancellable> = []
 
-    init(calendarEventStorage: CalendarEventStorageInterface) {
+    init(
+        calendarEventStorage: CalendarEventStorageInterface,
+        exerciseStorage: ExerciseStorageInterface
+    ) {
         self.calendarEventStorage = calendarEventStorage
+        self.exerciseStorage = exerciseStorage
         setupBindings()
     }
 
@@ -31,7 +36,13 @@ final class CalendarScreenViewModel: ObservableObject {
         }
     }
 
-    func setupBindings() {
+    func addExercisesToTheList(_ exercises: [ExerciseModel]) {
+        exercises.forEach { model in
+            exerciseStorage.addExerciseFromExerciseModel(model, savesLocation: savesLocation)
+        }
+    }
+
+    private func setupBindings() {
         calendarEventStorage.eventsPublisher
             .sink { completion in
                 // TODO: error handle
@@ -79,7 +90,6 @@ struct CalendarScreen: View {
                     }
                     .scrollDisabled(true)
                     .fixedSize(horizontal: false, vertical: true)
-                    .padding(.horizontal, 16)
 
                     if let selectedDate, let events = groupedEvents[selectedDate.trimmed()] {
                         ForEach(events) { event in
@@ -96,11 +106,10 @@ struct CalendarScreen: View {
                             .buttonStyle(.bordered)
                         }
                         .frame(maxWidth: .infinity, minHeight: 200)
-                        .background(Color.surface)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
-                        .padding(.horizontal, 16)
+                        .clippedWithBackground()
                     }
                 }
+                .padding(.horizontal, 16)
             }
             .navigationTitle("Calendar")
             .navigationBarTitleDisplayMode(.inline)
@@ -121,39 +130,68 @@ struct CalendarScreen: View {
     @ViewBuilder
     private func workoutCard(for event: CalendarEvent) -> some View {
         if let title = event.title {
-            SwipeView {
-                HStack {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(title)
+            VStack(alignment: .leading, spacing: 12) {
+                HStack(alignment: .top) {
+                    Text(title)
+                        .font(.title)
+                        .bold()
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Menu {
+                        if let exercises = event.exercises as? Set<ExerciseModel>, exercises.isEmpty == false {
+                            Button {
+                                viewModel.addExercisesToTheList(exercises.sorted())
+                                HapticManager.shared.triggerNotification(type: .success)
+                            } label: {
+                                Label(LocalizedStringKey("Add exercises to the list"), systemImage: "note.text.badge.plus")
+                            }
+                        }
+                        Button(role: .destructive) {
+                            withAnimation {
+                                viewModel.remove(event)
+                            }
+                            HapticManager.shared.triggerNotification(type: .success)
+                        } label: {
+                            Label(LocalizedStringKey("Remove workout"), systemImage: "trash")
+                        }
+                    } label: {
+                        Image(systemName: "ellipsis.circle.fill")
                             .font(.title)
-                            .bold()
-                        if let exercises = event.exercises as? Set<ExerciseModel> {
-                            let names = exercises.compactMap { exercise in
-                                return exercise.name
-                            }.sorted()
-                            Text(names.joined(separator: ", "))
+                    }
+                    .foregroundStyle(.secondary)
+                }
+                .padding(.top, 8)
+
+                if let exercises = event.exercises as? Set<ExerciseModel> {
+                    let names = exercises.compactMap { exercise in
+                        return exercise.name
+                    }.sorted()
+                    Divider()
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text("Exercises:")
+                            .font(.callout)
+                        HFlow {
+                            ForEach(names, id: \.self) { name in
+                                Text(name)
+                                    .padding(.vertical, 8)
+                                    .padding(.horizontal, 12)
+                                    .background(.quinary)
+                                    .clipShape(Capsule())
+                            }
                         }
                     }
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 12)
-                .background(Color.surface)
-                .clipShape(RoundedRectangle(cornerRadius: 16))
-            } trailingActions: { _ in
-                SwipeAction {
-                    withAnimation {
-                        viewModel.remove(event)
+                if let notes = event.notes {
+                    Divider()
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text("Notes:")
+                            .font(.callout)
+                        Text(notes)
+                            .font(.caption)
                     }
-                } label: { flag in
-                    Image(systemName: "trash")
-                        .foregroundStyle(.white)
-                } background: { flag in
-                    Color.red
                 }
             }
-            .swipeActionCornerRadius(16)
-            .padding(.horizontal, 16)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .clippedWithBackground()
         }
     }
 }

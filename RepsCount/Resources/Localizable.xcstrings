@@ -350,6 +350,9 @@
     "Add exercise" : {
 
     },
+    "Add exercises to the list" : {
+
+    },
     "Add more exercises" : {
 
     },
@@ -1106,6 +1109,9 @@
         }
       }
     },
+    "Exercises:" : {
+
+    },
     "Face Pulls" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1714,6 +1720,9 @@
         }
       }
     },
+    "Notes:" : {
+
+    },
     "Oblique Twist" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1832,6 +1841,9 @@
           }
         }
       }
+    },
+    "Remove workout" : {
+
     },
     "RepetitionRuleDetailsScreen" : {
 
