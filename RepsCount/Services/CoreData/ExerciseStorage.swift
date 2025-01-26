@@ -13,7 +13,7 @@ protocol ExerciseStorageInterface {
     var exerciseModelsPublisher: AnyPublisher<[ExerciseModel], CoreError> { get }
     var exerciseCategoriesPublisher: AnyPublisher<[String: [String: [String]]], CoreError> { get }
 
-    func addExercise(category: String, exerciseName: String, savesLocation: Bool)
+    func addExerciseFromExerciseModel(_ model: ExerciseModel, savesLocation: Bool)
     func deleteExercise(_ exercise: Exercise)
     func fetchExercises()
 }
@@ -63,12 +63,13 @@ class ExerciseStorage: ExerciseStorageInterface {
         save()
     }
 
-    func addExercise(category: String, exerciseName: String, savesLocation: Bool) {
+    func addExerciseFromExerciseModel(_ model: ExerciseModel, savesLocation: Bool) {
         Task { @MainActor in
             let newItem = Exercise(context: coreDataService.context)
             newItem.timestamp = .now
-            newItem.category = category
-            newItem.name = exerciseName
+            newItem.category = model.category
+            newItem.name = model.name
+            newItem.metricType = model.metricType
             newItem.id = UUID().uuidString
             if savesLocation, let location = await locationManager.getCurrentLocation() {
                 newItem.latitude = location.latitude

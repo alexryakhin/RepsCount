@@ -85,6 +85,7 @@ struct ExerciseModelPreset {
         .init(name: "Hyperextensions", category: .back, type: .strengthTraining, metricType: .weightAndReps),
         .init(name: "Face Pulls", category: .back, type: .strengthTraining, metricType: .weightAndReps),
         .init(name: "Reverse Flyes", category: .back, type: .strengthTraining, metricType: .weightAndReps),
+        .init(name: "One Arm Pull-up", category: .back, type: .strengthTraining, metricType: .weightAndReps),
 
         // Strength Training - Shoulders
         .init(name: "Overhead Press", category: .shoulders, type: .strengthTraining, metricType: .weightAndReps),
@@ -95,7 +96,7 @@ struct ExerciseModelPreset {
         .init(name: "Upright Rows", category: .shoulders, type: .strengthTraining, metricType: .weightAndReps),
         .init(name: "Shrugs", category: .shoulders, type: .strengthTraining, metricType: .weightAndReps),
         .init(name: "Push Press", category: .shoulders, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Handstand Push-ups", category: .shoulders, type: .calisthenics, metricType: .weightAndReps),
+        .init(name: "Handstand Push-ups", category: .shoulders, type: .strengthTraining, metricType: .weightAndReps),
 
         // Cardio
         .init(name: "5k Run", category: .running, type: .cardio, metricType: .timeOnly),
@@ -123,6 +124,7 @@ struct ExerciseModelPreset {
         .init(name: "Front Lever", category: .strengthSkills, type: .calisthenics, metricType: .timeOnly),
         .init(name: "Back Lever", category: .strengthSkills, type: .calisthenics, metricType: .timeOnly),
         .init(name: "Human Flag", category: .strengthSkills, type: .calisthenics, metricType: .timeOnly),
+        .init(name: "Muscle-ups", category: .strengthSkills, type: .calisthenics, metricType: .weightAndReps),
         .init(name: "Bridge", category: .mobility, type: .calisthenics, metricType: .timeOnly),
         .init(name: "Wall Handstand", category: .mobility, type: .calisthenics, metricType: .timeOnly),
         .init(name: "L-sit", category: .mobility, type: .calisthenics, metricType: .timeOnly),

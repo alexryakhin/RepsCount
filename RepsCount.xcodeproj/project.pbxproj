@@ -56,6 +56,9 @@
 		53552F2A2D3D0A0600FE8BCF /* AddWorkoutExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53552F262D3D0A0600FE8BCF /* AddWorkoutExerciseView.swift */; };
 		53552F2C2D3D0EFB00FE8BCF /* ListWithDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53552F2B2D3D0EFB00FE8BCF /* ListWithDivider.swift */; };
 		536B07882D3CD97A00166273 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536B07872D3CD97400166273 /* Date+Extension.swift */; };
+		5387CBD52D46277F00370D07 /* Flow in Frameworks */ = {isa = PBXBuildFile; productRef = 5387CBD42D46277F00370D07 /* Flow */; };
+		5387CBD72D46279500370D07 /* FlowPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5387CBD62D46279100370D07 /* FlowPicker.swift */; };
+		5387CBD92D4640E700370D07 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5387CBD82D4640E700370D07 /* HapticManager.swift */; };
 		53FF95F32D3D64910023C33E /* SwipeActions in Frameworks */ = {isa = PBXBuildFile; productRef = 53FF95F22D3D64910023C33E /* SwipeActions */; };
 /* End PBXBuildFile section */
 
@@ -110,6 +113,8 @@
 		53552F272D3D0A0600FE8BCF /* AddWorkoutExerciseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutExerciseViewModel.swift; sourceTree = "<group>"; };
 		53552F2B2D3D0EFB00FE8BCF /* ListWithDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWithDivider.swift; sourceTree = "<group>"; };
 		536B07872D3CD97400166273 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		5387CBD62D46279100370D07 /* FlowPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowPicker.swift; sourceTree = "<group>"; };
+		5387CBD82D4640E700370D07 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5387CBD52D46277F00370D07 /* Flow in Frameworks */,
 				530E52FB2D2C451C00064589 /* MijickCalendarView in Frameworks */,
 				53FF95F32D3D64910023C33E /* SwipeActions in Frameworks */,
 				5328DDD32D33F55D0086E7D2 /* Swinject in Frameworks */,
@@ -192,6 +198,7 @@
 		02E8347E2B8BA15D006C98DA /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				5387CBD82D4640E700370D07 /* HapticManager.swift */,
 				02E834822B8BA1F3006C98DA /* Location */,
 				02E834812B8BA1E6006C98DA /* CoreData */,
 			);
@@ -346,6 +353,7 @@
 		53552F202D3CF2B200FE8BCF /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				5387CBD62D46279100370D07 /* FlowPicker.swift */,
 				53552F222D3CF2DD00FE8BCF /* InputView.swift */,
 				53552F242D3CFC1F00FE8BCF /* DateInputView.swift */,
 				02FC1F4C2B656090008F5D8D /* CustomDatePicker.swift */,
@@ -425,6 +433,7 @@
 				530E52F92D2C451C00064589 /* XCRemoteSwiftPackageReference "CalendarView" */,
 				5328DDD12D33F55D0086E7D2 /* XCRemoteSwiftPackageReference "Swinject" */,
 				53FF95F12D3D64910023C33E /* XCRemoteSwiftPackageReference "SwipeActions" */,
+				5387CBD32D46277F00370D07 /* XCRemoteSwiftPackageReference "SwiftUI-Flow" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 024C4E022B52D32D00032346 /* Products */;
@@ -471,11 +480,13 @@
 				024C4E0E2B52D32E00032346 /* CoreDataService.swift in Sources */,
 				5328DF582D340E820086E7D2 /* EditExercisesViewModel.swift in Sources */,
 				025F49D52B65604000C571FF /* DatePickerView.swift in Sources */,
+				5387CBD92D4640E700370D07 /* HapticManager.swift in Sources */,
 				53552F1D2D3CF25000FE8BCF /* RepetitionRulesListScreen.swift in Sources */,
 				024C4E072B52D32D00032346 /* ExercisesView.swift in Sources */,
 				02FC1F572B6653B9008F5D8D /* TabViewScreen.swift in Sources */,
 				02FC1F5B2B6668FB008F5D8D /* GlobalConstants.swift in Sources */,
 				530E52FF2D2D491100064589 /* DefaultExercises.swift in Sources */,
+				5387CBD72D46279500370D07 /* FlowPicker.swift in Sources */,
 				025F49D32B6501C200C571FF /* LocationManager.swift in Sources */,
 				023223892B93363800C0A73A /* RCContentUnavailableView.swift in Sources */,
 				53552F1A2D3CE50600FE8BCF /* PlanWorkoutScreen.swift in Sources */,
@@ -745,6 +756,14 @@
 				minimumVersion = 2.9.1;
 			};
 		};
+		5387CBD32D46277F00370D07 /* XCRemoteSwiftPackageReference "SwiftUI-Flow" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tevelee/SwiftUI-Flow";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.1;
+			};
+		};
 		53FF95F12D3D64910023C33E /* XCRemoteSwiftPackageReference "SwipeActions" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/aheze/SwipeActions";
@@ -765,6 +784,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5328DDD12D33F55D0086E7D2 /* XCRemoteSwiftPackageReference "Swinject" */;
 			productName = Swinject;
+		};
+		5387CBD42D46277F00370D07 /* Flow */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5387CBD32D46277F00370D07 /* XCRemoteSwiftPackageReference "SwiftUI-Flow" */;
+			productName = Flow;
 		};
 		53FF95F22D3D64910023C33E /* SwipeActions */ = {
 			isa = XCSwiftPackageProductDependency;

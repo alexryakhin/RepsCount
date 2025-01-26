@@ -50,10 +50,7 @@ struct InputView: View {
                     .foregroundStyle(.secondary)
                 }
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 12)
-            .background(Color.surface)
-            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .clippedWithBackground()
             .overlay {
                 var color: Color {
                     if isFocused {

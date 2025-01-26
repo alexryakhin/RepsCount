@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class ExerciseDetailsViewModel: ObservableObject {
+final class ExerciseDetailsViewModel: ObservableObject {
     @AppStorage("measurementUnit") var measurementUnit: MeasurementUnit = .kilograms
 
     @Published var isShowingAlert = false
@@ -17,6 +17,10 @@ class ExerciseDetailsViewModel: ObservableObject {
 
     private let coreDataService: CoreDataServiceInterface
     let exercise: Exercise
+
+    var metricType: ExerciseMetricType {
+        ExerciseMetricType(rawValue: exercise.metricType ?? "")
+    }
 
     var exerciseSets: [ExerciseSet] {
         let set = exercise.exerciseSets as? Set<ExerciseSet> ?? []

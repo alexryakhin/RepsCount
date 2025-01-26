@@ -906,9 +906,6 @@
         }
       }
     },
-    "Didn't find exercise?" : {
-
-    },
     "Dips" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1000,6 +997,7 @@
 
     },
     "Enter exercise name" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1687,6 +1685,9 @@
           }
         }
       }
+    },
+    "No workout scheduled for this day" : {
+
     },
     "Notes" : {
       "localizations" : {

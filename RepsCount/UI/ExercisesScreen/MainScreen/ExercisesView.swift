@@ -176,8 +176,6 @@ struct ExercisesView: View {
                 shouldNavigateToEditExercisesScreen = true
         })
         resolver.resolve(AddExerciseView.self, argument: config)!
-            .presentationDetents([.medium, .large])
-            .presentationDragIndicator(.visible)
     }
 
     @ViewBuilder

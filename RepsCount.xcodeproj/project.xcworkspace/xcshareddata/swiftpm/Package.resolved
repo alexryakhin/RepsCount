@@ -1,5 +1,5 @@
 {
-  "originHash" : "3d2aae7a90e6ad1e4eb8f76314bc75066902b223f3f52c836ce7aa173f72740d",
+  "originHash" : "807940eea47cd6789e7661da71d6020009ab05ba0e9b4ea3de2ad783e87406b2",
   "pins" : [
     {
       "identity" : "calendarview",
@@ -8,6 +8,15 @@
       "state" : {
         "branch" : "main",
         "revision" : "6730960ae4921a2ad1b9e76505f9c36e27ba9946"
+      }
+    },
+    {
+      "identity" : "swiftui-flow",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tevelee/SwiftUI-Flow",
+      "state" : {
+        "revision" : "5b2f4b3373ff5ba6a8a1666d52ebfd9dc6c0e10b",
+        "version" : "3.0.1"
       }
     },
     {

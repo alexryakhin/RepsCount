@@ -25,15 +25,18 @@ struct AddExerciseView: ViewWithBackground {
     }
 
     private var exerciseCategories: [String] {
-        guard let categories = viewModel.exerciseTypes[viewModel.selectedType] else {
+        guard let selectedType = viewModel.selectedType,
+              let categories = viewModel.exerciseTypes[selectedType] else {
             return []
         }
         return categories.keys.sorted()
     }
 
     private var exercises: [String] {
-        guard let categories = viewModel.exerciseTypes[viewModel.selectedType],
-              let exercises = categories[viewModel.selectedCategory] else {
+        guard let selectedType = viewModel.selectedType,
+              let selectedCategory = viewModel.selectedCategory,
+              let categories = viewModel.exerciseTypes[selectedType],
+              let exercises = categories[selectedCategory] else {
             return []
         }
         return exercises.sorted()
@@ -48,99 +51,88 @@ struct AddExerciseView: ViewWithBackground {
     }
 
     var content: some View {
-        ScrollView {
-            VStack {
-                Text("Choose an exercise")
-                    .fontWeight(.bold)
-                    .font(.system(.title))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, 8)
-                Spacer()
-                VStack(spacing: 8) {
-                    HStack {
-                        Text("Type")
-                            .fontWeight(.semibold)
-                            .font(.system(.headline))
-                        Spacer()
-                        Picker("Select type", selection: $viewModel.selectedType) {
-                            ForEach(exerciseTypes, id: \.self) { type in
-                                Text(LocalizedStringKey(type)).tag(type)
-                            }
-                        }
-                        .pickerStyle(MenuPickerStyle())
-                        .buttonStyle(.bordered)
+        NavigationView {
+            ScrollView {
+                VStack(spacing: 16) {
+                    FlowPicker(
+                        selection: $viewModel.selectedType,
+                        items: exerciseTypes,
+                        header: "Type"
+                    )
+                    if exerciseCategories.isEmpty == false {
+                        FlowPicker(
+                            selection: $viewModel.selectedCategory,
+                            items: exerciseCategories,
+                            header: "Category"
+                        )
                     }
-
-                    HStack {
-                        Text("Category")
-                            .fontWeight(.semibold)
-                            .font(.system(.headline))
-                        Spacer()
-                        Picker("Select category", selection: $viewModel.selectedCategory) {
-                            ForEach(exerciseCategories, id: \.self) { category in
-                                Text(LocalizedStringKey(category)).tag(category)
-                            }
-                        }
-                        .pickerStyle(MenuPickerStyle())
-                        .buttonStyle(.bordered)
-                    }
-
-                    HStack {
-                        Text("Exercise")
-                            .fontWeight(.semibold)
-                            .font(.system(.headline))
-                        Spacer()
-                        if isAddingNewExercise {
-                            TextField("Enter exercise name", text: $viewModel.text)
-                                .padding(6)
-                                .background(Color(uiColor: UIColor.systemBackground))
-                                .clipShape(RoundedRectangle(cornerRadius: 16))
-                                .shadow(radius: 2, x: 0, y: 4)
-                        } else {
-                            Picker("Select exercise", selection: $viewModel.selectedExercise) {
-                                ForEach(exercises, id: \.self) { exercise in
-                                    Text(LocalizedStringKey(exercise)).tag(exercise)
-                                }
-                            }
-                            .pickerStyle(MenuPickerStyle())
-                            .buttonStyle(.bordered)
-                        }
+                    if exercises.isEmpty == false {
+                        FlowPicker(
+                            selection: $viewModel.selectedExercise,
+                            items: exercises,
+                            header: "Exercise"
+                        )
                     }
                 }
-                .padding(.vertical)
+                .padding(.horizontal, 16)
             }
-            .padding(16)
-        }
-        .safeAreaInset(edge: .bottom) {
-            VStack(spacing: 12) {
-                Button {
-                    viewModel.addExercise(savesLocation: savesLocation)
-                    config.isPresented.wrappedValue = false
-                } label: {
-                    Text("Choose")
-                        .bold()
-                        .frame(maxWidth: .infinity)
-                        .padding(12)
-                        .cornerRadius(12)
+            .background(Color.background)
+            .navigationTitle("Choose an exercise")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        config.isPresented.wrappedValue = false
+                    } label: {
+                        Image(systemName: "xmark.circle.fill")
+                    }
+                    .foregroundStyle(.secondary)
                 }
-                .buttonStyle(.borderedProminent)
-                Button {
-                    config.onGoToAddExerciseModel()
-                } label: {
-                    Text("Didn't find exercise?")
-                        .bold()
-                        .frame(maxWidth: .infinity)
-                        .padding(12)
-                        .cornerRadius(12)
-                }
-                .buttonStyle(.bordered)
             }
-            .padding(.vertical, 12)
-            .padding(.horizontal, 16)
+            .safeAreaInset(edge: .bottom) {
+                VStack(spacing: 12) {
+                    Button {
+                        viewModel.addExercise(savesLocation: savesLocation)
+                        config.isPresented.wrappedValue = false
+                        HapticManager.shared.triggerNotification(type: .success)
+                    } label: {
+                        Text("Choose")
+                            .bold()
+                            .frame(maxWidth: .infinity)
+                            .padding(12)
+                            .cornerRadius(12)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .disabled(viewModel.findExerciseModel() == nil)
+                    // TODO: add later
+    //                Button {
+    //                    config.onGoToAddExerciseModel()
+    //                } label: {
+    //                    Text("Didn't find exercise?")
+    //                        .bold()
+    //                        .frame(maxWidth: .infinity)
+    //                        .padding(12)
+    //                        .cornerRadius(12)
+    //                }
+    //                .buttonStyle(.bordered)
+                }
+                .padding(.vertical, 12)
+                .padding(.horizontal, 16)
+            }
         }
     }
 }
 
 #Preview {
     DIContainer.shared.resolver.resolve(AddExerciseView.self)!
+}
+
+extension View {
+    func clippedWithBackground(_ color: Color = .surface) -> some View {
+        self
+            .padding(.vertical, 12)
+            .padding(.horizontal, 16)
+            .background(color)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+    }
 }
