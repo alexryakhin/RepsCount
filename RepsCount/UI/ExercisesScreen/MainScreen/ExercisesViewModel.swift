@@ -17,6 +17,19 @@ final class ExercisesViewModel: ObservableObject {
     @Published var exercises: [Exercise] = []
     @AppStorage("savesLocation") var savesLocation: Bool = true
 
+    var sortedUniqueExerciseNames: [String] {
+        let nameCounts = Dictionary(grouping: exercises, by: { $0.name ?? "" })
+            .mapValues { $0.count }
+
+        return nameCounts.sorted {
+            if $0.value == $1.value {
+                return $0.key < $1.key // Secondary sorting by name (alphabetical)
+            }
+            return $0.value > $1.value // Primary sorting by count (descending)
+        }
+        .compactMap { $0.key }
+    }
+
     init(
         exerciseStorage: ExerciseStorageInterface,
         locationManager: LocationManagerInterface

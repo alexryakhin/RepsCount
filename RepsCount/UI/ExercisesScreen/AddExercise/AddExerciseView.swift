@@ -126,13 +126,3 @@ struct AddExerciseView: View {
 #Preview {
     DIContainer.shared.resolver.resolve(AddExerciseView.self)!
 }
-
-extension View {
-    func clippedWithBackground(_ color: Color = .surface) -> some View {
-        self
-            .padding(.vertical, 12)
-            .padding(.horizontal, 16)
-            .background(color)
-            .clipShape(RoundedRectangle(cornerRadius: 16))
-    }
-}

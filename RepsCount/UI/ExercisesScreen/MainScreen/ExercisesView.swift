@@ -12,6 +12,7 @@ struct ExercisesView: View {
     private let resolver = DIContainer.shared.resolver
     @ObservedObject private var viewModel: ExercisesViewModel
 
+    @State private var selectedNameFilter: String? = nil
     @State private var isChoosingExercise = false
     @State private var shouldNavigateToEditExercisesScreen = false
     @State private var dateSelection: Date?
@@ -47,6 +48,20 @@ struct ExercisesView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
                 } else {
                     List {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack {
+                                ForEach(viewModel.sortedUniqueExerciseNames, id: \.self) { name in
+                                    nameFilterButtonView(for: name)
+                                }
+                            }
+                            .scrollTargetLayoutIfAvailable()
+                        }
+                        .scrollTargetBehaviorIfAvailable()
+                        .listRowBackground(Color.clear)
+                        .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                        .listRowSpacing(0)
+                        .listRowSeparator(.hidden, edges: .all)
+
                         if dateSelection == nil {
                             ForEach(groupedExercises.keys.sorted(by: >), id: \.self) { date in
                                 sectionForDate(date)
@@ -112,31 +127,66 @@ struct ExercisesView: View {
 
     @ViewBuilder
     private func sectionForDate(_ date: Date) -> some View {
-        let exercisesInDate = groupedExercises[date] ?? []
-        Section {
-            ForEach(exercisesInDate) { exercise in
-                NavigationLink {
-                    exerciseDetailsView(for: exercise)
-                } label: {
-                    VStack(alignment: .leading) {
-                        Text(LocalizedStringKey(exercise.name ?? ""))
-                            .font(.headline)
-                            .foregroundColor(.primary)
-                        + Text(", ")
-                        + Text(LocalizedStringKey(exercise.category ?? ""))
-                        if let date = exercise.timestamp {
-                            Text(date.formatted(date: .omitted, time: .shortened))
-                                .font(.subheadline)
-                                .foregroundStyle(.secondary)
+        let exercisesInDate = (groupedExercises[date] ?? []).filter {
+            if let selectedNameFilter {
+                $0.name == selectedNameFilter
+            } else {
+                true
+            }
+        }
+        if exercisesInDate.isEmpty == false {
+            Section {
+                ForEach(exercisesInDate) { exercise in
+                    NavigationLink {
+                        exerciseDetailsView(for: exercise)
+                    } label: {
+                        VStack(alignment: .leading) {
+                            Text(LocalizedStringKey(exercise.name ?? ""))
+                                .font(.headline)
+                                .foregroundColor(.primary)
+                            + Text(", ")
+                            + Text(LocalizedStringKey(exercise.category ?? ""))
+                            if let date = exercise.timestamp {
+                                Text(date.formatted(date: .omitted, time: .shortened))
+                                    .font(.subheadline)
+                                    .foregroundStyle(.secondary)
+                            }
                         }
                     }
                 }
+                .onDelete { indices in
+                    deleteElements(at: indices, for: date)
+                }
+            } header: {
+                Text(date.formatted(date: .complete, time: .omitted))
             }
-            .onDelete { indices in
-                deleteElements(at: indices, for: date)
+        }
+    }
+
+    @ViewBuilder
+    private func nameFilterButtonView(for name: String) -> some View {
+        if selectedNameFilter == name {
+            Button {
+                withAnimation {
+                    selectedNameFilter = nil
+                }
+                HapticManager.shared.triggerSelection()
+            } label: {
+                Text(name)
             }
-        } header: {
-            Text(date.formatted(date: .complete, time: .omitted))
+            .buttonStyle(.borderedProminent)
+            .clipShape(Capsule())
+        } else {
+            Button {
+                withAnimation {
+                    selectedNameFilter = name
+                }
+                HapticManager.shared.triggerSelection()
+            } label: {
+                Text(name)
+            }
+            .buttonStyle(.bordered)
+            .clipShape(Capsule())
         }
     }
 
