@@ -1,15 +1,6 @@
 {
-  "originHash" : "807940eea47cd6789e7661da71d6020009ab05ba0e9b4ea3de2ad783e87406b2",
+  "originHash" : "243af58fd9ca5c0fe76370cab88795bfdb0ff827d36c555609ab90528c17f2e6",
   "pins" : [
-    {
-      "identity" : "calendarview",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Mijick/CalendarView",
-      "state" : {
-        "branch" : "main",
-        "revision" : "6730960ae4921a2ad1b9e76505f9c36e27ba9946"
-      }
-    },
     {
       "identity" : "swiftui-flow",
       "kind" : "remoteSourceControl",
@@ -26,15 +17,6 @@
       "state" : {
         "revision" : "be9dbcc7b86811bc131539a20c6f9c2d3e56919f",
         "version" : "2.9.1"
-      }
-    },
-    {
-      "identity" : "swipeactions",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/aheze/SwipeActions",
-      "state" : {
-        "revision" : "41e6f6dce02d8cfa164f8c5461a41340850ca3ab",
-        "version" : "1.1.0"
       }
     }
   ],

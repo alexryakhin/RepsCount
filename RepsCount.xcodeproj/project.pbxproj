@@ -37,7 +37,6 @@
 		530AAC232D2BD36800788407 /* ExerciseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530AAC222D2BD36400788407 /* ExerciseStorage.swift */; };
 		530E52F32D2C38FE00064589 /* ExerciseDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530E52F22D2C38FE00064589 /* ExerciseDetailsViewModel.swift */; };
 		530E52F82D2C420200064589 /* CalendarScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530E52F72D2C41FC00064589 /* CalendarScreen.swift */; };
-		530E52FB2D2C451C00064589 /* MijickCalendarView in Frameworks */ = {isa = PBXBuildFile; productRef = 530E52FA2D2C451C00064589 /* MijickCalendarView */; };
 		530E52FD2D2D457500064589 /* CalendarEventStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530E52FC2D2D457500064589 /* CalendarEventStorage.swift */; };
 		530E52FF2D2D491100064589 /* DefaultExercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530E52FE2D2D491100064589 /* DefaultExercises.swift */; };
 		530E53032D2DAF2300064589 /* ExerciseMetricType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530E53022D2DAF2300064589 /* ExerciseMetricType.swift */; };
@@ -56,10 +55,10 @@
 		53552F2A2D3D0A0600FE8BCF /* AddWorkoutExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53552F262D3D0A0600FE8BCF /* AddWorkoutExerciseView.swift */; };
 		53552F2C2D3D0EFB00FE8BCF /* ListWithDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53552F2B2D3D0EFB00FE8BCF /* ListWithDivider.swift */; };
 		536B07882D3CD97A00166273 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536B07872D3CD97400166273 /* Date+Extension.swift */; };
+		5382B9BD2D4F14BE00C469BA /* CalendarScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5382B9BC2D4F14BE00C469BA /* CalendarScreenViewModel.swift */; };
 		5387CBD52D46277F00370D07 /* Flow in Frameworks */ = {isa = PBXBuildFile; productRef = 5387CBD42D46277F00370D07 /* Flow */; };
 		5387CBD72D46279500370D07 /* FlowPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5387CBD62D46279100370D07 /* FlowPicker.swift */; };
 		5387CBD92D4640E700370D07 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5387CBD82D4640E700370D07 /* HapticManager.swift */; };
-		53FF95F32D3D64910023C33E /* SwipeActions in Frameworks */ = {isa = PBXBuildFile; productRef = 53FF95F22D3D64910023C33E /* SwipeActions */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -113,6 +112,7 @@
 		53552F272D3D0A0600FE8BCF /* AddWorkoutExerciseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutExerciseViewModel.swift; sourceTree = "<group>"; };
 		53552F2B2D3D0EFB00FE8BCF /* ListWithDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWithDivider.swift; sourceTree = "<group>"; };
 		536B07872D3CD97400166273 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		5382B9BC2D4F14BE00C469BA /* CalendarScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarScreenViewModel.swift; sourceTree = "<group>"; };
 		5387CBD62D46279100370D07 /* FlowPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowPicker.swift; sourceTree = "<group>"; };
 		5387CBD82D4640E700370D07 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,8 +123,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5387CBD52D46277F00370D07 /* Flow in Frameworks */,
-				530E52FB2D2C451C00064589 /* MijickCalendarView in Frameworks */,
-				53FF95F32D3D64910023C33E /* SwipeActions in Frameworks */,
 				5328DDD32D33F55D0086E7D2 /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -277,25 +275,24 @@
 				53552F212D3CF2CD00FE8BCF /* Extensions */,
 				53552F202D3CF2B200FE8BCF /* CustomViews */,
 				02FC1F552B6653A3008F5D8D /* TabView */,
-				02FC1F522B664DE4008F5D8D /* SettingsScreen */,
-				02FC1F512B664DD9008F5D8D /* ExercisesScreen */,
-				530E52F62D2C41DD00064589 /* CalendarScreen */,
-				022ACF812B8C64C800764C6D /* ViewWithBackground.swift */,
+				02FC1F522B664DE4008F5D8D /* SettingsFlow */,
+				02FC1F512B664DD9008F5D8D /* ExercisesFlow */,
+				530E52F62D2C41DD00064589 /* CalendarFlow */,
 			);
 			path = UI;
 			sourceTree = "<group>";
 		};
-		02FC1F512B664DD9008F5D8D /* ExercisesScreen */ = {
+		02FC1F512B664DD9008F5D8D /* ExercisesFlow */ = {
 			isa = PBXGroup;
 			children = (
 				0294FDA72B8DB57E00D9186C /* MainScreen */,
 				02E834852B8BAA55006C98DA /* Details */,
 				02E834842B8BAA4C006C98DA /* AddExercise */,
 			);
-			path = ExercisesScreen;
+			path = ExercisesFlow;
 			sourceTree = "<group>";
 		};
-		02FC1F522B664DE4008F5D8D /* SettingsScreen */ = {
+		02FC1F522B664DE4008F5D8D /* SettingsFlow */ = {
 			isa = PBXGroup;
 			children = (
 				53552F1B2D3CF23500FE8BCF /* RepetitionRulesListScreen */,
@@ -303,7 +300,7 @@
 				02E834752B8A21EB006C98DA /* AboutAppScreen */,
 				02FC1F532B664E02008F5D8D /* SettingsView.swift */,
 			);
-			path = SettingsScreen;
+			path = SettingsFlow;
 			sourceTree = "<group>";
 		};
 		02FC1F552B6653A3008F5D8D /* TabView */ = {
@@ -314,13 +311,13 @@
 			path = TabView;
 			sourceTree = "<group>";
 		};
-		530E52F62D2C41DD00064589 /* CalendarScreen */ = {
+		530E52F62D2C41DD00064589 /* CalendarFlow */ = {
 			isa = PBXGroup;
 			children = (
+				5382B9BB2D4F149E00C469BA /* CalendarScreen */,
 				53552F182D3CE4DC00FE8BCF /* PlanWorkoutScreen */,
-				530E52F72D2C41FC00064589 /* CalendarScreen.swift */,
 			);
-			path = CalendarScreen;
+			path = CalendarFlow;
 			sourceTree = "<group>";
 		};
 		5328DF542D340E300086E7D2 /* EditExercisesScreen */ = {
@@ -358,6 +355,7 @@
 				53552F242D3CFC1F00FE8BCF /* DateInputView.swift */,
 				02FC1F4C2B656090008F5D8D /* CustomDatePicker.swift */,
 				53552F2B2D3D0EFB00FE8BCF /* ListWithDivider.swift */,
+				022ACF812B8C64C800764C6D /* ViewWithBackground.swift */,
 				025F49D42B65604000C571FF /* DatePickerView.swift */,
 				02FC1F4E2B6561D2008F5D8D /* ChildSizeReader.swift */,
 				023223882B93363800C0A73A /* RCContentUnavailableView.swift */,
@@ -380,6 +378,15 @@
 				53552F272D3D0A0600FE8BCF /* AddWorkoutExerciseViewModel.swift */,
 			);
 			path = AddWorkoutExercise;
+			sourceTree = "<group>";
+		};
+		5382B9BB2D4F149E00C469BA /* CalendarScreen */ = {
+			isa = PBXGroup;
+			children = (
+				530E52F72D2C41FC00064589 /* CalendarScreen.swift */,
+				5382B9BC2D4F14BE00C469BA /* CalendarScreenViewModel.swift */,
+			);
+			path = CalendarScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -430,9 +437,7 @@
 			);
 			mainGroup = 024C4DF82B52D32D00032346;
 			packageReferences = (
-				530E52F92D2C451C00064589 /* XCRemoteSwiftPackageReference "CalendarView" */,
 				5328DDD12D33F55D0086E7D2 /* XCRemoteSwiftPackageReference "Swinject" */,
-				53FF95F12D3D64910023C33E /* XCRemoteSwiftPackageReference "SwipeActions" */,
 				5387CBD32D46277F00370D07 /* XCRemoteSwiftPackageReference "SwiftUI-Flow" */,
 			);
 			preferredProjectObjectVersion = 77;
@@ -494,6 +499,7 @@
 				5328DF562D340E490086E7D2 /* EditExercisesScreen.swift in Sources */,
 				5328DDD52D33F57D0086E7D2 /* ServiceAssembly.swift in Sources */,
 				53552F252D3CFC1F00FE8BCF /* DateInputView.swift in Sources */,
+				5382B9BD2D4F14BE00C469BA /* CalendarScreenViewModel.swift in Sources */,
 				02E834872B8BAA68006C98DA /* AddExerciseView.swift in Sources */,
 				530E53032D2DAF2300064589 /* ExerciseMetricType.swift in Sources */,
 				5328DF532D33F7B50086E7D2 /* UIAssembly.swift in Sources */,
@@ -657,7 +663,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16;
+				IPHONEOS_DEPLOYMENT_TARGET = 17;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -698,7 +704,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16;
+				IPHONEOS_DEPLOYMENT_TARGET = 17;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -740,14 +746,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		530E52F92D2C451C00064589 /* XCRemoteSwiftPackageReference "CalendarView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Mijick/CalendarView";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		5328DDD12D33F55D0086E7D2 /* XCRemoteSwiftPackageReference "Swinject" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Swinject/Swinject";
@@ -764,22 +762,9 @@
 				minimumVersion = 3.0.1;
 			};
 		};
-		53FF95F12D3D64910023C33E /* XCRemoteSwiftPackageReference "SwipeActions" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/aheze/SwipeActions";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		530E52FA2D2C451C00064589 /* MijickCalendarView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 530E52F92D2C451C00064589 /* XCRemoteSwiftPackageReference "CalendarView" */;
-			productName = MijickCalendarView;
-		};
 		5328DDD22D33F55D0086E7D2 /* Swinject */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5328DDD12D33F55D0086E7D2 /* XCRemoteSwiftPackageReference "Swinject" */;
@@ -789,11 +774,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5387CBD32D46277F00370D07 /* XCRemoteSwiftPackageReference "SwiftUI-Flow" */;
 			productName = Flow;
-		};
-		53FF95F22D3D64910023C33E /* SwipeActions */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 53FF95F12D3D64910023C33E /* XCRemoteSwiftPackageReference "SwipeActions" */;
-			productName = SwipeActions;
 		};
 /* End XCSwiftPackageProductDependency section */
 
