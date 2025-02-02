@@ -28,35 +28,32 @@ struct CalendarScreen: View {
 
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack {
+            List {
+                Section {
                     DatePicker(
                         "Select Date",
                         selection: $selectedDate,
                         displayedComponents: [.date]
                     )
                     .datePickerStyle(.graphical)
-                    .clippedWithBackground()
+                }
 
+                Section {
                     if let events = groupedEvents[selectedDate.trimmed()] {
                         ForEach(events) { event in
                             workoutCard(for: event)
                         }
                     } else {
-                        VStack(spacing: 12) {
-                            Text("No workouts scheduled for this day")
-                                .font(.subheadline)
-                                .foregroundStyle(.secondary)
-                            NavigationLink("Plan a workout") {
-                                resolver.resolve(PlanWorkoutScreen.self)!
-                            }
-                            .buttonStyle(.bordered)
+                        Text("No workouts scheduled for this day")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                        NavigationLink {
+                            resolver.resolve(PlanWorkoutScreen.self)!
+                        } label: {
+                            Text("Plan a workout")
                         }
-                        .frame(maxWidth: .infinity, minHeight: 200)
-                        .clippedWithBackground()
                     }
                 }
-                .padding(16)
             }
             .navigationTitle("Calendar")
             .toolbar {
@@ -66,9 +63,6 @@ struct CalendarScreen: View {
                     }
                     .buttonStyle(.bordered)
                 }
-            }
-            .background {
-                Color.background.ignoresSafeArea()
             }
         }
     }
@@ -137,7 +131,6 @@ struct CalendarScreen: View {
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .clippedWithBackground()
         }
     }
 }

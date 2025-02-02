@@ -7,13 +7,13 @@
 
 import Swinject
 
-public final class DIContainer {
+final class DIContainer {
 
-    nonisolated(unsafe) public static let shared = DIContainer()
+    nonisolated(unsafe) static let shared = DIContainer()
 
     private let assembler: Assembler
 
-    public var resolver: Resolver { assembler.resolver }
+    var resolver: Resolver { assembler.resolver }
 
     private var assembled: Set<String> = .init()
 
@@ -21,7 +21,7 @@ public final class DIContainer {
         self.assembler = Assembler([])
     }
 
-    public func assemble<T>(assembly: T) where T: Assembly, T: Identifiable {
+    func assemble<T>(assembly: T) where T: Assembly, T: Identifiable {
         guard let id = assembly.id as? String else {
             return
         }

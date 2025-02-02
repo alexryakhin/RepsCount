@@ -15,7 +15,7 @@ protocol CalendarEventStorageInterface {
     func fetchEvents()
 }
 
-class CalendarEventStorage: CalendarEventStorageInterface {
+final class CalendarEventStorage: CalendarEventStorageInterface {
     private let coreDataService: CoreDataServiceInterface
     private let eventsSubject = CurrentValueSubject<[CalendarEvent], CoreError>([])
     var eventsPublisher: AnyPublisher<[CalendarEvent], CoreError> {

@@ -52,31 +52,31 @@ struct AddWorkoutExerciseView: ViewWithBackground {
 
     var content: some View {
         NavigationView {
-            ScrollView {
-                VStack(spacing: 16) {
-                    FlowPicker(
-                        selection: $viewModel.selectedType,
-                        items: exerciseTypes,
-                        header: "Type"
+            List {
+                ListFlowPicker(
+                    selection: $viewModel.selectedType,
+                    items: exerciseTypes,
+                    header: "Type"
+                )
+                if exerciseCategories.isEmpty == false {
+                    ListFlowPicker(
+                        selection: $viewModel.selectedCategory,
+                        items: exerciseCategories,
+                        header: "Category"
                     )
-                    if exerciseCategories.isEmpty == false {
-                        FlowPicker(
-                            selection: $viewModel.selectedCategory,
-                            items: exerciseCategories,
-                            header: "Category"
-                        )
-                    }
-                    if exercises.isEmpty == false {
-                        FlowPicker(
-                            selection: $viewModel.selectedExercise,
-                            items: exercises,
-                            header: "Exercise"
-                        )
-                    }
+                    .transition(.opacity)
                 }
-                .padding(.horizontal, 16)
+                if exercises.isEmpty == false {
+                    ListFlowPicker(
+                        selection: $viewModel.selectedExercise,
+                        items: exercises,
+                        header: "Exercise"
+                    )
+                    .transition(.opacity)
+                }
             }
-            .background(Color.background)
+            .animation(.default, value: exerciseCategories.isEmpty)
+            .animation(.default, value: exercises.isEmpty)
             .navigationTitle("Choose an exercise")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

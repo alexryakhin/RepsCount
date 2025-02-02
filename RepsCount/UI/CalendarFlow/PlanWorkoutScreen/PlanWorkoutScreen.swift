@@ -10,54 +10,6 @@ import Foundation
 import CoreData
 import Flow
 
-final class PlanWorkoutScreenViewModel: ObservableObject {
-
-    @Published var savedSuccessfully: Bool?
-
-    @Published var eventNameText: String = ""
-    @Published var eventNameError: String?
-
-    @Published var notesText: String = ""
-
-    @Published var dateSelection: Date?
-    @Published var dateSelectionError: String?
-
-    @Published var selectedExerciseModels: Set<ExerciseModel> = []
-    @Published var selectedExerciseModelsError: String?
-
-    private let calendarEventStorage: CalendarEventStorageInterface
-
-    init(calendarEventStorage: CalendarEventStorageInterface) {
-        self.calendarEventStorage = calendarEventStorage
-    }
-
-    func saveEvent() {
-        guard eventNameText.isEmpty == false else {
-            eventNameError = "Name is required"
-            return
-        }
-        guard let dateSelection else {
-            dateSelectionError = "Date is required"
-            return
-        }
-        guard selectedExerciseModels.isEmpty == false else {
-            selectedExerciseModelsError = "At least one exercise is required"
-            return
-        }
-        do {
-            try calendarEventStorage.addEvent(
-                title: eventNameText,
-                date: dateSelection,
-                notes: notesText,
-                exercises: selectedExerciseModels
-            )
-            savedSuccessfully = true
-        } catch {
-            savedSuccessfully = false
-        }
-    }
-}
-
 struct PlanWorkoutScreen: View {
     private let resolver = DIContainer.shared.resolver
     @Environment(\.dismiss) var dismiss
@@ -70,79 +22,88 @@ struct PlanWorkoutScreen: View {
     }
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 16) {
-                InputView(
-                    text: $viewModel.eventNameText,
-                    error: $viewModel.eventNameError,
-                    header: "Workout name",
-                    placeholder: "Enter name"
-                )
-                InputView(
-                    text: $viewModel.notesText,
-                    header: "Notes",
-                    placeholder: "Enter notes",
-                    caption: "Not required"
-                )
-                DateInputView(
-                    date: $viewModel.dateSelection,
-                    error: $viewModel.dateSelectionError,
-                    header: "Select a date"
-                )
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Exercises")
-                        .font(.subheadline)
-                        .padding(.horizontal, 16)
-                    if viewModel.selectedExerciseModels.isEmpty {
-                        VStack {
-                            Text("No exercises added yet.")
-                                .font(.subheadline)
-                                .foregroundStyle(.secondary)
-                            Button("Add exercise") {
-                                isExerciseSelectionPresented = true
-                            }
-                            .buttonStyle(.borderedProminent)
-                        }
-                        .frame(maxWidth: .infinity, minHeight: 200)
-                        .background(Color.surface)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
-                        .overlay {
-                            if viewModel.selectedExerciseModelsError != nil {
-                                Color.red.clipShape(
-                                    RoundedRectangle(cornerRadius: 16)
-                                        .stroke(style: .init(lineWidth: 2))
-                                )
-                                .allowsHitTesting(false)
-                            }
-                        }
-                        if let error = viewModel.selectedExerciseModelsError {
-                            Text(error)
-                                .font(.caption)
-                                .foregroundStyle(.red)
-                                .padding(.horizontal, 16)
-                        }
-                    } else {
-                        HFlow {
-                            ForEach(viewModel.selectedExerciseModels.sorted(by: {
-                                $0.name ?? "" < $1.name ?? ""
-                            })) { model in
-                                selectedExerciseCell(model)
-                            }
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .clippedWithBackground()
+        List {
+//            VStack(spacing: 16) {
+            ListInputView(
+                text: $viewModel.eventNameText,
+                error: $viewModel.eventNameError,
+                header: "Workout name",
+                placeholder: "Enter name"
+            )
+            ListInputView(
+                text: $viewModel.notesText,
+                header: "Notes",
+                placeholder: "Enter notes",
+                caption: "Not required"
+            )
+            ListDateInputView(
+                date: $viewModel.dateSelection,
+                error: $viewModel.dateSelectionError,
+                header: "Select a date"
+            )
+            Section {
+                NavigationLink {
+                    RecurrenceRulePickerView(existingRule: viewModel.recurrenceRule) { newRule in
+                        viewModel.recurrenceRule = newRule
 
-                        Button("Add more exercises") {
+                        if let data = try? JSONEncoder().encode(newRule) {
+                            print(data.prettyPrintedJSONString)
+                        }
+                    }
+                } label: {
+                    Text("Set Recurrence Rule")
+                }
+            } header: {
+                Text("Recurrence Rule")
+            } footer: {
+                if let rule = viewModel.recurrenceRule {
+                    Text(recurrenceRuleDescription(rule))
+                }
+            }
+            Section {
+                if viewModel.selectedExerciseModels.isEmpty {
+                    VStack {
+                        Text("No exercises added yet.")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                        Button("Add exercise") {
                             isExerciseSelectionPresented = true
                         }
-                        .padding(.horizontal, 16)
+                        .buttonStyle(.borderedProminent)
+                    }
+                    .frame(maxWidth: .infinity, minHeight: 200)
+                } else {
+                    HFlow {
+                        ForEach(viewModel.selectedExerciseModels.sorted(by: {
+                            $0.name ?? "" < $1.name ?? ""
+                        })) { model in
+                            selectedExerciseCell(model)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.vertical, 8)
+                    .animation(.bouncy, value: viewModel.selectedExerciseModels)
+
+                    Button("Add more exercises") {
+                        isExerciseSelectionPresented = true
                     }
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .animation(.bouncy, value: viewModel.selectedExerciseModels)
+            } header: {
+                Text("Exercises")
+            } footer: {
+                if let error = viewModel.selectedExerciseModelsError {
+                    Text(error)
+                        .foregroundStyle(.red.opacity(0.8))
+                }
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 12)
+            .listRowBackground(
+                viewModel.selectedExerciseModelsError != nil ? Color.red.opacity(0.4) : Color.surface
+            )
+            .onChange(of: viewModel.selectedExerciseModels) {
+                if viewModel.selectedExerciseModelsError != nil {
+                    viewModel.selectedExerciseModelsError = nil
+                }
+            }
         }
         .navigationTitle("Plan a workout")
         .navigationBarBackButtonHidden()
@@ -169,9 +130,6 @@ struct PlanWorkoutScreen: View {
                 },
                 secondaryButton: .cancel()
             )
-        }
-        .background {
-            Color.background.ignoresSafeArea()
         }
         .sheet(isPresented: $isExerciseSelectionPresented) {
             addExerciseView
@@ -209,12 +167,11 @@ struct PlanWorkoutScreen: View {
                 Text(LocalizedStringKey(name))
                     .font(.callout)
                     .foregroundStyle(.primary)
-                Button {
-                    viewModel.selectedExerciseModels.remove(model)
-                } label: {
-                    Image(systemName: "xmark.circle.fill")
-                }
-                .foregroundStyle(.secondary)
+                Image(systemName: "xmark.circle.fill")
+                    .foregroundStyle(.secondary)
+                    .onTapGesture {
+                        viewModel.selectedExerciseModels.remove(model)
+                    }
             }
             .padding(.vertical, 8)
             .padding(.horizontal, 12)
@@ -227,5 +184,15 @@ struct PlanWorkoutScreen: View {
 #Preview {
     NavigationView {
         DIContainer.shared.resolver.resolve(PlanWorkoutScreen.self)!
+    }
+}
+
+extension Data {
+    var prettyPrintedJSONString: String? {
+        guard let jsonObject = try? JSONSerialization.jsonObject(with: self, options: []),
+              let data = try? JSONSerialization.data(withJSONObject: jsonObject, options: [.prettyPrinted]),
+              let prettyJSON = String(data: data, encoding: .utf8)
+        else { return nil }
+        return prettyJSON
     }
 }

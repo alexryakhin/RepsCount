@@ -19,7 +19,7 @@ protocol LocationManagerInterface: AnyObject {
     func getCurrentLocation() async -> Location?
 }
 
-class LocationManager: NSObject, LocationManagerInterface, CLLocationManagerDelegate {
+final class LocationManager: NSObject, LocationManagerInterface, CLLocationManagerDelegate {
     private var locationManager = CLLocationManager()
 
     func initiateLocationManager() {

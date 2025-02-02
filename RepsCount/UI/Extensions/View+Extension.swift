@@ -48,7 +48,7 @@ extension View {
     }
 }
 
-public extension ScrollView {
+extension ScrollView {
     @ViewBuilder
     func scrollTargetBehaviorIfAvailable() -> some View {
         if #available(iOS 17, *) {

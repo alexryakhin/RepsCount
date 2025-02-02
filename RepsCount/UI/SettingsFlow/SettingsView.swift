@@ -22,7 +22,7 @@ struct SettingsView: View {
                             Text(unit.title)
                         }
                     } label: {
-                        Text("Choose a measurement unit")
+                        Text("Measurement unit")
                     }
 
                     Toggle("Save location", isOn: $savesLocation)

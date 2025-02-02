@@ -41,10 +41,8 @@ struct FlowPickerView<SelectionItem: Selectable>: View {
     func capsuleView(for item: SelectionItem) -> some View {
         if selection == item {
             Button {
+                selection = nil
                 HapticManager.shared.triggerSelection()
-                withAnimation {
-                    selection = nil
-                }
             } label: {
                 Text(item.name)
             }
@@ -52,10 +50,8 @@ struct FlowPickerView<SelectionItem: Selectable>: View {
             .clipShape(Capsule())
         } else {
             Button {
+                selection = item
                 HapticManager.shared.triggerSelection()
-                withAnimation {
-                    selection = item
-                }
             } label: {
                 Text(item.name)
             }

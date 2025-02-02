@@ -18,7 +18,7 @@ protocol ExerciseStorageInterface {
     func fetchExercises()
 }
 
-class ExerciseStorage: ExerciseStorageInterface {
+final class ExerciseStorage: ExerciseStorageInterface {
     private let coreDataService: CoreDataServiceInterface
     private let locationManager: LocationManagerInterface
     private let encoder = JSONEncoder()

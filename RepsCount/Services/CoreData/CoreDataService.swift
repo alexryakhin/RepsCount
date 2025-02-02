@@ -8,12 +8,12 @@
 import CoreData
 import SwiftUI
 
-public protocol CoreDataServiceInterface {
+protocol CoreDataServiceInterface {
     var context: NSManagedObjectContext { get }
     func saveContext() throws(CoreError)
 }
 
-public class CoreDataService: CoreDataServiceInterface {
+final class CoreDataService: CoreDataServiceInterface {
 
     private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentCloudKitContainer(name: "RepsCount")
@@ -27,11 +27,11 @@ public class CoreDataService: CoreDataServiceInterface {
         return container
     }()
 
-    public var context: NSManagedObjectContext {
+    var context: NSManagedObjectContext {
         return persistentContainer.viewContext
     }
 
-    public func saveContext() throws(CoreError) {
+    func saveContext() throws(CoreError) {
         let context = persistentContainer.viewContext
         if context.hasChanges {
             do {

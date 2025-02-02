@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import MapKit
 
 struct ExerciseDetailsView: View {
     @State private var isShowingAlert = false
@@ -108,15 +107,8 @@ struct ExerciseDetailsView: View {
         let longitude = viewModel.exercise.longitude
         if latitude != 0,
            longitude != 0 {
-            let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-            let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
-            let region = MKCoordinateRegion(center: location, span: span)
             Section("Map") {
-                Map(coordinateRegion: .constant(region), showsUserLocation: false, annotationItems: [MapMarker(coordinate: location, tint: .red)]) { $0 }
-                    .frame(height: 200)
-                    .allowsHitTesting(false)
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
-
+                MapView(location: .init(latitude: latitude, longitude: longitude))
                 if let address = viewModel.exercise.address {
                     Text(address)
                         .fontWeight(.semibold)
@@ -174,9 +166,3 @@ private let timeFormatter: DateComponentsFormatter = {
     formatter.allowedUnits = [.hour, .minute, .second]
     return formatter
 }()
-
-extension MapMarker: Identifiable {
-    public var id: String {
-        UUID().uuidString
-    }
-}

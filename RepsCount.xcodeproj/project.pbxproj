@@ -40,6 +40,12 @@
 		530E52FD2D2D457500064589 /* CalendarEventStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530E52FC2D2D457500064589 /* CalendarEventStorage.swift */; };
 		530E52FF2D2D491100064589 /* DefaultExercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530E52FE2D2D491100064589 /* DefaultExercises.swift */; };
 		530E53032D2DAF2300064589 /* ExerciseMetricType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530E53022D2DAF2300064589 /* ExerciseMetricType.swift */; };
+		531E82932D4F6F6400941E29 /* PlanWorkoutScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531E82922D4F6F6300941E29 /* PlanWorkoutScreenViewModel.swift */; };
+		531E82952D4F73E100941E29 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531E82942D4F73E100941E29 /* MapView.swift */; };
+		531E82972D4F7D0300941E29 /* ListInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531E82962D4F7D0300941E29 /* ListInputView.swift */; };
+		531E82992D4F7E1F00941E29 /* ListDateInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531E82982D4F7E1F00941E29 /* ListDateInputView.swift */; };
+		531E829B2D4FD96300941E29 /* ListFlowPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531E829A2D4FD96300941E29 /* ListFlowPicker.swift */; };
+		531E829D2D4FE07E00941E29 /* RecurrenceRulePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531E829C2D4FE07E00941E29 /* RecurrenceRulePickerView.swift */; };
 		5328DDD32D33F55D0086E7D2 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 5328DDD22D33F55D0086E7D2 /* Swinject */; };
 		5328DDD52D33F57D0086E7D2 /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5328DDD42D33F57D0086E7D2 /* ServiceAssembly.swift */; };
 		5328DF512D33F7130086E7D2 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5328DF502D33F7130086E7D2 /* DIContainer.swift */; };
@@ -98,6 +104,12 @@
 		530E52FC2D2D457500064589 /* CalendarEventStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventStorage.swift; sourceTree = "<group>"; };
 		530E52FE2D2D491100064589 /* DefaultExercises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultExercises.swift; sourceTree = "<group>"; };
 		530E53022D2DAF2300064589 /* ExerciseMetricType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseMetricType.swift; sourceTree = "<group>"; };
+		531E82922D4F6F6300941E29 /* PlanWorkoutScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanWorkoutScreenViewModel.swift; sourceTree = "<group>"; };
+		531E82942D4F73E100941E29 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		531E82962D4F7D0300941E29 /* ListInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListInputView.swift; sourceTree = "<group>"; };
+		531E82982D4F7E1F00941E29 /* ListDateInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDateInputView.swift; sourceTree = "<group>"; };
+		531E829A2D4FD96300941E29 /* ListFlowPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlowPicker.swift; sourceTree = "<group>"; };
+		531E829C2D4FE07E00941E29 /* RecurrenceRulePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurrenceRulePickerView.swift; sourceTree = "<group>"; };
 		5328DDD42D33F57D0086E7D2 /* ServiceAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
 		5328DF502D33F7130086E7D2 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		5328DF522D33F7B50086E7D2 /* UIAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAssembly.swift; sourceTree = "<group>"; };
@@ -316,6 +328,7 @@
 			children = (
 				5382B9BB2D4F149E00C469BA /* CalendarScreen */,
 				53552F182D3CE4DC00FE8BCF /* PlanWorkoutScreen */,
+				53552F282D3D0A0600FE8BCF /* AddWorkoutExercise */,
 			);
 			path = CalendarFlow;
 			sourceTree = "<group>";
@@ -332,8 +345,8 @@
 		53552F182D3CE4DC00FE8BCF /* PlanWorkoutScreen */ = {
 			isa = PBXGroup;
 			children = (
-				53552F282D3D0A0600FE8BCF /* AddWorkoutExercise */,
 				53552F192D3CE50100FE8BCF /* PlanWorkoutScreen.swift */,
+				531E82922D4F6F6300941E29 /* PlanWorkoutScreenViewModel.swift */,
 			);
 			path = PlanWorkoutScreen;
 			sourceTree = "<group>";
@@ -351,9 +364,14 @@
 			isa = PBXGroup;
 			children = (
 				5387CBD62D46279100370D07 /* FlowPicker.swift */,
+				531E829A2D4FD96300941E29 /* ListFlowPicker.swift */,
 				53552F222D3CF2DD00FE8BCF /* InputView.swift */,
+				531E82962D4F7D0300941E29 /* ListInputView.swift */,
 				53552F242D3CFC1F00FE8BCF /* DateInputView.swift */,
+				531E82982D4F7E1F00941E29 /* ListDateInputView.swift */,
+				531E82942D4F73E100941E29 /* MapView.swift */,
 				02FC1F4C2B656090008F5D8D /* CustomDatePicker.swift */,
+				531E829C2D4FE07E00941E29 /* RecurrenceRulePickerView.swift */,
 				53552F2B2D3D0EFB00FE8BCF /* ListWithDivider.swift */,
 				022ACF812B8C64C800764C6D /* ViewWithBackground.swift */,
 				025F49D42B65604000C571FF /* DatePickerView.swift */,
@@ -470,6 +488,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				53552F232D3CF2E400FE8BCF /* InputView.swift in Sources */,
+				531E82952D4F73E100941E29 /* MapView.swift in Sources */,
 				530AAC232D2BD36800788407 /* ExerciseStorage.swift in Sources */,
 				5328DF512D33F7130086E7D2 /* DIContainer.swift in Sources */,
 				02FC1F4D2B656090008F5D8D /* CustomDatePicker.swift in Sources */,
@@ -479,9 +498,12 @@
 				53552F292D3D0A0600FE8BCF /* AddWorkoutExerciseViewModel.swift in Sources */,
 				53552F2A2D3D0A0600FE8BCF /* AddWorkoutExerciseView.swift in Sources */,
 				0294FDA92B8DB59200D9186C /* ExercisesViewModel.swift in Sources */,
+				531E82932D4F6F6400941E29 /* PlanWorkoutScreenViewModel.swift in Sources */,
+				531E829D2D4FE07E00941E29 /* RecurrenceRulePickerView.swift in Sources */,
 				024C4E112B52D32E00032346 /* RepsCount.xcdatamodeld in Sources */,
 				530E52FD2D2D457500064589 /* CalendarEventStorage.swift in Sources */,
 				024C4E1C2B53112A00032346 /* Extensions.swift in Sources */,
+				531E82972D4F7D0300941E29 /* ListInputView.swift in Sources */,
 				024C4E0E2B52D32E00032346 /* CoreDataService.swift in Sources */,
 				5328DF582D340E820086E7D2 /* EditExercisesViewModel.swift in Sources */,
 				025F49D52B65604000C571FF /* DatePickerView.swift in Sources */,
@@ -503,6 +525,7 @@
 				02E834872B8BAA68006C98DA /* AddExerciseView.swift in Sources */,
 				530E53032D2DAF2300064589 /* ExerciseMetricType.swift in Sources */,
 				5328DF532D33F7B50086E7D2 /* UIAssembly.swift in Sources */,
+				531E82992D4F7E1F00941E29 /* ListDateInputView.swift in Sources */,
 				02FC1F592B665FAE008F5D8D /* MeasurementUnit.swift in Sources */,
 				536B07882D3CD97A00166273 /* Date+Extension.swift in Sources */,
 				02FC1F4F2B6561D2008F5D8D /* ChildSizeReader.swift in Sources */,
@@ -513,6 +536,7 @@
 				530AAC212D2BD22200788407 /* CoreError.swift in Sources */,
 				530E52F32D2C38FE00064589 /* ExerciseDetailsViewModel.swift in Sources */,
 				53552F2C2D3D0EFB00FE8BCF /* ListWithDivider.swift in Sources */,
+				531E829B2D4FD96300941E29 /* ListFlowPicker.swift in Sources */,
 				02FC1F5D2B666939008F5D8D /* String+Ext.swift in Sources */,
 				024C4E1A2B52D4F200032346 /* ExerciseDetailsView.swift in Sources */,
 			);
@@ -663,7 +687,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -704,7 +728,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -115,15 +115,15 @@ struct ExercisesView: View {
                 addExerciseView
             }
             .animation(.easeIn, value: dateSelection)
-            .background {
-                NavigationLink(
-                    destination: resolver.resolve(EditExercisesScreen.self)!,
-                    isActive: $shouldNavigateToEditExercisesScreen
-                ) {
-                    EmptyView()
-                }
-                .hidden()
-            }
+//            .background {
+//                NavigationLink(
+//                    destination: resolver.resolve(EditExercisesScreen.self)!,
+//                    isActive: $shouldNavigateToEditExercisesScreen
+//                ) {
+//                    EmptyView()
+//                }
+//                .hidden()
+//            }
         }
     }
 
