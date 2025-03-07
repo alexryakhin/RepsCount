@@ -14,7 +14,7 @@ struct AddExerciseView: View {
         let onGoToAddExerciseModel: () -> Void
     }
 
-    @AppStorage("savesLocation") var savesLocation: Bool = true
+    @AppStorage(UserDefaultsKey.savesLocation.rawValue) var savesLocation: Bool = true
     @ObservedObject private var viewModel: AddExerciseViewModel
     @State private var isAddingNewExercise = false
 

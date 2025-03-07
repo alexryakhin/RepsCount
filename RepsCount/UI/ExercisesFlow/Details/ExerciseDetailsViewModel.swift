@@ -8,7 +8,7 @@
 import SwiftUI
 
 final class ExerciseDetailsViewModel: ObservableObject {
-    @AppStorage("measurementUnit") var measurementUnit: MeasurementUnit = .kilograms
+    @AppStorage(UserDefaultsKey.measurementUnit.rawValue) var measurementUnit: MeasurementUnit = .kilograms
 
     @Published var isShowingAlert = false
     @Published var amountInput = ""

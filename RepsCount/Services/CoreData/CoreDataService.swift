@@ -31,6 +31,10 @@ final class CoreDataService: CoreDataServiceInterface {
         return persistentContainer.viewContext
     }
 
+    var backgroundContext: NSManagedObjectContext {
+        return persistentContainer.newBackgroundContext()
+    }
+
     func saveContext() throws(CoreError) {
         let context = persistentContainer.viewContext
         if context.hasChanges {

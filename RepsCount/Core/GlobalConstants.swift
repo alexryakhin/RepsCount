@@ -23,3 +23,9 @@ enum GlobalConstant {
         String(GlobalConstant.appVersion ?? "-", GlobalConstant.buildVersion ?? "–", separator: ".")
     }
 }
+
+enum UserDefaultsKey: String {
+    case measurementUnit
+    case savesLocation
+    case showsFiltersOnExerciseList
+}

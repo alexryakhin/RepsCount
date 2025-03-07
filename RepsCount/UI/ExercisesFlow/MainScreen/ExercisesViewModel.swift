@@ -15,7 +15,7 @@ final class ExercisesViewModel: ObservableObject {
     private var cancellable = Set<AnyCancellable>()
 
     @Published var exercises: [Exercise] = []
-    @AppStorage("savesLocation") var savesLocation: Bool = true
+    @AppStorage(UserDefaultsKey.savesLocation.rawValue) var savesLocation: Bool = true
 
     var sortedUniqueExerciseNames: [String] {
         let nameCounts = Dictionary(grouping: exercises, by: { $0.name ?? "" })

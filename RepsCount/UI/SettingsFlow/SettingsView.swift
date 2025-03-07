@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @AppStorage("measurementUnit") var measurementUnit: MeasurementUnit = .kilograms
-    @AppStorage("savesLocation") var savesLocation: Bool = true
+    @AppStorage(UserDefaultsKey.measurementUnit.rawValue) var measurementUnit: MeasurementUnit = .kilograms
+    @AppStorage(UserDefaultsKey.savesLocation.rawValue) var savesLocation: Bool = true
+    @AppStorage(UserDefaultsKey.showsFiltersOnExerciseList.rawValue) var showsFiltersOnExerciseList: Bool = true
 
     private let resolver = DIContainer.shared.resolver
 
@@ -26,6 +27,7 @@ struct SettingsView: View {
                     }
 
                     Toggle("Save location", isOn: $savesLocation)
+                    Toggle("Show filters on exercise list", isOn: $showsFiltersOnExerciseList)
 
                     // TODO: edit exercises list
 //                    Text("Edit exercises list")

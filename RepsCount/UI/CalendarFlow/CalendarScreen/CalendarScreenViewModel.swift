@@ -10,7 +10,7 @@ import Combine
 import CoreData
 
 final class CalendarScreenViewModel: ObservableObject {
-    @AppStorage("savesLocation") var savesLocation: Bool = true
+    @AppStorage(UserDefaultsKey.savesLocation.rawValue) var savesLocation: Bool = true
     @Published var events: [CalendarEvent] = []
 
     private let calendarEventStorage: CalendarEventStorageInterface

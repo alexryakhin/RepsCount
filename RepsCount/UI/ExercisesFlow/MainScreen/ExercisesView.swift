@@ -9,6 +9,8 @@ import SwiftUI
 import CoreData
 
 struct ExercisesView: View {
+    @AppStorage(UserDefaultsKey.showsFiltersOnExerciseList.rawValue) var showsFiltersOnExerciseList: Bool = true
+
     private let resolver = DIContainer.shared.resolver
     @ObservedObject private var viewModel: ExercisesViewModel
 
@@ -48,22 +50,6 @@ struct ExercisesView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
                 } else {
                     List {
-                        if viewModel.sortedUniqueExerciseNames.count >= 2 {
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack {
-                                    ForEach(viewModel.sortedUniqueExerciseNames, id: \.self) { name in
-                                        nameFilterButtonView(for: name)
-                                    }
-                                }
-                                .scrollTargetLayoutIfAvailable()
-                            }
-                            .scrollTargetBehaviorIfAvailable()
-                            .listRowBackground(Color.clear)
-                            .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
-                            .listRowSpacing(0)
-                            .listRowSeparator(.hidden, edges: .all)
-                        }
-
                         if dateSelection == nil {
                             ForEach(groupedExercises.keys.sorted(by: >), id: \.self) { date in
                                 sectionForDate(date)
@@ -75,6 +61,9 @@ struct ExercisesView: View {
                     .animation(.default, value: viewModel.exercises)
                     .safeAreaInset(edge: .bottom, alignment: .trailing) {
                         addExerciseButton
+                    }
+                    .safeAreaInset(edge: .top) {
+                        filtersView
                     }
                     .overlay {
                         if let dateSelection,
@@ -115,15 +104,6 @@ struct ExercisesView: View {
                 addExerciseView
             }
             .animation(.easeIn, value: dateSelection)
-//            .background {
-//                NavigationLink(
-//                    destination: resolver.resolve(EditExercisesScreen.self)!,
-//                    isActive: $shouldNavigateToEditExercisesScreen
-//                ) {
-//                    EmptyView()
-//                }
-//                .hidden()
-//            }
         }
     }
 
@@ -189,6 +169,27 @@ struct ExercisesView: View {
             }
             .buttonStyle(.bordered)
             .clipShape(Capsule())
+        }
+    }
+
+    @ViewBuilder
+    private var filtersView: some View {
+        if viewModel.sortedUniqueExerciseNames.count >= 2 && showsFiltersOnExerciseList {
+            VStack(spacing: 12) {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        ForEach(viewModel.sortedUniqueExerciseNames, id: \.self) { name in
+                            nameFilterButtonView(for: name)
+                        }
+                    }
+                    .scrollTargetLayoutIfAvailable()
+                    .padding(.horizontal, 16)
+                }
+                .scrollTargetBehaviorIfAvailable()
+
+                Divider()
+            }
+            .background(.ultraThinMaterial)
         }
     }
 
