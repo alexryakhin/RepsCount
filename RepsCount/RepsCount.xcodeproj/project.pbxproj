@@ -229,6 +229,9 @@
 		};
 		53F4CED02D8012A1004551D5 /* Exceptions for "Services" folder in "Services" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Persistence/RepsCount.xcdatamodeld,
+			);
 			publicHeaders = (
 				Services.h,
 			);
@@ -243,9 +246,6 @@
 		};
 		53F4CEF22D8012B6004551D5 /* Exceptions for "CoreUserInterface" folder in "CoreUserInterface" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				ViewController.swift,
-			);
 			publicHeaders = (
 				CoreUserInterface.h,
 			);
@@ -265,10 +265,10 @@
 			);
 			target = 53F4CF082D8012C9004551D5 /* Shared */;
 		};
-		53F4CF582D8014FA004551D5 /* Exceptions for "CoreUserInterface" folder in "RepsCount" target */ = {
+		53F8FB1F2D80B27300B3089F /* Exceptions for "Services" folder in "RepsCount" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				ViewController.swift,
+				Persistence/RepsCount.xcdatamodeld,
 			);
 			target = 53F4CE6E2D80004A004551D5 /* RepsCount */;
 		};
@@ -304,6 +304,7 @@
 		53F4CEC62D8012A1004551D5 /* Services */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				53F8FB1F2D80B27300B3089F /* Exceptions for "Services" folder in "RepsCount" target */,
 				53F4CED02D8012A1004551D5 /* Exceptions for "Services" folder in "Services" target */,
 			);
 			path = Services;
@@ -320,7 +321,6 @@
 		53F4CEE82D8012B6004551D5 /* CoreUserInterface */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				53F4CF582D8014FA004551D5 /* Exceptions for "CoreUserInterface" folder in "RepsCount" target */,
 				53F4CEF22D8012B6004551D5 /* Exceptions for "CoreUserInterface" folder in "CoreUserInterface" target */,
 			);
 			path = CoreUserInterface;
@@ -1065,7 +1065,7 @@
 				CODE_SIGN_ENTITLEMENTS = RepsCount/RepsCount.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = RepsCount/Resources/Assets.xcassets;
+				DEVELOPMENT_ASSET_PATHS = "RepsCount/Resources/Localizable.xcstrings Services/Persistence/RepsCount.xcdatamodeld/PullUpsCounter.xcdatamodel RepsCount/Resources/Assets.xcassets";
 				DEVELOPMENT_TEAM = 69S862NXBP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RepsCount/Info.plist;
@@ -1101,7 +1101,7 @@
 				CODE_SIGN_ENTITLEMENTS = RepsCount/RepsCount.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = RepsCount/Resources/Assets.xcassets;
+				DEVELOPMENT_ASSET_PATHS = "RepsCount/Resources/Localizable.xcstrings Services/Persistence/RepsCount.xcdatamodeld/PullUpsCounter.xcdatamodel RepsCount/Resources/Assets.xcassets";
 				DEVELOPMENT_TEAM = 69S862NXBP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RepsCount/Info.plist;
@@ -1345,7 +1345,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_ASSET_PATHS = RepsCount/Resources/Assets.xcassets;
+				DEVELOPMENT_ASSET_PATHS = "RepsCount/Resources/Localizable.xcstrings RepsCount/Resources/Assets.xcassets";
 				DEVELOPMENT_TEAM = 69S862NXBP;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1386,7 +1386,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_ASSET_PATHS = RepsCount/Resources/Assets.xcassets;
+				DEVELOPMENT_ASSET_PATHS = "RepsCount/Resources/Localizable.xcstrings RepsCount/Resources/Assets.xcassets";
 				DEVELOPMENT_TEAM = 69S862NXBP;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1427,7 +1427,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_ASSET_PATHS = RepsCount/RepsCount.xcdatamodeld/RepsCount.xcdatamodel;
+				DEVELOPMENT_ASSET_PATHS = Services/Persistence/RepsCount.xcdatamodeld/PullUpsCounter.xcdatamodel;
 				DEVELOPMENT_TEAM = 69S862NXBP;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1468,7 +1468,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_ASSET_PATHS = RepsCount/RepsCount.xcdatamodeld/RepsCount.xcdatamodel;
+				DEVELOPMENT_ASSET_PATHS = Services/Persistence/RepsCount.xcdatamodeld/PullUpsCounter.xcdatamodel;
 				DEVELOPMENT_TEAM = 69S862NXBP;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1509,6 +1509,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_ASSET_PATHS = RepsCount/Resources/Localizable.xcstrings;
 				DEVELOPMENT_TEAM = 69S862NXBP;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1549,6 +1550,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_ASSET_PATHS = RepsCount/Resources/Localizable.xcstrings;
 				DEVELOPMENT_TEAM = 69S862NXBP;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1589,7 +1591,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_ASSET_PATHS = RepsCount/Resources/Assets.xcassets;
+				DEVELOPMENT_ASSET_PATHS = "RepsCount/Resources/Localizable.xcstrings RepsCount/Resources/Assets.xcassets";
 				DEVELOPMENT_TEAM = 69S862NXBP;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1630,7 +1632,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_ASSET_PATHS = RepsCount/Resources/Assets.xcassets;
+				DEVELOPMENT_ASSET_PATHS = "RepsCount/Resources/Localizable.xcstrings RepsCount/Resources/Assets.xcassets";
 				DEVELOPMENT_TEAM = 69S862NXBP;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;

@@ -7,10 +7,11 @@
 
 import UIKit
 import CoreUserInterface
+import CoreNavigation
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
-    var window: UIWindow?
+    private var appCoordinator: AppCoordinator?
 
     func scene(
         _ scene: UIScene,
@@ -19,9 +20,17 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
-        window = UIWindow(windowScene: windowScene)
-        let controller = ViewController()
-        window?.rootViewController = UINavigationController(rootViewController: controller)
-        window?.makeKeyAndVisible()
+        let window = BaseWindow(windowScene: windowScene)
+        let diContainer = DIContainer.shared
+        diContainer.assemble(assembly: ServicesAssembly())
+        diContainer.assemble(assembly: AppAssembly(window: window))
+
+        guard let appCoordinator = diContainer.resolver.resolve(AppCoordinator.self) else {
+            fatalError("Failed to init AppCoordinator")
+        }
+
+        self.appCoordinator = appCoordinator
+
+        appCoordinator.start()
     }
 }
