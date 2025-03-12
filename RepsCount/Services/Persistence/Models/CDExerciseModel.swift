@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import Core
 
 @objc(CDExerciseModel)
 final class CDExerciseModel: NSManagedObject, Identifiable {
@@ -38,4 +39,23 @@ final class CDExerciseModel: NSManagedObject, Identifiable {
 
     @objc(removeCalendarEvents:)
     @NSManaged public func removeFromCalendarEvents(_ values: NSSet)
+
+    var coreModel: ExerciseModel? {
+        guard let name,
+              let category = ExerciseCategory(rawValue: category ?? ""),
+              let type = ExerciseType(rawValue: type ?? ""),
+              let id
+        else { return nil }
+        return ExerciseModel(
+            name: name,
+            category: category,
+            type: type,
+            metricType: .init(rawValue: metricType ?? ""),
+            id: id,
+            defaultReps: Int(defaultReps),
+            defaultSets: Int(defaultSets),
+            defaultWeight: defaultWeight,
+            notes: notes
+        )
+    }
 }

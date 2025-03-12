@@ -7,29 +7,24 @@
 
 import Foundation
 import CoreLocation
+import Core
 
-struct Location {
-    var latitude: Double
-    var longitude: Double
-    var address: String?
-}
-
-protocol LocationManagerInterface: AnyObject {
+public protocol LocationManagerInterface: AnyObject {
     func initiateLocationManager()
     func getCurrentLocation() async -> Location?
 }
 
-final class LocationManager: NSObject, LocationManagerInterface, CLLocationManagerDelegate {
-    private var locationManager = CLLocationManager()
+public final class LocationManager: NSObject, LocationManagerInterface, CLLocationManagerDelegate {
+    private let locationManager = CLLocationManager()
 
-    func initiateLocationManager() {
+    public func initiateLocationManager() {
         locationManager.requestWhenInUseAuthorization()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.activityType = .fitness
     }
 
-    func getCurrentLocation() async -> Location? {
+    public func getCurrentLocation() async -> Location? {
         locationManager.startUpdatingLocation()
         guard let currentLocation = locationManager.location else {
             locationManager.stopUpdatingLocation()

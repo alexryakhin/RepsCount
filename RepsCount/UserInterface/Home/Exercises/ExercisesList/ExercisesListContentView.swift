@@ -16,8 +16,15 @@ public struct ExercisesListContentView: PageView {
 
     public typealias ViewModel = ExercisesListViewModel
 
+    struct ListSection: Hashable {
+        let date: Date
+        let title: String
+        let items: [Exercise]
+    }
+
     @AppStorage(UDKeys.isShowingRating) var isShowingRating: Bool = true
     @AppStorage(UDKeys.isShowingOnboarding) var isShowingOnboarding: Bool = true
+    @AppStorage(UDKeys.showsFiltersOnExerciseList) var showsFiltersOnExerciseList: Bool = true
     @Environment(\.requestReview) var requestReview
     @ObservedObject public var viewModel: ViewModel
 
@@ -26,22 +33,159 @@ public struct ExercisesListContentView: PageView {
     }
 
     public var contentView: some View {
-        Text("ExercisesListContentView")
-            .sheet(isPresented: $isShowingOnboarding) {
-                isShowingOnboarding = false
-            } content: {
-                OnboardingView()
+        List {
+            filtersView
+                .listRowBackground(Color.clear)
+                .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                .listRowSpacing(0)
+                .listRowSeparator(.hidden, edges: .all)
+
+            if viewModel.selectedDate == nil {
+                ForEach(viewModel.sections, id: \.date) { section in
+                    sectionView(for: section)
+                }
+            } else if let selectedDate = viewModel.selectedDate, let section = viewModel.sections.first(where: {
+                $0.date == selectedDate.startOfDay
+            }) {
+                sectionView(for: section)
             }
+        }
+        .overlay {
+            if let selectedDate = viewModel.selectedDate,
+               viewModel.sections.first(where: { $0.date == selectedDate.startOfDay }) == nil {
+                EmptyListView(
+                    label: "No exercises",
+                    description: "No exercises for this date!"
+                )
+            }
+        }
+        .safeAreaInset(edge: .bottom, alignment: .trailing) {
+            addExerciseButton
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                if viewModel.selectedDate != nil {
+                    Button {
+                        viewModel.selectedDate = nil
+                    } label: {
+                        Image(systemName: "calendar.badge.minus")
+                    }
+                    .tint(.red)
+                }
+            }
+            ToolbarItem(placement: .topBarLeading) {
+                CustomDatePicker(
+                    date: $viewModel.selectedDate,
+                    minDate: nil,
+                    maxDate: Date.now,
+                    pickerMode: .date,
+                    labelFont: .system(.body, weight: .bold)
+                )
+            }
+        }
+        .animation(.easeIn, value: viewModel.selectedDate)
+        .sheet(isPresented: $isShowingOnboarding) {
+            isShowingOnboarding = false
+        } content: {
+            OnboardingView()
+        }
     }
 
     public func placeholderView(props: PageState.PlaceholderProps) -> some View {
         EmptyListView(
             label: "No exercises yet",
-            description: "Begin to add exercises to your list by tapping on plus icon in upper left corner"
+            description: "Begin to add exercises to your list by tapping on plus icon in bottom right corner"
         ) {
             Button("Add your first exercise!", action: addItem)
                 .buttonStyle(.borderedProminent)
         }
+    }
+
+    @ViewBuilder
+    private func sectionView(for section: ListSection) -> some View {
+        let exercisesInDate = section.items.filter {
+            if let selectedNameFilter = viewModel.selectedNameFilter {
+                $0.name == selectedNameFilter
+            } else {
+                true
+            }
+        }
+        if exercisesInDate.isEmpty == false {
+            Section {
+                ForEach(exercisesInDate) { exercise in
+                    Button {
+                        viewModel.handle(.showExerciseDetails(exercise))
+                    } label: {
+                        ExerciseListCellView(
+                            model: .init(
+                                exercise: LocalizedStringKey(exercise.name),
+                                category: LocalizedStringKey(exercise.category.rawValue),
+                                dateFormatted: exercise.timestamp.formatted(date: .omitted, time: .shortened)
+                            )
+                        )
+                    }
+                }
+                .onDelete {
+                    viewModel.handle(.deleteElements(indices: $0, date: section.date))
+                }
+            } header: {
+                Text(section.title)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var filtersView: some View {
+        if viewModel.sortedUniqueExerciseNames.count >= 2 && showsFiltersOnExerciseList {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    ForEach(viewModel.sortedUniqueExerciseNames, id: \.self) { name in
+                        nameFilterButtonView(for: name)
+                    }
+                }
+                .scrollTargetLayoutIfAvailable()
+            }
+            .scrollTargetBehaviorIfAvailable()
+        }
+    }
+
+    @ViewBuilder
+    private func nameFilterButtonView(for name: String) -> some View {
+        if viewModel.selectedNameFilter == name {
+            Button {
+                withAnimation {
+                    viewModel.handle(.selectNameFilter(nil))
+                }
+                HapticManager.shared.triggerSelection()
+            } label: {
+                Text(name)
+            }
+            .buttonStyle(.borderedProminent)
+            .clipShape(Capsule())
+        } else {
+            Button {
+                withAnimation {
+                    viewModel.handle(.selectNameFilter(name))
+                }
+                HapticManager.shared.triggerSelection()
+            } label: {
+                Text(name)
+            }
+            .buttonStyle(.bordered)
+            .clipShape(Capsule())
+        }
+    }
+
+    private var addExerciseButton: some View {
+        Button {
+            addItem()
+        } label: {
+            Image(systemName: "plus")
+                .font(.system(size: 24, weight: .semibold, design: .monospaced))
+                .padding(8)
+        }
+        .buttonStyle(.bordered)
+        .padding(24)
     }
 
     private func addItem() {

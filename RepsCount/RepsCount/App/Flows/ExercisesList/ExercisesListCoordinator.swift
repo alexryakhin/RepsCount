@@ -36,6 +36,8 @@ final class ExercisesListCoordinator: Coordinator {
             switch event {
             case .showAddExercise:
                 self?.showAddExercise()
+            case .showExerciseDetails(let exercise):
+                self?.showExerciseDetails(for: exercise)
             @unknown default:
                 fatalError("Unhandled event")
             }
@@ -44,6 +46,10 @@ final class ExercisesListCoordinator: Coordinator {
     }
 
     private func showAddExercise() {
+
+    }
+
+    private func showExerciseDetails(for exercise: Exercise) {
 
     }
 }

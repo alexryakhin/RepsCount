@@ -5,7 +5,7 @@
 //  Created by Aleksandr Riakhin on 3/12/25.
 //
 
-public enum ExerciseCategory: String {
+public enum ExerciseCategory: String, CaseIterable {
     case legs = "Legs"
     case core = "Core"
     case arms = "Arms"

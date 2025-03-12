@@ -59,8 +59,21 @@ final class ServicesAssembly: Assembly, Identifiable {
 //        container.autoregister(FeatureToggleServiceInterface.self, initializer: FeatureToggleService.init)
 //            .inObjectScope(.container)
 
+        container.register(LocationManagerInterface.self) { resolver in
+            LocationManager()
+        }
+        .inObjectScope(.container)
+
         container.register(CoreDataServiceInterface.self) { resolver in
             CoreDataService()
+        }
+        .inObjectScope(.container)
+
+        container.register(ExercisesProviderInterface.self) { resolver in
+            ExercisesProvider(
+                coreDataService: resolver ~> CoreDataServiceInterface.self,
+                locationManager: resolver ~> LocationManagerInterface.self
+            )
         }
         .inObjectScope(.container)
     }

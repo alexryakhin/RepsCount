@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import Core
 
 @objc(CDCalendarEvent)
 final class CDCalendarEvent: NSManagedObject, Identifiable {
@@ -34,4 +35,24 @@ final class CDCalendarEvent: NSManagedObject, Identifiable {
 
     @objc(removeExercises:)
     @NSManaged public func removeFromExercises(_ values: NSSet)
+
+    var exerciseModels: Set<ExerciseModel> {
+        let sets = exercises as? Set<CDExerciseModel> ?? []
+        return Set(sets.compactMap(\.coreModel))
+    }
+
+    var coreModel: CalendarEvent? {
+        guard let date,
+              let id,
+              let title
+        else { return nil }
+        return CalendarEvent(
+            title: title,
+            date: date,
+            id: id,
+            exercises: exerciseModels,
+            notes: notes,
+            recurrenceRule: recurrenceRule
+        )
+    }
 }

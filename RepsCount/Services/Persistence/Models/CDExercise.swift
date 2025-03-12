@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import Core
 
 @objc(CDExercise)
 final class CDExercise: NSManagedObject, Identifiable {
@@ -40,4 +41,35 @@ final class CDExercise: NSManagedObject, Identifiable {
 
     @objc(removeExerciseSets:)
     @NSManaged public func removeFromExerciseSets(_ values: NSSet)
+
+    var sets: [ExerciseSet] {
+        let sets = exerciseSets as? Set<CDExerciseSet> ?? []
+        return sets.sorted {
+            $0.timestamp ?? .now < $1.timestamp ?? .now
+        }.compactMap(\.coreModel)
+    }
+
+    var coreModel: Exercise? {
+        guard let name,
+              let category = ExerciseCategory(rawValue: category ?? ""),
+              let id,
+              let timestamp
+        else { return nil }
+        var location: Location? {
+            guard latitude != 0, longitude != 0 else { return nil }
+            return Location(latitude: latitude, longitude: longitude, address: address)
+        }
+        return Exercise(
+            name: name,
+            category: category,
+            type: .init(rawValue: type ?? "") ?? .strengthTraining,
+            metricType: .init(rawValue: metricType ?? ""),
+            id: id,
+            timestamp: timestamp,
+            sets: sets,
+            calendarEventID: eventID,
+            location: location,
+            notes: notes
+        )
+    }
 }

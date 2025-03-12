@@ -11,17 +11,27 @@ import CoreUserInterface
 struct ExerciseListCellView: ConfigurableView {
 
     struct Model {
-        let exercise: String
+        let exercise: LocalizedStringKey
+        let category: LocalizedStringKey
+        let dateFormatted: String
     }
 
     var model: Model
 
     var body: some View {
         HStack(spacing: 8) {
-            Text(model.exercise)
-                .bold()
-                .foregroundColor(.primary)
-                .frame(maxWidth: .infinity, alignment: .leading)
+            VStack(alignment: .leading, spacing: 4) {
+                Text(model.exercise)
+                    .font(.headline)
+                + Text(", ")
+                + Text(model.category)
+
+                Text(model.dateFormatted)
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+            }
+            .foregroundColor(.primary)
+            .frame(maxWidth: .infinity, alignment: .leading)
 
             Image(systemName: "chevron.right")
                 .frame(sideLength: 12)

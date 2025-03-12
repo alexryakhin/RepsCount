@@ -14,6 +14,7 @@ public final class ExercisesListViewController: PageViewController<ExercisesList
 
     public enum Event {
         case showAddExercise
+        case showExerciseDetails(Exercise)
     }
 
     public var onEvent: ((Event) -> Void)?
@@ -47,6 +48,8 @@ public final class ExercisesListViewController: PageViewController<ExercisesList
             switch output {
             case .showAddExercise:
                 self?.onEvent?(.showAddExercise)
+            case .showExerciseDetails(let exercise):
+                self?.onEvent?(.showExerciseDetails(exercise))
             }
         }
     }

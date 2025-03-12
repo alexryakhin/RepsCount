@@ -12,7 +12,9 @@ final class ExercisesListAssembly: Assembly, Identifiable {
         container.autoregister(ExercisesListCoordinator.self, argument: RouterInterface.self, initializer: ExercisesListCoordinator.init)
 
         container.register(ExercisesListViewController.self) { resolver in
-            let viewModel = ExercisesListViewModel(arg: 0)
+            let viewModel = ExercisesListViewModel(
+                exercisesProvider: resolver ~> ExercisesProviderInterface.self
+            )
             let controller = ExercisesListViewController(viewModel: viewModel)
             return controller
         }

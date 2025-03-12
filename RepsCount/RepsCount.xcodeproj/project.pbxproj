@@ -213,6 +213,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		530F28862D817C0D002AD126 /* Exceptions for "RepsCount" folder in "UserInterface" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Resources/Assets.xcassets,
+			);
+			target = 53F4CEB22D801271004551D5 /* UserInterface */;
+		};
+		530F28872D817C0D002AD126 /* Exceptions for "RepsCount" folder in "CoreUserInterface" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Resources/Assets.xcassets,
+			);
+			target = 53F4CEE62D8012B6004551D5 /* CoreUserInterface */;
+		};
 		53F4CE9B2D80004C004551D5 /* Exceptions for "RepsCount" folder in "RepsCount" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -279,6 +293,8 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				53F4CE9B2D80004C004551D5 /* Exceptions for "RepsCount" folder in "RepsCount" target */,
+				530F28862D817C0D002AD126 /* Exceptions for "RepsCount" folder in "UserInterface" target */,
+				530F28872D817C0D002AD126 /* Exceptions for "RepsCount" folder in "CoreUserInterface" target */,
 			);
 			path = RepsCount;
 			sourceTree = "<group>";
@@ -440,15 +456,15 @@
 			isa = PBXGroup;
 			children = (
 				53F4CE712D80004A004551D5 /* RepsCount */,
+				53F4CED72D8012AA004551D5 /* Core */,
+				53F4CEF92D8012C1004551D5 /* CoreNavigation */,
+				53F4CEE82D8012B6004551D5 /* CoreUserInterface */,
+				53F4CF152D801346004551D5 /* Frameworks */,
+				53F4CEC62D8012A1004551D5 /* Services */,
+				53F4CF0A2D8012C9004551D5 /* Shared */,
+				53F4CEB42D801271004551D5 /* UserInterface */,
 				53F4CE8C2D80004C004551D5 /* RepsCountTests */,
 				53F4CE962D80004C004551D5 /* RepsCountUITests */,
-				53F4CEB42D801271004551D5 /* UserInterface */,
-				53F4CEC62D8012A1004551D5 /* Services */,
-				53F4CED72D8012AA004551D5 /* Core */,
-				53F4CEE82D8012B6004551D5 /* CoreUserInterface */,
-				53F4CEF92D8012C1004551D5 /* CoreNavigation */,
-				53F4CF0A2D8012C9004551D5 /* Shared */,
-				53F4CF152D801346004551D5 /* Frameworks */,
 				53F4CE702D80004A004551D5 /* Products */,
 			);
 			sourceTree = "<group>";

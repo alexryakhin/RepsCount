@@ -14,21 +14,18 @@ public struct ExerciseSet: Identifiable, Hashable {
     public let id: String
     public let timestamp: Date
     public let exerciseID: String
-    public let unit: MeasurementUnit
 
     public init(
         amount: Double,
         weight: Double,
         id: String,
         timestamp: Date,
-        exerciseID: String,
-        unit: MeasurementUnit
+        exerciseID: String
     ) {
         self.amount = amount
         self.weight = weight
         self.id = id
         self.timestamp = timestamp
         self.exerciseID = exerciseID
-        self.unit = unit
     }
 }
