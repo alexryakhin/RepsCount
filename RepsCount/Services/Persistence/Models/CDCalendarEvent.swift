@@ -1,5 +1,5 @@
 //
-//  CalendarEvent+CoreDataProperties.swift
+//  CDCalendarEvent.swift
 //  Services
 //
 //  Created by Aleksandr Riakhin on 3/11/25.
@@ -9,11 +9,11 @@
 import Foundation
 import CoreData
 
+@objc(CDCalendarEvent)
+final class CDCalendarEvent: NSManagedObject, Identifiable {
 
-extension CalendarEvent {
-
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<CalendarEvent> {
-        return NSFetchRequest<CalendarEvent>(entityName: "CalendarEvent")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<CDCalendarEvent> {
+        return NSFetchRequest<CDCalendarEvent>(entityName: "CalendarEvent")
     }
 
     @NSManaged public var date: Date?
@@ -23,25 +23,15 @@ extension CalendarEvent {
     @NSManaged public var title: String?
     @NSManaged public var exercises: NSSet?
 
-}
-
-// MARK: Generated accessors for exercises
-extension CalendarEvent {
-
     @objc(addExercisesObject:)
-    @NSManaged public func addToExercises(_ value: ExerciseModel)
+    @NSManaged public func addToExercises(_ value: CDExerciseModel)
 
     @objc(removeExercisesObject:)
-    @NSManaged public func removeFromExercises(_ value: ExerciseModel)
+    @NSManaged public func removeFromExercises(_ value: CDExerciseModel)
 
     @objc(addExercises:)
     @NSManaged public func addToExercises(_ values: NSSet)
 
     @objc(removeExercises:)
     @NSManaged public func removeFromExercises(_ values: NSSet)
-
-}
-
-extension CalendarEvent : Identifiable {
-
 }

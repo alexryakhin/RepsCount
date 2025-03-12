@@ -1,41 +1,49 @@
 //
-//  DefaultExerciseTypes.swift
-//  RepsCount
+//  ExerciseModel+CoreDataClass.swift
+//  Services
 //
-//  Created by Aleksandr Riakhin on 1/7/25.
+//  Created by Aleksandr Riakhin on 3/11/25.
+//
 //
 
 import Foundation
 
-public enum ExerciseCategoryPreset: String {
-    case legs = "Legs"
-    case core = "Core"
-    case arms = "Arms"
-    case chest = "Chest"
-    case back = "Back"
-    case shoulders = "Shoulders"
-    case running = "Running"
-    case biking = "Biking"
-    case swimming = "Swimming"
-    case rowing = "Rowing"
-    case strengthSkills = "Strength Skills"
-    case mobility = "Mobility"
-    case balance = "Balance"
+public struct ExerciseModel: Identifiable, Hashable {
+    public let name: String
+    public let category: ExerciseCategory
+    public let type: ExerciseType
+    public let metricType: ExerciseMetricType
+    public let id: String
+    public let defaultReps: Int
+    public let defaultSets: Int
+    public let defaultWeight: Double
+    public let notes: String?
+
+    public init(
+        name: String,
+        category: ExerciseCategory,
+        type: ExerciseType,
+        metricType: ExerciseMetricType,
+        id: String = UUID().uuidString,
+        defaultReps: Int = .zero,
+        defaultSets: Int = .zero,
+        defaultWeight: Double = .zero,
+        notes: String? = nil
+    ) {
+        self.name = name
+        self.category = category
+        self.type = type
+        self.metricType = metricType
+        self.id = id
+        self.defaultReps = defaultReps
+        self.defaultSets = defaultSets
+        self.defaultWeight = defaultWeight
+        self.notes = notes
+    }
 }
 
-public enum ExerciseTypePreset: String {
-    case strengthTraining = "Strength Training"
-    case cardio = "Cardio"
-    case calisthenics = "Calisthenics"
-}
-
-public struct ExerciseModelPreset {
-    public var name: String
-    public var category: ExerciseCategoryPreset
-    public var type: ExerciseTypePreset
-    public var metricType: ExerciseMetricType
-
-    public static let presets: [ExerciseModelPreset] = [
+public extension ExerciseModel {
+    static let presets: [ExerciseModel] = [
         // Strength Training - Legs
         .init(name: "Squats", category: .legs, type: .strengthTraining, metricType: .weightAndReps),
         .init(name: "Lunges", category: .legs, type: .strengthTraining, metricType: .weightAndReps),
@@ -98,12 +106,14 @@ public struct ExerciseModelPreset {
         .init(name: "Push Press", category: .shoulders, type: .strengthTraining, metricType: .weightAndReps),
         .init(name: "Handstand Push-ups", category: .shoulders, type: .strengthTraining, metricType: .weightAndReps),
 
+        // Running
+        .init(name: "5k Run", category: .running, type: .running, metricType: .timeOnly),
+        .init(name: "10k Run", category: .running, type: .running, metricType: .timeOnly),
+        .init(name: "Marathon", category: .running, type: .running, metricType: .timeOnly),
+
         // Cardio
-        .init(name: "5k Run", category: .running, type: .cardio, metricType: .timeOnly),
-        .init(name: "10k Run", category: .running, type: .cardio, metricType: .timeOnly),
         .init(name: "Sprints", category: .running, type: .cardio, metricType: .distanceAndTime),
         .init(name: "Intervals", category: .running, type: .cardio, metricType: .distanceAndTime),
-        .init(name: "Marathon", category: .running, type: .cardio, metricType: .timeOnly),
         .init(name: "Stationary Bike", category: .biking, type: .cardio, metricType: .distanceAndTime),
         .init(name: "Mountain Biking", category: .biking, type: .cardio, metricType: .distanceAndTime),
         .init(name: "Road Biking", category: .biking, type: .cardio, metricType: .distanceAndTime),

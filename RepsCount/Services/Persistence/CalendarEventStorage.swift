@@ -10,16 +10,16 @@ import CoreData
 import Core
 
 protocol CalendarEventStorageInterface {
-    var eventsPublisher: AnyPublisher<[CalendarEvent], CoreError> { get }
-    func addEvent(title: String, date: Date, notes: String?, exercises: Set<ExerciseModel>) throws
-    func deleteEvent(_ event: CalendarEvent) throws
+    var eventsPublisher: AnyPublisher<[CDCalendarEvent], CoreError> { get }
+    func addEvent(title: String, date: Date, notes: String?, exercises: Set<CDExerciseModel>) throws
+    func deleteEvent(_ event: CDCalendarEvent) throws
     func fetchEvents()
 }
 
 final class CalendarEventStorage: CalendarEventStorageInterface {
     private let coreDataService: CoreDataServiceInterface
-    private let eventsSubject = CurrentValueSubject<[CalendarEvent], CoreError>([])
-    var eventsPublisher: AnyPublisher<[CalendarEvent], CoreError> {
+    private let eventsSubject = CurrentValueSubject<[CDCalendarEvent], CoreError>([])
+    var eventsPublisher: AnyPublisher<[CDCalendarEvent], CoreError> {
         eventsSubject.eraseToAnyPublisher()
     }
 
@@ -29,7 +29,7 @@ final class CalendarEventStorage: CalendarEventStorageInterface {
     }
 
     func fetchEvents() {
-        let request = NSFetchRequest<CalendarEvent>(entityName: "CalendarEvent")
+        let request = NSFetchRequest<CDCalendarEvent>(entityName: "CalendarEvent")
         do {
             let events = try coreDataService.context.fetch(request)
             eventsSubject.send(events)
@@ -38,8 +38,8 @@ final class CalendarEventStorage: CalendarEventStorageInterface {
         }
     }
 
-    func addEvent(title: String, date: Date, notes: String?, exercises: Set<ExerciseModel>) throws {
-        let newEvent = CalendarEvent(context: coreDataService.context)
+    func addEvent(title: String, date: Date, notes: String?, exercises: Set<CDExerciseModel>) throws {
+        let newEvent = CDCalendarEvent(context: coreDataService.context)
         newEvent.id = UUID().uuidString
         newEvent.title = title
         newEvent.date = date
@@ -48,7 +48,7 @@ final class CalendarEventStorage: CalendarEventStorageInterface {
         try save()
     }
 
-    func deleteEvent(_ event: CalendarEvent) throws {
+    func deleteEvent(_ event: CDCalendarEvent) throws {
         coreDataService.context.delete(event)
         try save()
     }

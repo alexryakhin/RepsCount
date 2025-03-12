@@ -10,12 +10,12 @@ import Combine
 import Core
 
 protocol ExerciseStorageInterface {
-    var exercisesPublisher: AnyPublisher<[Exercise], CoreError> { get }
-    var exerciseModelsPublisher: AnyPublisher<[ExerciseModel], CoreError> { get }
+    var exercisesPublisher: AnyPublisher<[CDExercise], CoreError> { get }
+    var exerciseModelsPublisher: AnyPublisher<[CDExerciseModel], CoreError> { get }
     var exerciseCategoriesPublisher: AnyPublisher<[String: [String: [String]]], CoreError> { get }
 
-    func addExerciseFromExerciseModel(_ model: ExerciseModel, savesLocation: Bool)
-    func deleteExercise(_ exercise: Exercise)
+    func addExerciseFromExerciseModel(_ model: CDExerciseModel, savesLocation: Bool)
+    func deleteExercise(_ exercise: CDExercise)
     func fetchExercises()
 }
 
@@ -24,13 +24,13 @@ final class ExerciseStorage: ExerciseStorageInterface {
     private let locationManager: LocationManagerInterface
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
-    private let exercisesSubject = CurrentValueSubject<[Exercise], CoreError>([])
-    var exercisesPublisher: AnyPublisher<[Exercise], CoreError> {
+    private let exercisesSubject = CurrentValueSubject<[CDExercise], CoreError>([])
+    var exercisesPublisher: AnyPublisher<[CDExercise], CoreError> {
         return exercisesSubject.eraseToAnyPublisher()
     }
 
-    private let exerciseModelsSubject = CurrentValueSubject<[ExerciseModel], CoreError>([])
-    var exerciseModelsPublisher: AnyPublisher<[ExerciseModel], CoreError> {
+    private let exerciseModelsSubject = CurrentValueSubject<[CDExerciseModel], CoreError>([])
+    var exerciseModelsPublisher: AnyPublisher<[CDExerciseModel], CoreError> {
         return exerciseModelsSubject.eraseToAnyPublisher()
     }
 
@@ -50,7 +50,7 @@ final class ExerciseStorage: ExerciseStorageInterface {
     }
 
     func fetchExercises() {
-        let request = NSFetchRequest<Exercise>(entityName: "Exercise")
+        let request = NSFetchRequest<CDExercise>(entityName: "Exercise")
         do {
             let exercises = try coreDataService.context.fetch(request)
             exercisesSubject.send(exercises)
@@ -59,14 +59,14 @@ final class ExerciseStorage: ExerciseStorageInterface {
         }
     }
 
-    func deleteExercise(_ exercise: Exercise) {
+    func deleteExercise(_ exercise: CDExercise) {
         coreDataService.context.delete(exercise)
         save()
     }
 
-    func addExerciseFromExerciseModel(_ model: ExerciseModel, savesLocation: Bool) {
+    func addExerciseFromExerciseModel(_ model: CDExerciseModel, savesLocation: Bool) {
         Task { @MainActor in
-            let newItem = Exercise(context: coreDataService.context)
+            let newItem = CDExercise(context: coreDataService.context)
             newItem.timestamp = .now
             newItem.category = model.category
             newItem.name = model.name
@@ -83,7 +83,7 @@ final class ExerciseStorage: ExerciseStorageInterface {
     }
 
     private func fetchCategories() {
-        let request = NSFetchRequest<ExerciseModel>(entityName: "ExerciseModel")
+        let request = NSFetchRequest<CDExerciseModel>(entityName: "ExerciseModel")
         do {
             let models = try coreDataService.context.fetch(request)
             if models.isEmpty || models.first?.type == nil {
@@ -101,7 +101,7 @@ final class ExerciseStorage: ExerciseStorageInterface {
         }
     }
 
-    private func groupExercises(from models: [ExerciseModel]) -> [String: [String: [String]]] {
+    private func groupExercises(from models: [CDExerciseModel]) -> [String: [String: [String]]] {
         var dictionary: [String: [String: [String]]] = [:]
 
         for model in models {
@@ -130,8 +130,8 @@ final class ExerciseStorage: ExerciseStorageInterface {
     }
 
     private func setDefaultExercises() {
-        ExerciseModelPreset.presets.forEach { preset in
-            let newExerciseModel = ExerciseModel(context: coreDataService.context)
+        ExerciseModel.presets.forEach { preset in
+            let newExerciseModel = CDExerciseModel(context: coreDataService.context)
             newExerciseModel.id = UUID().uuidString
             newExerciseModel.name = preset.name
             newExerciseModel.category = preset.category.rawValue
@@ -153,8 +153,8 @@ final class ExerciseStorage: ExerciseStorageInterface {
     }
 }
 
-extension ExerciseModel: Comparable {
-    public static func < (lhs: ExerciseModel, rhs: ExerciseModel) -> Bool {
+extension CDExerciseModel: Comparable {
+    public static func < (lhs: CDExerciseModel, rhs: CDExerciseModel) -> Bool {
         lhs.name ?? "" < rhs.name ?? ""
     }
 }

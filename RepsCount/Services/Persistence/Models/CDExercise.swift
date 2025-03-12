@@ -1,5 +1,5 @@
 //
-//  Exercise+CoreDataProperties.swift
+//  CDExercise.swift
 //  Services
 //
 //  Created by Aleksandr Riakhin on 3/11/25.
@@ -9,11 +9,11 @@
 import Foundation
 import CoreData
 
+@objc(CDExercise)
+final class CDExercise: NSManagedObject, Identifiable {
 
-extension Exercise {
-
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Exercise> {
-        return NSFetchRequest<Exercise>(entityName: "Exercise")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<CDExercise> {
+        return NSFetchRequest<CDExercise>(entityName: "Exercise")
     }
 
     @NSManaged public var address: String?
@@ -29,25 +29,15 @@ extension Exercise {
     @NSManaged public var type: String?
     @NSManaged public var exerciseSets: NSSet?
 
-}
-
-// MARK: Generated accessors for exerciseSets
-extension Exercise {
-
     @objc(addExerciseSetsObject:)
-    @NSManaged public func addToExerciseSets(_ value: ExerciseSet)
+    @NSManaged public func addToExerciseSets(_ value: CDExerciseSet)
 
     @objc(removeExerciseSetsObject:)
-    @NSManaged public func removeFromExerciseSets(_ value: ExerciseSet)
+    @NSManaged public func removeFromExerciseSets(_ value: CDExerciseSet)
 
     @objc(addExerciseSets:)
     @NSManaged public func addToExerciseSets(_ values: NSSet)
 
     @objc(removeExerciseSets:)
     @NSManaged public func removeFromExerciseSets(_ values: NSSet)
-
-}
-
-extension Exercise : Identifiable {
-
 }
