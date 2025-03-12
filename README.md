@@ -1,6 +1,6 @@
-# 🏋️ RepsCount - Your Daily Workout Companion
+# 🏋️ Reps Counter - Your Daily Workout Companion
 
-Welcome to **RepsCount**, a straightforward and efficient app designed to help you track your workout repetitions and monitor your progress. Whether you're at the gym, at home, or on the go, RepsCount is here to keep you on track with your fitness goals.
+Welcome to **Reps Counter**, a straightforward and efficient app designed to help you track your workout repetitions and monitor your progress. Whether you're at the gym, at home, or on the go, RepsCount is here to keep you on track with your fitness goals.
 
 ## 🚀 Features
 
@@ -13,7 +13,7 @@ Review your past workouts to monitor progress and see how you're improving over 
 ### 3. **iCloud Sync**
 Sync your workout data across all your Apple devices, ensuring your progress is always up-to-date.
 
-### 4. **Customizable Workouts** *(Coming Soon)*
+### 4. **Apple Watch support** *(Coming Soon)*
 Create and customize your workout routines, tailoring them to your specific fitness goals.
 
 ## 🛠️ Technology Stack
@@ -34,6 +34,7 @@ RepsCount is designed to be as simple and intuitive as possible. The focus is on
 ## 🚧 Future Plans
 
 - **Progress Charts:** Visualize your progress with charts and statistics.
+- **Apple watch tracking:** Not just manually enter reps, but connect a workout session and measure heart rate and other data.
 
 ## 📸 Screenshots
 
