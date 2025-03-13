@@ -13,6 +13,7 @@ final class ExercisesListAssembly: Assembly, Identifiable {
 
         container.register(ExercisesListViewController.self) { resolver in
             let viewModel = ExercisesListViewModel(
+                locationManager: resolver ~> LocationManagerInterface.self,
                 exercisesProvider: resolver ~> ExercisesProviderInterface.self
             )
             let controller = ExercisesListViewController(viewModel: viewModel)

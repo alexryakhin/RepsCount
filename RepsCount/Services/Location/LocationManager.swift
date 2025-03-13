@@ -15,6 +15,7 @@ public protocol LocationManagerInterface: AnyObject {
 }
 
 public final class LocationManager: NSObject, LocationManagerInterface, CLLocationManagerDelegate {
+
     private let locationManager = CLLocationManager()
 
     public func initiateLocationManager() {

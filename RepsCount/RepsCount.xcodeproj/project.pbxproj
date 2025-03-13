@@ -217,6 +217,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Resources/Assets.xcassets,
+				Resources/Localizable.xcstrings,
 			);
 			target = 53F4CEB22D801271004551D5 /* UserInterface */;
 		};
@@ -224,8 +225,16 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Resources/Assets.xcassets,
+				Resources/Localizable.xcstrings,
 			);
 			target = 53F4CEE62D8012B6004551D5 /* CoreUserInterface */;
+		};
+		5373AD7D2D82BDF600C80C14 /* Exceptions for "RepsCount" folder in "Core" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Resources/Localizable.xcstrings,
+			);
+			target = 53F4CED52D8012AA004551D5 /* Core */;
 		};
 		53F4CE9B2D80004C004551D5 /* Exceptions for "RepsCount" folder in "RepsCount" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -294,6 +303,7 @@
 			exceptions = (
 				53F4CE9B2D80004C004551D5 /* Exceptions for "RepsCount" folder in "RepsCount" target */,
 				530F28862D817C0D002AD126 /* Exceptions for "RepsCount" folder in "UserInterface" target */,
+				5373AD7D2D82BDF600C80C14 /* Exceptions for "RepsCount" folder in "Core" target */,
 				530F28872D817C0D002AD126 /* Exceptions for "RepsCount" folder in "CoreUserInterface" target */,
 			);
 			path = RepsCount;
@@ -820,6 +830,10 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
+				de,
+				ru,
+				hr,
 			);
 			mainGroup = 53F4CE662D80004A004551D5;
 			minimizedProjectReferenceProxies = 1;
@@ -1150,6 +1164,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1213,6 +1228,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

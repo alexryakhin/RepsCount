@@ -21,7 +21,6 @@ open class BaseTabController: UITabBarController {
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-        navigationItem.backButtonTitle = ""
     }
 
     open func setup() {}

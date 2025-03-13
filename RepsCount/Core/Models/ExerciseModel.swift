@@ -8,117 +8,116 @@
 
 import Foundation
 
-public struct ExerciseModel: Identifiable, Hashable {
-    public let name: String
-    public let category: ExerciseCategory
-    public let type: ExerciseType
-    public let metricType: ExerciseMetricType
-    public let id: String
-    public let defaultReps: Int
-    public let defaultSets: Int
-    public let defaultWeight: Double
-    public let notes: String?
+public enum ExerciseModel: String, CaseIterable, Identifiable {
+    case squats = "Squats"
+    case lunges = "Lunges"
+    case legPress = "Leg Press"
+    case deadlifts = "Deadlifts"
+    case legCurls = "Leg Curls"
+    case calfRaises = "Calf Raises"
+    case toeRaises = "Toe Raises"
+    case splitSquat = "Split Squat"
+    case bulgarianSplitSquat = "Bulgarian Split Squat"
+    case pistolSquat = "Pistol Squat"
 
-    public init(
-        name: String,
-        category: ExerciseCategory,
-        type: ExerciseType,
-        metricType: ExerciseMetricType,
-        id: String = UUID().uuidString,
-        defaultReps: Int = .zero,
-        defaultSets: Int = .zero,
-        defaultWeight: Double = .zero,
-        notes: String? = nil
-    ) {
-        self.name = name
-        self.category = category
-        self.type = type
-        self.metricType = metricType
-        self.id = id
-        self.defaultReps = defaultReps
-        self.defaultSets = defaultSets
-        self.defaultWeight = defaultWeight
-        self.notes = notes
+    case crunches = "Crunches"
+    case russianTwist = "Russian Twist"
+    case legRaises = "Leg Raises"
+    case obliqueTwist = "Oblique Twist"
+    case superman = "Superman"
+
+    case bicepCurls = "Bicep Curls"
+    case tricepDips = "Tricep Dips"
+    case hammerCurls = "Hammer Curls"
+    case tricepExtension = "Tricep Extension"
+    case chinUps = "Chin-ups"
+
+    case dips = "Dips"
+    case pushUps = "Push-ups"
+    case diamondPushUps = "Diamond Push-ups"
+    case dumbbellFlyes = "Dumbbell Flyes"
+    case benchPress = "Bench Press"
+    case chestPress = "Chest Press"
+    case cableCrossover = "Cable Crossover"
+    case inclineBenchPress = "Incline Bench Press"
+
+    case pullUps = "Pull-ups"
+    case latPulldowns = "Lat Pulldowns"
+    case barbellRows = "Barbell Rows"
+    case dumbbellRows = "Dumbbell Rows"
+    case seatedCableRows = "Seated Cable Rows"
+    case tBarRows = "T-bar Rows"
+    case hyperextensions = "Hyperextensions"
+    case facePulls = "Face Pulls"
+    case reverseFlyes = "Reverse Flyes"
+    case oneArmPullUp = "One Arm Pull-up"
+
+    case overheadPress = "Overhead Press"
+    case arnoldPress = "Arnold Press"
+    case lateralRaises = "Lateral Raises"
+    case frontRaises = "Front Raises"
+    case rearDeltFlyes = "Rear Delt Flyes"
+    case uprightRows = "Upright Rows"
+    case shrugs = "Shrugs"
+    case pushPress = "Push Press"
+    case handstandPushUps = "Handstand Push-ups"
+
+    case deadHang = "Dead Hang"
+    case planche = "Planche"
+    case frontLever = "Front Lever"
+    case backLever = "Back Lever"
+    case humanFlag = "Human Flag"
+    case muscleUps = "Muscle-ups"
+
+    case bridge = "Bridge"
+    case wallHandstand = "Wall Handstand"
+    case lSit = "L-sit"
+    case skinTheCat = "Skin the Cat"
+
+    case handstandHold = "Handstand Hold"
+    case handstandWalk = "Handstand Walk"
+    case elbowLever = "Elbow Lever"
+
+    public var id: String { rawValue }
+
+    public var category: ExerciseCategory {
+        switch self {
+        case .squats, .lunges, .legPress, .deadlifts, .legCurls, .calfRaises, .toeRaises, .splitSquat, .bulgarianSplitSquat, .pistolSquat:
+            return .legs
+        case .crunches, .russianTwist, .legRaises, .obliqueTwist, .superman:
+            return .core
+        case .bicepCurls, .tricepDips, .hammerCurls, .tricepExtension, .chinUps:
+            return .arms
+        case .dips, .pushUps, .diamondPushUps, .dumbbellFlyes, .benchPress, .chestPress, .cableCrossover, .inclineBenchPress:
+            return .chest
+        case .pullUps, .latPulldowns, .barbellRows, .dumbbellRows, .seatedCableRows, .tBarRows, .hyperextensions, .facePulls, .reverseFlyes, .oneArmPullUp:
+            return .back
+        case .overheadPress, .arnoldPress, .lateralRaises, .frontRaises, .rearDeltFlyes, .uprightRows, .shrugs, .pushPress, .handstandPushUps:
+            return .shoulders
+        case .deadHang, .planche, .frontLever, .backLever, .humanFlag, .muscleUps:
+            return .strengthSkills
+        case .bridge, .wallHandstand, .lSit, .skinTheCat:
+            return .mobility
+        case .handstandHold, .handstandWalk, .elbowLever:
+            return .balance
+        }
     }
-}
 
-public extension ExerciseModel {
-    static let presets: [ExerciseModel] = [
-        // Strength Training - Legs
-        .init(name: "Squats", category: .legs, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Lunges", category: .legs, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Leg Press", category: .legs, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Deadlifts", category: .legs, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Leg Curls", category: .legs, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Calf Raises", category: .legs, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Toe Raises", category: .legs, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Split Squat", category: .legs, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Bulgarian Split Squat", category: .legs, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Pistol Squat", category: .legs, type: .strengthTraining, metricType: .weightAndReps),
+    public var type: ExerciseType {
+        switch self {
+        case .deadHang, .planche, .frontLever, .backLever, .humanFlag, .muscleUps, .bridge, .wallHandstand, .lSit, .skinTheCat, .handstandHold, .handstandWalk, .elbowLever:
+            return .calisthenics
+        default:
+            return .strengthTraining
+        }
+    }
 
-        // Strength Training - Core
-        .init(name: "Crunches", category: .core, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Russian Twist", category: .core, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Leg Raises", category: .core, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Oblique Twist", category: .core, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Superman", category: .core, type: .strengthTraining, metricType: .weightAndReps),
-
-        // Strength Training - Arms
-        .init(name: "Bicep Curls", category: .arms, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Tricep Dips", category: .arms, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Hammer Curls", category: .arms, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Tricep Extension", category: .arms, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Push-ups", category: .arms, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Chin-ups", category: .arms, type: .strengthTraining, metricType: .weightAndReps),
-
-        // Strength Training - Chest
-        .init(name: "Dips", category: .chest, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Push-ups", category: .chest, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Diamond Push-ups", category: .chest, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Dumbbell Flyes", category: .chest, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Bench Press", category: .chest, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Chest Press", category: .chest, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Cable Crossover", category: .chest, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Incline Bench Press", category: .chest, type: .strengthTraining, metricType: .weightAndReps),
-
-        // Strength Training - Back
-        .init(name: "Pull-ups", category: .back, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Chin-ups", category: .back, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Lat Pulldowns", category: .back, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Barbell Rows", category: .back, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Dumbbell Rows", category: .back, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Seated Cable Rows", category: .back, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "T-bar Rows", category: .back, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Deadlifts", category: .back, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Hyperextensions", category: .back, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Face Pulls", category: .back, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Reverse Flyes", category: .back, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "One Arm Pull-up", category: .back, type: .strengthTraining, metricType: .weightAndReps),
-
-        // Strength Training - Shoulders
-        .init(name: "Overhead Press", category: .shoulders, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Arnold Press", category: .shoulders, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Lateral Raises", category: .shoulders, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Front Raises", category: .shoulders, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Rear Delt Flyes", category: .shoulders, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Upright Rows", category: .shoulders, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Shrugs", category: .shoulders, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Push Press", category: .shoulders, type: .strengthTraining, metricType: .weightAndReps),
-        .init(name: "Handstand Push-ups", category: .shoulders, type: .strengthTraining, metricType: .weightAndReps),
-
-        // Calisthenics
-        .init(name: "Dead Hang", category: .strengthSkills, type: .calisthenics, metricType: .time),
-        .init(name: "Planche", category: .strengthSkills, type: .calisthenics, metricType: .time),
-        .init(name: "Front Lever", category: .strengthSkills, type: .calisthenics, metricType: .time),
-        .init(name: "Back Lever", category: .strengthSkills, type: .calisthenics, metricType: .time),
-        .init(name: "Human Flag", category: .strengthSkills, type: .calisthenics, metricType: .time),
-        .init(name: "Muscle-ups", category: .strengthSkills, type: .calisthenics, metricType: .weightAndReps),
-        .init(name: "Bridge", category: .mobility, type: .calisthenics, metricType: .time),
-        .init(name: "Wall Handstand", category: .mobility, type: .calisthenics, metricType: .time),
-        .init(name: "L-sit", category: .mobility, type: .calisthenics, metricType: .time),
-        .init(name: "Skin the Cat", category: .mobility, type: .calisthenics, metricType: .time),
-        .init(name: "Handstand Hold", category: .balance, type: .calisthenics, metricType: .time),
-        .init(name: "Handstand Walk", category: .balance, type: .calisthenics, metricType: .time),
-        .init(name: "Elbow Lever", category: .balance, type: .calisthenics, metricType: .time)
-    ]
+    public var metricType: ExerciseMetricType {
+        switch self {
+        case .deadHang, .planche, .frontLever, .backLever, .humanFlag, .bridge, .wallHandstand, .lSit, .skinTheCat, .handstandHold, .handstandWalk, .elbowLever:
+            return .time
+        default:
+            return .weightAndReps
+        }
+    }
 }

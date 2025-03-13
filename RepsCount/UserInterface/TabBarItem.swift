@@ -21,6 +21,10 @@ public enum TabBarItem {
         }
     }
 
+    public var localizedTitle: String {
+        NSLocalizedString(title, comment: title)
+    }
+
     public var image: String {
         switch self {
         case .exercises: "dumbbell"
@@ -39,7 +43,7 @@ public enum TabBarItem {
 
     public var item: UITabBarItem {
         UITabBarItem(
-            title: title,
+            title: localizedTitle,
             image: .init(systemName: image),
             selectedImage: .init(systemName: selectedImage)
         )

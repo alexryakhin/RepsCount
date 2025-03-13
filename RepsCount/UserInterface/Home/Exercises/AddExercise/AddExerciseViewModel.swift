@@ -22,7 +22,7 @@ public final class AddExerciseViewModel: DefaultPageViewModel {
 
     @Published var selectedType: ExerciseType?
     @Published var selectedCategory: ExerciseCategory?
-    @Published var selectedExercise: String?
+    @Published var selectedExercise: ExerciseModel?
 
     // MARK: - Private Properties
 
@@ -31,7 +31,9 @@ public final class AddExerciseViewModel: DefaultPageViewModel {
 
     // MARK: - Initialization
 
-    public init(addExerciseManager: AddExerciseManagerInterface) {
+    public init(
+        addExerciseManager: AddExerciseManagerInterface
+    ) {
         self.addExerciseManager = addExerciseManager
         super.init()
         setupBindings()
@@ -51,30 +53,11 @@ public final class AddExerciseViewModel: DefaultPageViewModel {
     }
 
     private func addExercise() {
-        guard let selectedExerciseModel else {
-            // Handle invalid input (e.g., show an error message to the user)
-            return
-        }
-
-        try? addExerciseManager.addExercise(from: selectedExerciseModel, savesLocation: savesLocation)
-    }
-}
-
-extension AddExerciseViewModel {
-    var exercises: [String] {
-        guard let selectedType, let selectedCategory else { return [] }
-        return ExerciseModel.presets.filter { preset in
-            preset.type == selectedType
-            && preset.category == selectedCategory
-        }
-        .map(\.name)
-    }
-
-    var selectedExerciseModel: ExerciseModel? {
-        ExerciseModel.presets.first { model in
-            model.type == selectedType
-            && model.category == selectedCategory
-            && model.name == selectedExercise
+        guard let selectedExercise else { return }
+        do {
+            try addExerciseManager.addExercise(from: selectedExercise, savesLocation: savesLocation)
+        } catch {
+            errorReceived(error, displayType: .alert)
         }
     }
 }

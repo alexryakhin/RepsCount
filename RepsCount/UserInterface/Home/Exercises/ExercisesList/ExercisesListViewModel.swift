@@ -11,8 +11,11 @@ import CoreNavigation
 import Services
 import Combine
 import UIKit
+import SwiftUI
 
-public class ExercisesListViewModel: DefaultPageViewModel {    
+public class ExercisesListViewModel: DefaultPageViewModel {
+
+    @AppStorage(UDKeys.savesLocation) var savesLocation: Bool = true
 
     enum Input {
         case showAddExercise
@@ -30,16 +33,20 @@ public class ExercisesListViewModel: DefaultPageViewModel {
     @Published private(set) var sections: [ExercisesListContentView.ListSection] = []
     @Published var selectedDate: Date?
 
+    private let locationManager: LocationManagerInterface
     private let exercisesProvider: ExercisesProviderInterface
     private var cancellables: Set<AnyCancellable> = []
 
     public init(
+        locationManager: LocationManagerInterface,
         exercisesProvider: ExercisesProviderInterface
     ) {
+        self.locationManager = locationManager
         self.exercisesProvider = exercisesProvider
         super.init()
         loadingStarted()
         setupBindings()
+        setupLocationService()
     }
 
     func handle(_ input: Input) {
@@ -80,6 +87,12 @@ public class ExercisesListViewModel: DefaultPageViewModel {
                 }
             }
             .store(in: &cancellables)
+    }
+
+    private func setupLocationService() {
+        if savesLocation {
+            locationManager.initiateLocationManager()
+        }
     }
 
     private func prepareExercisesForDisplay(_ exercises: [Exercise]) {

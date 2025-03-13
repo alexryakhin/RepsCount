@@ -104,8 +104,8 @@ public struct ExercisesListContentView: PageView {
                 } label: {
                     ExerciseListCellView(
                         model: .init(
-                            exercise: LocalizedStringKey(exercise.name),
-                            category: LocalizedStringKey(exercise.category.rawValue),
+                            exercise: exercise.model.name,
+                            category: exercise.model.category.name,
                             dateFormatted: exercise.timestamp.formatted(date: .omitted, time: .shortened)
                         )
                     )

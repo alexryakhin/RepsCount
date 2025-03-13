@@ -6,15 +6,16 @@
 //
 
 import Foundation
+import SwiftUI
 
 public struct DefaultPlaceholderProps: Equatable {
 
-    let title: String?
-    let subtitle: String?
+    let title: LocalizedStringKey?
+    let subtitle: LocalizedStringKey?
 
     public init(
-        title: String? = nil,
-        subtitle: String? = nil
+        title: LocalizedStringKey? = nil,
+        subtitle: LocalizedStringKey? = nil
     ) {
         self.title = title
         self.subtitle = subtitle

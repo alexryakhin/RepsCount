@@ -8,13 +8,13 @@
 import SwiftUI
 
 public struct EmptyListView<Actions: View>: View {
-    private let label: String?
-    private let description: String?
+    private let label: LocalizedStringKey?
+    private let description: LocalizedStringKey?
     private let actions: () -> Actions
 
     public init(
-        label: String?,
-        description: String?,
+        label: LocalizedStringKey?,
+        description: LocalizedStringKey?,
         @ViewBuilder actions: @escaping () -> Actions = { EmptyView() }
     ) {
         self.label = label

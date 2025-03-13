@@ -52,6 +52,6 @@ final class ExercisesListCoordinator: Coordinator {
 
     private func showExerciseDetails(for exercise: Exercise) {
         let controller = resolver ~> (ExerciseDetailsViewController.self, exercise)
-        innerRouter.push(controller)
+        router.push(controller)
     }
 }

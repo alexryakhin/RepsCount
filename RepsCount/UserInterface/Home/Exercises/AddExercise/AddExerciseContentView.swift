@@ -23,18 +23,18 @@ public struct AddExerciseContentView: PageView {
                     items: ExerciseType.allCases,
                     header: "Type"
                 )
-                if let categories = viewModel.selectedType?.categories {
+                if let selectedType = viewModel.selectedType {
                     ListFlowPicker(
                         selection: $viewModel.selectedCategory,
-                        items: categories,
+                        items: selectedType.categories,
                         header: "Category"
                     )
                     .transition(.opacity)
                 }
-                if viewModel.exercises.isNotEmpty {
+                if let selectedCategory = viewModel.selectedCategory {
                     ListFlowPicker(
                         selection: $viewModel.selectedExercise,
-                        items: viewModel.exercises,
+                        items: selectedCategory.exercises,
                         header: "Exercise"
                     )
                     .transition(.opacity)
@@ -42,7 +42,7 @@ public struct AddExerciseContentView: PageView {
             }
             .animation(.default, value: viewModel.selectedCategory == nil)
             .animation(.default, value: viewModel.selectedType == nil)
-            .animation(.default, value: viewModel.exercises.isEmpty)
+            .animation(.default, value: viewModel.selectedExercise == nil)
             .navigationTitle("Choose an exercise")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -69,7 +69,7 @@ public struct AddExerciseContentView: PageView {
                             .cornerRadius(12)
                     }
                     .buttonStyle(.borderedProminent)
-                    .disabled(viewModel.selectedExerciseModel == nil)
+                    .disabled(viewModel.selectedExercise == nil)
                 }
                 .padding(.vertical, 12)
                 .padding(.horizontal, 16)
@@ -85,6 +85,12 @@ extension ExerciseType: @retroactive Selectable {
 }
 
 extension ExerciseCategory: @retroactive Selectable {
+    public var name: LocalizedStringKey {
+        LocalizedStringKey(rawValue)
+    }
+}
+
+extension ExerciseModel: @retroactive Selectable {
     public var name: LocalizedStringKey {
         LocalizedStringKey(rawValue)
     }

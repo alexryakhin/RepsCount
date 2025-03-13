@@ -10,6 +10,7 @@ import Core
 
 public protocol CoreDataServiceInterface {
     var context: NSManagedObjectContext { get }
+
     func saveContext() throws(CoreError)
 }
 
@@ -18,6 +19,10 @@ public class CoreDataService: CoreDataServiceInterface {
 
     private lazy var persistentContainer: NSPersistentCloudKitContainer = {
         let container = NSPersistentCloudKitContainer(name: "RepsCount")
+        let description = container.persistentStoreDescriptions.first
+        description?.shouldMigrateStoreAutomatically = true
+        description?.shouldInferMappingModelAutomatically = true
+
         container.loadPersistentStores { description, error in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")

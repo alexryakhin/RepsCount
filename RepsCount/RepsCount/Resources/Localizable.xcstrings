@@ -1,6 +1,29 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    ", " : {
+
+    },
+    "#%lld: %@ reps" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "#%1$lld: %2$@ reps"
+          }
+        }
+      }
+    },
+    "#%lld: %@ reps, %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "#%1$lld: %2$@ reps, %3$@"
+          }
+        }
+      }
+    },
     "#%lld: %lld reps" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -60,6 +83,40 @@
             }
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "№%1$lld: %#@arg2@"
+          },
+          "substitutions" : {
+            "arg2" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "few" : {
+                    "stringUnit" : {
+                      "state" : "new",
+                      "value" : "%arg reps"
+                    }
+                  },
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "new",
+                      "value" : "%arg rep"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "new",
+                      "value" : "%arg reps"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -93,40 +150,6 @@
                     "stringUnit" : {
                       "state" : "translated",
                       "value" : "%arg повторений"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "№%1$lld: %#@arg2@"
-          },
-          "substitutions" : {
-            "arg2" : {
-              "argNum" : 2,
-              "formatSpecifier" : "lld",
-              "variations" : {
-                "plural" : {
-                  "few" : {
-                    "stringUnit" : {
-                      "state" : "new",
-                      "value" : "%arg reps"
-                    }
-                  },
-                  "one" : {
-                    "stringUnit" : {
-                      "state" : "new",
-                      "value" : "%arg rep"
-                    }
-                  },
-                  "other" : {
-                    "stringUnit" : {
-                      "state" : "new",
-                      "value" : "%arg reps"
                     }
                   }
                 }
@@ -237,8 +260,10 @@
         }
       }
     },
+    "%.1f%%" : {
+
+    },
     "About app" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -252,51 +277,55 @@
             "value" : "À propos de l'application"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O aplikaciji"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "О приложении"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "O aplikaciji"
           }
         }
       }
     },
-    "About App" : {
-      "extractionState" : "stale",
+    "about_app_description_text" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Über App"
+            "value" : "Willkommen bei RepsCount, Ihrem Begleiter zum Verfolgen und Verbessern Ihrer Trainingsleistung!\n\nIch habe diese App erstellt, weil ich selbst etwas Einfaches, aber Leistungsstarkes brauchte, um meinen Fortschritt zu verfolgen, und es ist ziemlich schwierig, dies nur in der Notes-App zu tun.\n\nWenn Ihnen die App gefällt, hinterlassen Sie bitte eine Bewertung"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welcome to RepsCount, your companion for tracking and improving your workout performance!\n\nI created this app because I myself needed something simple yet powerful to track my progress, and it's pretty hard to do it just in Notes App.\n\nIf you like the app, please leave a review"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "À propos de l'application"
+            "value" : "Bienvenue sur RepsCount, votre compagnon pour suivre et améliorer vos performances d'entraînement !\n\nJ'ai créé cette application parce que j'avais moi-même besoin de quelque chose de simple mais puissant pour suivre mes progrès, et il est assez difficile de le faire uniquement dans l'application Notes.\n\nSi vous aimez l'application, veuillez laisser un commentaire"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dobrodošli u RepsCount, vašeg saputnika za praćenje i poboljšanje performansi vašeg vežbanja!\n\nNapravio sam ovu aplikaciju jer mi je lično bilo potrebno nešto jednostavno, ali moćno da pratim svoj napredak, a prilično je teško to učiniti samo u aplikaciji Notes.\n\nAko vam se sviđa aplikacija, ostavite recenziju"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "О приложении"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "O aplikaciji"
+            "value" : "Добро пожаловать в RepsCount, вашего помощника для отслеживания и улучшения результатов тренировок!\n\nЯ создал это приложение, потому что мне самому нужно было что-то простое, но мощное для отслеживания моего прогресса, а сделать это только в приложении «Заметки» довольно сложно.\n\nЕсли вам понравилось приложение, пожалуйста, оставьте отзыв"
           }
         }
       }
     },
     "Add" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -310,22 +339,24 @@
             "value" : "Ajouter"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dodati"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Добавить"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dodati"
-          }
         }
       }
     },
+    "Add your first exercise!" : {
+
+    },
     "Amount" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -339,19 +370,22 @@
             "value" : "Montant"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Količina"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Количество"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Količina"
-          }
         }
       }
+    },
+    "App version:" : {
+
     },
     "Arms" : {
       "extractionState" : "manual",
@@ -368,16 +402,16 @@
             "value" : "Bras"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ruke"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Руки"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ruke"
           }
         }
       }
@@ -397,16 +431,16 @@
             "value" : "Dos"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leđa"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Спина"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Leđa"
           }
         }
       }
@@ -426,19 +460,22 @@
             "value" : "Rowing barre"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Veslanje šipkom"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Тяга штанги в наклоне"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Veslanje šipkom"
-          }
         }
       }
+    },
+    "Begin to add exercises to your list by tapping on plus icon in bottom right corner" : {
+
     },
     "Bench Press" : {
       "extractionState" : "manual",
@@ -455,16 +492,16 @@
             "value" : "Developpé couché"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benč pres"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Жим штанги лежа"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Benč pres"
           }
         }
       }
@@ -484,19 +521,22 @@
             "value" : "Curls biceps"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Biceps kolutovi"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Подъем штанги на бицепс"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Biceps kolutovi"
-          }
         }
       }
+    },
+    "Buy Me a Coffee" : {
+
     },
     "Cable Crossover" : {
       "extractionState" : "manual",
@@ -513,16 +553,16 @@
             "value" : "Cross over avec câble"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kablovski prelaz"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Кроссовер с кабелем"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kablovski prelaz"
           }
         }
       }
@@ -542,22 +582,21 @@
             "value" : "Élévations de mollets"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Podizanje pete"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Подъем на носках"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Podizanje pete"
-          }
         }
       }
     },
     "Cancel" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -571,22 +610,21 @@
             "value" : "Annuler"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Otkazati"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Отменить"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Otkazati"
-          }
         }
       }
     },
     "Category" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -600,16 +638,16 @@
             "value" : "Catégorie"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kategorija"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Категория"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kategorija"
           }
         }
       }
@@ -629,16 +667,16 @@
             "value" : "Poitrine"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grudi"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Грудь"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Grudi"
           }
         }
       }
@@ -658,22 +696,21 @@
             "value" : "Presse pectorale"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Press za prsa"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Жим гантелей лежа"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Press za prsa"
-          }
         }
       }
     },
     "Choose" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -687,16 +724,16 @@
             "value" : "Choisir"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Izaberi"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Выбрать"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Izaberi"
           }
         }
       }
@@ -716,22 +753,21 @@
             "value" : "Choisissez une unité de mesure"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Izaberite mernu jedinicu"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Выберите единицу измерения"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Izaberite mernu jedinicu"
-          }
         }
       }
     },
     "Choose an exercise" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -745,22 +781,21 @@
             "value" : "Choisissez une exercice"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Izaberite vježbu"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Выберите упражнение"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Izaberite vježbu"
-          }
         }
       }
     },
     "Contact me" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -774,19 +809,56 @@
             "value" : "Contactez moi"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kontaktiraj me"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Связаться со мной"
           }
-        },
-        "sr-Latn" : {
+        }
+      }
+    },
+    "contact_me_description_text" : {
+      "localizations" : {
+        "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kontaktiraj me"
+            "value" : "Haben Sie Fragen, Anregungen oder Feedback? Ich würde gerne von Ihnen hören. Kontaktieren Sie uns, um Unterstützung auf Instagram oder Twitter zu erhalten!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Have questions, suggestions, or feedback? I'd love to hear from you. Reach out to get support on Instagram or Twitter!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous avez des questions, des suggestions ou des commentaires ? J'aimerais avoir de vos nouvelles. Contactez-nous pour obtenir de l'aide sur Instagram ou Twitter !"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imate pitanja, sugestije ili povratne informacije? Voleo bih da čujem od vas. Obratite se da dobijete podršku na Instagramu ili Tvitteru!"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Есть вопросы, предложения или отзывы? Я хотел бы услышать ваше мнение. Обратитесь за поддержкой в Instagram или Twitter!"
           }
         }
       }
+    },
+    "Continue" : {
+
     },
     "Core" : {
       "extractionState" : "manual",
@@ -803,16 +875,16 @@
             "value" : "Tronc"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trup"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Корпус"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trup"
           }
         }
       }
@@ -832,16 +904,16 @@
             "value" : "Crunchs"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trbušnjaci"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Жим живота"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trbušnjaci"
           }
         }
       }
@@ -861,16 +933,16 @@
             "value" : "Soulevé de terre"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mrtvo dizanje"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Мертвая тяга"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mrtvo dizanje"
           }
         }
       }
@@ -890,19 +962,22 @@
             "value" : "Dips"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dipsevi"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Отжимания на брусьях"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dipsevi"
-          }
         }
       }
+    },
+    "Done" : {
+
     },
     "Dumbbell Flyes" : {
       "extractionState" : "manual",
@@ -919,16 +994,16 @@
             "value" : "Écartés avec haltères"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Muški letovi s bučicama"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Разведение гантелей"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Muški letovi s bučicama"
           }
         }
       }
@@ -948,19 +1023,22 @@
             "value" : "Rowing avec haltères"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Veslanje bučicama"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Тяга гантелей"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Veslanje bučicama"
-          }
         }
       }
+    },
+    "Empty here" : {
+
     },
     "Enter exercise name" : {
       "extractionState" : "stale",
@@ -977,22 +1055,21 @@
             "value" : "Entrez le nom de l'exercice"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unesite naziv vježbe"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Введите название упражнения"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unesite naziv vježbe"
-          }
         }
       }
     },
     "Enter the amount of reps" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1006,22 +1083,24 @@
             "value" : "Entrez le nombre de répétitions"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unesite količinu ponavljanja"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Введите количество повторений"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unesite količinu ponavljanja"
-          }
         }
       }
     },
+    "Enter your notes here..." : {
+
+    },
     "Exercise" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1035,16 +1114,16 @@
             "value" : "Exercice"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vježba"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Упражнение"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vježba"
           }
         }
       }
@@ -1064,16 +1143,16 @@
             "value" : "Des exercices"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vežbe"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Упражнения"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vežbe"
           }
         }
       }
@@ -1093,16 +1172,16 @@
             "value" : "Tirage visage"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Podizanje lica"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Тяга к лицу"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Podizanje lica"
           }
         }
       }
@@ -1122,16 +1201,16 @@
             "value" : "Élévations frontales"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Podizanje naprijed"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Передние подъемы"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Podizanje naprijed"
           }
         }
       }
@@ -1151,45 +1230,16 @@
             "value" : "Curls marteau"
           }
         },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Молотковые подъемы"
-          }
-        },
-        "sr-Latn" : {
+        "hr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Čekićasti biceps"
           }
-        }
-      }
-    },
-    "Have questions, suggestions, or feedback? I'd love to hear from you. Reach out to get support on Instagram or Twitter!" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Haben Sie Fragen, Anregungen oder Feedback? Ich würde gerne von Ihnen hören. Kontaktieren Sie uns, um Unterstützung auf Instagram oder Twitter zu erhalten!"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vous avez des questions, des suggestions ou des commentaires ? J'aimerais avoir de vos nouvelles. Contactez-nous pour obtenir de l'aide sur Instagram ou Twitter !"
-          }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Есть вопросы, предложения или отзывы? Я хотел бы услышать ваше мнение. Обратитесь за поддержкой в Instagram или Twitter!"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Imate pitanja, sugestije ili povratne informacije? Voleo bih da čujem od vas. Obratite se da dobijete podršku na Instagramu ili Tvitteru!"
+            "value" : "Молотковые подъемы"
           }
         }
       }
@@ -1209,22 +1259,21 @@
             "value" : "Developpé incliné"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nagibni benč pres"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Жим гантелей на наклонной скамье"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nagibni benč pres"
-          }
         }
       }
     },
     "Instagram" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1238,13 +1287,13 @@
             "value" : "Instagram"
           }
         },
-        "ru" : {
+        "hr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Instagram"
           }
         },
-        "sr-Latn" : {
+        "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Instagram"
@@ -1267,16 +1316,16 @@
             "value" : "kg"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "kg"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "кг"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "kg"
           }
         }
       }
@@ -1296,16 +1345,16 @@
             "value" : "Kilogrammes"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kilogrami"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Килограммы"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kilogrami"
           }
         }
       }
@@ -1325,16 +1374,16 @@
             "value" : "Tirage vertical"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pulldown za latissimus"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Тяга верхнего блока"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pulldown za latissimus"
           }
         }
       }
@@ -1354,16 +1403,16 @@
             "value" : "Élévations latérales"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bočno podizanje"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Боковые подъемы"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bočno podizanje"
           }
         }
       }
@@ -1383,16 +1432,16 @@
             "value" : "lb"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "funta"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "фунт."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "funta"
           }
         }
       }
@@ -1412,16 +1461,16 @@
             "value" : "Leg curls"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zadnje lože"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Сгибание ног"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zadnje lože"
           }
         }
       }
@@ -1441,16 +1490,16 @@
             "value" : "Presse à cuisses"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Potisak nogama"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Жим ногами"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Potisak nogama"
           }
         }
       }
@@ -1470,16 +1519,16 @@
             "value" : "Élévations de jambes"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Podizanje nogu"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Подъем ног"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Podizanje nogu"
           }
         }
       }
@@ -1499,16 +1548,16 @@
             "value" : "Jambes"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noge"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ноги"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Noge"
           }
         }
       }
@@ -1528,22 +1577,21 @@
             "value" : "Fentes"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iskoraci"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Выпады"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Iskoraci"
-          }
         }
       }
     },
     "Map" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1557,22 +1605,35 @@
             "value" : "Carte"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mapa"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Карта"
           }
-        },
-        "sr-Latn" : {
+        }
+      }
+    },
+    "Measurement unit" : {
+
+    },
+    "More" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mapa"
+            "value" : "Еще"
           }
         }
       }
     },
     "No exercises" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1586,22 +1647,21 @@
             "value" : "Pas d'exercices"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nema vežbi"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Нет упражнений"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nema vežbi"
-          }
         }
       }
     },
     "No exercises for this date!" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1615,22 +1675,21 @@
             "value" : "Pas d'exercices pour cette date !"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nema vežbi za ovaj datum!"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Нет упражнений в этот день"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nema vežbi za ovaj datum!"
-          }
         }
       }
     },
     "No exercises yet" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1644,22 +1703,21 @@
             "value" : "Pas encore d'exercices"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Još nema vežbi"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Пока нет упражнений"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Još nema vežbi"
-          }
         }
       }
     },
     "Notes" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1673,16 +1731,16 @@
             "value" : "Remarques"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Napomene"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Примечания"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Napomene"
           }
         }
       }
@@ -1702,19 +1760,22 @@
             "value" : "Torsion oblique"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Okretanje trupa"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Поворот корпуса"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Okretanje trupa"
-          }
         }
       }
+    },
+    "OK" : {
+
     },
     "Pounds" : {
       "extractionState" : "manual",
@@ -1731,16 +1792,16 @@
             "value" : "Livres sterling"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pounds"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Фунты"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pounds"
           }
         }
       }
@@ -1760,16 +1821,16 @@
             "value" : "Tractions"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Čeonim hvatom"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Подтягивания"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Čeonim hvatom"
           }
         }
       }
@@ -1789,19 +1850,22 @@
             "value" : "Pompes"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sklekovi"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Отжимания"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sklekovi"
-          }
         }
       }
+    },
+    "Rate the app" : {
+
     },
     "Reps counter" : {
       "extractionState" : "stale",
@@ -1818,19 +1882,22 @@
             "value" : "Compteur de répétitions"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prilazni brojač"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Счетчик подходов"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prilazni brojač"
-          }
         }
       }
+    },
+    "Reps: %@" : {
+
     },
     "Reps: %lld" : {
       "extractionState" : "stale",
@@ -1847,16 +1914,16 @@
             "value" : "Représentants : %lld"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ponavljanja: %lld"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Повторений: %lld"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ponavljanja: %lld"
           }
         }
       }
@@ -1876,16 +1943,16 @@
             "value" : "Consultez l'application"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pregledajte aplikaciju"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Оценить приложение"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pregledajte aplikaciju"
           }
         }
       }
@@ -1905,16 +1972,16 @@
             "value" : "Russian Twist"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ruski okret"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Русский поворот"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ruski okret"
           }
         }
       }
@@ -1934,22 +2001,21 @@
             "value" : "Sauvegarder"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sačuvati"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Сохранить"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sačuvati"
-          }
         }
       }
     },
     "Save location" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1963,16 +2029,16 @@
             "value" : "Enregistrer l'emplacement"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sačuvaj lokaciju"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Сохранять локацию"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sačuvaj lokaciju"
           }
         }
       }
@@ -1992,16 +2058,16 @@
             "value" : "Sélectionnez une catégorie"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Izaberite kategoriju"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Выберите категорию"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Izaberite kategoriju"
           }
         }
       }
@@ -2021,22 +2087,21 @@
             "value" : "Sélectionnez une exercice"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Izaberite vježbu"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Выберите упражнение"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Izaberite vježbu"
-          }
         }
       }
     },
     "Sets" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2050,22 +2115,21 @@
             "value" : "Ensembles"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Setovi"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Подходы"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Setovi"
-          }
         }
       }
     },
     "Sets: %lld" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2079,16 +2143,16 @@
             "value" : "Ensembles : %lld"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pristupi: %lld"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Подходов: %lld"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pristupi: %lld"
           }
         }
       }
@@ -2108,16 +2172,16 @@
             "value" : "Paramètres"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Podešavanja"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Настройки"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Podešavanja"
           }
         }
       }
@@ -2137,16 +2201,16 @@
             "value" : "Développé épaules"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Potisak ramenima"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Жим гантелей сидя"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Potisak ramenima"
           }
         }
       }
@@ -2166,16 +2230,16 @@
             "value" : "Épaules"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ramena"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Плечи"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ramena"
           }
         }
       }
@@ -2195,16 +2259,16 @@
             "value" : "Hausses d'épaules"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skakanje ramenima"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Поднимание плеч"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Skakanje ramenima"
           }
         }
       }
@@ -2224,16 +2288,16 @@
             "value" : "Squats"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Čučnjevi"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Приседания"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Čučnjevi"
           }
         }
       }
@@ -2253,16 +2317,16 @@
             "value" : "st"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "st"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "ст."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "st"
           }
         }
       }
@@ -2282,16 +2346,16 @@
             "value" : "Commencer à écrire"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Počnite da kucate"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Начните печатать"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Počnite da kucate"
           }
         }
       }
@@ -2311,16 +2375,16 @@
             "value" : "Des pierres"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stones"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Стоуны"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stones"
           }
         }
       }
@@ -2340,19 +2404,22 @@
             "value" : "Superman"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supermen"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Супермен"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Supermen"
-          }
         }
       }
+    },
+    "Support" : {
+
     },
     "T-Bar Rows" : {
       "extractionState" : "manual",
@@ -2369,16 +2436,16 @@
             "value" : "Rowing T-bar"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "T-bar veslanje"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Тяга Т-грифа"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "T-bar veslanje"
           }
         }
       }
@@ -2398,22 +2465,21 @@
             "value" : "Appuyez sur un bouton plus pour ajouter un nouvel exercice !"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dodirnite dugme plus da dodate novu vežbu!"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Нажмите на плюс что бы добавить упражнение"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dodirnite dugme plus da dodate novu vežbu!"
-          }
         }
       }
     },
     "Time: %@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2427,16 +2493,16 @@
             "value" : "Temps: %@"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vreme: %@"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Время: %@"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vreme: %@"
           }
         }
       }
@@ -2456,22 +2522,21 @@
             "value" : "Élévation sur les orteils"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Podizanje na prstima"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Поднятие пальцев ног"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Podizanje na prstima"
-          }
         }
       }
     },
     "Total" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2485,16 +2550,16 @@
             "value" : "Total"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ukupno"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Всего"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ukupno"
           }
         }
       }
@@ -2514,16 +2579,16 @@
             "value" : "Tricep Dips"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dipsevi za triceps"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Отжимания на трицепс"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dipsevi za triceps"
           }
         }
       }
@@ -2543,16 +2608,16 @@
             "value" : "Extension triceps"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Produžetak tricepsa"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Разгибание трицепса"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Produžetak tricepsa"
           }
         }
       }
@@ -2572,19 +2637,22 @@
             "value" : "Twitter"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tvitter"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Twitter"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tvitter"
-          }
         }
       }
+    },
+    "Type" : {
+
     },
     "Upright Rows" : {
       "extractionState" : "manual",
@@ -2601,16 +2669,16 @@
             "value" : "Élévations Upright"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uspravno podizanje"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Вертикальные подъемы"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uspravno podizanje"
           }
         }
       }
@@ -2630,22 +2698,21 @@
             "value" : "Version"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Версия"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Version"
-          }
         }
       }
     },
     "Weight, %@ (optional)" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2659,77 +2726,25 @@
             "value" : "Poids, %@ (facultatif)"
           }
         },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Težina, %@ (opciono)"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Вес, %@ (по желанию)"
           }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Težina, %@ (opciono)"
-          }
         }
       }
     },
-    "Welcome to RepsCount, your companion for tracking and improving your workout performance!\n\nI created this app because I myself needed something simple yet powerful to track my progress, and it's pretty hard to do it just in Notes App.\n\nIf you like the app, please leave a review" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Willkommen bei RepsCount, Ihrem Begleiter zum Verfolgen und Verbessern Ihrer Trainingsleistung!\n\nIch habe diese App erstellt, weil ich selbst etwas Einfaches, aber Leistungsstarkes brauchte, um meinen Fortschritt zu verfolgen, und es ist ziemlich schwierig, dies nur in der Notes-App zu tun.\n\nWenn Ihnen die App gefällt, hinterlassen Sie bitte eine Bewertung"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bienvenue sur RepsCount, votre compagnon pour suivre et améliorer vos performances d'entraînement !\n\nJ'ai créé cette application parce que j'avais moi-même besoin de quelque chose de simple mais puissant pour suivre mes progrès, et il est assez difficile de le faire uniquement dans l'application Notes.\n\nSi vous aimez l'application, veuillez laisser un commentaire"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Добро пожаловать в RepsCount, вашего помощника для отслеживания и улучшения результатов тренировок!\n\nЯ создал это приложение, потому что мне самому нужно было что-то простое, но мощное для отслеживания моего прогресса, а сделать это только в приложении «Заметки» довольно сложно.\n\nЕсли вам понравилось приложение, пожалуйста, оставьте отзыв"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dobrodošli u RepsCount, vašeg saputnika za praćenje i poboljšanje performansi vašeg vežbanja!\n\nNapravio sam ovu aplikaciju jer mi je lično bilo potrebno nešto jednostavno, ali moćno da pratim svoj napredak, a prilično je teško to učiniti samo u aplikaciji Notes.\n\nAko vam se sviđa aplikacija, ostavite recenziju"
-          }
-        }
-      }
+    "Welcome to\nReps Counter" : {
+
     },
-    "What's new" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Was ist neu"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quoi de neuf"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Что нового"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Šta je novo"
-          }
-        }
-      }
+    "X (Twitter)" : {
+
     }
   },
   "version" : "1.0"

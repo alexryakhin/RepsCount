@@ -29,6 +29,9 @@ public struct MapView: View {
                         .scaledToFit()
                         .frame(height: height)
                         .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .overlay {
+                            Image(systemName: "mappin.and.ellipse")
+                        }
                 } else {
                     ShimmerView(width: width, height: height)
                         .onAppear {

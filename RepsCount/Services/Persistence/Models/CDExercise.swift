@@ -18,16 +18,12 @@ final class CDExercise: NSManagedObject, Identifiable {
     }
 
     @NSManaged public var address: String?
-    @NSManaged public var category: String?
-    @NSManaged public var eventID: String?
     @NSManaged public var id: String?
     @NSManaged public var latitude: Double
     @NSManaged public var longitude: Double
-    @NSManaged public var metricType: String?
     @NSManaged public var name: String?
     @NSManaged public var notes: String?
     @NSManaged public var timestamp: Date?
-    @NSManaged public var type: String?
     @NSManaged public var exerciseSets: NSSet?
 
     @objc(addExerciseSetsObject:)
@@ -51,7 +47,7 @@ final class CDExercise: NSManagedObject, Identifiable {
 
     var coreModel: Exercise? {
         guard let name,
-              let category = ExerciseCategory(rawValue: category ?? ""),
+              let model = ExerciseModel(rawValue: name),
               let id,
               let timestamp
         else { return nil }
@@ -60,13 +56,10 @@ final class CDExercise: NSManagedObject, Identifiable {
             return Location(latitude: latitude, longitude: longitude, address: address)
         }
         return Exercise(
-            name: name,
-            category: category,
-            metricType: .init(rawValue: metricType ?? ""),
+            model: model,
             id: id,
             timestamp: timestamp,
             sets: sets.compactMap(\.coreModel),
-            calendarEventID: eventID,
             location: location,
             notes: notes
         )

@@ -30,9 +30,7 @@ public final class AddExerciseManager: AddExerciseManagerInterface {
         Task { @MainActor in
             let newItem = CDExercise(context: coreDataService.context)
             newItem.timestamp = .now
-            newItem.category = model.category.rawValue
-            newItem.name = model.name
-            newItem.metricType = model.metricType.rawValue
+            newItem.name = model.rawValue
             newItem.id = UUID().uuidString
             if savesLocation, let location = await locationManager.getCurrentLocation() {
                 newItem.latitude = location.latitude

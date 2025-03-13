@@ -43,11 +43,11 @@ public final class ExercisesListViewController: PageViewController<ExercisesList
         super.setup()
         setupBindings()
         tabBarItem = TabBarItem.exercises.item
+        navigationItem.title = TabBarItem.exercises.localizedTitle
     }
 
     func setupNavigationBar() {
         navigationItem.largeTitleDisplayMode = .always
-        navigationItem.title = TabBarItem.exercises.title
         navigationController?.navigationBar.prefersLargeTitles = true
     }
 
