@@ -26,22 +26,17 @@ public final class ExercisesProvider: ExercisesProviderInterface {
     public let exercisesErrorPublisher = PassthroughSubject<CoreError, Never>()
 
     private let coreDataService: CoreDataServiceInterface
-    private let locationManager: LocationManagerInterface
     private let exercisesSubject = CurrentValueSubject<[Exercise], Never>([])
     private var cancellables: Set<AnyCancellable> = []
 
-    public init(
-        coreDataService: CoreDataServiceInterface,
-        locationManager: LocationManagerInterface
-    ) {
+    public init(coreDataService: CoreDataServiceInterface) {
         self.coreDataService = coreDataService
-        self.locationManager = locationManager
         setupBindings()
-        fetchExercises()
+        coreDataService.context.refreshAllObjects()
     }
 
     public func fetchExercises() {
-        let request = NSFetchRequest<CDExercise>(entityName: "Exercise")
+        let request = CDExercise.fetchRequest()
         do {
             let exercises = try coreDataService.context.fetch(request)
             exercisesSubject.send(exercises.compactMap(\.coreModel))
@@ -51,11 +46,11 @@ public final class ExercisesProvider: ExercisesProviderInterface {
     }
 
     public func delete(with id: String) {
-        let fetchRequest: NSFetchRequest<CDExercise> = CDExercise.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
+        let request = CDExercise.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", id)
 
         do {
-            if let object = try coreDataService.context.fetch(fetchRequest).first {
+            if let object = try coreDataService.context.fetch(request).first {
                 coreDataService.context.delete(object)
                 try coreDataService.saveContext()
             } else {
@@ -67,18 +62,9 @@ public final class ExercisesProvider: ExercisesProviderInterface {
     }
 
     private func setupBindings() {
-        // every time core data gets updated, call fetchExercises()
-        NotificationCenter.default.mergeChangesObjectIDsPublisher
-            .combineLatest(NotificationCenter.default.coreDataDidSavePublisher)
-            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
-            .sink { [weak self] _ in
-                self?.fetchExercises()
-            }
-            .store(in: &cancellables)
-
-
         NotificationCenter.default.eventChangedPublisher
-            .debounce(for: .seconds(1), scheduler: RunLoop.main)
+            .combineLatest(NotificationCenter.default.coreDataDidSaveObjectIDsPublisher)
+            .debounce(for: .seconds(0.3), scheduler: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.fetchExercises()
             }

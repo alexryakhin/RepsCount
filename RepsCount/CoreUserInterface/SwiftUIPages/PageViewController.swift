@@ -22,18 +22,17 @@ open class PageViewController<Content: PageView>: UIHostingController<Content> {
         setup()
     }
 
-    override public func viewWillAppear(_ animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupNavigationBar(animated: animated)
+        if self is NavigationBarHidden {
+            navigationController?.setNavigationBarHidden(true, animated: animated)
+        } else if self is NavigationBarVisible {
+            navigationController?.setNavigationBarHidden(false, animated: animated)
+        }
     }
 
     public required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    open func setupNavigationBar(animated: Bool) {
-        navigationItem.largeTitleDisplayMode = .always
-        navigationController?.navigationBar.prefersLargeTitles = true
     }
 
     open func setup() {

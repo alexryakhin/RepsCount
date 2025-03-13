@@ -106,41 +106,19 @@ public extension ExerciseModel {
         .init(name: "Push Press", category: .shoulders, type: .strengthTraining, metricType: .weightAndReps),
         .init(name: "Handstand Push-ups", category: .shoulders, type: .strengthTraining, metricType: .weightAndReps),
 
-        // Running
-        .init(name: "5k Run", category: .running, type: .running, metricType: .timeOnly),
-        .init(name: "10k Run", category: .running, type: .running, metricType: .timeOnly),
-        .init(name: "Marathon", category: .running, type: .running, metricType: .timeOnly),
-
-        // Cardio
-        .init(name: "Sprints", category: .running, type: .cardio, metricType: .distanceAndTime),
-        .init(name: "Intervals", category: .running, type: .cardio, metricType: .distanceAndTime),
-        .init(name: "Stationary Bike", category: .biking, type: .cardio, metricType: .distanceAndTime),
-        .init(name: "Mountain Biking", category: .biking, type: .cardio, metricType: .distanceAndTime),
-        .init(name: "Road Biking", category: .biking, type: .cardio, metricType: .distanceAndTime),
-        .init(name: "Cycling Intervals", category: .biking, type: .cardio, metricType: .distanceAndTime),
-        .init(name: "Freestyle", category: .swimming, type: .cardio, metricType: .distanceAndTime),
-        .init(name: "Breaststroke", category: .swimming, type: .cardio, metricType: .distanceAndTime),
-        .init(name: "Backstroke", category: .swimming, type: .cardio, metricType: .distanceAndTime),
-        .init(name: "Butterfly", category: .swimming, type: .cardio, metricType: .distanceAndTime),
-        .init(name: "Distance Swimming", category: .swimming, type: .cardio, metricType: .distanceAndTime),
-        .init(name: "500m Row", category: .rowing, type: .cardio, metricType: .timeOnly),
-        .init(name: "1000m Row", category: .rowing, type: .cardio, metricType: .timeOnly),
-        .init(name: "Rowing Intervals", category: .rowing, type: .cardio, metricType: .distanceAndTime),
-        .init(name: "Endurance Rowing", category: .rowing, type: .cardio, metricType: .distanceAndTime),
-
         // Calisthenics
-        .init(name: "Dead Hang", category: .strengthSkills, type: .calisthenics, metricType: .timeOnly),
-        .init(name: "Planche", category: .strengthSkills, type: .calisthenics, metricType: .timeOnly),
-        .init(name: "Front Lever", category: .strengthSkills, type: .calisthenics, metricType: .timeOnly),
-        .init(name: "Back Lever", category: .strengthSkills, type: .calisthenics, metricType: .timeOnly),
-        .init(name: "Human Flag", category: .strengthSkills, type: .calisthenics, metricType: .timeOnly),
+        .init(name: "Dead Hang", category: .strengthSkills, type: .calisthenics, metricType: .time),
+        .init(name: "Planche", category: .strengthSkills, type: .calisthenics, metricType: .time),
+        .init(name: "Front Lever", category: .strengthSkills, type: .calisthenics, metricType: .time),
+        .init(name: "Back Lever", category: .strengthSkills, type: .calisthenics, metricType: .time),
+        .init(name: "Human Flag", category: .strengthSkills, type: .calisthenics, metricType: .time),
         .init(name: "Muscle-ups", category: .strengthSkills, type: .calisthenics, metricType: .weightAndReps),
-        .init(name: "Bridge", category: .mobility, type: .calisthenics, metricType: .timeOnly),
-        .init(name: "Wall Handstand", category: .mobility, type: .calisthenics, metricType: .timeOnly),
-        .init(name: "L-sit", category: .mobility, type: .calisthenics, metricType: .timeOnly),
-        .init(name: "Skin the Cat", category: .mobility, type: .calisthenics, metricType: .timeOnly),
-        .init(name: "Handstand Hold", category: .balance, type: .calisthenics, metricType: .timeOnly),
-        .init(name: "Handstand Walk", category: .balance, type: .calisthenics, metricType: .timeOnly),
-        .init(name: "Elbow Lever", category: .balance, type: .calisthenics, metricType: .timeOnly)
+        .init(name: "Bridge", category: .mobility, type: .calisthenics, metricType: .time),
+        .init(name: "Wall Handstand", category: .mobility, type: .calisthenics, metricType: .time),
+        .init(name: "L-sit", category: .mobility, type: .calisthenics, metricType: .time),
+        .init(name: "Skin the Cat", category: .mobility, type: .calisthenics, metricType: .time),
+        .init(name: "Handstand Hold", category: .balance, type: .calisthenics, metricType: .time),
+        .init(name: "Handstand Walk", category: .balance, type: .calisthenics, metricType: .time),
+        .init(name: "Elbow Lever", category: .balance, type: .calisthenics, metricType: .time)
     ]
 }

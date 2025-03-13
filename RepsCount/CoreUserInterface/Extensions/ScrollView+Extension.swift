@@ -46,4 +46,12 @@ public extension View {
             self
         }
     }
+
+    func clippedWithBackground(_ color: Color) -> some View {
+        self
+            .padding(.vertical, 12)
+            .padding(.horizontal, 16)
+            .background(color)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+    }
 }

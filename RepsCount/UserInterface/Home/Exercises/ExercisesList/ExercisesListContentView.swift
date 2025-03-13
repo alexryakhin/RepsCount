@@ -34,12 +34,6 @@ public struct ExercisesListContentView: PageView {
 
     public var contentView: some View {
         List {
-            filtersView
-                .listRowBackground(Color.clear)
-                .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
-                .listRowSpacing(0)
-                .listRowSeparator(.hidden, edges: .all)
-
             if viewModel.selectedDate == nil {
                 ForEach(viewModel.sections, id: \.date) { section in
                     sectionView(for: section)
@@ -50,6 +44,7 @@ public struct ExercisesListContentView: PageView {
                 sectionView(for: section)
             }
         }
+        .animation(.default, value: viewModel.sections)
         .overlay {
             if let selectedDate = viewModel.selectedDate,
                viewModel.sections.first(where: { $0.date == selectedDate.startOfDay }) == nil {
@@ -101,78 +96,26 @@ public struct ExercisesListContentView: PageView {
         }
     }
 
-    @ViewBuilder
     private func sectionView(for section: ListSection) -> some View {
-        let exercisesInDate = section.items.filter {
-            if let selectedNameFilter = viewModel.selectedNameFilter {
-                $0.name == selectedNameFilter
-            } else {
-                true
-            }
-        }
-        if exercisesInDate.isEmpty == false {
-            Section {
-                ForEach(exercisesInDate) { exercise in
-                    Button {
-                        viewModel.handle(.showExerciseDetails(exercise))
-                    } label: {
-                        ExerciseListCellView(
-                            model: .init(
-                                exercise: LocalizedStringKey(exercise.name),
-                                category: LocalizedStringKey(exercise.category.rawValue),
-                                dateFormatted: exercise.timestamp.formatted(date: .omitted, time: .shortened)
-                            )
+        Section {
+            ForEach(section.items) { exercise in
+                Button {
+                    viewModel.handle(.showExerciseDetails(exercise))
+                } label: {
+                    ExerciseListCellView(
+                        model: .init(
+                            exercise: LocalizedStringKey(exercise.name),
+                            category: LocalizedStringKey(exercise.category.rawValue),
+                            dateFormatted: exercise.timestamp.formatted(date: .omitted, time: .shortened)
                         )
-                    }
+                    )
                 }
-                .onDelete {
-                    viewModel.handle(.deleteElements(indices: $0, date: section.date))
-                }
-            } header: {
-                Text(section.title)
             }
-        }
-    }
-
-    @ViewBuilder
-    private var filtersView: some View {
-        if viewModel.sortedUniqueExerciseNames.count >= 2 && showsFiltersOnExerciseList {
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    ForEach(viewModel.sortedUniqueExerciseNames, id: \.self) { name in
-                        nameFilterButtonView(for: name)
-                    }
-                }
-                .scrollTargetLayoutIfAvailable()
+            .onDelete { indexSet in
+                viewModel.handle(.deleteElements(indices: indexSet, date: section.date))
             }
-            .scrollTargetBehaviorIfAvailable()
-        }
-    }
-
-    @ViewBuilder
-    private func nameFilterButtonView(for name: String) -> some View {
-        if viewModel.selectedNameFilter == name {
-            Button {
-                withAnimation {
-                    viewModel.handle(.selectNameFilter(nil))
-                }
-                HapticManager.shared.triggerSelection()
-            } label: {
-                Text(name)
-            }
-            .buttonStyle(.borderedProminent)
-            .clipShape(Capsule())
-        } else {
-            Button {
-                withAnimation {
-                    viewModel.handle(.selectNameFilter(name))
-                }
-                HapticManager.shared.triggerSelection()
-            } label: {
-                Text(name)
-            }
-            .buttonStyle(.bordered)
-            .clipShape(Capsule())
+        } header: {
+            Text(section.title)
         }
     }
 

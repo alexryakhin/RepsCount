@@ -7,7 +7,14 @@
 
 public enum ExerciseType: String, CaseIterable {
     case strengthTraining = "Strength Training"
-    case cardio = "Cardio"
     case calisthenics = "Calisthenics"
-    case running = "Running"
+
+    public var categories: [ExerciseCategory] {
+        switch self {
+        case .strengthTraining:
+            [.legs, .core, .arms, .chest, .back, .shoulders]
+        case .calisthenics:
+            [.strengthSkills, .mobility, .balance]
+        }
+    }
 }

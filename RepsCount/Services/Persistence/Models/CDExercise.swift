@@ -42,11 +42,11 @@ final class CDExercise: NSManagedObject, Identifiable {
     @objc(removeExerciseSets:)
     @NSManaged public func removeFromExerciseSets(_ values: NSSet)
 
-    var sets: [ExerciseSet] {
+    var sets: [CDExerciseSet] {
         let sets = exerciseSets as? Set<CDExerciseSet> ?? []
         return sets.sorted {
             $0.timestamp ?? .now < $1.timestamp ?? .now
-        }.compactMap(\.coreModel)
+        }
     }
 
     var coreModel: Exercise? {
@@ -62,11 +62,10 @@ final class CDExercise: NSManagedObject, Identifiable {
         return Exercise(
             name: name,
             category: category,
-            type: .init(rawValue: type ?? "") ?? .strengthTraining,
             metricType: .init(rawValue: metricType ?? ""),
             id: id,
             timestamp: timestamp,
-            sets: sets,
+            sets: sets.compactMap(\.coreModel),
             calendarEventID: eventID,
             location: location,
             notes: notes

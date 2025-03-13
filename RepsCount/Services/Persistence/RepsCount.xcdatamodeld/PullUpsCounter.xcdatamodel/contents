@@ -19,7 +19,6 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="notes" attributeType="String" defaultValueString=""/>
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="type" optional="YES" attributeType="String"/>
         <relationship name="exerciseSets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExerciseSet" inverseName="exercise" inverseEntity="ExerciseSet"/>
     </entity>
     <entity name="ExerciseModel" representedClassName="CDExerciseModel" syncable="YES">
@@ -31,7 +30,6 @@
         <attribute name="metricType" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
-        <attribute name="type" optional="YES" attributeType="String"/>
         <relationship name="calendarEvents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CalendarEvent" inverseName="exercises" inverseEntity="CalendarEvent"/>
     </entity>
     <entity name="ExerciseSet" representedClassName="CDExerciseSet" syncable="YES">

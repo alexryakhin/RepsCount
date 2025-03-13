@@ -8,22 +8,19 @@ import Foundation
 
 public enum ExerciseMetricType: Equatable {
     case weightAndReps      // Strength
-    case distanceAndTime    // Cardio
-    case timeOnly           // Static holds (e.g., L-sit, Plank)
+    case time               // Static holds (e.g., L-sit, Plank)
 
     public var rawValue: String {
         switch self {
         case .weightAndReps: "weightAndReps"
-        case .distanceAndTime: "distanceAndTime"
-        case .timeOnly: "timeOnly"
+        case .time: "time"
         }
     }
 
     public init(rawValue: String) {
         switch rawValue {
         case "weightAndReps": self = .weightAndReps
-        case "distanceAndTime": self = .distanceAndTime
-        case "timeOnly": self = .timeOnly
+        case "time": self = .time
         default: self = .weightAndReps
         }
     }

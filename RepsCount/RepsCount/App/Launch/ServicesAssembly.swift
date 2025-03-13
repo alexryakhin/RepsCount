@@ -71,11 +71,26 @@ final class ServicesAssembly: Assembly, Identifiable {
 
         container.register(ExercisesProviderInterface.self) { resolver in
             ExercisesProvider(
+                coreDataService: resolver ~> CoreDataServiceInterface.self
+            )
+        }
+        .inObjectScope(.container)
+
+        container.register(AddExerciseManagerInterface.self) { resolver in
+            AddExerciseManager(
                 coreDataService: resolver ~> CoreDataServiceInterface.self,
                 locationManager: resolver ~> LocationManagerInterface.self
             )
         }
-        .inObjectScope(.container)
+        .inObjectScope(.transient)
+
+        container.register(ExerciseDetailsManagerInterface.self) { resolver, exerciseID in
+            ExerciseDetailsManager(
+                exerciseID: exerciseID,
+                coreDataService: resolver ~> CoreDataServiceInterface.self
+            )
+        }
+        .inObjectScope(.transient)
     }
 
     func loaded(resolver: Resolver) {

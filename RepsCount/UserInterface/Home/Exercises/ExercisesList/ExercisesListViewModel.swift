@@ -17,7 +17,6 @@ public class ExercisesListViewModel: DefaultPageViewModel {
     enum Input {
         case showAddExercise
         case showExerciseDetails(Exercise)
-        case selectNameFilter(String?)
         case deleteElements(indices: IndexSet, date: Date)
     }
 
@@ -29,8 +28,6 @@ public class ExercisesListViewModel: DefaultPageViewModel {
     var onOutput: ((Output) -> Void)?
 
     @Published private(set) var sections: [ExercisesListContentView.ListSection] = []
-    @Published private(set) var sortedUniqueExerciseNames: [String] = []
-    @Published private(set) var selectedNameFilter: String? = nil
     @Published var selectedDate: Date?
 
     private let exercisesProvider: ExercisesProviderInterface
@@ -51,8 +48,6 @@ public class ExercisesListViewModel: DefaultPageViewModel {
             onOutput?(.showAddExercise)
         case .showExerciseDetails(let exercise):
             onOutput?(.showExerciseDetails(exercise))
-        case .selectNameFilter(let nameFilter):
-            selectedNameFilter = nameFilter
         case .deleteElements(let indices, let date):
             deleteElements(at: indices, for: date)
         }
@@ -73,6 +68,8 @@ public class ExercisesListViewModel: DefaultPageViewModel {
 
     private func setupBindings() {
         exercisesProvider.exercisesPublisher
+            .dropFirst()
+            .removeDuplicates()
             .receive(on: RunLoop.main)
             .sink { [weak self] exercises in
                 if exercises.isNotEmpty {
@@ -99,19 +96,8 @@ public class ExercisesListViewModel: DefaultPageViewModel {
                     )
                 }
 
-            let names = Dictionary(grouping: exercises, by: { $0.name })
-                .mapValues { $0.count }
-                .sorted {
-                    if $0.value == $1.value {
-                        return $0.key < $1.key // Secondary sorting by name (alphabetical)
-                    }
-                    return $0.value > $1.value // Primary sorting by count (descending)
-                }
-                .compactMap { $0.key }
-
-            await MainActor.run { [weak self, groupedExercises, names] in
+            await MainActor.run { [weak self, groupedExercises] in
                 self?.sections = groupedExercises
-                self?.sortedUniqueExerciseNames = names
             }
         }
     }

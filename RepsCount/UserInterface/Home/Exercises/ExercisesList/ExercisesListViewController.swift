@@ -10,7 +10,7 @@ import SwiftUI
 import CoreUserInterface
 import Core
 
-public final class ExercisesListViewController: PageViewController<ExercisesListContentView> {
+public final class ExercisesListViewController: PageViewController<ExercisesListContentView>, NavigationBarVisible {
 
     public enum Event {
         case showAddExercise
@@ -34,11 +34,21 @@ public final class ExercisesListViewController: PageViewController<ExercisesList
         fatalError("init(coder:) has not been implemented")
     }
 
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNavigationBar()
+    }
+
     override public func setup() {
         super.setup()
         setupBindings()
         tabBarItem = TabBarItem.exercises.item
+    }
+
+    func setupNavigationBar() {
+        navigationItem.largeTitleDisplayMode = .always
         navigationItem.title = TabBarItem.exercises.title
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
 
     // MARK: - Private Methods

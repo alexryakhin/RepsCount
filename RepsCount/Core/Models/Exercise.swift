@@ -12,7 +12,6 @@ import CoreLocation
 public struct Exercise: Identifiable, Hashable {
     public let name: String
     public let category: ExerciseCategory
-    public let type: ExerciseType
     public let metricType: ExerciseMetricType
     public let id: String
     public let timestamp: Date
@@ -24,7 +23,6 @@ public struct Exercise: Identifiable, Hashable {
     public init(
         name: String,
         category: ExerciseCategory,
-        type: ExerciseType,
         metricType: ExerciseMetricType,
         id: String,
         timestamp: Date,
@@ -35,7 +33,6 @@ public struct Exercise: Identifiable, Hashable {
     ) {
         self.name = name
         self.category = category
-        self.type = type
         self.metricType = metricType
         self.id = id
         self.timestamp = timestamp
