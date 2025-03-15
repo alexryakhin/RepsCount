@@ -7,15 +7,9 @@
 
 import Foundation
 import Core
+import UIKit
 
-public protocol APIServiceInterface {
-    var baseURL: String { get }
-    var apiKey: String { get }
-
-    func fetchData<T: Decodable, P: APIPath>(from path: P, customParams: [CustomQueryParameter]) async throws -> T
-}
-
-open class BaseAPIService: APIServiceInterface {
+open class BaseAPIService {
 
     open var baseURL: String { fatalError("baseURL must be overridden") }
     open var apiKey: String { fatalError("apiKey must be overridden") }
@@ -26,7 +20,10 @@ open class BaseAPIService: APIServiceInterface {
         self.decoder = decoder
     }
 
-    func buildURL<P: APIPath>(for path: P, customParams: [CustomQueryParameter]) throws -> URL {
+    func buildURL<P: APIPath>(
+        for path: P,
+        customParams: [CustomQueryParameter] = []
+    ) throws -> URL {
         var components = URLComponents(string: baseURL + path.path)
         var queryItems = path.queryParams ?? []
         if customParams.contains(.apiKey) {
@@ -41,14 +38,47 @@ open class BaseAPIService: APIServiceInterface {
     }
 
     /// Generic method to fetch and decode data from any API
-    public func fetchData<T: Decodable, P: APIPath>(from path: P, customParams: [CustomQueryParameter]) async throws -> T {
+    func fetchData<T: Decodable, P: APIPath>(
+        from path: P,
+        customParams: [CustomQueryParameter] = [],
+        customHeaders: [String: String] = [:]
+    ) async throws -> T {
         let url = try buildURL(for: path, customParams: customParams)
-        let (data, _) = try await URLSession.shared.data(from: url)
+
+        var request = URLRequest(url: url)
+        request.httpMethod = path.httpMethod.rawValue
+        request.allHTTPHeaderFields = customHeaders
+        request.cachePolicy = .useProtocolCachePolicy
+
+        let (data, _) = try await URLSession.shared.data(for: request)
         #if DEBUG
         if let string = data.prettyPrintedJSONString {
             print("DEBUG50\nURL: \(url)\nPath: \(path.path)\nJSON: \(string)\\")
         }
         #endif
         return try decoder.decode(T.self, from: data)
+    }
+
+    // Fetch UIImage
+    func fetchImage<P: APIPath>(
+        from path: P,
+        customParams: [CustomQueryParameter] = [],
+        customHeaders: [String: String] = [:]
+    ) async throws -> UIImage? {
+        let url = try buildURL(for: path, customParams: customParams)
+//        let url = URL(string: "https://muscle-group-image-generator.p.rapidapi.com/getImage?muscleGroups=biceps%2Cchest%2Chamstring&color=200%2C100%2C80&transparentBackground=0")!
+
+        var request = URLRequest(url: url)
+        request.httpMethod = path.httpMethod.rawValue
+        request.allHTTPHeaderFields = customHeaders
+        request.cachePolicy = .useProtocolCachePolicy
+
+        let (data, _) = try await URLSession.shared.data(for: request)
+
+        let tempURL = FileManager.default.temporaryDirectory.appendingPathComponent("muscle_image.png")
+        try? data.write(to: tempURL)
+        print("Saved image at:", tempURL)
+
+        return UIImage(data: data)
     }
 }

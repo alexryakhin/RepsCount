@@ -217,6 +217,8 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Resources/Assets.xcassets,
+				Resources/back.svg,
+				Resources/front.svg,
 				Resources/Localizable.xcstrings,
 			);
 			target = 53F4CEB22D801271004551D5 /* UserInterface */;
@@ -225,6 +227,8 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Resources/Assets.xcassets,
+				Resources/back.svg,
+				Resources/front.svg,
 				Resources/Localizable.xcstrings,
 			);
 			target = 53F4CEE62D8012B6004551D5 /* CoreUserInterface */;
@@ -1377,7 +1381,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_ASSET_PATHS = "RepsCount/Resources/Localizable.xcstrings RepsCount/Resources/Assets.xcassets";
+				DEVELOPMENT_ASSET_PATHS = "RepsCount/Resources/back.svg RepsCount/Resources/Assets.xcassets RepsCount/Resources/Localizable.xcstrings RepsCount/Resources/front.svg";
 				DEVELOPMENT_TEAM = 69S862NXBP;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1418,7 +1422,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_ASSET_PATHS = "RepsCount/Resources/Localizable.xcstrings RepsCount/Resources/Assets.xcassets";
+				DEVELOPMENT_ASSET_PATHS = "RepsCount/Resources/back.svg RepsCount/Resources/Assets.xcassets RepsCount/Resources/Localizable.xcstrings RepsCount/Resources/front.svg";
 				DEVELOPMENT_TEAM = 69S862NXBP;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1623,7 +1627,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_ASSET_PATHS = "RepsCount/Resources/Localizable.xcstrings RepsCount/Resources/Assets.xcassets";
+				DEVELOPMENT_ASSET_PATHS = "RepsCount/Resources/back.svg RepsCount/Resources/Assets.xcassets RepsCount/Resources/Localizable.xcstrings RepsCount/Resources/front.svg";
 				DEVELOPMENT_TEAM = 69S862NXBP;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1664,7 +1668,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_ASSET_PATHS = "RepsCount/Resources/Localizable.xcstrings RepsCount/Resources/Assets.xcassets";
+				DEVELOPMENT_ASSET_PATHS = "RepsCount/Resources/back.svg RepsCount/Resources/Assets.xcassets RepsCount/Resources/Localizable.xcstrings RepsCount/Resources/front.svg";
 				DEVELOPMENT_TEAM = 69S862NXBP;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;

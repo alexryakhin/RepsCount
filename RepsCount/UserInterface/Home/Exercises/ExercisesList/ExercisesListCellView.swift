@@ -20,6 +20,8 @@ struct ExerciseListCellView: ConfigurableView {
 
     var body: some View {
         HStack(spacing: 8) {
+            // TODO: 
+            MuscleMapView(primaryMuscleGroups: [.biceps], secondaryMuscleGroups: [.tricepsLongHead])
             VStack(alignment: .leading, spacing: 4) {
                 Text(model.exercise)
                     .font(.headline)
