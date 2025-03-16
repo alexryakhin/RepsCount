@@ -20,14 +20,6 @@ final class ExercisesListAssembly: Assembly, Identifiable {
             return controller
         }
 
-        container.register(AddExerciseViewController.self) { resolver in
-            let viewModel = AddExerciseViewModel(
-                addExerciseManager: resolver ~> AddExerciseManagerInterface.self
-            )
-            let controller = AddExerciseViewController(viewModel: viewModel)
-            return controller
-        }
-
         container.register(ExerciseDetailsViewController.self) { resolver, exercise in
             let viewModel = ExerciseDetailsViewModel(
                 exercise: exercise,

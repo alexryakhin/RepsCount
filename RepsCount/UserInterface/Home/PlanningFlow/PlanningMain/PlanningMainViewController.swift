@@ -3,23 +3,23 @@ import SwiftUI
 import CoreUserInterface
 import Core
 
-public final class AddExerciseViewController: PageViewController<AddExerciseContentView>, NavigationBarHidden {
+public final class PlanningMainViewController: PageViewController<PlanningMainContentView> {
 
     public enum Event {
-        case finish
+        case createWorkoutTemplate
     }
 
     public var onEvent: ((Event) -> Void)?
 
     // MARK: - Private properties
 
-    private let viewModel: AddExerciseViewModel
+    private let viewModel: PlanningMainViewModel
 
     // MARK: - Initialization
 
-    public init(viewModel: AddExerciseViewModel) {
+    public init(viewModel: PlanningMainViewModel) {
         self.viewModel = viewModel
-        super.init(rootView: AddExerciseContentView(viewModel: viewModel))
+        super.init(rootView: PlanningMainContentView(viewModel: viewModel))
     }
 
     public required init?(coder: NSCoder) {
@@ -29,6 +29,8 @@ public final class AddExerciseViewController: PageViewController<AddExerciseCont
     override public func setup() {
         super.setup()
         setupBindings()
+        tabBarItem = TabBarItem.planning.item
+        navigationItem.title = TabBarItem.planning.localizedTitle
     }
 
     // MARK: - Private Methods
@@ -36,7 +38,8 @@ public final class AddExerciseViewController: PageViewController<AddExerciseCont
     private func setupBindings() {
         viewModel.onOutput = { [weak self] output in
             switch output {
-                // handle output
+            case .createWorkoutTemplate:
+                self?.onEvent?(.createWorkoutTemplate)
             }
         }
     }

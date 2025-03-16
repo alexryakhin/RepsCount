@@ -19,35 +19,55 @@ final class HomeCoordinator: Coordinator {
     private func showTabController() {
         guard topController(ofType: TabController.self) == nil else { return }
 
-        let exercisesListNavigationController = assignExercisesListCoordinator()
+        let todayFlowNavigationController = assignTodayFlowCoordinator()
+        let planningFlowNavigationController = assignPlanningFlowCoordinator()
         let moreNavigationController = assignMoreCoordinator()
 
         let controller = resolver ~> TabController.self
 
         controller.controllers = [
-            exercisesListNavigationController,
+            todayFlowNavigationController,
+            planningFlowNavigationController,
             moreNavigationController
         ]
 
         router.setRootModule(controller)
     }
 
-    private func assignExercisesListCoordinator() -> NavigationController {
-        DIContainer.shared.assemble(assembly: ExercisesListAssembly())
+    private func assignTodayFlowCoordinator() -> NavigationController {
+        DIContainer.shared.assemble(assembly: TodayFlowAssembly())
 
-        // ExercisesList flow coordinator
-        guard let exercisesListCoordinator = child(ofType: ExercisesListCoordinator.self)
-                ?? resolver.resolve(ExercisesListCoordinator.self, argument: router)
-        else { fatalError("Unable to instantiate ExercisesListCoordinator") }
-        exercisesListCoordinator.start()
+        // TodayFlow flow coordinator
+        guard let todayFlowCoordinator = child(ofType: TodayFlowCoordinator.self)
+                ?? resolver.resolve(TodayFlowCoordinator.self, argument: router)
+        else { fatalError("Unable to instantiate TodayFlowCoordinator") }
+        todayFlowCoordinator.start()
 
-        let exercisesListNavigationController = exercisesListCoordinator.navController
+        let todayFlowNavigationController = todayFlowCoordinator.navController
 
-        if !contains(child: ExercisesListCoordinator.self) {
-            addDependency(exercisesListCoordinator)
+        if !contains(child: TodayFlowCoordinator.self) {
+            addDependency(todayFlowCoordinator)
         }
 
-        return exercisesListNavigationController
+        return todayFlowNavigationController
+    }
+
+    private func assignPlanningFlowCoordinator() -> NavigationController {
+        DIContainer.shared.assemble(assembly: PlanningFlowAssembly())
+
+        // PlanningFlow flow coordinator
+        guard let planningFlowCoordinator = child(ofType: PlanningFlowCoordinator.self)
+                ?? resolver.resolve(PlanningFlowCoordinator.self, argument: router)
+        else { fatalError("Unable to instantiate PlanningFlowCoordinator") }
+        planningFlowCoordinator.start()
+
+        let planningFlowNavigationController = planningFlowCoordinator.navController
+
+        if !contains(child: PlanningFlowCoordinator.self) {
+            addDependency(planningFlowCoordinator)
+        }
+
+        return planningFlowNavigationController
     }
 
     private func assignMoreCoordinator() -> NavigationController {

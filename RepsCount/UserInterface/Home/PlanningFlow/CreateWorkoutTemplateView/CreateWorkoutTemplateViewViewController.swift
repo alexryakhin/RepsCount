@@ -3,22 +3,23 @@ import SwiftUI
 import CoreUserInterface
 import Core
 
-public final class MoreViewController: PageViewController<MoreContentView> {
+public final class CreateWorkoutTemplateViewViewController: PageViewController<CreateWorkoutTemplateViewContentView>, NavigationBarVisible {
 
     public enum Event {
+        case finish
     }
 
     public var onEvent: ((Event) -> Void)?
 
     // MARK: - Private properties
 
-    private let viewModel: MoreViewModel
+    private let viewModel: CreateWorkoutTemplateViewViewModel
 
     // MARK: - Initialization
 
-    public init(viewModel: MoreViewModel) {
+    public init(viewModel: CreateWorkoutTemplateViewViewModel) {
         self.viewModel = viewModel
-        super.init(rootView: MoreContentView(viewModel: viewModel))
+        super.init(rootView: CreateWorkoutTemplateViewContentView(viewModel: viewModel))
     }
 
     public required init?(coder: NSCoder) {
@@ -28,8 +29,7 @@ public final class MoreViewController: PageViewController<MoreContentView> {
     override public func setup() {
         super.setup()
         setupBindings()
-        tabBarItem = TabBarItem.more.item
-        navigationItem.title = TabBarItem.more.localizedTitle
+        navigationItem.title = "New workout template"
     }
 
     // MARK: - Private Methods

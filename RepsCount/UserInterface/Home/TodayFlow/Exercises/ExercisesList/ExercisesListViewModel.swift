@@ -24,7 +24,6 @@ public class ExercisesListViewModel: DefaultPageViewModel {
     }
 
     enum Output {
-        case showAddExercise
         case showExerciseDetails(Exercise)
     }
 
@@ -52,7 +51,7 @@ public class ExercisesListViewModel: DefaultPageViewModel {
     func handle(_ input: Input) {
         switch input {
         case .showAddExercise:
-            onOutput?(.showAddExercise)
+            break
         case .showExerciseDetails(let exercise):
             onOutput?(.showExerciseDetails(exercise))
         case .deleteElements(let indices, let date):

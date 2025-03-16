@@ -7,7 +7,7 @@ import UIKit
 import UserInterface
 import Core
 
-final class ExercisesListCoordinator: Coordinator {
+final class TodayFlowCoordinator: Coordinator {
 
     // MARK: - Public Properties
 
@@ -31,20 +31,13 @@ final class ExercisesListCoordinator: Coordinator {
     // MARK: - Private Methods
 
     private func showMainController() {
-        let controller = resolver ~> ExercisesListViewController.self
+        let controller = resolver ~> TodayMainViewController.self
         controller.onEvent = { [weak self] event in
             switch event {
-            case .showExerciseDetails(let exercise):
-                self?.showExerciseDetails(for: exercise)
             @unknown default:
                 fatalError("Unhandled event")
             }
         }
         navController.addChild(controller)
-    }
-
-    private func showExerciseDetails(for exercise: Exercise) {
-        let controller = resolver ~> (ExerciseDetailsViewController.self, exercise)
-        innerRouter.push(controller)
     }
 }

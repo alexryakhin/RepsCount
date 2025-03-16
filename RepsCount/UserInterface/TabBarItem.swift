@@ -9,14 +9,14 @@ import Foundation
 import UIKit
 
 public enum TabBarItem {
-    case exercises
-    case calendar
+    case today
+    case planning
     case more
 
     public var title: String {
         switch self {
-        case .exercises: "Exercises"
-        case .calendar: "Calendar"
+        case .today: "Today"
+        case .planning: "Planning"
         case .more: "More"
         }
     }
@@ -27,16 +27,16 @@ public enum TabBarItem {
 
     public var image: String {
         switch self {
-        case .exercises: "dumbbell"
-        case .calendar: "calendar"
+        case .today: "doc.text.image"
+        case .planning: "figure.run.square.stack"
         case .more: "ellipsis.circle"
         }
     }
 
     public var selectedImage: String {
         switch self {
-        case .exercises: "dumbbell.fill"
-        case .calendar: "calendar"
+        case .today: "doc.text.image.fill"
+        case .planning: "figure.run.square.stack.fill"
         case .more: "ellipsis.circle.fill"
         }
     }

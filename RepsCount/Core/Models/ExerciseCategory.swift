@@ -6,46 +6,48 @@
 //
 
 public enum ExerciseCategory: String, CaseIterable {
-    case legs = "Legs"
-    case core = "Core"
-    case arms = "Arms"
-    case chest = "Chest"
-    case back = "Back"
-    case shoulders = "Shoulders"
+    case calves = "Calves"
+    case quadriceps = "Quadriceps"
+    case hamstrings = "Hamstrings"
+    case glutes = "Glutes"
+    case lowerBack = "Lower Back"
+    case lats = "Lats"
+    case trapezius = "Trapezius"
+    case abdominals = "Abdominals"
+    case pectorals = "Pectorals"
+    case deltoids = "Deltoids"
+    case triceps = "Triceps"
+    case biceps = "Biceps"
+    case forearms = "Forearms"
 
-    case strengthSkills = "Strength Skills"
-    case mobility = "Mobility"
-    case balance = "Balance"
-
-    public var type: ExerciseType {
+    public var exercises: [any ExerciseModel] {
         switch self {
-        case .legs, .core, .arms, .chest, .back, .shoulders:
-                .strengthTraining
-        case .strengthSkills, .mobility, .balance:
-                .calisthenics
-        }
-    }
-
-    public var exercises: [ExerciseModel] {
-        switch self {
-        case .legs:
-            [.squats, .lunges, .legPress, .deadlifts, .legCurls, .calfRaises, .toeRaises, .splitSquat, .bulgarianSplitSquat, .pistolSquat]
-        case .core:
-            [.crunches, .russianTwist, .legRaises, .obliqueTwist, .superman]
-        case .arms:
-            [.bicepCurls, .tricepDips, .hammerCurls, .tricepExtension, .chinUps]
-        case .chest:
-            [.dips, .pushUps, .diamondPushUps, .dumbbellFlyes, .benchPress, .chestPress, .cableCrossover, .inclineBenchPress]
-        case .back:
-            [.pullUps, .latPulldowns, .barbellRows, .dumbbellRows, .seatedCableRows, .tBarRows, .hyperextensions, .facePulls, .reverseFlyes, .oneArmPullUp]
-        case .shoulders:
-            [.overheadPress, .arnoldPress, .lateralRaises, .frontRaises, .rearDeltFlyes, .uprightRows, .shrugs, .pushPress, .handstandPushUps]
-        case .strengthSkills:
-            [.deadHang, .planche, .frontLever, .backLever, .humanFlag, .muscleUps]
-        case .mobility:
-            [.bridge, .wallHandstand, .lSit, .skinTheCat]
-        case .balance:
-            [.handstandHold, .handstandWalk, .elbowLever]
+        case .calves:
+            return CalvesExerciseModel.allCases
+        case .quadriceps:
+            return QuadricepsExerciseModel.allCases
+        case .hamstrings:
+            return HamstringsExerciseModel.allCases
+        case .glutes:
+            return GlutesExerciseModel.allCases
+        case .lowerBack:
+            return LowerBackExerciseModel.allCases
+        case .lats:
+            return LatsExerciseModel.allCases
+        case .trapezius:
+            return TricepsExerciseModel.allCases
+        case .abdominals:
+            return AbdominalsExerciseModel.allCases
+        case .pectorals:
+            return PectoralsExerciseModel.allCases
+        case .deltoids:
+            return DeltoidsExerciseModel.allCases
+        case .triceps:
+            return TricepsExerciseModel.allCases
+        case .biceps:
+            return BicepsExerciseModel.allCases
+        case .forearms:
+            return ForearmsExerciseModel.allCases
         }
     }
 }

@@ -27,15 +27,12 @@ public enum MuscleGroup: String, CaseIterable, Identifiable {
     case sternocleidomastoid
     case tensorFasciaeLatae
     case trapezius
-    case tricepsLongHead
-    case tricepsMedialHead
+    case triceps
     case vastusLateralis
     case vastusMedialis
     case adductorMagnus
     case bicepsFemoris
     case flexorCarpiUlnaris
-    case gastrocnemiusLateralHead
-    case gastrocnemiusMedialHead
     case gluteusMaximus
     case gluteusMedius
     case gracilis
@@ -46,7 +43,6 @@ public enum MuscleGroup: String, CaseIterable, Identifiable {
     case semitendinosus
     case teresMajor
     case thoracolumbarFascia
-    case tricepsLongLateralHead
 
     public var id: String { rawValue }
 
@@ -73,15 +69,12 @@ public enum MuscleGroup: String, CaseIterable, Identifiable {
         case .sternocleidomastoid: "Sternocleidomastoid"
         case .tensorFasciaeLatae: "Tensor Fasciae Latae"
         case .trapezius: "Trapezius"
-        case .tricepsLongHead: "Triceps Brachii, Long Head"
-        case .tricepsMedialHead: "Triceps Brachii, Medial Head"
+        case .triceps: "Triceps Brachii"
         case .vastusLateralis: "Vastus Lateralis"
         case .vastusMedialis: "Vastus Medialis"
         case .adductorMagnus: "Adductor Magnus"
         case .bicepsFemoris: "Biceps Femoris"
         case .flexorCarpiUlnaris: "Flexor Carpi Ulnaris"
-        case .gastrocnemiusLateralHead: "Gastrocnemius, Lateral Head"
-        case .gastrocnemiusMedialHead: "Gastrocnemius, Medial Head"
         case .gluteusMaximus: "Gluteus Maximus"
         case .gluteusMedius: "Gluteus Medius"
         case .gracilis: "Gracilis"
@@ -92,7 +85,6 @@ public enum MuscleGroup: String, CaseIterable, Identifiable {
         case .semitendinosus: "Semitendinosus"
         case .teresMajor: "Teres Major"
         case .thoracolumbarFascia: "Thoracolumbar Fascia"
-        case .tricepsLongLateralHead: "Triceps Brachii (Long Head, Lateral Head)"
         }
     }
 }

@@ -98,6 +98,7 @@ public struct MoreContentView: PageView {
             }
         }
         .listStyle(.insetGrouped)
+        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             AnalyticsService.shared.logEvent(.moreOpened)
         }
