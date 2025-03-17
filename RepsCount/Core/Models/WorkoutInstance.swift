@@ -5,10 +5,10 @@
 //  Created by Aleksandr Riakhin on 3/16/25.
 //
 
-public struct WorkoutInstance: Identifiable {
+public struct WorkoutInstance: Identifiable, Hashable {
     public let id: String
     public let date: Date
-    public let exercises: Set<Exercise>
+    public let exercises: [Exercise]
     public let workoutTemplate: WorkoutTemplate
 
     public var isCompleted: Bool {
@@ -18,7 +18,7 @@ public struct WorkoutInstance: Identifiable {
     public init(
         id: String,
         date: Date,
-        exercises: Set<Exercise>,
+        exercises: [Exercise],
         workoutTemplate: WorkoutTemplate
     ) {
         self.id = id

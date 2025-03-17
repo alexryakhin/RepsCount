@@ -14,7 +14,8 @@ public struct CalendarEvent: Identifiable {
     public let id: String
     public let exercises: [ExerciseModel]
     public let notes: String?
-    public let recurrenceRule: Data?
+    public let recurrenceRule: String?
+    public let eventIdentifier: String?
 
     public init(
         title: String,
@@ -22,7 +23,8 @@ public struct CalendarEvent: Identifiable {
         id: String = UUID().uuidString,
         exercises: [ExerciseModel] = [],
         notes: String? = nil,
-        recurrenceRule: Data? = nil
+        recurrenceRule: String? = nil,
+        eventIdentifier: String? = nil
     ) {
         self.title = title
         self.date = date
@@ -30,5 +32,6 @@ public struct CalendarEvent: Identifiable {
         self.exercises = exercises
         self.notes = notes
         self.recurrenceRule = recurrenceRule
+        self.eventIdentifier = eventIdentifier
     }
 }

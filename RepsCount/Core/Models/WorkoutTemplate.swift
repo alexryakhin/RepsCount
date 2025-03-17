@@ -5,18 +5,21 @@
 //  Created by Aleksandr Riakhin on 3/16/25.
 //
 
-public struct WorkoutTemplate: Identifiable {
+public struct WorkoutTemplate: Identifiable, Hashable {
     public let id: String
     public let name: String
-    public let exercises: Set<WorkoutTemplateExercise>
+    public let templateExercises: [WorkoutTemplateExercise]
+    public let workoutInstances: [WorkoutInstance]
 
     public init(
         id: String,
         name: String,
-        exercises: Set<WorkoutTemplateExercise>
+        templateExercises: [WorkoutTemplateExercise],
+        workoutInstances: [WorkoutInstance]
     ) {
         self.id = id
         self.name = name
-        self.exercises = exercises
+        self.templateExercises = templateExercises
+        self.workoutInstances = workoutInstances
     }
 }

@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="24D81" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="CalendarEvent" representedClassName="CDCalendarEvent" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="eventIdentifier" optional="YES" attributeType="String"/>
+        <attribute name="exercises" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="recurrenceRule" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="Exercise" representedClassName="CDExercise" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="String"/>
@@ -7,8 +16,10 @@
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="notes" attributeType="String" defaultValueString=""/>
+        <attribute name="sortingOrder" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="exerciseSets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExerciseSet" inverseName="exercise" inverseEntity="ExerciseSet"/>
+        <relationship name="workoutInstance" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutInstance" inverseName="exercises" inverseEntity="WorkoutInstance"/>
     </entity>
     <entity name="ExerciseSet" representedClassName="CDExerciseSet" syncable="YES">
         <attribute name="amount" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
@@ -16,5 +27,25 @@
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="weight" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="exercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise" inverseName="exerciseSets" inverseEntity="Exercise"/>
+    </entity>
+    <entity name="WorkoutInstance" representedClassName="CDWorkoutInstance" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise" inverseName="workoutInstance" inverseEntity="Exercise"/>
+        <relationship name="workoutTemplate" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutTemplate" inverseName="workoutInstances" inverseEntity="WorkoutTemplate"/>
+    </entity>
+    <entity name="WorkoutTemplate" representedClassName="CDWorkoutTemplate" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="templateExercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkoutTemplateExercise" inverseName="workoutTemplates" inverseEntity="WorkoutTemplateExercise"/>
+        <relationship name="workoutInstances" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkoutInstance" inverseName="workoutTemplate" inverseEntity="WorkoutInstance"/>
+    </entity>
+    <entity name="WorkoutTemplateExercise" representedClassName="CDWorkoutTemplateExercise" syncable="YES">
+        <attribute name="defaultReps" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="defaultSets" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="exerciseModel" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="sortingOrder" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="workoutTemplates" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkoutTemplate" inverseName="templateExercises" inverseEntity="WorkoutTemplate"/>
     </entity>
 </model>

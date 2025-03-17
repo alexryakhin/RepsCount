@@ -52,6 +52,11 @@ public final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
     // MARK: - Private Methods
 
     private func setupBindings() {
-        // Services and Published properties subscriptions
+        $selectedEquipment
+            .sink { [weak self] equipment in
+                guard let self else { return }
+                selectedExercises = selectedExercises.filter { equipment.contains($0.equipment) }
+            }
+            .store(in: &cancellables)
     }
 }

@@ -1686,6 +1686,9 @@
         }
       }
     },
+    "No exercises available for this category" : {
+
+    },
     "No exercises for this date!" : {
       "localizations" : {
         "de" : {

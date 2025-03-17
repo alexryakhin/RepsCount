@@ -13,32 +13,34 @@ import Core
 @objc(CDExercise)
 final class CDExercise: NSManagedObject, Identifiable {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<CDExercise> {
+    @nonobjc class func fetchRequest() -> NSFetchRequest<CDExercise> {
         return NSFetchRequest<CDExercise>(entityName: "Exercise")
     }
 
-    @NSManaged public var address: String?
-    @NSManaged public var id: String?
-    @NSManaged public var latitude: Double
-    @NSManaged public var longitude: Double
-    @NSManaged public var name: String?
-    @NSManaged public var notes: String?
-    @NSManaged public var timestamp: Date?
-    @NSManaged public var exerciseSets: NSSet?
+    @NSManaged var address: String?
+    @NSManaged var id: String?
+    @NSManaged var latitude: Double
+    @NSManaged var longitude: Double
+    @NSManaged var name: String?
+    @NSManaged var notes: String?
+    @NSManaged var timestamp: Date?
+    @NSManaged var exerciseSets: NSSet?
+    @NSManaged var workoutInstance: CDWorkoutInstance?
+    @NSManaged var sortingOrder: Int64
 
     @objc(addExerciseSetsObject:)
-    @NSManaged public func addToExerciseSets(_ value: CDExerciseSet)
+    @NSManaged func addToExerciseSets(_ value: CDExerciseSet)
 
     @objc(removeExerciseSetsObject:)
-    @NSManaged public func removeFromExerciseSets(_ value: CDExerciseSet)
+    @NSManaged func removeFromExerciseSets(_ value: CDExerciseSet)
 
     @objc(addExerciseSets:)
-    @NSManaged public func addToExerciseSets(_ values: NSSet)
+    @NSManaged func addToExerciseSets(_ values: NSSet)
 
     @objc(removeExerciseSets:)
-    @NSManaged public func removeFromExerciseSets(_ values: NSSet)
+    @NSManaged func removeFromExerciseSets(_ values: NSSet)
 
-    var sets: [CDExerciseSet] {
+    var _exerciseSets: [CDExerciseSet] {
         let sets = exerciseSets as? Set<CDExerciseSet> ?? []
         return sets.sorted {
             $0.timestamp ?? .now < $1.timestamp ?? .now
@@ -59,9 +61,11 @@ final class CDExercise: NSManagedObject, Identifiable {
             model: model,
             id: id,
             timestamp: timestamp,
-            sets: sets.compactMap(\.coreModel),
+            sets: _exerciseSets.compactMap(\.coreModel),
             location: location,
-            notes: notes
+            notes: notes,
+            workoutInstanceId: workoutInstance?.id,
+            sortingOrder: Int(sortingOrder)
         )
     }
 }

@@ -50,6 +50,7 @@ public enum ExerciseCategory: String, CaseIterable {
             return [
                 .bicepCurls,
                 .hammerCurls,
+                .pullUps,
                 .chinUps,
                 .concentrationCurls,
                 .preacherCurls,

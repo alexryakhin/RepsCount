@@ -47,7 +47,7 @@ public final class ExerciseDetailsManager: ExerciseDetailsManagerInterface {
     }
 
     public func deleteSet(atOffsets offsets: IndexSet) {
-        offsets.compactMap { cdExercise?.sets[$0] }.forEach(coreDataService.context.delete)
+        offsets.compactMap { cdExercise?._exerciseSets[$0] }.forEach(coreDataService.context.delete)
         saveContext()
     }
 

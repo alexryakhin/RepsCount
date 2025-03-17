@@ -16,6 +16,8 @@ public struct Exercise: Identifiable, Hashable {
     public let sets: [ExerciseSet]
     public let location: Location?
     public let notes: String?
+    public let workoutInstanceId: String?
+    public let sortingOrder: Int
 
     public var isCompleted: Bool {
         Calendar.current.isDateInToday(timestamp)
@@ -27,7 +29,9 @@ public struct Exercise: Identifiable, Hashable {
         timestamp: Date,
         sets: [ExerciseSet],
         location: Location?,
-        notes: String?
+        notes: String?,
+        workoutInstanceId: String?,
+        sortingOrder: Int
     ) {
         self.model = model
         self.id = id
@@ -35,14 +39,7 @@ public struct Exercise: Identifiable, Hashable {
         self.sets = sets
         self.location = location
         self.notes = notes
-    }
-
-    public static func == (lhs: Exercise, rhs: Exercise) -> Bool {
-        lhs.id == rhs.id
-    }
-
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-        hasher.combine(timestamp)
+        self.workoutInstanceId = workoutInstanceId
+        self.sortingOrder = sortingOrder
     }
 }

@@ -15,6 +15,8 @@ struct ExerciseEquipmentFilterView: View {
         Menu {
             ForEach(ExerciseEquipment.allCases, id: \.self) { equipment in
                 Button(action: {
+                    guard equipment != .none else { return }
+
                     if selectedEquipment.contains(equipment) {
                         selectedEquipment.remove(equipment)
                     } else {

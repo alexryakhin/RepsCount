@@ -62,27 +62,11 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
                 Text("Select exercises")
                     .font(.title2)
                     .bold()
-                    .frame(maxWidth: .infinity)
                     .listRowBackground(Color.clear)
             }
 
             ForEach(ExerciseCategory.allCases, id: \.self) { category in
-                Section {
-                    HFlow {
-                        ForEach(category.exercises.filter { exercise in
-                            viewModel.selectedEquipment.contains(exercise.equipment)
-                        }, id: \.rawValue) { model in
-                            capsuleView(
-                                for: model,
-                                isSelected: viewModel.selectedExercises.contains(
-                                    where: { $0.rawValue == model.rawValue }
-                                )
-                            )
-                        }
-                    }
-                } header: {
-                    Text(category.name)
-                }
+                exerciseCategorySectionView(for: category)
             }
         }
         .overlay(alignment: .topTrailing) {
@@ -110,6 +94,31 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
             .padding(.vertical, 12)
             .padding(.horizontal, 16)
             .gradientStyle(.bottomButton)
+        }
+    }
+
+    private func exerciseCategorySectionView(for category: ExerciseCategory) -> some View {
+        Section {
+            let filteredExercises = category.exercises.filter {
+                viewModel.selectedEquipment.contains($0.equipment)
+            }
+            if filteredExercises.isNotEmpty {
+                HFlow {
+                    ForEach(filteredExercises, id: \.rawValue) { model in
+                        capsuleView(
+                            for: model,
+                            isSelected: viewModel.selectedExercises.contains(
+                                where: { $0.rawValue == model.rawValue }
+                            )
+                        )
+                    }
+                }
+            } else {
+                Text("No exercises available for this category")
+                    .foregroundStyle(.secondary)
+            }
+        } header: {
+            Text(category.name)
         }
     }
 

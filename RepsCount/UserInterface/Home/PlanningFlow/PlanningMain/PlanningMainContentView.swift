@@ -46,7 +46,7 @@ struct WorkoutTemplateRow: View {
         VStack(alignment: .leading) {
             Text(template.name)
                 .font(.headline)
-            Text("Exercises: \(template.exercises.count)")
+            Text("Exercises: \(template.templateExercises.count)")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
         }

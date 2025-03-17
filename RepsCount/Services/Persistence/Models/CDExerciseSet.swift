@@ -1,5 +1,5 @@
 //
-//  ExerciseSet+CoreDataClass.swift
+//  ExerciseSet.swift
 //  Services
 //
 //  Created by Aleksandr Riakhin on 3/11/25.
