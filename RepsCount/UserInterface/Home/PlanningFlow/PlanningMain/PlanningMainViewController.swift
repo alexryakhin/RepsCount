@@ -7,6 +7,8 @@ public final class PlanningMainViewController: PageViewController<PlanningMainCo
 
     public enum Event {
         case createWorkoutTemplate
+        case editWorkoutTemplate(WorkoutTemplate)
+        case showCalendar
     }
 
     public var onEvent: ((Event) -> Void)?
@@ -40,6 +42,10 @@ public final class PlanningMainViewController: PageViewController<PlanningMainCo
             switch output {
             case .createWorkoutTemplate:
                 self?.onEvent?(.createWorkoutTemplate)
+            case .editWorkoutTemplate(let template):
+                self?.onEvent?(.editWorkoutTemplate(template))
+            case .showCalendar:
+                self?.onEvent?(.showCalendar)
             }
         }
     }

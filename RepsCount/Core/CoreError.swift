@@ -68,12 +68,15 @@ public enum CoreError: Error {
 
     public enum InternalError: Error {
         case removingExerciseFailed
+        case removingTemplateFailed
         case inputCannotBeEmpty
 
         public var description: String {
             switch self {
             case .removingExerciseFailed:
                 return "Removing exercise failed"
+            case .removingTemplateFailed:
+                return "Removing template failed"
             case .inputCannotBeEmpty:
                 return "Input cannot be empty"
             }

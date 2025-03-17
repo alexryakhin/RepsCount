@@ -20,8 +20,7 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
     public var contentView: some View {
         List {
             Section {
-                MuscleMapView(exercises: viewModel.selectedExercises)
-                    .aspectRatio(1, contentMode: .fit)
+                MuscleMapView(exercises: viewModel.exercises.map(\.exerciseModel))
                     .onAppear { isMuscleMapVisible = true }
                     .onDisappear { isMuscleMapVisible = false }
             } header: {
@@ -56,6 +55,24 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
                         }
                     }
                 }
+            }
+
+            Section {
+                ForEach(viewModel.exercises) { exercise in
+                    HStack {
+                        Text(exercise.exerciseModel.name)
+                            .bold()
+                        Divider()
+                        TextField("0", text: .constant("0"))
+                        Divider()
+                        TextField("1", text: .constant("1"))
+                    }
+                }
+                .onDelete { offsets in
+                    // TODO: delete
+                }
+            } header: {
+                Text("Selected exercises")
             }
 
             Section {
@@ -107,8 +124,8 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
                     ForEach(filteredExercises, id: \.rawValue) { model in
                         capsuleView(
                             for: model,
-                            isSelected: viewModel.selectedExercises.contains(
-                                where: { $0.rawValue == model.rawValue }
+                            isSelected: viewModel.exercises.contains(
+                                where: { $0.exerciseModel.rawValue == model.rawValue }
                             )
                         )
                     }
@@ -146,7 +163,7 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
     }
 
     private var floatingMuscleMapView: some View {
-        MuscleMapView(exercises: viewModel.selectedExercises)
+        MuscleMapView(exercises: viewModel.exercises.map(\.exerciseModel))
             .frame(width: 100, height: 100)
             .padding(8)
             .background(.ultraThinMaterial)
@@ -154,10 +171,4 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
             .padding(8)
             .transition(.opacity)
     }
-}
-
-#Preview {
-    CreateWorkoutTemplateViewContentView(
-        viewModel: CreateWorkoutTemplateViewViewModel(arg: 0)
-    )
 }

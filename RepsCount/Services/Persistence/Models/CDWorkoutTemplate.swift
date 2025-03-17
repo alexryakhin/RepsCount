@@ -19,8 +19,10 @@ final class CDWorkoutTemplate: NSManagedObject, Identifiable {
 
     @NSManaged var id: String?
     @NSManaged var name: String?
+    @NSManaged var notes: String?
     @NSManaged var templateExercises: NSSet?
     @NSManaged var workoutInstances: NSSet?
+    @NSManaged var calendarEvent: CDCalendarEvent?
 
     @objc(insertObject:inTemplateExercisesAtIndex:)
     @NSManaged func insertIntoTemplateExercises(_ value: CDWorkoutTemplateExercise, at idx: Int)
@@ -47,10 +49,10 @@ final class CDWorkoutTemplate: NSManagedObject, Identifiable {
     @NSManaged func removeFromTemplateExercises(_ value: CDWorkoutTemplateExercise)
 
     @objc(addTemplateExercises:)
-    @NSManaged func addToTemplateExercises(_ values: NSOrderedSet)
+    @NSManaged func addToTemplateExercises(_ values: NSSet)
 
     @objc(removeTemplateExercises:)
-    @NSManaged func removeFromTemplateExercises(_ values: NSOrderedSet)
+    @NSManaged func removeFromTemplateExercises(_ values: NSSet)
 
     @objc(addWorkoutInstancesObject:)
     @NSManaged func addToWorkoutInstances(_ value: CDWorkoutInstance)
@@ -84,8 +86,10 @@ final class CDWorkoutTemplate: NSManagedObject, Identifiable {
         return WorkoutTemplate(
             id: id,
             name: name,
+            notes: notes,
             templateExercises: _templateExercises.compactMap(\.coreModel),
-            workoutInstances: _workoutInstances.compactMap(\.coreModel)
+            workoutInstances: _workoutInstances.compactMap(\.coreModel),
+            calendarEventId: calendarEvent?.id
         )
     }
 }

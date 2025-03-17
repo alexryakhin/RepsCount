@@ -20,7 +20,7 @@ final class CDCalendarEvent: NSManagedObject, Identifiable {
     @NSManaged var title: String?
     @NSManaged var date: Date?
     @NSManaged var id: String?
-    @NSManaged var exercises: String?
+    @NSManaged var workoutTemplate: CDWorkoutTemplate?
     @NSManaged var notes: String?
     @NSManaged var recurrenceRule: String?
     @NSManaged var eventIdentifier: String?
@@ -29,17 +29,14 @@ final class CDCalendarEvent: NSManagedObject, Identifiable {
         guard let title,
               let date,
               let id,
-              let exercises
+              let workoutTemplate = workoutTemplate?.coreModel
         else { return nil }
 
-        let exerciseModels = exercises.components(separatedBy: ";").compactMap {
-            ExerciseModel(rawValue: $0)
-        }
         return CalendarEvent(
             title: title,
             date: date,
             id: id,
-            exercises: exerciseModels,
+            workoutTemplate: workoutTemplate,
             notes: notes,
             recurrenceRule: recurrenceRule,
             eventIdentifier: eventIdentifier

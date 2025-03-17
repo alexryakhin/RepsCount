@@ -47,10 +47,10 @@ final class CDWorkoutInstance: NSManagedObject, Identifiable {
     @NSManaged func removeFromExercises(_ value: CDExercise)
 
     @objc(addExercises:)
-    @NSManaged func addToExercises(_ values: NSOrderedSet)
+    @NSManaged func addToExercises(_ values: NSSet)
 
     @objc(removeExercises:)
-    @NSManaged func removeFromExercises(_ values: NSOrderedSet)
+    @NSManaged func removeFromExercises(_ values: NSSet)
 
     var _exercises: [CDExercise] {
         let sets = exercises as? Set<CDExercise> ?? []

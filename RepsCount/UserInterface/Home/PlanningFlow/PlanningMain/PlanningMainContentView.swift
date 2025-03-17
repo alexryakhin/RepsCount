@@ -14,9 +14,39 @@ public struct PlanningMainContentView: PageView {
     }
 
     public var contentView: some View {
-        List(viewModel.workoutTemplates) { template in
-            Button(action: { viewModel.handle(.showWorkoutTemplateDetails(template)) }) {
-                WorkoutTemplateRow(template: template)
+        List {
+            Section {
+                Button {
+                    viewModel.handle(.showCalendar)
+                } label: {
+                    Label {
+                        VStack(alignment: .leading) {
+                            Text("Schedule workouts")
+                                .font(.headline)
+                                .bold()
+                                .foregroundStyle(.primary)
+                            Text("Manage your workout schedule here: Create repetition for events, set reminders, and more.")
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        }
+                    } icon: {
+                        Image(systemName: "calendar")
+                    }
+                }
+            } header: {
+                Text("Calendar")
+            }
+            Section {
+                ForEach(viewModel.workoutTemplates) { template in
+                    Button(action: { viewModel.handle(.showWorkoutTemplateDetails(template)) }) {
+                        WorkoutTemplateRow(template: template)
+                    }
+                }
+                .onDelete {
+                    viewModel.handle(.deleteWorkoutTemplate(offsets: $0))
+                }
+            } header: {
+                Text("My workout templates")
             }
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -35,20 +65,6 @@ public struct PlanningMainContentView: PageView {
                 viewModel.handle(.createWorkoutTemplate)
             }
             .buttonStyle(.borderedProminent)
-        }
-    }
-}
-
-struct WorkoutTemplateRow: View {
-    let template: WorkoutTemplate
-
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text(template.name)
-                .font(.headline)
-            Text("Exercises: \(template.templateExercises.count)")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
         }
     }
 }

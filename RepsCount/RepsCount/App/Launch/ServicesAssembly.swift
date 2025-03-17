@@ -91,6 +91,21 @@ final class ServicesAssembly: Assembly, Identifiable {
             )
         }
         .inObjectScope(.transient)
+
+        container.register(WorkoutTemplatesProviderInterface.self) { resolver in
+            WorkoutTemplatesProvider(
+                coreDataService: resolver ~> CoreDataServiceInterface.self
+            )
+        }
+        .inObjectScope(.container)
+
+        container.register(WorkoutTemplateManagerInterface.self) { resolver, workoutTemplateID in
+            WorkoutTemplatesManager(
+                workoutTemplateID: workoutTemplateID,
+                coreDataService: resolver ~> CoreDataServiceInterface.self
+            )
+        }
+        .inObjectScope(.transient)
     }
 
     func loaded(resolver: Resolver) {

@@ -263,6 +263,12 @@
     "%.1f%%" : {
 
     },
+    "0" : {
+
+    },
+    "1" : {
+
+    },
     "About app" : {
       "localizations" : {
         "de" : {
@@ -569,6 +575,9 @@
           }
         }
       }
+    },
+    "Calendar" : {
+
     },
     "Calf Raises" : {
       "extractionState" : "manual",
@@ -1613,6 +1622,9 @@
         }
       }
     },
+    "Manage your workout schedule here: Create repetition for events, set reminders, and more." : {
+
+    },
     "Map" : {
       "localizations" : {
         "de" : {
@@ -1656,6 +1668,9 @@
       }
     },
     "Muscle groups to target" : {
+
+    },
+    "My workout templates" : {
 
     },
     "No exercises" : {
@@ -2083,6 +2098,9 @@
         }
       }
     },
+    "Schedule workouts" : {
+
+    },
     "Select a category" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -2142,6 +2160,9 @@
       }
     },
     "Select exercises" : {
+
+    },
+    "Selected exercises" : {
 
     },
     "Sets" : {

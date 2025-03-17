@@ -65,7 +65,7 @@ final class CDExercise: NSManagedObject, Identifiable {
             location: location,
             notes: notes,
             workoutInstanceId: workoutInstance?.id,
-            sortingOrder: Int(sortingOrder)
+            sortingOrder: sortingOrder.int
         )
     }
 }

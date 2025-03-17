@@ -21,27 +21,20 @@ final class CDWorkoutTemplateExercise: NSManagedObject, Identifiable {
     @NSManaged var exerciseModel: String?
     @NSManaged var defaultSets: Int64
     @NSManaged var defaultReps: Int64
-    @NSManaged var workoutTemplates: NSSet?
+    @NSManaged var workoutTemplate: CDWorkoutTemplate?
     @NSManaged var sortingOrder: Int64
 
-    @objc(addWorkoutTemplatesObject:)
-    @NSManaged func addToWorkoutTemplates(_ value: CDWorkoutTemplate)
-
-    @objc(removeWorkoutTemplatesObject:)
-    @NSManaged func removeFromWorkoutTemplates(_ value: CDWorkoutTemplate)
-
-    @objc(addWorkoutTemplates:)
-    @NSManaged func addToWorkoutTemplates(_ values: NSSet)
-
-    @objc(removeWorkoutTemplates:)
-    @NSManaged func removeFromWorkoutTemplates(_ values: NSSet)
-
-    var _workoutTemplates: [CDWorkoutTemplate] {
-        let sets = workoutTemplates as? Set<CDWorkoutTemplate> ?? []
-        return sets.sorted {
-            $0.name ?? "" < $1.name ?? ""
-        }
-    }
+//    @objc(addWorkoutTemplatesObject:)
+//    @NSManaged func addToWorkoutTemplates(_ value: CDWorkoutTemplate)
+//
+//    @objc(removeWorkoutTemplatesObject:)
+//    @NSManaged func removeFromWorkoutTemplates(_ value: CDWorkoutTemplate)
+//
+//    @objc(addWorkoutTemplates:)
+//    @NSManaged func addToWorkoutTemplates(_ values: NSSet)
+//
+//    @objc(removeWorkoutTemplates:)
+//    @NSManaged func removeFromWorkoutTemplates(_ values: NSSet)
 
     var coreModel: WorkoutTemplateExercise? {
         guard let id,
@@ -52,9 +45,9 @@ final class CDWorkoutTemplateExercise: NSManagedObject, Identifiable {
         return WorkoutTemplateExercise(
             id: id,
             exerciseModel: model,
-            defaultSets: Int(defaultSets),
-            defaultReps: Int(defaultReps),
-            workoutTemplates: _workoutTemplates.compactMap(\.coreModel)
+            defaultSets: defaultSets.int,
+            defaultReps: defaultReps.int,
+            sortingOrder: sortingOrder.int
         )
     }
 }

@@ -36,6 +36,10 @@ final class PlanningFlowCoordinator: Coordinator {
             switch event {
             case .createWorkoutTemplate:
                 self?.createWorkoutTemplate()
+            case .editWorkoutTemplate(let template):
+                self?.editWorkoutTemplate(with: template)
+            case .showCalendar:
+                self?.showCalendar()
             @unknown default:
                 fatalError("Unhandled event")
             }
@@ -44,7 +48,39 @@ final class PlanningFlowCoordinator: Coordinator {
     }
 
     private func createWorkoutTemplate() {
-        let controller = resolver ~> CreateWorkoutTemplateViewViewController.self
+        let workoutTemplateId: String? = nil
+        let controller = resolver.resolve(CreateWorkoutTemplateViewViewController.self, argument: workoutTemplateId)
+
+        controller?.onEvent = { [weak self] event in
+            switch event {
+            case .finish:
+                self?.router.popToRootModule(animated: true)
+            @unknown default:
+                fatalError("Unhandled event")
+            }
+        }
+
+        router.push(controller)
+    }
+
+    private func editWorkoutTemplate(with template: WorkoutTemplate) {
+        let workoutTemplateId: String? = template.id
+        let controller = resolver.resolve(CreateWorkoutTemplateViewViewController.self, argument: workoutTemplateId)
+
+        controller?.onEvent = { [weak self] event in
+            switch event {
+            case .finish:
+                self?.router.popToRootModule(animated: true)
+            @unknown default:
+                fatalError("Unhandled event")
+            }
+        }
+
+        router.push(controller)
+    }
+
+    private func showCalendar() {
+        let controller = resolver.resolve(CalendarViewController.self)
         router.push(controller)
     }
 }

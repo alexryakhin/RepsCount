@@ -3,7 +3,7 @@ import SwiftUI
 import CoreUserInterface
 import Core
 
-public final class CreateWorkoutTemplateViewViewController: PageViewController<CreateWorkoutTemplateViewContentView>, NavigationBarVisible {
+public final class CalendarViewController: PageViewController<CalendarContentView>, NavigationBarVisible {
 
     public enum Event {
         case finish
@@ -13,13 +13,13 @@ public final class CreateWorkoutTemplateViewViewController: PageViewController<C
 
     // MARK: - Private properties
 
-    private let viewModel: CreateWorkoutTemplateViewViewModel
+    private let viewModel: CalendarViewModel
 
     // MARK: - Initialization
 
-    public init(viewModel: CreateWorkoutTemplateViewViewModel) {
+    public init(viewModel: CalendarViewModel) {
         self.viewModel = viewModel
-        super.init(rootView: CreateWorkoutTemplateViewContentView(viewModel: viewModel))
+        super.init(rootView: CalendarContentView(viewModel: viewModel))
     }
 
     public required init?(coder: NSCoder) {
@@ -29,7 +29,7 @@ public final class CreateWorkoutTemplateViewViewController: PageViewController<C
     override public func setup() {
         super.setup()
         setupBindings()
-        navigationItem.title = "New workout template"
+        navigationItem.title = "Calendar"
     }
 
     // MARK: - Private Methods
@@ -37,8 +37,7 @@ public final class CreateWorkoutTemplateViewViewController: PageViewController<C
     private func setupBindings() {
         viewModel.onOutput = { [weak self] output in
             switch output {
-            case .dismiss:
-                self?.onEvent?(.finish)
+                // handle output
             }
         }
     }

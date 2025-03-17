@@ -13,7 +13,7 @@ public final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
     }
 
     enum Output {
-        // Output actions to pass to the view controller
+        case dismiss
     }
 
     var onOutput: ((Output) -> Void)?
@@ -23,15 +23,17 @@ public final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
     @Published var selectedEquipment: Set<ExerciseEquipment> = Set(ExerciseEquipment.allCases)
 
     @Published private(set) var isEditing: Bool = false
-    @Published private(set) var selectedExercises: [ExerciseModel] = []
+    @Published private(set) var exercises: [WorkoutTemplateExercise] = []
 
     // MARK: - Private Properties
 
+    private let workoutTemplatesManager: WorkoutTemplateManagerInterface
     private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Initialization
 
-    public init(arg: Int) {
+    public init(workoutTemplatesManager: WorkoutTemplateManagerInterface) {
+        self.workoutTemplatesManager = workoutTemplatesManager
         super.init()
         setupBindings()
     }
@@ -39,13 +41,21 @@ public final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
     func handle(_ input: Input) {
         switch input {
         case .toggleExerciseSelection(let model):
-            if let index = selectedExercises.firstIndex(where: { $0.rawValue == model.rawValue }) {
-                selectedExercises.remove(at: index)
+            if let index = exercises.firstIndex(where: { $0.exerciseModel.rawValue == model.rawValue }) {
+                exercises.remove(at: index)
             } else {
-                selectedExercises.append(model)
+                exercises.append(
+                    .init(
+                        id: UUID().uuidString,
+                        exerciseModel: model,
+                        defaultSets: 0,
+                        defaultReps: 0,
+                        sortingOrder: exercises.count
+                    )
+                )
             }
         case .saveTemplate:
-            break
+            saveTemplate()
         }
     }
 
@@ -55,8 +65,35 @@ public final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
         $selectedEquipment
             .sink { [weak self] equipment in
                 guard let self else { return }
-                selectedExercises = selectedExercises.filter { equipment.contains($0.equipment) }
+                exercises = exercises.filter { equipment.contains($0.exerciseModel.equipment) }
             }
             .store(in: &cancellables)
+
+        workoutTemplatesManager.workoutTemplatePublisher
+            .removeDuplicates()
+            .sink { [weak self] template in
+                guard let self else { return }
+                if let template {
+                    isEditing = true
+                    workoutName = template.name
+                    workoutNotes = template.notes.orEmpty
+                    exercises = template.templateExercises
+                }
+            }
+            .store(in: &cancellables)
+    }
+
+    private func saveTemplate() {
+        if isEditing {
+            workoutTemplatesManager.updateExercises(exercises)
+            onOutput?(.dismiss)
+        } else {
+            workoutTemplatesManager.createNewWorkoutTemplate(
+                name: workoutName,
+                notes: workoutNotes.nilIfEmpty,
+                exerciseTemplates: exercises
+            )
+            onOutput?(.dismiss)
+        }
     }
 }

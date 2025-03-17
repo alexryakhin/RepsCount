@@ -48,7 +48,7 @@ public struct MuscleMapView: View {
         HStack(spacing: 8) {
             InteractiveMap(svgName: "front") { shape in
                 InteractiveShape(shape)
-                    .stroke(Color.accentColor)
+                    .stroke(Color.accentColor, lineWidth: .onePixel)
                     .background(background(for: shape))
                     .onTapGesture {
                         print("DEBUG50 - tapped \(shape.name)")
@@ -59,7 +59,7 @@ public struct MuscleMapView: View {
 
             InteractiveMap(svgName: "back") { shape in
                 InteractiveShape(shape)
-                    .stroke(Color.accentColor)
+                    .stroke(Color.accentColor, lineWidth: .onePixel)
                     .background(background(for: shape))
                     .onTapGesture {
                         print("DEBUG50 - tapped \(shape.name)")
@@ -68,6 +68,7 @@ public struct MuscleMapView: View {
             .aspectRatio(0.35, contentMode: .fit)
             .frame(maxWidth: .infinity, alignment: .center)
         }
+        .aspectRatio(1, contentMode: .fit)
     }
 
     @ViewBuilder

@@ -8,18 +8,24 @@
 public struct WorkoutTemplate: Identifiable, Hashable {
     public let id: String
     public let name: String
+    public let notes: String?
     public let templateExercises: [WorkoutTemplateExercise]
     public let workoutInstances: [WorkoutInstance]
+    public let calendarEventId: String?
 
     public init(
         id: String,
         name: String,
+        notes: String?,
         templateExercises: [WorkoutTemplateExercise],
-        workoutInstances: [WorkoutInstance]
+        workoutInstances: [WorkoutInstance],
+        calendarEventId: String?
     ) {
         self.id = id
         self.name = name
+        self.notes = notes
         self.templateExercises = templateExercises
         self.workoutInstances = workoutInstances
+        self.calendarEventId = calendarEventId
     }
 }

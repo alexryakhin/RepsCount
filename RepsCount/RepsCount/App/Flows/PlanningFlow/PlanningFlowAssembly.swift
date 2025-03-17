@@ -13,15 +13,23 @@ final class PlanningFlowAssembly: Assembly, Identifiable {
 
         container.register(PlanningMainViewController.self) { resolver in
             let viewModel = PlanningMainViewModel(
-                arg: 0
+                workoutTemplatesProvider: resolver ~> WorkoutTemplatesProviderInterface.self
             )
             let controller = PlanningMainViewController(viewModel: viewModel)
             return controller
         }
 
-        container.register(CreateWorkoutTemplateViewViewController.self) { resolver in
-            let viewModel = CreateWorkoutTemplateViewViewModel(arg: 0)
+        container.register(CreateWorkoutTemplateViewViewController.self) { (resolver: Resolver, workoutTemplateId: String?) in
+            let viewModel = CreateWorkoutTemplateViewViewModel(
+                workoutTemplatesManager: resolver.resolve(WorkoutTemplateManagerInterface.self, argument: workoutTemplateId)!
+            )
             let controller = CreateWorkoutTemplateViewViewController(viewModel: viewModel)
+            return controller
+        }
+
+        container.register(CalendarViewController.self) { resolver in
+            let viewModel = CalendarViewModel(arg: 0)
+            let controller = CalendarViewController(viewModel: viewModel)
             return controller
         }
     }
