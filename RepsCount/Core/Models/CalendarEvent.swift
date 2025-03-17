@@ -12,7 +12,7 @@ public struct CalendarEvent: Identifiable {
     public let title: String
     public let date: Date
     public let id: String
-    public let exercises: [any ExerciseModel]
+    public let exercises: [ExerciseModel]
     public let notes: String?
     public let recurrenceRule: Data?
 
@@ -20,7 +20,7 @@ public struct CalendarEvent: Identifiable {
         title: String,
         date: Date,
         id: String = UUID().uuidString,
-        exercises: [any ExerciseModel] = [],
+        exercises: [ExerciseModel] = [],
         notes: String? = nil,
         recurrenceRule: Data? = nil
     ) {

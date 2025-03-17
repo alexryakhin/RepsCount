@@ -114,7 +114,7 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
     }
 
     @ViewBuilder
-    private func capsuleView(for item: any ExerciseModel, isSelected: Bool) -> some View {
+    private func capsuleView(for item: ExerciseModel, isSelected: Bool) -> some View {
         if isSelected {
             Button {
                 viewModel.handle(.toggleExerciseSelection(item))

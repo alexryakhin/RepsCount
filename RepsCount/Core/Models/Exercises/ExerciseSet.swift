@@ -1,6 +1,6 @@
 //
 //  ExerciseSet.swift
-//  Services
+//  Core
 //
 //  Created by Aleksandr Riakhin on 3/11/25.
 //

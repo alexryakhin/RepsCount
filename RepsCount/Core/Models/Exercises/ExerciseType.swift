@@ -1,6 +1,6 @@
 //
 //  ExerciseType.swift
-//  RepsCount
+//  Core
 //
 //  Created by Aleksandr Riakhin on 3/12/25.
 //

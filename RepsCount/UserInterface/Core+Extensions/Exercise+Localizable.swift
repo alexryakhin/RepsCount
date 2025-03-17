@@ -25,4 +25,8 @@ extension ExerciseModel {
     public var name: LocalizedStringKey {
         LocalizedStringKey(rawValue)
     }
+
+    public var categoriesLocalizedNames: String {
+        categories.map { NSLocalizedString($0.rawValue, comment: $0.rawValue) }.joined(separator: ", ")
+    }
 }

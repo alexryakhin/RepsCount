@@ -38,7 +38,7 @@ public struct MuscleMapView: View {
         self.secondaryMuscleGroups = secondaryMuscleGroups
     }
 
-    public init(exercises: [any ExerciseModel]) {
+    public init(exercises: [ExerciseModel]) {
         let allPrimary = exercises.flatMap { $0.primaryMuscleGroups }
         let allSecondary = exercises.flatMap { $0.secondaryMuscleGroups }
         self.init(primaryMuscleGroups: Array(Set(allPrimary)), secondaryMuscleGroups: Array(Set(allSecondary)))

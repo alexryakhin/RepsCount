@@ -10,7 +10,7 @@ import Foundation
 import CoreLocation
 
 public struct Exercise: Identifiable, Hashable {
-    public let model: any ExerciseModel
+    public let model: ExerciseModel
     public let id: String
     public let timestamp: Date
     public let sets: [ExerciseSet]
@@ -22,7 +22,7 @@ public struct Exercise: Identifiable, Hashable {
     }
 
     public init(
-        model: any ExerciseModel,
+        model: ExerciseModel,
         id: String,
         timestamp: Date,
         sets: [ExerciseSet],

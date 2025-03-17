@@ -1,6 +1,6 @@
 //
 //  ExerciseEquipment.swift
-//  RepsCount
+//  Core
 //
 //  Created by Aleksandr Riakhin on 3/16/25.
 //

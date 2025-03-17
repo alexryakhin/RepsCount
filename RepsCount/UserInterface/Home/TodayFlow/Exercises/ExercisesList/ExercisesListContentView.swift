@@ -105,7 +105,7 @@ public struct ExercisesListContentView: PageView {
                     ExerciseListCellView(
                         model: .init(
                             exercise: exercise.model.name,
-                            category: exercise.model.category.name,
+                            categories: exercise.model.categoriesLocalizedNames,
                             dateFormatted: exercise.timestamp.formatted(date: .omitted, time: .shortened)
                         )
                     )

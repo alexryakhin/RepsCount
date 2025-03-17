@@ -1,9 +1,10 @@
 //
 //  ExerciseMetricType.swift
-//  RepsCount
+//  Core
 //
 //  Created by Aleksandr Riakhin on 1/7/25.
 //
+
 import Foundation
 
 public enum ExerciseMetricType: Equatable {

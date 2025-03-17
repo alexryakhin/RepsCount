@@ -11,12 +11,12 @@ public struct WorkoutTemplateExercise: Identifiable, Hashable {
     }
     
     public let id: String
-    public let exerciseModel: any ExerciseModel
+    public let exerciseModel: ExerciseModel
     public let defaultSets: Int
 
     public init(
         id: String,
-        exerciseModel: any ExerciseModel,
+        exerciseModel: ExerciseModel,
         defaultSets: Int
     ) {
         self.id = id

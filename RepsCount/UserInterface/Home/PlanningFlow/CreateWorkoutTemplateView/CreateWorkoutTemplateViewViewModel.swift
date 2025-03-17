@@ -8,7 +8,7 @@ import Combine
 public final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
 
     enum Input {
-        case toggleExerciseSelection(any ExerciseModel)
+        case toggleExerciseSelection(ExerciseModel)
         case saveTemplate
     }
 
@@ -23,7 +23,7 @@ public final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
     @Published var selectedEquipment: Set<ExerciseEquipment> = Set(ExerciseEquipment.allCases)
 
     @Published private(set) var isEditing: Bool = false
-    @Published private(set) var selectedExercises: [any ExerciseModel] = []
+    @Published private(set) var selectedExercises: [ExerciseModel] = []
 
     // MARK: - Private Properties
 

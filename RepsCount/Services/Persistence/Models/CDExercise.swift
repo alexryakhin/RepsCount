@@ -47,7 +47,7 @@ final class CDExercise: NSManagedObject, Identifiable {
 
     var coreModel: Exercise? {
         guard let name,
-              let model: any ExerciseModel = exerciseModel(from: name),
+              let model: ExerciseModel = .init(rawValue: name),
               let id,
               let timestamp
         else { return nil }

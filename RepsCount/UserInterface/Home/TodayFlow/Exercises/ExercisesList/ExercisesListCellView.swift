@@ -12,7 +12,7 @@ struct ExerciseListCellView: ConfigurableView {
 
     struct Model {
         let exercise: LocalizedStringKey
-        let category: LocalizedStringKey
+        let categories: String
         let dateFormatted: String
     }
 
@@ -24,7 +24,7 @@ struct ExerciseListCellView: ConfigurableView {
                 Text(model.exercise)
                     .font(.headline)
                 + Text(", ")
-                + Text(model.category)
+                + Text(model.categories)
 
                 Text(model.dateFormatted)
                     .font(.subheadline)
