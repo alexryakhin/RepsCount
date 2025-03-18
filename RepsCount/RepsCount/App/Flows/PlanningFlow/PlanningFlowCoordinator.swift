@@ -81,6 +81,49 @@ final class PlanningFlowCoordinator: Coordinator {
 
     private func showCalendar() {
         let controller = resolver.resolve(CalendarViewController.self)
+
+        controller?.onEvent = { [weak self] event in
+            switch event {
+            case .scheduleWorkout:
+                self?.showScheduleWorkout()
+            case .editEvent(let eventId):
+                self?.showEditEvent(with: eventId)
+            @unknown default:
+                fatalError("Unhandled event")
+            }
+        }
+
+        router.push(controller)
+    }
+
+    private func showScheduleWorkout() {
+        let eventId: String? = nil
+        let controller = resolver.resolve(ScheduleEventViewController.self, argument: eventId)
+
+        controller?.onEvent = { [weak self] event in
+            switch event {
+            case .finish:
+                self?.router.popToRootModule(animated: true)
+            @unknown default:
+                fatalError("Unhandled event")
+            }
+        }
+
+        router.push(controller)
+    }
+
+    private func showEditEvent(with id: String?) {
+        let controller = resolver.resolve(ScheduleEventViewController.self, argument: id)
+
+        controller?.onEvent = { [weak self] event in
+            switch event {
+            case .finish:
+                self?.router.popToRootModule(animated: true)
+            @unknown default:
+                fatalError("Unhandled event")
+            }
+        }
+
         router.push(controller)
     }
 }

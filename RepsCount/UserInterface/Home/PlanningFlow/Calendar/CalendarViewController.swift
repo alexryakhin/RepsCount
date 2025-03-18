@@ -6,7 +6,8 @@ import Core
 public final class CalendarViewController: PageViewController<CalendarContentView>, NavigationBarVisible {
 
     public enum Event {
-        case finish
+        case scheduleWorkout
+        case editEvent(eventId: String)
     }
 
     public var onEvent: ((Event) -> Void)?
@@ -37,7 +38,10 @@ public final class CalendarViewController: PageViewController<CalendarContentVie
     private func setupBindings() {
         viewModel.onOutput = { [weak self] output in
             switch output {
-                // handle output
+            case .scheduleWorkout:
+                self?.onEvent?(.scheduleWorkout)
+            case .editEvent(let eventId):
+                self?.onEvent?(.editEvent(eventId: eventId))
             }
         }
     }

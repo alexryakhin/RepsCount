@@ -17,27 +17,22 @@ final class CDCalendarEvent: NSManagedObject, Identifiable {
         return NSFetchRequest<CDCalendarEvent>(entityName: "CalendarEvent")
     }
 
-    @NSManaged var title: String?
     @NSManaged var date: Date?
     @NSManaged var id: String?
     @NSManaged var workoutTemplate: CDWorkoutTemplate?
-    @NSManaged var notes: String?
     @NSManaged var recurrenceRule: String?
     @NSManaged var eventIdentifier: String?
 
     var coreModel: CalendarEvent? {
-        guard let title,
-              let date,
+        guard let date,
               let id,
               let workoutTemplate = workoutTemplate?.coreModel
         else { return nil }
 
         return CalendarEvent(
-            title: title,
             date: date,
             id: id,
             workoutTemplate: workoutTemplate,
-            notes: notes,
             recurrenceRule: recurrenceRule,
             eventIdentifier: eventIdentifier
         )

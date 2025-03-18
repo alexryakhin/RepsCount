@@ -13,8 +13,8 @@ public struct EmptyListView<Actions: View>: View {
     private let actions: () -> Actions
 
     public init(
-        label: LocalizedStringKey?,
-        description: LocalizedStringKey?,
+        label: LocalizedStringKey? = nil,
+        description: LocalizedStringKey? = nil,
         @ViewBuilder actions: @escaping () -> Actions = { EmptyView() }
     ) {
         self.label = label
@@ -28,21 +28,29 @@ public struct EmptyListView<Actions: View>: View {
             if #available(iOS 17.0, *) {
                 ContentUnavailableView(
                     label: {
-                        Text(label ?? "Empty here")
+                        if let label {
+                            Text(label)
+                        } else {
+                            EmptyView()
+                        }
                     },
                     description: {
                         if let description {
                             Text(description)
+                        } else {
+                            EmptyView()
                         }
                     },
                     actions: actions
                 )
             } else {
                 VStack(spacing: 12) {
-                    Text(label ?? "Empty here")
-                        .multilineTextAlignment(.center)
-                        .font(.headline)
-                        .foregroundColor(.primary)
+                    if let label {
+                        Text(label)
+                            .multilineTextAlignment(.center)
+                            .font(.headline)
+                            .foregroundColor(.primary)
+                    }
                     if let description {
                         Text(description)
                             .multilineTextAlignment(.center)

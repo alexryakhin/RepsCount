@@ -4,9 +4,7 @@
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="eventIdentifier" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="String"/>
-        <attribute name="notes" optional="YES" attributeType="String"/>
         <attribute name="recurrenceRule" optional="YES" attributeType="String"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="workoutTemplate" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutTemplate" inverseName="calendarEvent" inverseEntity="WorkoutTemplate"/>
     </entity>
     <entity name="Exercise" representedClassName="CDExercise" syncable="YES">

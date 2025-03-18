@@ -9,7 +9,7 @@ import Combine
 import CoreData
 import Core
 
-protocol CalendarEventManagerInterface {
+public protocol CalendarEventManagerInterface {
     var calendarEventPublisher: AnyPublisher<CalendarEvent?, Never> { get }
     var errorPublisher: PassthroughSubject<CoreError, Never> { get }
 
@@ -22,7 +22,7 @@ protocol CalendarEventManagerInterface {
     )
 }
 
-final class CalendarEventManager: CalendarEventManagerInterface {
+public final class CalendarEventManager: CalendarEventManagerInterface {
     public var calendarEventPublisher: AnyPublisher<CalendarEvent?, Never> {
         calendarEventSubject.eraseToAnyPublisher()
     }
@@ -34,11 +34,17 @@ final class CalendarEventManager: CalendarEventManagerInterface {
     private var cdCalendarEvent: CDCalendarEvent?
     private var cancellables: Set<AnyCancellable> = []
 
-    init(coreDataService: CoreDataServiceInterface) {
+    public init(
+        eventId: String?,
+        coreDataService: CoreDataServiceInterface
+    ) {
         self.coreDataService = coreDataService
+        if let eventId {
+            fetchEvent(with: eventId)
+        }
     }
 
-    func createNewCalendarEvent(
+    public func createNewCalendarEvent(
         title: String,
         date: Date,
         notes: String?,
@@ -48,9 +54,7 @@ final class CalendarEventManager: CalendarEventManagerInterface {
         guard let workoutTemplate = getWorkoutTemplate(id: workoutTemplateId) else { return }
         let newEvent = CDCalendarEvent(context: coreDataService.context)
         newEvent.id = UUID().uuidString
-        newEvent.title = title
         newEvent.date = date
-        newEvent.notes = notes
         newEvent.recurrenceRule = recurrenceRule
         newEvent.workoutTemplate = workoutTemplate
         saveContext()
@@ -63,6 +67,10 @@ final class CalendarEventManager: CalendarEventManagerInterface {
             return nil
         }
         return template
+    }
+
+    private func fetchEvent(with id: String) {
+
     }
 
     private func saveContext() {

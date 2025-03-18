@@ -24,7 +24,6 @@ public struct ExercisesListContentView: PageView {
 
     @AppStorage(UDKeys.isShowingRating) var isShowingRating: Bool = true
     @AppStorage(UDKeys.isShowingOnboarding) var isShowingOnboarding: Bool = true
-    @AppStorage(UDKeys.showsFiltersOnExerciseList) var showsFiltersOnExerciseList: Bool = true
     @Environment(\.requestReview) var requestReview
     @ObservedObject public var viewModel: ViewModel
 

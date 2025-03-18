@@ -10,6 +10,7 @@ import SwinjectAutoregistration
 import Foundation
 import Services
 import Shared
+import EventKit
 
 final class ServicesAssembly: Assembly, Identifiable {
 
@@ -59,6 +60,12 @@ final class ServicesAssembly: Assembly, Identifiable {
 //        container.autoregister(FeatureToggleServiceInterface.self, initializer: FeatureToggleService.init)
 //            .inObjectScope(.container)
 
+        container.autoregister(EventDataStore.self, initializer: EventDataStore.init)
+            .inObjectScope(.container)
+
+        container.autoregister(EventStoreManagerInterface.self, initializer: EventStoreManager.init)
+            .inObjectScope(.container)
+
         container.register(LocationManagerInterface.self) { resolver in
             LocationManager()
         }
@@ -99,9 +106,24 @@ final class ServicesAssembly: Assembly, Identifiable {
         }
         .inObjectScope(.container)
 
+        container.register(CalendarEventsProviderInterface.self) { resolver in
+            CalendarEventsProvider(
+                coreDataService: resolver ~> CoreDataServiceInterface.self
+            )
+        }
+        .inObjectScope(.container)
+
         container.register(WorkoutTemplateManagerInterface.self) { resolver, workoutTemplateID in
             WorkoutTemplatesManager(
                 workoutTemplateID: workoutTemplateID,
+                coreDataService: resolver ~> CoreDataServiceInterface.self
+            )
+        }
+        .inObjectScope(.transient)
+
+        container.register(CalendarEventManagerInterface.self) { resolver, eventId in
+            CalendarEventManager(
+                eventId: eventId,
                 coreDataService: resolver ~> CoreDataServiceInterface.self
             )
         }

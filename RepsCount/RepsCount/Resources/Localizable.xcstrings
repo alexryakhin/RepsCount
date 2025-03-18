@@ -359,6 +359,9 @@
         }
       }
     },
+    "Add to system calendar" : {
+
+    },
     "Add Workout from Templates" : {
 
     },
@@ -392,6 +395,9 @@
           }
         }
       }
+    },
+    "An unknown error occured." : {
+      "comment" : "Unknown error"
     },
     "App version:" : {
 
@@ -577,6 +583,9 @@
       }
     },
     "Calendar" : {
+
+    },
+    "Calendar on device" : {
 
     },
     "Calf Raises" : {
@@ -1060,9 +1069,6 @@
           }
         }
       }
-    },
-    "Empty here" : {
-
     },
     "Enter exercise name" : {
       "extractionState" : "stale",
@@ -1766,6 +1772,9 @@
     "No Workouts Created" : {
 
     },
+    "No Workouts Scheduled" : {
+
+    },
     "Notes" : {
       "localizations" : {
         "de" : {
@@ -1827,6 +1836,9 @@
 
     },
     "Planned at: %@" : {
+
+    },
+    "Planned workouts" : {
 
     },
     "Pounds" : {
@@ -1917,6 +1929,15 @@
       }
     },
     "Rate the app" : {
+
+    },
+    "Recurrence" : {
+
+    },
+    "Recurrence Rule" : {
+
+    },
+    "Repeat Workout" : {
 
     },
     "Reps counter" : {
@@ -2098,6 +2119,12 @@
         }
       }
     },
+    "Schedule a Workout" : {
+
+    },
+    "Schedule Workout" : {
+
+    },
     "Schedule workouts" : {
 
     },
@@ -2159,7 +2186,19 @@
         }
       }
     },
+    "Select calendar" : {
+
+    },
+    "Select date" : {
+
+    },
     "Select exercises" : {
+
+    },
+    "Select template" : {
+
+    },
+    "Selected calendar" : {
 
     },
     "Selected exercises" : {
@@ -2401,6 +2440,9 @@
     "Start a new workout" : {
 
     },
+    "Start date" : {
+
+    },
     "Start typing" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -2548,6 +2590,12 @@
           }
         }
       }
+    },
+    "The app doesn't have permission to Calendar in Settings." : {
+      "comment" : "Access denied"
+    },
+    "This device doesn't allow access to Calendar." : {
+      "comment" : "Access restricted"
     },
     "Time: %@" : {
       "localizations" : {
@@ -2811,6 +2859,9 @@
       }
     },
     "Welcome to\nReps Counter" : {
+
+    },
+    "Workout" : {
 
     },
     "Workout Name" : {
