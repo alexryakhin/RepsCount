@@ -47,8 +47,8 @@ public actor EventDataStore {
     }
 
     /// Create an event with the specified workout details, then save it with all its occurrences to the user's Calendar.
-    public func addWorkoutEvent(_ workoutEvent: WorkoutEvent, date: Date, calendar: EKCalendar? = nil) throws(CoreError) {
-        let newEvent = workoutEvent.eventWithDate(date, store: eventStore, calendar: calendar)
+    public func addWorkoutEvent(_ workoutEvent: WorkoutEvent, calendar: EKCalendar? = nil) throws(CoreError) {
+        let newEvent = workoutEvent.event(store: eventStore, calendar: calendar)
         do {
             try self.eventStore.save(newEvent, span: .futureEvents)
         } catch {

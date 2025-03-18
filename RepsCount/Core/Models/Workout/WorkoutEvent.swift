@@ -10,24 +10,55 @@ import Foundation
 import EventKit
 import Shared
 
-/// Defines the type of a workoutEvent.
-public enum WorkoutEventType: Int, Hashable, CaseIterable, Identifiable, Codable {
+/// Defines the type of a workout event.
+public enum WorkoutEventType: Int, Hashable, CaseIterable, Identifiable {
     public var id: Int { rawValue }
 
-    case single = 1
-    case recurring = 2
+    case single = 0
+    case recurring = 1
 }
 
-public enum WorkoutEventDay: Int, Hashable, CaseIterable, Identifiable, Codable {
+/// Defines the duration of a workout event.
+public enum WorkoutEventDuration: Int, Hashable, CaseIterable, Identifiable {
     public var id: Int { rawValue }
 
-    case sunday = 1
-    case monday = 2
-    case tuesday = 3
-    case wednesday = 4
-    case thursday = 5
-    case friday = 6
-    case saturday = 7
+    case fifteenMinutes = 0
+    case thirtyMinutes = 1
+    case oneHour = 2
+    case oneHourAndThirtyMinutes = 3
+    case twoHours = 4
+
+    public var timeInterval: TimeInterval {
+        switch self {
+        case .fifteenMinutes: return 900
+        case .thirtyMinutes: return 1800
+        case .oneHour: return 3600
+        case .oneHourAndThirtyMinutes: return 3600 + 1800
+        case .twoHours: return 7200
+        }
+    }
+
+    public var stringValue: String {
+        switch self {
+        case .fifteenMinutes: return "15 minutes"
+        case .thirtyMinutes: return "30 minutes"
+        case .oneHour: return "1 hour"
+        case .oneHourAndThirtyMinutes: return "1 hour 30 minutes"
+        case .twoHours: return "2 hours"
+        }
+    }
+}
+
+public enum WorkoutEventDay: Int, Hashable, CaseIterable, Identifiable {
+    public var id: Int { rawValue }
+
+    case sunday = 0
+    case monday = 1
+    case tuesday = 2
+    case wednesday = 3
+    case thursday = 4
+    case friday = 5
+    case saturday = 6
 
     public var name: String {
         switch self {
@@ -58,7 +89,7 @@ public enum WorkoutEventDay: Int, Hashable, CaseIterable, Identifiable, Codable 
     }
 }
 
-public enum WorkoutEventRecurrence: Int, Hashable, CaseIterable, Identifiable, Codable {
+public enum WorkoutEventRecurrence: Int, Hashable, CaseIterable, Identifiable {
     public var id: Int { rawValue }
 
     case daily = 0
@@ -74,59 +105,71 @@ public enum WorkoutEventRecurrence: Int, Hashable, CaseIterable, Identifiable, C
     }
 }
 
-/// Provides information about a workoutEvent.
+/// Provides information about a workout event.
 public struct WorkoutEvent: Identifiable, Hashable {
-    public var id: String { name }
+    public var id: String { template.name }
+
+    /// Template selected for the event
+    public var template: WorkoutTemplate
 
     /// Specifies whether the workoutEvent is a recurring event or a single event.
-    var type: WorkoutEventType
-    var name: String
+    public var type: WorkoutEventType
 
-    /// Specifies the days on which the workoutEvent occur.
-    var days: [WorkoutEventDay]
+    /// Specifies the days on which the workout event occur.
+    public var days: [WorkoutEventDay]
 
-    /// Specifies the time at which the workoutEvent starts.
-    var startAt: Int
+    /// Specifies the time at which the workout event starts.
+    public var startAt: Int
 
     /// Specifies the workoutEvent recurrence frequency.
-    var repeats: WorkoutEventRecurrence?
+    public var repeats: WorkoutEventRecurrence?
 
     /// Specifies the workoutEvent recurrence interval.
-    var interval: Int?
+    public var interval: Int?
 
-    /// Specifies how often the workoutEvent occurs.
-    var occurrenceCount: Int?
+    /// Specifies how often the workout event occurs.
+    public var occurrenceCount: Int?
+
+    /// Specifies the duration of the workout
+    public var duration: WorkoutEventDuration
+
+    /// Specifies the date the initial event was created at.
+    public var dateCreated: Date
 
     public init(
+        template: WorkoutTemplate,
         type: WorkoutEventType,
-        name: String,
         days: [WorkoutEventDay],
         startAt: Int,
-        repeats: WorkoutEventRecurrence? = nil,
-        interval: Int? = nil,
-        occurrenceCount: Int? = nil
+        repeats: WorkoutEventRecurrence?,
+        interval: Int?,
+        occurrenceCount: Int?,
+        duration: WorkoutEventDuration,
+        dateCreated: Date
     ) {
+        self.template = template
         self.type = type
-        self.name = name
         self.days = days
         self.startAt = startAt
         self.repeats = repeats
         self.interval = interval
         self.occurrenceCount = occurrenceCount
+        self.duration = duration
+        self.dateCreated = dateCreated
     }
 }
 
 public extension WorkoutEvent {
     var title: String {
-        return "Swim " + name
+        return template.name + " Workout"
     }
 
-    var titleAndBook: String {
-        return "Book \(title)"
+    var titleAndSchedule: String {
+        return "Schedule \(title)"
     }
 
     var titleAndStartAt: String {
-        return "Book \(self.title) starting at \(self.startAtDate.formatted(date: .omitted, time: .shortened))"
+        return "Schedule \(self.title) starting at \(self.startAtDate.formatted(date: .omitted, time: .shortened))"
     }
 }
 
@@ -137,22 +180,12 @@ extension WorkoutEvent: Equatable {
 }
 
 public extension WorkoutEvent {
-    static var dropinWorkoutEventMock: WorkoutEvent {
-        WorkoutEvent(type: .single, name: "205", days: [.monday], startAt: 43_200)
-    }
-
-    static var repeatingWorkoutEventMock: WorkoutEvent {
-        WorkoutEvent(type: .recurring, name: "105", days: [.friday], startAt: 39_900, repeats: .weekly, interval: 1, occurrenceCount: 8)
-    }
-}
-
-public extension WorkoutEvent {
     var startAtDate: Date {
         return TimeInterval(startAt).toTodayDate
     }
 
     var endAtDate: Date {
-        return startAtDate.thirtyMinutesLater
+        Date(timeInterval: duration.timeInterval, since: startAtDate)
     }
 
     var fromStartAtToEndAtAsText: String {
@@ -165,7 +198,7 @@ public extension WorkoutEvent {
 }
 
 public extension WorkoutEvent {
-    /// Create the date at which a drop-in workoutEvent starts.
+    /// Create the date at which a drop-in workout event starts.
     func workoutEventWithDate(date: Date) -> Date {
         let result = TimeInterval(startAt)
         return Calendar.current.date(bySettingHour: result.hour, minute: result.minute, second: 0, of: date) ?? date
@@ -182,7 +215,7 @@ public extension WorkoutEvent {
         return Calendar.current.date(from: components) ?? Date()
     }
 
-    /// Create the date at which a workoutEvent begins.
+    /// Create the date at which a workout event begins.
     func buildStartDate(date: Date) -> Date {
         switch type {
         case .single:
@@ -192,10 +225,10 @@ public extension WorkoutEvent {
         }
     }
 
-    /// Create an event with the workoutEvent details. Use the user's default calendar if the specified calendar doesn't exist.
-    func eventWithDate(_ date: Date, store: EKEventStore, calendar: EKCalendar? = nil) -> EKEvent {
-        let startDate = buildStartDate(date: date)
-        let endDate = startDate.thirtyMinutesLater
+    /// Create an event with the workout event details. Use the user's default calendar if the specified calendar doesn't exist.
+    func event(store: EKEventStore, calendar: EKCalendar? = nil) -> EKEvent {
+        let startDate = buildStartDate(date: dateCreated)
+        let endDate = Date(timeInterval: duration.timeInterval, since: startDate)
 
         let newEvent = EKEvent(
             workoutEvent: self,
@@ -210,7 +243,7 @@ public extension WorkoutEvent {
 }
 
 public extension WorkoutEvent {
-    /// Formats the number of recurring workoutEvent occurrences.
+    /// Formats the number of recurring workout event occurrences.
     var numberOfRecurringWorkoutEvents: String {
         guard let workoutEventCount = occurrenceCount else {
             fatalError()
@@ -218,13 +251,13 @@ public extension WorkoutEvent {
         return "No. of workoutEvents: \(workoutEventCount)"
     }
 
-    /// The amount of occurrences of a recurring workoutEvent.
+    /// The amount of occurrences of a recurring workout event.
     var recurrenceEnd: EKRecurrenceEnd {
         guard let occurrenceCount else { fatalError("Can't create recurrence end") }
         return EKRecurrenceEnd(occurrenceCount: occurrenceCount)
     }
 
-    /// Specifies when a recurring workoutEvent ends.
+    /// Specifies when a recurring workout event ends.
     var recurrenceRule: EKRecurrenceRule {
         let recurrenceDayOfWeek = days.map(\.dayOfWeek)
         guard let repeats, let interval else { fatalError("Can't create recurrence rule") }

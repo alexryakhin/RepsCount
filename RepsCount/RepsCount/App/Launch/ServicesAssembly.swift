@@ -106,8 +106,8 @@ final class ServicesAssembly: Assembly, Identifiable {
         }
         .inObjectScope(.container)
 
-        container.register(CalendarEventsProviderInterface.self) { resolver in
-            CalendarEventsProvider(
+        container.register(WorkoutEventsProviderInterface.self) { resolver in
+            WorkoutEventsProvider(
                 coreDataService: resolver ~> CoreDataServiceInterface.self
             )
         }
@@ -121,9 +121,8 @@ final class ServicesAssembly: Assembly, Identifiable {
         }
         .inObjectScope(.transient)
 
-        container.register(CalendarEventManagerInterface.self) { resolver, eventId in
-            CalendarEventManager(
-                eventId: eventId,
+        container.register(WorkoutEventManagerInterface.self) { resolver in
+            WorkoutEventManager(
                 coreDataService: resolver ~> CoreDataServiceInterface.self
             )
         }

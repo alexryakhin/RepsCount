@@ -15,7 +15,7 @@ public protocol EventStoreManagerInterface {
     var store: EKEventStore { get }
 
     func setupEventStore() async throws
-    func saveWorkoutEvent(_ workoutEvent: WorkoutEvent, date: Date, calendar: EKCalendar?) async throws
+    func saveWorkoutEvent(_ workoutEvent: WorkoutEvent, calendar: EKCalendar?) async throws
 }
 
 public final class EventStoreManager: EventStoreManagerInterface {
@@ -42,7 +42,7 @@ public final class EventStoreManager: EventStoreManagerInterface {
         authorizationStatusSubject.value = EKEventStore.authorizationStatus(for: .event)
     }
 
-    public func saveWorkoutEvent(_ workoutEvent: WorkoutEvent, date: Date, calendar: EKCalendar? = nil) async throws {
-        try await dataStore.addWorkoutEvent(workoutEvent, date: date, calendar: calendar)
+    public func saveWorkoutEvent(_ workoutEvent: WorkoutEvent, calendar: EKCalendar? = nil) async throws {
+        try await dataStore.addWorkoutEvent(workoutEvent, calendar: calendar)
     }
 }

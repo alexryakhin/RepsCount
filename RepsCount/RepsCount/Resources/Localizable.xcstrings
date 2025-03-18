@@ -951,6 +951,9 @@
         }
       }
     },
+    "Daily" : {
+
+    },
     "Deadlifts" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1069,6 +1072,9 @@
           }
         }
       }
+    },
+    "Duration" : {
+
     },
     "Enter exercise name" : {
       "extractionState" : "stale",
@@ -1334,6 +1340,9 @@
           }
         }
       }
+    },
+    "Interval: %@" : {
+
     },
     "kg" : {
       "extractionState" : "manual",
@@ -1662,6 +1671,9 @@
     "Measurement unit" : {
 
     },
+    "Monthly" : {
+
+    },
     "More" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1832,6 +1844,9 @@
         }
       }
     },
+    "Occurrences: %@" : {
+
+    },
     "OK" : {
 
     },
@@ -1934,7 +1949,7 @@
     "Recurrence" : {
 
     },
-    "Recurrence Rule" : {
+    "Repeat Frequency" : {
 
     },
     "Repeat Workout" : {
@@ -2829,6 +2844,9 @@
           }
         }
       }
+    },
+    "Weekly" : {
+
     },
     "Weight, %@ (optional)" : {
       "localizations" : {

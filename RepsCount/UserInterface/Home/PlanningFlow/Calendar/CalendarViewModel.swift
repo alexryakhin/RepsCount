@@ -9,29 +9,27 @@ public final class CalendarViewModel: DefaultPageViewModel {
 
     enum Input {
         case scheduleWorkout
-        case editEvent(CalendarEvent)
         case deleteEvent(atOffsets: IndexSet)
     }
 
     enum Output {
         case scheduleWorkout
-        case editEvent(eventId: String)
     }
 
     var onOutput: ((Output) -> Void)?
 
     @Published var selectedDate: Date = .now
-    @Published var allEvents: [CalendarEvent] = []
-    @Published var filteredEvents: [CalendarEvent] = []
+    @Published var allEvents: [WorkoutEvent] = []
+    @Published var filteredEvents: [WorkoutEvent] = []
 
     // MARK: - Private Properties
 
-    private let calendarEventsProvider: CalendarEventsProviderInterface
+    private let calendarEventsProvider: WorkoutEventsProviderInterface
     private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Initialization
 
-    public init(calendarEventsProvider: CalendarEventsProviderInterface) {
+    public init(calendarEventsProvider: WorkoutEventsProviderInterface) {
         self.calendarEventsProvider = calendarEventsProvider
         super.init()
         setupBindings()
@@ -41,8 +39,6 @@ public final class CalendarViewModel: DefaultPageViewModel {
         switch input {
         case .scheduleWorkout:
             onOutput?(.scheduleWorkout)
-        case .editEvent(let event):
-            onOutput?(.editEvent(eventId: event.id))
         case .deleteEvent(let offsets):
             deleteElements(at: offsets)
         }
@@ -62,11 +58,11 @@ public final class CalendarViewModel: DefaultPageViewModel {
     private func deleteElements(at indices: IndexSet) {
         indices.map { allEvents[$0] }
             .forEach { [weak self] in
-                self?.deleteCalendarEvent($0.id)
+                self?.deleteWorkoutEvent($0.id)
             }
     }
 
-    private func deleteCalendarEvent(_ id: String) {
+    private func deleteWorkoutEvent(_ id: String) {
 //        calendarEventsProvider.delete(with: id)
         // TODO: how to delete an event that is not existing, but a repeated event
     }

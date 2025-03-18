@@ -39,6 +39,7 @@ public extension String {
     }
 
     var isNotEmpty: Bool { !isEmpty }
+
     var nilIfEmpty: String? { isNotEmpty ? self : nil }
 }
 

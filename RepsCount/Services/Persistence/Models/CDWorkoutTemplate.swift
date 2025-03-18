@@ -22,7 +22,7 @@ final class CDWorkoutTemplate: NSManagedObject, Identifiable {
     @NSManaged var notes: String?
     @NSManaged var templateExercises: NSSet?
     @NSManaged var workoutInstances: NSSet?
-    @NSManaged var calendarEvent: CDCalendarEvent?
+    @NSManaged var workoutEvent: CDWorkoutEvent?
 
     @objc(insertObject:inTemplateExercisesAtIndex:)
     @NSManaged func insertIntoTemplateExercises(_ value: CDWorkoutTemplateExercise, at idx: Int)
@@ -89,7 +89,7 @@ final class CDWorkoutTemplate: NSManagedObject, Identifiable {
             notes: notes,
             templateExercises: _templateExercises.compactMap(\.coreModel),
             workoutInstances: _workoutInstances.compactMap(\.coreModel),
-            calendarEventId: calendarEvent?.id
+            workoutEventId: workoutEvent?.id
         )
     }
 }

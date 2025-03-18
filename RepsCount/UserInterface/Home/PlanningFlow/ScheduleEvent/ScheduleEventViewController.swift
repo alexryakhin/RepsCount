@@ -32,7 +32,7 @@ public final class ScheduleEventViewController: PageViewController<ScheduleEvent
     override public func setup() {
         super.setup()
         setupBindings()
-        navigationItem.title = viewModel.isEditing ? "Edit Event" : "Schedule Workout"
+        navigationItem.title = "Schedule Workout"
     }
 
     // MARK: - Private Methods

@@ -34,11 +34,7 @@ public struct CalendarContentView: PageView {
                     }
                 } else {
                     ForEach(viewModel.filteredEvents) { event in
-                        Button {
-                            viewModel.handle(.editEvent(event))
-                        } label: {
-                            CalendarEventRow(event: event)
-                        }
+                        WorkoutEventRow(event: event)
                     }
                     .onDelete {
                         viewModel.handle(.deleteEvent(atOffsets: $0))
@@ -58,14 +54,14 @@ public struct CalendarContentView: PageView {
     }
 }
 
-struct CalendarEventRow: View {
-    let event: CalendarEvent
+struct WorkoutEventRow: View {
+    let event: WorkoutEvent
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(event.workoutTemplate.name)
+            Text(event.title)
                 .font(.headline)
-            Text("Planned at: \(event.date, formatter: DateFormatter.shortDate)")
+            Text("Planned at: \(event.startAtDate, formatter: DateFormatter.shortTime)")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
         }

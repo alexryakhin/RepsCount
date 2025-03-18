@@ -71,6 +71,8 @@ public enum CoreError: Error {
         case removingExerciseFailed
         case removingTemplateFailed
         case removingEventFailed
+        case templateNotFound
+        case eventAlreadyExists
         case inputCannotBeEmpty
 
         public var description: String {
@@ -81,6 +83,10 @@ public enum CoreError: Error {
                 return "Removing template failed"
             case .removingEventFailed:
                 return "Removing event failed"
+            case .templateNotFound:
+                return "Template not found"
+            case .eventAlreadyExists:
+                return "Event already exists"
             case .inputCannotBeEmpty:
                 return "Input cannot be empty"
             }

@@ -7,7 +7,6 @@ public final class CalendarViewController: PageViewController<CalendarContentVie
 
     public enum Event {
         case scheduleWorkout
-        case editEvent(eventId: String)
     }
 
     public var onEvent: ((Event) -> Void)?
@@ -40,8 +39,6 @@ public final class CalendarViewController: PageViewController<CalendarContentVie
             switch output {
             case .scheduleWorkout:
                 self?.onEvent?(.scheduleWorkout)
-            case .editEvent(let eventId):
-                self?.onEvent?(.editEvent(eventId: eventId))
             }
         }
     }

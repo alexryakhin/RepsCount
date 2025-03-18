@@ -2,6 +2,7 @@ import SwiftUI
 import CoreUserInterface
 import CoreNavigation
 import Core
+import Flow
 
 public struct ScheduleEventContentView: PageView {
 
@@ -18,6 +19,14 @@ public struct ScheduleEventContentView: PageView {
             Section {
                 DatePicker("Start date", selection: $viewModel.selectedDate, displayedComponents: [.date, .hourAndMinute])
                     .datePickerStyle(.compact)
+
+                Picker("Duration", selection: $viewModel.duration) {
+                    ForEach(WorkoutEventDuration.allCases) { item in
+                        Text(item.stringValue)
+                            .tag(item)
+                    }
+                }
+                .pickerStyle(.menu)
             } header: {
                 Text("Select date")
             }
@@ -43,13 +52,29 @@ public struct ScheduleEventContentView: PageView {
                 Toggle("Repeat Workout", isOn: $viewModel.isRecurring)
 
                 if viewModel.isRecurring {
-                    Picker("Recurrence Rule", selection: $viewModel.selectedRecurrenceRule) {
-                        ForEach(viewModel.recurrenceRules, id: \.self) { rule in
-                            Text(rule)
-                                .tag(rule)
+                    Picker("Repeat Frequency", selection: $viewModel.repeats) {
+                        ForEach(WorkoutEventRecurrence.allCases, id: \.self) { recurrence in
+                            Text(recurrence.rawValue == 0 ? "Daily" : recurrence.rawValue == 1 ? "Weekly" : "Monthly")
+                                .tag(recurrence)
                         }
                     }
                     .pickerStyle(.menu)
+
+                    if viewModel.repeats == .weekly {
+                        HFlow {
+                            ForEach(WorkoutEventDay.allCases) { day in
+                                capsuleView(for: day)
+                            }
+                        }
+                    }
+
+                    Stepper(value: $viewModel.interval, in: 1...30) {
+                        Text("Interval: \(viewModel.interval.formatted())")
+                    }
+
+                    Stepper(value: $viewModel.occurrenceCount, in: 1...100) {
+                        Text("Occurrences: \(viewModel.occurrenceCount.formatted())")
+                    }
                 }
             } header: {
                 Text("Recurrence")
@@ -84,7 +109,7 @@ public struct ScheduleEventContentView: PageView {
             Button {
                 viewModel.handle(.saveEvent)
             } label: {
-                Text(viewModel.isEditing ? "Save Changes" : "Schedule Workout")
+                Text("Schedule Workout")
                     .bold()
                     .frame(maxWidth: .infinity)
                     .padding(12)
@@ -94,6 +119,29 @@ public struct ScheduleEventContentView: PageView {
             .padding(.vertical, 12)
             .padding(.horizontal, 16)
             .gradientStyle(.bottomButton)
+        }
+    }
+
+    @ViewBuilder
+    private func capsuleView(for day: WorkoutEventDay) -> some View {
+        if let index = viewModel.days.firstIndex(of: day) {
+            Button {
+                viewModel.days.remove(at: index)
+                HapticManager.shared.triggerSelection()
+            } label: {
+                Text(day.name)
+            }
+            .buttonStyle(.borderedProminent)
+            .clipShape(Capsule())
+        } else {
+            Button {
+                viewModel.days.append(day)
+                HapticManager.shared.triggerSelection()
+            } label: {
+                Text(day.name)
+            }
+            .buttonStyle(.bordered)
+            .clipShape(Capsule())
         }
     }
 }

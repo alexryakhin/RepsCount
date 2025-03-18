@@ -26,19 +26,31 @@ public final class ScheduleEventViewModel: DefaultPageViewModel {
     @AppStorage(UDKeys.addToCalendar) var addToCalendar: Bool = false {
         didSet {
             Task {
-                await addToCalendarFlatChanged(addToCalendar)
+                await addToCalendarFlagChanged(addToCalendar)
             }
         }
     }
 
-    @Published private(set) var isEditing: Bool = false
     @Published private(set) var workoutTemplates: [WorkoutTemplate] = []
-    @Published private(set) var recurrenceRules: [String] = []
     @Published private(set) var selectedTemplate: WorkoutTemplate?
 
-    @Published var selectedRecurrenceRule: String?
-    @Published var selectedDate: Date = .now
+    /// Specifies the days on which the workout event occur.
+    @Published var days: [WorkoutEventDay] = []
+
+    /// Specifies the workoutEvent recurrence frequency.
+    @Published var repeats: WorkoutEventRecurrence = .daily
+
+    /// Specifies the workoutEvent recurrence interval.
+    @Published var interval: Int = 1
+
+    /// Specifies how often the workout event occurs.
+    @Published var occurrenceCount: Int = 1
+
+    /// Specifies the duration of the workout
+    @Published var duration: WorkoutEventDuration = .oneHour
+
     @Published var isRecurring: Bool = false
+    @Published var selectedDate: Date = .now
     @Published var isWriteOnlyOrFullAccessAuthorized: Bool = false {
         didSet {
             if !isWriteOnlyOrFullAccessAuthorized {
@@ -52,7 +64,7 @@ public final class ScheduleEventViewModel: DefaultPageViewModel {
 
     // MARK: - Private Properties
 
-    private let calendarEventManager: CalendarEventManagerInterface
+    private let workoutEventManager: WorkoutEventManagerInterface
     private let workoutTemplatesProvider: WorkoutTemplatesProviderInterface
     private let eventStoreManager: EventStoreManagerInterface
     private var cancellables = Set<AnyCancellable>()
@@ -60,11 +72,11 @@ public final class ScheduleEventViewModel: DefaultPageViewModel {
     // MARK: - Initialization
 
     public init(
-        calendarEventManager: CalendarEventManagerInterface,
+        workoutEventManager: WorkoutEventManagerInterface,
         workoutTemplatesProvider: WorkoutTemplatesProviderInterface,
         eventStoreManager: EventStoreManagerInterface
     ) {
-        self.calendarEventManager = calendarEventManager
+        self.workoutEventManager = workoutEventManager
         self.workoutTemplatesProvider = workoutTemplatesProvider
         self.eventStoreManager = eventStoreManager
         self.eventStore = eventStoreManager.store
@@ -95,21 +107,6 @@ public final class ScheduleEventViewModel: DefaultPageViewModel {
             }
             .store(in: &cancellables)
 
-        calendarEventManager.calendarEventPublisher
-            .removeDuplicates()
-            .sink { [weak self] event in
-                guard let self else { return }
-                if let event {
-                    isEditing = true
-                    selectedDate = event.date
-                    if let recurrenceRule = event.recurrenceRule {
-                        selectedRecurrenceRule = recurrenceRule
-                    }
-                    selectedTemplate = event.workoutTemplate
-                }
-            }
-            .store(in: &cancellables)
-
         eventStoreManager.authorizationStatusPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
@@ -125,26 +122,31 @@ public final class ScheduleEventViewModel: DefaultPageViewModel {
 
     private func saveEvent() {
         Task { @MainActor in
-            await addToCalendarFlatChanged(addToCalendar)
+            await addToCalendarFlagChanged(addToCalendar)
 
             do {
                 guard let selectedTemplate else { fatalError("Selected template is nil") }
 
-                // TODO: create a workout event
-//                let workoutEvent = WorkoutEvent(
-//                    type: <#WorkoutEventType#>,
-//                    name: <#String#>,
-//                    days: <#[WorkoutEventDay]#>,
-//                    startAt: <#Int#>
-//                )
+                guard selectedTemplate.workoutEventId == nil else {
+                    throw CoreError.internalError(.eventAlreadyExists)
+                }
 
-                // TODO: save event to Core Data
+                let event = WorkoutEvent(
+                    template: selectedTemplate,
+                    type: isRecurring ? .recurring : .single,
+                    days: isRecurring ? days : [],
+                    startAt: Int(selectedDate.timeIntervalSince(selectedDate.startOfDay)),
+                    repeats: isRecurring ? repeats : nil,
+                    interval: isRecurring ? interval : nil,
+                    occurrenceCount: isRecurring ? occurrenceCount : nil,
+                    duration: duration,
+                    dateCreated: selectedDate
+                )
 
-                // Save event to the event store
+                try workoutEventManager.createNewWorkoutEvent(from: event)
 
                 if addToCalendar {
-                    print("DEBUG50 adding to calendar")
-//                    try await eventStoreManager.saveWorkoutEvent(workoutEvent, date: selectedDate, calendar: calendar)
+                    try await eventStoreManager.saveWorkoutEvent(event, calendar: calendar)
                 }
 
                 onOutput?(.dismiss)
@@ -154,7 +156,7 @@ public final class ScheduleEventViewModel: DefaultPageViewModel {
         }
     }
 
-    private func addToCalendarFlatChanged(_ newValue: Bool) async {
+    private func addToCalendarFlagChanged(_ newValue: Bool) async {
         if newValue, !isWriteOnlyOrFullAccessAuthorized {
             do {
                 try await eventStoreManager.setupEventStore()

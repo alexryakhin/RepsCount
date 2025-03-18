@@ -30,15 +30,15 @@ final class PlanningFlowAssembly: Assembly, Identifiable {
 
         container.register(CalendarViewController.self) { resolver in
             let viewModel = CalendarViewModel(
-                calendarEventsProvider: resolver ~> CalendarEventsProviderInterface.self
+                calendarEventsProvider: resolver ~> WorkoutEventsProviderInterface.self
             )
             let controller = CalendarViewController(viewModel: viewModel)
             return controller
         }
 
-        container.register(ScheduleEventViewController.self) { (resolver: Resolver, eventId: String?) in
+        container.register(ScheduleEventViewController.self) { resolver in
             let viewModel = ScheduleEventViewModel(
-                calendarEventManager: resolver.resolve(CalendarEventManagerInterface.self, argument: eventId)!,
+                workoutEventManager: resolver ~> WorkoutEventManagerInterface.self,
                 workoutTemplatesProvider: resolver ~> WorkoutTemplatesProviderInterface.self,
                 eventStoreManager: resolver ~> EventStoreManagerInterface.self
             )

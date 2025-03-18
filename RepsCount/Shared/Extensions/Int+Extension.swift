@@ -15,4 +15,8 @@ public extension Numeric {
             self
         }
     }
+
+    var nilIfZero: Self? {
+        self == 0 ? nil : self
+    }
 }
