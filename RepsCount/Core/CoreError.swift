@@ -74,6 +74,7 @@ public enum CoreError: Error {
         case templateNotFound
         case eventAlreadyExists
         case inputCannotBeEmpty
+        case cancelingRecurrenceFailed
 
         public var description: String {
             switch self {
@@ -89,6 +90,8 @@ public enum CoreError: Error {
                 return "Event already exists"
             case .inputCannotBeEmpty:
                 return "Input cannot be empty"
+            case .cancelingRecurrenceFailed:
+                return "Canceling recurrence failed"
             }
         }
     }

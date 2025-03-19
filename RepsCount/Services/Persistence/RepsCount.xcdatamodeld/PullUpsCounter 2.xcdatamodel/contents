@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="24D81" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
-    <entity name="Exercise" representedClassName="CDExercise" syncable="YES">
+    <entity name="Exercise" representedClassName="CDExercise" syncable="YES" codeGenerationType="class">
         <attribute name="address" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -12,39 +12,40 @@
         <relationship name="exerciseSets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExerciseSet" inverseName="exercise" inverseEntity="ExerciseSet"/>
         <relationship name="workoutInstance" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutInstance" inverseName="exercises" inverseEntity="WorkoutInstance"/>
     </entity>
-    <entity name="ExerciseSet" representedClassName="CDExerciseSet" syncable="YES">
+    <entity name="ExerciseSet" representedClassName="CDExerciseSet" syncable="YES" codeGenerationType="class">
         <attribute name="amount" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="weight" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="exercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise" inverseName="exerciseSets" inverseEntity="Exercise"/>
     </entity>
-    <entity name="WorkoutEvent" representedClassName="CDWorkoutEvent" syncable="YES">
-        <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    <entity name="WorkoutEvent" representedClassName="CDWorkoutEvent" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="days" optional="YES" attributeType="String"/>
         <attribute name="duration" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="interval" optional="YES" attributeType="Integer 64" defaultValueString="-1" usesScalarValueType="YES"/>
         <attribute name="occurrenceCount" optional="YES" attributeType="Integer 64" defaultValueString="-1" usesScalarValueType="YES"/>
+        <attribute name="recurrenceId" optional="YES" attributeType="String"/>
         <attribute name="repeats" optional="YES" attributeType="Integer 64" defaultValueString="-1" usesScalarValueType="YES"/>
         <attribute name="startAt" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="type" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="workoutTemplate" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutTemplate" inverseName="workoutEvent" inverseEntity="WorkoutTemplate"/>
+        <relationship name="workoutTemplate" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutTemplate" inverseName="workoutEvents" inverseEntity="WorkoutTemplate"/>
     </entity>
-    <entity name="WorkoutInstance" representedClassName="CDWorkoutInstance" syncable="YES">
+    <entity name="WorkoutInstance" representedClassName="CDWorkoutInstance" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="String"/>
         <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise" inverseName="workoutInstance" inverseEntity="Exercise"/>
         <relationship name="workoutTemplate" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutTemplate" inverseName="workoutInstances" inverseEntity="WorkoutTemplate"/>
     </entity>
-    <entity name="WorkoutTemplate" representedClassName="CDWorkoutTemplate" syncable="YES">
+    <entity name="WorkoutTemplate" representedClassName="CDWorkoutTemplate" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
         <relationship name="templateExercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkoutTemplateExercise" inverseName="workoutTemplate" inverseEntity="WorkoutTemplateExercise"/>
-        <relationship name="workoutEvent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutEvent" inverseName="workoutTemplate" inverseEntity="WorkoutEvent"/>
+        <relationship name="workoutEvents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkoutEvent" inverseName="workoutTemplate" inverseEntity="WorkoutEvent"/>
         <relationship name="workoutInstances" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkoutInstance" inverseName="workoutTemplate" inverseEntity="WorkoutInstance"/>
     </entity>
-    <entity name="WorkoutTemplateExercise" representedClassName="CDWorkoutTemplateExercise" syncable="YES">
+    <entity name="WorkoutTemplateExercise" representedClassName="CDWorkoutTemplateExercise" syncable="YES" codeGenerationType="class">
         <attribute name="defaultReps" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="defaultSets" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="exerciseModel" optional="YES" attributeType="String"/>

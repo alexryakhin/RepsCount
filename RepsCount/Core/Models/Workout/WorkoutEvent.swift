@@ -107,69 +107,72 @@ public enum WorkoutEventRecurrence: Int, Hashable, CaseIterable, Identifiable {
 
 /// Provides information about a workout event.
 public struct WorkoutEvent: Identifiable, Hashable {
-    public var id: String { template.name }
+    public let id: String
 
     /// Template selected for the event
-    public var template: WorkoutTemplate
+    public let template: WorkoutTemplate
 
     /// Specifies whether the workoutEvent is a recurring event or a single event.
-    public var type: WorkoutEventType
+    public var type: WorkoutEventType {
+        recurrenceId == nil ? .single : .recurring
+    }
 
     /// Specifies the days on which the workout event occur.
-    public var days: [WorkoutEventDay]
+    public let days: [WorkoutEventDay]
 
     /// Specifies the time at which the workout event starts.
-    public var startAt: Int
+    public let startAt: Int
 
     /// Specifies the workoutEvent recurrence frequency.
-    public var repeats: WorkoutEventRecurrence?
+    public let repeats: WorkoutEventRecurrence?
 
     /// Specifies the workoutEvent recurrence interval.
-    public var interval: Int?
+    public let interval: Int?
 
     /// Specifies how often the workout event occurs.
-    public var occurrenceCount: Int?
+    public let occurrenceCount: Int?
+
+    /// If event is recurring, then it will have this id
+    public let recurrenceId: String?
 
     /// Specifies the duration of the workout
-    public var duration: WorkoutEventDuration
+    public let duration: WorkoutEventDuration
 
     /// Specifies the date the initial event was created at.
-    public var dateCreated: Date
+    public let date: Date
 
     public init(
         template: WorkoutTemplate,
-        type: WorkoutEventType,
         days: [WorkoutEventDay],
         startAt: Int,
         repeats: WorkoutEventRecurrence?,
         interval: Int?,
         occurrenceCount: Int?,
         duration: WorkoutEventDuration,
-        dateCreated: Date
+        date: Date,
+        id: String = UUID().uuidString,
+        recurrenceId: String?
     ) {
         self.template = template
-        self.type = type
         self.days = days
         self.startAt = startAt
         self.repeats = repeats
         self.interval = interval
         self.occurrenceCount = occurrenceCount
         self.duration = duration
-        self.dateCreated = dateCreated
+        self.date = date
+        self.id = id
+        self.recurrenceId = recurrenceId
     }
 }
 
 public extension WorkoutEvent {
     var title: String {
-        return template.name + " Workout"
+        return template.name + " workout"
     }
 
     var titleAndSchedule: String {
         return "Schedule \(title)"
-    }
-
-    var titleAndStartAt: String {
-        return "Schedule \(self.title) starting at \(self.startAtDate.formatted(date: .omitted, time: .shortened))"
     }
 }
 
@@ -180,16 +183,12 @@ extension WorkoutEvent: Equatable {
 }
 
 public extension WorkoutEvent {
-    var startAtDate: Date {
-        return TimeInterval(startAt).toTodayDate
-    }
-
     var endAtDate: Date {
-        Date(timeInterval: duration.timeInterval, since: startAtDate)
+        Date(timeInterval: duration.timeInterval, since: date)
     }
 
     var fromStartAtToEndAtAsText: String {
-        return "\(startAtDate.timeAsText) to \(endAtDate.timeAsText)"
+        return "\(date.timeAsText) to \(endAtDate.timeAsText)"
     }
 
     var daysAsText: String {
@@ -227,7 +226,7 @@ public extension WorkoutEvent {
 
     /// Create an event with the workout event details. Use the user's default calendar if the specified calendar doesn't exist.
     func event(store: EKEventStore, calendar: EKCalendar? = nil) -> EKEvent {
-        let startDate = buildStartDate(date: dateCreated)
+        let startDate = buildStartDate(date: date)
         let endDate = Date(timeInterval: duration.timeInterval, since: startDate)
 
         let newEvent = EKEvent(

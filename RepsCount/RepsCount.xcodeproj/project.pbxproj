@@ -256,9 +256,6 @@
 		};
 		53F4CED02D8012A1004551D5 /* Exceptions for "Services" folder in "Services" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Persistence/RepsCount.xcdatamodeld,
-			);
 			publicHeaders = (
 				Services.h,
 			);

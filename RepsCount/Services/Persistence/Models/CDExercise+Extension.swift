@@ -1,5 +1,5 @@
 //
-//  CDExercise.swift
+//  CDExercise+Extension.swift
 //  Services
 //
 //  Created by Aleksandr Riakhin on 3/11/25.
@@ -10,35 +10,7 @@ import Foundation
 import CoreData
 import Core
 
-@objc(CDExercise)
-final class CDExercise: NSManagedObject, Identifiable {
-
-    @nonobjc class func fetchRequest() -> NSFetchRequest<CDExercise> {
-        return NSFetchRequest<CDExercise>(entityName: "Exercise")
-    }
-
-    @NSManaged var address: String?
-    @NSManaged var id: String?
-    @NSManaged var latitude: Double
-    @NSManaged var longitude: Double
-    @NSManaged var name: String?
-    @NSManaged var notes: String?
-    @NSManaged var timestamp: Date?
-    @NSManaged var exerciseSets: NSSet?
-    @NSManaged var workoutInstance: CDWorkoutInstance?
-    @NSManaged var sortingOrder: Int64
-
-    @objc(addExerciseSetsObject:)
-    @NSManaged func addToExerciseSets(_ value: CDExerciseSet)
-
-    @objc(removeExerciseSetsObject:)
-    @NSManaged func removeFromExerciseSets(_ value: CDExerciseSet)
-
-    @objc(addExerciseSets:)
-    @NSManaged func addToExerciseSets(_ values: NSSet)
-
-    @objc(removeExerciseSets:)
-    @NSManaged func removeFromExerciseSets(_ values: NSSet)
+extension CDExercise {
 
     var _exerciseSets: [CDExerciseSet] {
         let sets = exerciseSets as? Set<CDExerciseSet> ?? []

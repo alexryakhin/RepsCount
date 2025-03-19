@@ -36,8 +36,9 @@ final class PlanningFlowAssembly: Assembly, Identifiable {
             return controller
         }
 
-        container.register(ScheduleEventViewController.self) { resolver in
+        container.register(ScheduleEventViewController.self) { resolver, configModel in
             let viewModel = ScheduleEventViewModel(
+                configModel: configModel,
                 workoutEventManager: resolver ~> WorkoutEventManagerInterface.self,
                 workoutTemplatesProvider: resolver ~> WorkoutTemplatesProviderInterface.self,
                 eventStoreManager: resolver ~> EventStoreManagerInterface.self

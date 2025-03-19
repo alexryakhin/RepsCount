@@ -84,8 +84,8 @@ final class PlanningFlowCoordinator: Coordinator {
 
         controller?.onEvent = { [weak self] event in
             switch event {
-            case .scheduleWorkout:
-                self?.showScheduleWorkout()
+            case .scheduleWorkout(let configModel):
+                self?.showScheduleWorkout(configModel: configModel)
             @unknown default:
                 fatalError("Unhandled event")
             }
@@ -94,8 +94,8 @@ final class PlanningFlowCoordinator: Coordinator {
         router.push(controller)
     }
 
-    private func showScheduleWorkout() {
-        let controller = resolver ~> ScheduleEventViewController.self
+    private func showScheduleWorkout(configModel: ScheduleEventViewModel.ConfigModel) {
+        let controller = resolver ~> (ScheduleEventViewController.self, configModel)
 
         controller.onEvent = { [weak self] event in
             switch event {

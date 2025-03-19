@@ -32,7 +32,7 @@ public final class WorkoutTemplatesProvider: WorkoutTemplatesProviderInterface {
     public init(coreDataService: CoreDataServiceInterface) {
         self.coreDataService = coreDataService
         setupBindings()
-        coreDataService.context.refreshAllObjects()
+        fetchTemplates()
     }
 
     public func fetchTemplates() {
@@ -62,9 +62,7 @@ public final class WorkoutTemplatesProvider: WorkoutTemplatesProviderInterface {
     }
 
     private func setupBindings() {
-        NotificationCenter.default.eventChangedPublisher
-            .combineLatest(NotificationCenter.default.coreDataDidSaveObjectIDsPublisher)
-            .debounce(for: .seconds(0.3), scheduler: DispatchQueue.main)
+        coreDataService.dataUpdatedPublisher
             .sink { [weak self] _ in
                 self?.fetchTemplates()
             }

@@ -13,7 +13,7 @@ public protocol WorkoutEventsProviderInterface {
     var eventsPublisher: AnyPublisher<[WorkoutEvent], Never> { get }
     var eventsErrorPublisher: PassthroughSubject<CoreError, Never> { get }
 
-    func delete(with id: String)
+    func deleteEvent(_ event: WorkoutEvent, shouldDeleteAllFutureEvents: Bool)
     func fetchEvents()
 }
 
@@ -32,7 +32,7 @@ public final class WorkoutEventsProvider: WorkoutEventsProviderInterface {
     public init(coreDataService: CoreDataServiceInterface) {
         self.coreDataService = coreDataService
         setupBindings()
-        coreDataService.context.refreshAllObjects()
+        fetchEvents()
     }
 
     public func fetchEvents() {
@@ -45,9 +45,17 @@ public final class WorkoutEventsProvider: WorkoutEventsProviderInterface {
         }
     }
 
-    public func delete(with id: String) {
+    public func deleteEvent(_ event: WorkoutEvent, shouldDeleteAllFutureEvents: Bool) {
+        if shouldDeleteAllFutureEvents {
+            deleteFutureRecurrences(for: event)
+        } else {
+            deleteFromDatabase(event)
+        }
+    }
+
+    private func deleteFromDatabase(_ event: WorkoutEvent) {
         let request = CDWorkoutEvent.fetchRequest()
-        request.predicate = NSPredicate(format: "id == %@", id)
+        request.predicate = NSPredicate(format: "id == %@", event.id)
 
         do {
             if let object = try coreDataService.context.fetch(request).first {
@@ -61,10 +69,26 @@ public final class WorkoutEventsProvider: WorkoutEventsProviderInterface {
         }
     }
 
+    private func deleteFutureRecurrences(for event: WorkoutEvent) {
+        guard let recurrenceId = event.recurrenceId else { return }
+        let request = CDWorkoutEvent.fetchRequest()
+        request.predicate = NSPredicate(format: "recurrenceId == %@", recurrenceId)
+
+        do {
+            let recurrences = try coreDataService.context.fetch(request)
+            recurrences
+                .filter { $0.date! >= event.date }
+                .forEach { event in
+                    coreDataService.context.delete(event)
+                }
+            try coreDataService.saveContext()
+        } catch {
+            eventsErrorPublisher.send(.internalError(.cancelingRecurrenceFailed))
+        }
+    }
+
     private func setupBindings() {
-        NotificationCenter.default.eventChangedPublisher
-            .combineLatest(NotificationCenter.default.coreDataDidSaveObjectIDsPublisher)
-            .debounce(for: .seconds(0.3), scheduler: DispatchQueue.main)
+        coreDataService.dataUpdatedPublisher
             .sink { [weak self] _ in
                 self?.fetchEvents()
             }

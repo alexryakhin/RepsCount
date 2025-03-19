@@ -23,7 +23,7 @@ public struct CalendarContentView: PageView {
             }
 
             Section {
-                if viewModel.filteredEvents.isEmpty {
+                if viewModel.eventsForSelectedDate.isEmpty {
                     EmptyListView(description: "No Workouts Scheduled") {
                         VStack(spacing: 10) {
                             Button("Schedule a Workout") {
@@ -33,11 +33,13 @@ public struct CalendarContentView: PageView {
                         }
                     }
                 } else {
-                    ForEach(viewModel.filteredEvents) { event in
+                    ForEach(viewModel.eventsForSelectedDate) { event in
                         WorkoutEventRow(event: event)
-                    }
-                    .onDelete {
-                        viewModel.handle(.deleteEvent(atOffsets: $0))
+                            .contextMenu {
+                                Button("Delete", role: .destructive) {
+                                    viewModel.handle(.deleteEvent(event))
+                                }
+                            }
                     }
                 }
             } header: {
@@ -61,7 +63,7 @@ struct WorkoutEventRow: View {
         VStack(alignment: .leading) {
             Text(event.title)
                 .font(.headline)
-            Text("Planned at: \(event.startAtDate, formatter: DateFormatter.shortTime)")
+            Text("Planned at: \(event.date, formatter: DateFormatter.shortTime)")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
         }

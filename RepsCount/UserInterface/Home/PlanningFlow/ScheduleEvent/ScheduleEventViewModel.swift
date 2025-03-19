@@ -9,6 +9,10 @@ import SwiftUI
 
 public final class ScheduleEventViewModel: DefaultPageViewModel {
 
+    public struct ConfigModel {
+        public let selectedDate: Date
+    }
+
     enum Input {
         case saveEvent
         case selectTemplate(WorkoutTemplate)
@@ -50,7 +54,7 @@ public final class ScheduleEventViewModel: DefaultPageViewModel {
     @Published var duration: WorkoutEventDuration = .oneHour
 
     @Published var isRecurring: Bool = false
-    @Published var selectedDate: Date = .now
+    @Published var selectedDate: Date
     @Published var isWriteOnlyOrFullAccessAuthorized: Bool = false {
         didSet {
             if !isWriteOnlyOrFullAccessAuthorized {
@@ -72,6 +76,7 @@ public final class ScheduleEventViewModel: DefaultPageViewModel {
     // MARK: - Initialization
 
     public init(
+        configModel: ConfigModel,
         workoutEventManager: WorkoutEventManagerInterface,
         workoutTemplatesProvider: WorkoutTemplatesProviderInterface,
         eventStoreManager: EventStoreManagerInterface
@@ -80,6 +85,7 @@ public final class ScheduleEventViewModel: DefaultPageViewModel {
         self.workoutTemplatesProvider = workoutTemplatesProvider
         self.eventStoreManager = eventStoreManager
         self.eventStore = eventStoreManager.store
+        self.selectedDate = configModel.selectedDate
         super.init()
         setupBindings()
     }
@@ -127,20 +133,16 @@ public final class ScheduleEventViewModel: DefaultPageViewModel {
             do {
                 guard let selectedTemplate else { fatalError("Selected template is nil") }
 
-                guard selectedTemplate.workoutEventId == nil else {
-                    throw CoreError.internalError(.eventAlreadyExists)
-                }
-
                 let event = WorkoutEvent(
                     template: selectedTemplate,
-                    type: isRecurring ? .recurring : .single,
                     days: isRecurring ? days : [],
                     startAt: Int(selectedDate.timeIntervalSince(selectedDate.startOfDay)),
                     repeats: isRecurring ? repeats : nil,
                     interval: isRecurring ? interval : nil,
                     occurrenceCount: isRecurring ? occurrenceCount : nil,
                     duration: duration,
-                    dateCreated: selectedDate
+                    date: selectedDate,
+                    recurrenceId: isRecurring ? UUID().uuidString : nil
                 )
 
                 try workoutEventManager.createNewWorkoutEvent(from: event)

@@ -4,23 +4,31 @@ import CoreNavigation
 import Services
 import Shared
 import Combine
+import EventKit
 
 public final class CalendarViewModel: DefaultPageViewModel {
 
     enum Input {
         case scheduleWorkout
-        case deleteEvent(atOffsets: IndexSet)
+        case deleteEvent(WorkoutEvent)
+        case handleDeleteEventAlert(WorkoutEvent, deleteFutureEvents: Bool)
     }
 
     enum Output {
-        case scheduleWorkout
+        case scheduleWorkout(configModel: ScheduleEventViewModel.ConfigModel)
+        case presentDeleteEventAlert(WorkoutEvent)
     }
 
     var onOutput: ((Output) -> Void)?
 
     @Published var selectedDate: Date = .now
-    @Published var allEvents: [WorkoutEvent] = []
-    @Published var filteredEvents: [WorkoutEvent] = []
+    @Published private var events: [WorkoutEvent] = []
+
+    var eventsForSelectedDate: [WorkoutEvent] {
+        events
+            .filter { $0.date.startOfDay == selectedDate.startOfDay }
+            .sorted(by: { $0.startAt < $1.startAt })
+    }
 
     // MARK: - Private Properties
 
@@ -38,9 +46,12 @@ public final class CalendarViewModel: DefaultPageViewModel {
     func handle(_ input: Input) {
         switch input {
         case .scheduleWorkout:
-            onOutput?(.scheduleWorkout)
-        case .deleteEvent(let offsets):
-            deleteElements(at: offsets)
+            let configModel = ScheduleEventViewModel.ConfigModel(selectedDate: selectedDate)
+            onOutput?(.scheduleWorkout(configModel: configModel))
+        case .deleteEvent(let event):
+            onOutput?(.presentDeleteEventAlert(event))
+        case .handleDeleteEventAlert(let event, let deleteFutureEvents):
+            calendarEventsProvider.deleteEvent(event, shouldDeleteAllFutureEvents: deleteFutureEvents)
         }
     }
 
@@ -50,20 +61,8 @@ public final class CalendarViewModel: DefaultPageViewModel {
         calendarEventsProvider.eventsPublisher
             .receive(on: RunLoop.main)
             .sink { [weak self] events in
-                self?.allEvents = events
+                self?.events = events
             }
             .store(in: &cancellables)
-    }
-
-    private func deleteElements(at indices: IndexSet) {
-        indices.map { allEvents[$0] }
-            .forEach { [weak self] in
-                self?.deleteWorkoutEvent($0.id)
-            }
-    }
-
-    private func deleteWorkoutEvent(_ id: String) {
-//        calendarEventsProvider.delete(with: id)
-        // TODO: how to delete an event that is not existing, but a repeated event
     }
 }
