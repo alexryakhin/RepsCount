@@ -112,7 +112,7 @@ public struct WorkoutEvent: Identifiable, Hashable {
     /// Template selected for the event
     public let template: WorkoutTemplate
 
-    /// Specifies whether the workoutEvent is a recurring event or a single event.
+    /// Specifies whether the workout event is a recurring event or a single event.
     public var type: WorkoutEventType {
         recurrenceId == nil ? .single : .recurring
     }
@@ -123,10 +123,10 @@ public struct WorkoutEvent: Identifiable, Hashable {
     /// Specifies the time at which the workout event starts.
     public let startAt: Int
 
-    /// Specifies the workoutEvent recurrence frequency.
+    /// Specifies the workout event recurrence frequency.
     public let repeats: WorkoutEventRecurrence?
 
-    /// Specifies the workoutEvent recurrence interval.
+    /// Specifies the workout event recurrence interval.
     public let interval: Int?
 
     /// Specifies how often the workout event occurs.
@@ -171,8 +171,8 @@ public extension WorkoutEvent {
         return template.name + " workout"
     }
 
-    var titleAndSchedule: String {
-        return "Schedule \(title)"
+    var titleAndStart: String {
+        return "Start \(title)"
     }
 }
 

@@ -41,10 +41,10 @@ public final class ScheduleEventViewModel: DefaultPageViewModel {
     /// Specifies the days on which the workout event occur.
     @Published var days: [WorkoutEventDay] = []
 
-    /// Specifies the workoutEvent recurrence frequency.
+    /// Specifies the workout event recurrence frequency.
     @Published var repeats: WorkoutEventRecurrence = .daily
 
-    /// Specifies the workoutEvent recurrence interval.
+    /// Specifies the workout event recurrence interval.
     @Published var interval: Int = 1
 
     /// Specifies how often the workout event occurs.

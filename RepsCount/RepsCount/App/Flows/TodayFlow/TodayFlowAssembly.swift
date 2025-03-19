@@ -13,7 +13,7 @@ final class TodayFlowAssembly: Assembly, Identifiable {
 
         container.register(TodayMainViewController.self) { resolver in
             let viewModel = TodayMainViewModel(
-                arg: 0
+                calendarEventsProvider: resolver ~> WorkoutEventsProviderInterface.self
             )
             let controller = TodayMainViewController(viewModel: viewModel)
             return controller

@@ -11,6 +11,7 @@ public final class TodayMainViewModel: DefaultPageViewModel {
         case showWorkouts
         case createNewWorkout
         case showWorkoutDetails(WorkoutInstance)
+        case startPlannedWorkout(WorkoutEvent)
     }
 
     enum Output {
@@ -19,18 +20,20 @@ public final class TodayMainViewModel: DefaultPageViewModel {
 
     var onOutput: ((Output) -> Void)?
 
+    @Published private(set) var plannedWorkouts: [WorkoutEvent] = []
     @Published private(set) var todayWorkouts: [WorkoutInstance] = []
 
     // MARK: - Private Properties
 
+    private let calendarEventsProvider: WorkoutEventsProviderInterface
     private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Initialization
 
-    public init(arg: Int) {
+    public init(calendarEventsProvider: WorkoutEventsProviderInterface) {
+        self.calendarEventsProvider = calendarEventsProvider
         super.init()
         setupBindings()
-        additionalState = .placeholder()
     }
 
     func handle(_ input: Input) {
@@ -41,12 +44,30 @@ public final class TodayMainViewModel: DefaultPageViewModel {
             break
         case .showWorkoutDetails(let workoutInstance):
             break
+        case .startPlannedWorkout(let event):
+            startPlannedWorkout(with: event)
         }
     }
 
     // MARK: - Private Methods
 
     private func setupBindings() {
-        // Services and Published properties subscriptions
+        calendarEventsProvider.eventsPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] events in
+                let plannedEvents = events
+                    .filter { $0.date.startOfDay == Date.now.startOfDay }
+                    .sorted(by: { $0.startAt < $1.startAt })
+                if plannedEvents.isNotEmpty {
+                    self?.plannedWorkouts = plannedEvents
+                } else {
+                    self?.additionalState = .placeholder()
+                }
+            }
+            .store(in: &cancellables)
+    }
+
+    private func startPlannedWorkout(with event: WorkoutEvent) {
+        // NewWorkoutManager start workout from event
     }
 }

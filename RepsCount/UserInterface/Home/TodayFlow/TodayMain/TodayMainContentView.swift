@@ -14,28 +14,28 @@ public struct TodayMainContentView: PageView {
     }
 
     public var contentView: some View {
-        List(viewModel.todayWorkouts) { workout in
-            Button(action: { viewModel.handle(.showWorkoutDetails(workout)) }) {
-                WorkoutRow(workout: workout)
+        ScrollViewWithCustomNavBar {
+            LazyVStack {
+                todayWorkoutsSectionView
+                plannedWorkoutsSectionView
             }
-        }
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                VStack(alignment: .leading, spacing: 0) {
-                    Text(Date().formatted(date: .long, time: .omitted)) // e.g., March 16
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .foregroundStyle(.secondary)
+            .padding(.horizontal, 16)
+        } navigationBar: {
+            VStack(alignment: .leading, spacing: 0) {
+                Text(Date.now.formatted(date: .long, time: .omitted)) // e.g., March 16
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(.secondary)
 
-                    Text("Today")
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .foregroundStyle(.primary)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
+                Text("Today")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .foregroundStyle(.primary)
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(vertical: 12, horizontal: 16)
         }
+        .background(Color.background)
     }
 
     public func placeholderView(props: PageState.PlaceholderProps) -> some View {
@@ -53,23 +53,36 @@ public struct TodayMainContentView: PageView {
             }
         }
     }
-}
 
-struct WorkoutRow: View {
-    let workout: WorkoutInstance
+    private var plannedWorkoutsSectionView: some View {
+        Section {
+            ForEach(viewModel.plannedWorkouts) { event in
+                Button {
+                    viewModel.handle(.startPlannedWorkout(event))
+                } label: {
+                    TodayWorkoutEventRow(event: event)
+                        .clippedWithBackground(.surface)
+                }
+            }
+        } header: {
+            CustomSectionHeader(text: "Planned workouts")
+        }
+    }
 
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text(workout.workoutTemplate.name)
-                .font(.headline)
-            Text("Planned at: \(workout.date, formatter: DateFormatter.shortTime)")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-
-            if workout.isCompleted {
-                Text("Completed ✅")
-                    .font(.footnote)
-                    .foregroundColor(.green)
+    @ViewBuilder
+    private var todayWorkoutsSectionView: some View {
+        if viewModel.todayWorkouts.isNotEmpty {
+            Section {
+                ForEach(viewModel.todayWorkouts) { workout in
+                    Button {
+                        viewModel.handle(.showWorkoutDetails(workout))
+                    } label: {
+                        TodayWorkoutRow(workout: workout)
+                            .clippedWithBackground(.surface)
+                    }
+                }
+            } header: {
+                CustomSectionHeader(text: "Current workouts")
             }
         }
     }

@@ -8,15 +8,15 @@
 import EventKit
 
 extension EKEvent {
-    /// Creates a nonfloating event that uses the specified workoutEvent, event store, calendar, start date, and end date.
+    /// Creates a nonfloating event that uses the specified workout event, event store, calendar, start date, and end date.
     convenience init(workoutEvent: WorkoutEvent, eventStore store: EKEventStore, calendar: EKCalendar?, startDate: Date, endDate: Date) {
         self.init(eventStore: store)
         self.title = workoutEvent.title
         self.calendar = calendar
         self.startDate = startDate
         self.endDate = endDate
-
-        // A floating event is one that isn't associated with a specific time zone. Set `timeZone` to nil if you wish to have a floating event.
+        // TODO: add ui for this later
+        self.addAlarm(.init(relativeOffset: -900)) // Alert 15 minutes before a workout
         self.timeZone = TimeZone.current
 
         if workoutEvent.type == .recurring {
