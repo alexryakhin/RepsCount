@@ -8,8 +8,8 @@
 public struct WorkoutTemplateExercise: Identifiable, Hashable {
     public let id: String
     public let exerciseModel: ExerciseModel
-    public let defaultSets: Int
-    public let defaultReps: Int
+    public var defaultSets: Int
+    public var defaultReps: Int
     public let sortingOrder: Int
 
     public init(

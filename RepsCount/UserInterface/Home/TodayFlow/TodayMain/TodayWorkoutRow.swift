@@ -17,13 +17,19 @@ struct TodayWorkoutRow: View {
                 .frame(width: 80)
 
             VStack(alignment: .leading) {
-                Text(workout.title)
+                Text(workout.defaultName)
                     .font(.headline)
                     .foregroundColor(.primary)
+                    .lineLimit(1)
 
                 Text("Started at: \(workout.date, formatter: DateFormatter.shortTime)")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
+
+                Text(workout.exercises.map(\.model.categoriesLocalizedNames).removedDuplicates.joined(separator: ", "))
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .lineLimit(2)
 
                 if workout.isCompleted {
                     Text("Completed ✅")
@@ -32,6 +38,7 @@ struct TodayWorkoutRow: View {
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
+            .multilineTextAlignment(.leading)
 
             Image(systemName: "chevron.right")
                 .foregroundColor(.secondary)

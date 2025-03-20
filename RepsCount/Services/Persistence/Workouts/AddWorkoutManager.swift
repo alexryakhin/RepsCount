@@ -36,6 +36,7 @@ public final class AddWorkoutManager: AddWorkoutManagerInterface {
         let newItem = CDWorkoutInstance(context: coreDataService.context)
         newItem.date = .now
         newItem.id = event.id
+        newItem.name = event.template.name
         newItem.workoutEvent = try getEvent(with: event.id)
         newItem.workoutTemplate = newItem.workoutEvent?.workoutTemplate
         for exercise in event.template.templateExercises {
@@ -62,6 +63,7 @@ public final class AddWorkoutManager: AddWorkoutManagerInterface {
         let newItem = CDWorkoutInstance(context: coreDataService.context)
         newItem.date = .now
         newItem.id = UUID().uuidString
+        newItem.name = template.name
         newItem.workoutTemplate = try getTemplate(with: template.id)
         for exercise in template.templateExercises {
             let newCDExercise = CDExercise(context: coreDataService.context)

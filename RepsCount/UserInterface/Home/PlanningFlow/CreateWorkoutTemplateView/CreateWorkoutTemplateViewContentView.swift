@@ -18,73 +18,24 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
     }
 
     public var contentView: some View {
-        List {
-            Section {
-                MuscleMapView(exercises: viewModel.exercises.map(\.exerciseModel))
-                    .onAppear { isMuscleMapVisible = true }
-                    .onDisappear { isMuscleMapVisible = false }
-            } header: {
-                Text("Muscle groups to target")
-            }
-
-            Section {
-                TextField("Legs day", text: $viewModel.workoutName, axis: .vertical)
-                    .focused($isNameFocused)
-            } header: {
-                HStack {
-                    Text("Workout Name")
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    if isNameFocused {
-                        Button("Done") {
-                            isNameFocused = false
-                        }
-                    }
-                }
-            }
-
-            Section {
-                TextField("Something you might need", text: $viewModel.workoutNotes, axis: .vertical)
-                    .focused($isNotesFocused)
-            } header: {
-                HStack {
-                    Text("Notes")
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    if isNotesFocused {
-                        Button("Done") {
-                            isNotesFocused = false
-                        }
-                    }
-                }
-            }
-
-            if viewModel.exercises.isNotEmpty {
-                Section {
-                    ForEach(viewModel.exercises) { exercise in
-                        HStack {
-                            Text(exercise.exerciseModel.name)
-                                .bold()
-                            Divider()
-                            TextField("0", text: .constant("0"))
-                            Divider()
-                            TextField("1", text: .constant("1"))
-                        }
-                    }
-                } header: {
-                    Text("Selected exercises")
-                }
-            }
-
-            Section {
+        ScrollView {
+            LazyVStack(spacing: 24) {
+                muscleMapSectionView
+                workoutNameSectionView
+                notesSectionView
+                selectedExerciseSectionView
                 Text("Select exercises")
                     .font(.title2)
                     .bold()
                     .listRowBackground(Color.clear)
-            }
 
-            ForEach(ExerciseCategory.allCases, id: \.self) { category in
-                exerciseCategorySectionView(for: category)
+                ForEach(ExerciseCategory.allCases, id: \.self) { category in
+                    exerciseCategorySectionView(for: category)
+                }
             }
+            .padding(vertical: 12, horizontal: 16)
         }
+        .background(Color.background)
         .overlay(alignment: .topTrailing) {
             if !isMuscleMapVisible {
                 floatingMuscleMapView
@@ -111,30 +62,150 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
             .padding(.horizontal, 16)
             .gradientStyle(.bottomButton)
         }
+        .alert("Defaults", isPresented: .constant(viewModel.exerciseModelToAdd != nil), presenting: viewModel.exerciseModelToAdd) { model in
+            TextField("Default sets", text: $viewModel.defaultSetsInput)
+                .keyboardType(.numberPad)
+            TextField("Default reps", text: $viewModel.defaultRepsInput)
+                .keyboardType(.numberPad)
+            Button("Add") {
+                viewModel.handle(.appendNewExercise(model))
+            }
+        }
+        .alert("Edit defaults", isPresented: .constant(viewModel.editingDefaultsExercise != nil), presenting: viewModel.editingDefaultsExercise) { exercise in
+            TextField("Default sets", text: $viewModel.defaultSetsInput)
+                .keyboardType(.numberPad)
+            TextField("Default reps", text: $viewModel.defaultRepsInput)
+                .keyboardType(.numberPad)
+            Button("Apply") {
+                viewModel.handle(.applyEditing(exercise))
+            }
+        }
+    }
+
+    private var muscleMapSectionView: some View {
+        VStack(spacing: 8) {
+            Section {
+                MuscleMapView(exercises: viewModel.exercises.map(\.exerciseModel))
+                    .clippedWithBackground(.surface)
+                    .onAppear { isMuscleMapVisible = true }
+                    .onDisappear { isMuscleMapVisible = false }
+            } header: {
+                CustomSectionHeader(text: "Muscle groups to target")
+            }
+        }
+    }
+
+    private var workoutNameSectionView: some View {
+        VStack(spacing: 8) {
+            Section {
+                TextField("Legs day", text: $viewModel.workoutName, axis: .vertical)
+                    .focused($isNameFocused)
+                    .clippedWithBackground(.surface)
+            } header: {
+                HStack {
+                    CustomSectionHeader(text: "Workout Name")
+                    if isNameFocused {
+                        Button("Done") {
+                            isNameFocused = false
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private var notesSectionView: some View {
+        VStack(spacing: 8) {
+            Section {
+                TextField("Something you might need", text: $viewModel.workoutNotes, axis: .vertical)
+                    .focused($isNotesFocused)
+                    .clippedWithBackground(.surface)
+            } header: {
+                HStack {
+                    CustomSectionHeader(text: "Notes")
+                    if isNotesFocused {
+                        Button("Done") {
+                            isNotesFocused = false
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var selectedExerciseSectionView: some View {
+        if viewModel.exercises.isNotEmpty {
+            VStack(spacing: 8) {
+                Section {
+                    ListWithDivider(viewModel.exercises) { exercise in
+                        HStack(alignment: .top, spacing: 12) {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(exercise.exerciseModel.name)
+                                    .bold()
+                                    .foregroundStyle(.primary)
+                                Text(exercise.exerciseModel.categoriesLocalizedNames)
+                                    .foregroundStyle(.secondary)
+                                    .font(.caption)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            VStack(alignment: .trailing, spacing: 4) {
+                                Text("Default sets: \(exercise.defaultSets.formatted())")
+                                    .foregroundStyle(.secondary)
+                                    .font(.caption)
+                                Text("Default reps: \(exercise.defaultReps.formatted())")
+                                    .foregroundStyle(.secondary)
+                                    .font(.caption)
+                            }
+                        }
+                        .padding(.vertical, 12)
+                        .padding(.horizontal, 16)
+                        .contextMenu {
+                            Button("Edit defaults") {
+                                viewModel.handle(.editDefaults(exercise))
+                            }
+                            Button("Remove", role: .destructive) {
+                                viewModel.handle(.toggleExerciseSelection(exercise.exerciseModel))
+                            }
+                        }
+                    }
+                    .background(Color.surface)
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                } header: {
+                    CustomSectionHeader(text: "Selected exercises")
+                }
+            }
+        }
     }
 
     private func exerciseCategorySectionView(for category: ExerciseCategory) -> some View {
-        Section {
-            let filteredExercises = category.exercises.filter {
-                viewModel.selectedEquipment.contains($0.equipment)
-            }
-            if filteredExercises.isNotEmpty {
-                HFlow {
-                    ForEach(filteredExercises, id: \.rawValue) { model in
-                        capsuleView(
-                            for: model,
-                            isSelected: viewModel.exercises.contains(
-                                where: { $0.exerciseModel.rawValue == model.rawValue }
-                            )
-                        )
-                    }
+        VStack(spacing: 8) {
+            Section {
+                let filteredExercises = category.exercises.filter {
+                    viewModel.selectedEquipment.contains($0.equipment)
                 }
-            } else {
-                Text("No exercises available for this category")
-                    .foregroundStyle(.secondary)
+                if filteredExercises.isNotEmpty {
+                    HFlow {
+                        ForEach(filteredExercises, id: \.rawValue) { model in
+                            capsuleView(
+                                for: model,
+                                isSelected: viewModel.exercises.contains(
+                                    where: { $0.exerciseModel.rawValue == model.rawValue }
+                                )
+                            )
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .clippedWithBackground(.surface)
+                } else {
+                    Text("No exercises available for this category")
+                        .foregroundStyle(.secondary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .clippedWithBackground(.surface)
+                }
+            } header: {
+                CustomSectionHeader(text: LocalizedStringKey(category.name))
             }
-        } header: {
-            Text(category.name)
         }
     }
 
@@ -142,8 +213,7 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
     private func capsuleView(for item: ExerciseModel, isSelected: Bool) -> some View {
         if isSelected {
             Button {
-                viewModel.handle(.toggleExerciseSelection(item))
-                HapticManager.shared.triggerSelection()
+                // do nothing
             } label: {
                 Text(item.name)
             }

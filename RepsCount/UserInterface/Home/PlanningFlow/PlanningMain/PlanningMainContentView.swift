@@ -14,7 +14,34 @@ public struct PlanningMainContentView: PageView {
     }
 
     public var contentView: some View {
-        List {
+        ScrollView {
+            LazyVStack(spacing: 24) {
+                calendarSection
+                templatesSection
+            }
+            .padding(vertical: 12, horizontal: 16)
+        }
+        .background(Color.background)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(action: { viewModel.handle(.createWorkoutTemplate) }) {
+                    Image(systemName: "plus")
+                }
+            }
+        }
+    }
+
+    public func placeholderView(props: PageState.PlaceholderProps) -> some View {
+        EmptyListView(label: "No Workouts Created", description: "You haven't created any workout templates yet.") {
+            Button("Create New Workout Template") {
+                viewModel.handle(.createWorkoutTemplate)
+            }
+            .buttonStyle(.borderedProminent)
+        }
+    }
+
+    private var calendarSection: some View {
+        VStack(spacing: 8) {
             Section {
                 Button {
                     viewModel.handle(.showCalendar)
@@ -33,37 +60,34 @@ public struct PlanningMainContentView: PageView {
                         Image(systemName: "calendar")
                     }
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .clippedWithBackground(.surface)
             } header: {
-                Text("Calendar")
-            }
-            Section {
-                ForEach(viewModel.workoutTemplates) { template in
-                    Button(action: { viewModel.handle(.showWorkoutTemplateDetails(template)) }) {
-                        WorkoutTemplateRow(template: template)
-                    }
-                }
-                .onDelete {
-                    viewModel.handle(.deleteWorkoutTemplate(offsets: $0))
-                }
-            } header: {
-                Text("My workout templates")
-            }
-        }
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button(action: { viewModel.handle(.createWorkoutTemplate) }) {
-                    Image(systemName: "plus")
-                }
+                CustomSectionHeader(text: "Calendar")
             }
         }
     }
 
-    public func placeholderView(props: PageState.PlaceholderProps) -> some View {
-        EmptyListView(label: "No Workouts Created", description: "You haven't created any workout templates yet.") {
-            Button("Create New Workout Template") {
-                viewModel.handle(.createWorkoutTemplate)
+    private var templatesSection: some View {
+        VStack(spacing: 8) {
+            Section {
+                ForEach(viewModel.workoutTemplates) { template in
+                    Button {
+                        viewModel.handle(.showWorkoutTemplateDetails(template))
+                    } label: {
+                        WorkoutTemplateRow(template: template)
+                            .clippedWithBackground(.surface)
+                            .contextMenu {
+                                Button("Delete", role: .destructive) {
+                                    viewModel.handle(.deleteWorkoutTemplate(template))
+                                }
+                            }
+                    }
+                }
+
+            } header: {
+                CustomSectionHeader(text: "My workout templates")
             }
-            .buttonStyle(.borderedProminent)
         }
     }
 }

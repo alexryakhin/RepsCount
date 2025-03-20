@@ -34,6 +34,7 @@
         <attribute name="completionTimeStamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise" inverseName="workoutInstance" inverseEntity="Exercise"/>
         <relationship name="workoutEvent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutEvent" inverseName="workoutInstance" inverseEntity="WorkoutEvent"/>
         <relationship name="workoutTemplate" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutTemplate" inverseName="workoutInstances" inverseEntity="WorkoutTemplate"/>

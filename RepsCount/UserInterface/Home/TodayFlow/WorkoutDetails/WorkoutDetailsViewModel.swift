@@ -13,6 +13,7 @@ public final class WorkoutDetailsViewModel: DefaultPageViewModel {
         case showExerciseDetails(Exercise)
         case showDeleteExerciseAlert(Exercise)
         case showDeleteWorkoutAlert
+        case updateName(String)
     }
 
     enum Output {
@@ -87,6 +88,8 @@ public final class WorkoutDetailsViewModel: DefaultPageViewModel {
                     }
                 )
             )
+        case .updateName(let name):
+            workoutDetailsManager.updateName(name)
         }
     }
 

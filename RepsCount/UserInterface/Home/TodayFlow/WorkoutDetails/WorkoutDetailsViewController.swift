@@ -30,7 +30,10 @@ public final class WorkoutDetailsViewController: PageViewController<WorkoutDetai
     override public func setup() {
         super.setup()
         setupBindings()
-        navigationItem.title = viewModel.workout.title
+        navigationItem.titleView = NavBarTitleView(
+            title: viewModel.workout.defaultName,
+            subtitle: viewModel.workout.date.formatted(date: .abbreviated, time: .shortened)
+        )
     }
 
     // MARK: - Private Methods

@@ -8,6 +8,7 @@ public protocol WorkoutDetailsManagerInterface {
     var workoutPublisher: AnyPublisher<WorkoutInstance?, Never> { get }
     var errorPublisher: PassthroughSubject<CoreError, Never> { get }
 
+    func updateName(_ name: String)
     func markAsComplete()
     func deleteExercise(_ exercise: Exercise)
     func deleteWorkout()
@@ -32,6 +33,19 @@ public final class WorkoutDetailsManager: WorkoutDetailsManagerInterface {
     ) {
         self.coreDataService = coreDataService
         fetchWorkout(with: workoutID)
+    }
+
+    public func updateName(_ name: String) {
+        guard let cdWorkoutInstance else {
+            errorPublisher.send(.unknownError)
+            return
+        }
+        guard name.isNotEmpty else {
+            errorPublisher.send(.internalError(.inputCannotBeEmpty))
+            return
+        }
+        cdWorkoutInstance.name = name
+        saveContext()
     }
 
     public func markAsComplete() {

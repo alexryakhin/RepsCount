@@ -10,7 +10,7 @@ public final class PlanningMainViewModel: DefaultPageViewModel {
     enum Input {
         case createWorkoutTemplate
         case showWorkoutTemplateDetails(WorkoutTemplate)
-        case deleteWorkoutTemplate(offsets: IndexSet)
+        case deleteWorkoutTemplate(WorkoutTemplate)
         case showCalendar
     }
 
@@ -44,8 +44,8 @@ public final class PlanningMainViewModel: DefaultPageViewModel {
             onOutput?(.createWorkoutTemplate)
         case .showWorkoutTemplateDetails(let template):
             onOutput?(.editWorkoutTemplate(template))
-        case .deleteWorkoutTemplate(let offsets):
-            deleteElements(at: offsets)
+        case .deleteWorkoutTemplate(let template):
+            workoutTemplatesProvider.delete(with: template.id)
         case .showCalendar:
             onOutput?(.showCalendar)
         }
@@ -67,16 +67,5 @@ public final class PlanningMainViewModel: DefaultPageViewModel {
                 }
             }
             .store(in: &cancellables)
-    }
-
-    private func deleteElements(at indices: IndexSet) {
-        indices.map { workoutTemplates[$0] }
-            .forEach { [weak self] in
-                self?.deleteWorkoutTemplate($0.id)
-            }
-    }
-
-    private func deleteWorkoutTemplate(_ id: String) {
-        workoutTemplatesProvider.delete(with: id)
     }
 }

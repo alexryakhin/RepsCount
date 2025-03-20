@@ -11,10 +11,25 @@ public struct WorkoutInstance: Identifiable, Hashable {
     public let exercises: [Exercise]
     public let workoutTemplate: WorkoutTemplate?
     public let workoutEvent: WorkoutEvent?
-    public var completionTimeStamp: Date?
+    public let completionTimeStamp: Date?
+    public let name: String?
 
-    public var title: String {
-        workoutTemplate?.workoutTitle ?? "Open Workout"
+    public var defaultName: String {
+        if let name = name?.nilIfEmpty {
+            return name
+        } else if let name = workoutTemplate?.name {
+            return name
+        }
+
+        let hour = Calendar.current.component(.hour, from: date)
+        switch hour {
+        case 5..<12:
+            return "Morning workout"
+        case 12..<18:
+            return "Afternoon workout"
+        default:
+            return "Evening workout"
+        }
     }
 
     public var isCompleted: Bool {
@@ -22,13 +37,8 @@ public struct WorkoutInstance: Identifiable, Hashable {
     }
 
     public var totalDuration: TimeInterval? {
-        let sortedExercises = exercises.sorted(by: { $0.timestamp < $1.timestamp })
-        guard let firstExercise = sortedExercises.first,
-              firstExercise.sets.count > 1,
-              let firstSetDate = firstExercise.sets.first?.timestamp,
-              let lastSetDate = sortedExercises.last?.sets.last?.timestamp
-        else { return nil }
-        return firstSetDate.distance(to: lastSetDate)
+        guard let completionTimeStamp else { return nil }
+        return date.distance(to: completionTimeStamp)
     }
 
     public init(
@@ -37,7 +47,8 @@ public struct WorkoutInstance: Identifiable, Hashable {
         exercises: [Exercise],
         completionTimeStamp: Date?,
         workoutTemplate: WorkoutTemplate? = nil,
-        workoutEvent: WorkoutEvent? = nil
+        workoutEvent: WorkoutEvent? = nil,
+        name: String? = nil
     ) {
         self.id = id
         self.date = date
@@ -45,5 +56,6 @@ public struct WorkoutInstance: Identifiable, Hashable {
         self.completionTimeStamp = completionTimeStamp
         self.workoutTemplate = workoutTemplate
         self.workoutEvent = workoutEvent
+        self.name = name
     }
 }

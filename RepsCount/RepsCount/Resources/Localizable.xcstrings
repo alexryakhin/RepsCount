@@ -263,12 +263,6 @@
     "%.1f%%" : {
 
     },
-    "0" : {
-
-    },
-    "1" : {
-
-    },
     "About app" : {
       "localizations" : {
         "de" : {
@@ -403,6 +397,9 @@
       }
     },
     "App version:" : {
+
+    },
+    "Apply" : {
 
     },
     "Are you sure you want to complete this workout? You won't be able to make any changes afterwards" : {
@@ -995,6 +992,21 @@
         }
       }
     },
+    "Default reps" : {
+
+    },
+    "Default reps: %@" : {
+
+    },
+    "Default sets" : {
+
+    },
+    "Default sets: %@" : {
+
+    },
+    "Defaults" : {
+
+    },
     "Delete" : {
 
     },
@@ -1095,6 +1107,9 @@
       }
     },
     "Duration" : {
+
+    },
+    "Edit defaults" : {
 
     },
     "Empty exercises" : {
@@ -1219,9 +1234,6 @@
           }
         }
       }
-    },
-    "Exercises: %@" : {
-
     },
     "Face Pulls" : {
       "extractionState" : "manual",
@@ -1993,6 +2005,9 @@
     "Recurrence" : {
 
     },
+    "Remove" : {
+
+    },
     "Repeat Frequency" : {
 
     },
@@ -2666,6 +2681,9 @@
       }
     },
     "Target muscles" : {
+
+    },
+    "Targets: %@" : {
 
     },
     "Time" : {

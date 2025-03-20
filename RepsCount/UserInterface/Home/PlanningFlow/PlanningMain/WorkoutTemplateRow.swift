@@ -21,7 +21,7 @@ struct WorkoutTemplateRow: View {
                 Text(template.name)
                     .font(.headline)
                     .foregroundColor(.primary)
-                Text("Exercises: \(template.templateExercises.map(\.exerciseModel.name).joined(separator: ", "))")
+                Text("Targets: \(template.templateExercises.map(\.exerciseModel.categoriesLocalizedNames).removedDuplicates.joined(separator: ", "))")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
                     .lineLimit(3)

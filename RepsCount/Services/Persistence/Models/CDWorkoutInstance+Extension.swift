@@ -27,7 +27,8 @@ extension CDWorkoutInstance {
             exercises: _exercises.compactMap(\.coreModel),
             completionTimeStamp: completionTimeStamp,
             workoutTemplate: workoutTemplate?.coreModel,
-            workoutEvent: workoutEvent?.coreModel
+            workoutEvent: workoutEvent?.coreModel,
+            name: name
         )
     }
 }

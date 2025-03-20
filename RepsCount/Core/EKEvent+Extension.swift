@@ -11,7 +11,7 @@ extension EKEvent {
     /// Creates a nonfloating event that uses the specified workout event, event store, calendar, start date, and end date.
     convenience init(workoutEvent: WorkoutEvent, eventStore store: EKEventStore, calendar: EKCalendar?, startDate: Date, endDate: Date) {
         self.init(eventStore: store)
-        self.title = workoutEvent.template.workoutTitle
+        self.title = workoutEvent.template.name
         self.calendar = calendar
         self.startDate = startDate
         self.endDate = endDate

@@ -13,10 +13,6 @@ public struct WorkoutTemplate: Identifiable, Hashable {
     public let workoutInstanceIds: [String]
     public let workoutEventIds: [String]
 
-    public var workoutTitle: String {
-        name + " workout"
-    }
-
     public init(
         id: String,
         name: String,
