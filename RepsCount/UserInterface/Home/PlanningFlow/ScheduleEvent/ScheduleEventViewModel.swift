@@ -132,6 +132,9 @@ public final class ScheduleEventViewModel: DefaultPageViewModel {
 
             do {
                 guard let selectedTemplate else { fatalError("Selected template is nil") }
+                if isRecurring && repeats == .weekly && days.isEmpty {
+                    throw CoreError.internalError(.inputCannotBeEmpty)
+                }
 
                 let event = WorkoutEvent(
                     template: selectedTemplate,

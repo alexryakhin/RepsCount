@@ -16,7 +16,7 @@ final class MoreAssembly: Assembly, Identifiable {
 
         container.register(MoreViewController.self) { resolver in
             let viewModel = MoreViewModel(
-                arg: 0
+                locationManager: resolver ~> LocationManagerInterface.self
             )
             let controller = MoreViewController(viewModel: viewModel)
             return controller

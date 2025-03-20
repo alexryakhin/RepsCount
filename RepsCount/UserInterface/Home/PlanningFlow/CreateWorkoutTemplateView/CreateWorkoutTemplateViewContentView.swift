@@ -57,22 +57,21 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
                 }
             }
 
-            Section {
-                ForEach(viewModel.exercises) { exercise in
-                    HStack {
-                        Text(exercise.exerciseModel.name)
-                            .bold()
-                        Divider()
-                        TextField("0", text: .constant("0"))
-                        Divider()
-                        TextField("1", text: .constant("1"))
+            if viewModel.exercises.isNotEmpty {
+                Section {
+                    ForEach(viewModel.exercises) { exercise in
+                        HStack {
+                            Text(exercise.exerciseModel.name)
+                                .bold()
+                            Divider()
+                            TextField("0", text: .constant("0"))
+                            Divider()
+                            TextField("1", text: .constant("1"))
+                        }
                     }
+                } header: {
+                    Text("Selected exercises")
                 }
-                .onDelete { offsets in
-                    // TODO: delete
-                }
-            } header: {
-                Text("Selected exercises")
             }
 
             Section {

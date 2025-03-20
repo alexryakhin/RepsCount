@@ -41,7 +41,7 @@ extension CDWorkoutTemplate {
             name: name,
             notes: notes,
             templateExercises: _templateExercises.compactMap(\.coreModel),
-            workoutInstances: _workoutInstances.compactMap(\.coreModel),
+            workoutInstanceIds: _workoutInstances.compactMap(\.id),
             workoutEventIds: _workoutEvents.compactMap(\.id)
         )
     }

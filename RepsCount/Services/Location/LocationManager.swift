@@ -8,24 +8,38 @@
 import Foundation
 import CoreLocation
 import Core
+import Combine
 
 public protocol LocationManagerInterface: AnyObject {
-    func initiateLocationManager()
-    func getCurrentLocation() async -> Location?
+    /// Specifies the authorization status for the app.
+    var authorizationStatusPublisher: AnyPublisher<CLAuthorizationStatus, Never> { get }
+
+    func requestAccess()
+    func getCurrentLocation() async throws(CoreError) -> Location?
 }
 
 public final class LocationManager: NSObject, LocationManagerInterface, CLLocationManagerDelegate {
 
-    private let locationManager = CLLocationManager()
-
-    public func initiateLocationManager() {
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.activityType = .fitness
+    /// Specifies the authorization status for the app.
+    public var authorizationStatusPublisher: AnyPublisher<CLAuthorizationStatus, Never> {
+        authorizationStatusSubject.eraseToAnyPublisher()
     }
 
-    public func getCurrentLocation() async -> Location? {
+    private let locationManager = CLLocationManager()
+    private let authorizationStatusSubject = CurrentValueSubject<CLAuthorizationStatus, Never>(.notDetermined)
+
+    public override init() {
+        super.init()
+        authorizationStatusSubject.value = locationManager.authorizationStatus
+        initiateLocationManager()
+    }
+
+    public func requestAccess() {
+        locationManager.requestWhenInUseAuthorization()
+    }
+
+    public func getCurrentLocation() async throws(CoreError) -> Location? {
+        try verifyAuthorizationStatus()
         locationManager.startUpdatingLocation()
         guard let currentLocation = locationManager.location else {
             locationManager.stopUpdatingLocation()
@@ -39,7 +53,13 @@ public final class LocationManager: NSObject, LocationManagerInterface, CLLocati
         locationManager.stopUpdatingLocation()
         return location
     }
-    
+
+    private func initiateLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.activityType = .fitness
+    }
+
     private func getAddress(for location: CLLocation) async -> String? {
         let placemarks = try? await CLGeocoder().reverseGeocodeLocation(location)
         guard let pm = placemarks?.first else { return nil }
@@ -57,5 +77,23 @@ public final class LocationManager: NSObject, LocationManagerInterface, CLLocati
             addressComponents.append(country)
         }
         return addressComponents.isEmpty ? nil : addressComponents.joined(separator: ", ")
+    }
+
+    /// Verifies the authorization status for the app.
+    private func verifyAuthorizationStatus() throws(CoreError) {
+        let status = locationManager.authorizationStatus
+
+        switch status {
+        case .notDetermined:
+            requestAccess()
+        case .restricted:
+            throw CoreError.eventStoreError(.restricted)
+        case .denied:
+            throw CoreError.eventStoreError(.denied)
+        case .authorizedAlways, .authorizedWhenInUse:
+            break
+        @unknown default:
+            throw CoreError.eventStoreError(.unknown)
+        }
     }
 }

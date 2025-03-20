@@ -20,12 +20,14 @@ extension CDWorkoutInstance {
     }
 
     var coreModel: WorkoutInstance? {
-        guard let id, let date, let workoutTemplate = workoutTemplate?.coreModel else { return nil }
+        guard let id, let date else { return nil }
         return WorkoutInstance(
             id: id,
             date: date,
             exercises: _exercises.compactMap(\.coreModel),
-            workoutTemplate: workoutTemplate
+            completionTimeStamp: completionTimeStamp,
+            workoutTemplate: workoutTemplate?.coreModel,
+            workoutEvent: workoutEvent?.coreModel
         )
     }
 }

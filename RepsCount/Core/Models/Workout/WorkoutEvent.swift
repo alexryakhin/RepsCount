@@ -138,8 +138,11 @@ public struct WorkoutEvent: Identifiable, Hashable {
     /// Specifies the duration of the workout
     public let duration: WorkoutEventDuration
 
-    /// Specifies the date the initial event was created at.
+    /// Specifies the date of the event.
     public let date: Date
+
+    /// The id of the workout if user actually started a workout based on the event. One to one connection
+    public let workoutInstanceId: String?
 
     public init(
         template: WorkoutTemplate,
@@ -151,7 +154,8 @@ public struct WorkoutEvent: Identifiable, Hashable {
         duration: WorkoutEventDuration,
         date: Date,
         id: String = UUID().uuidString,
-        recurrenceId: String?
+        recurrenceId: String?,
+        workoutInstanceId: String? = nil
     ) {
         self.template = template
         self.days = days
@@ -163,16 +167,7 @@ public struct WorkoutEvent: Identifiable, Hashable {
         self.date = date
         self.id = id
         self.recurrenceId = recurrenceId
-    }
-}
-
-public extension WorkoutEvent {
-    var title: String {
-        return template.name + " workout"
-    }
-
-    var titleAndStart: String {
-        return "Start \(title)"
+        self.workoutInstanceId = workoutInstanceId
     }
 }
 

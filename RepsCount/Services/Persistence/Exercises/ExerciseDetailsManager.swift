@@ -37,6 +37,10 @@ public final class ExerciseDetailsManager: ExerciseDetailsManagerInterface {
     }
 
     public func addSet(_ amount: Double, weight: Double) {
+        guard cdExercise?.workoutInstance?.completionTimeStamp == nil else {
+            errorPublisher.send(.internalError(.workoutCompleted))
+            return
+        }
         let newItem = CDExerciseSet(context: coreDataService.context)
         newItem.timestamp = .now
         newItem.id = UUID().uuidString
@@ -47,6 +51,11 @@ public final class ExerciseDetailsManager: ExerciseDetailsManagerInterface {
     }
 
     public func deleteSet(atOffsets offsets: IndexSet) {
+        guard cdExercise?.workoutInstance?.completionTimeStamp == nil else {
+            errorPublisher.send(.internalError(.workoutCompleted))
+            return
+        }
+
         offsets.compactMap { cdExercise?._exerciseSets[$0] }.forEach(coreDataService.context.delete)
         saveContext()
     }
@@ -74,7 +83,7 @@ public final class ExerciseDetailsManager: ExerciseDetailsManagerInterface {
             try coreDataService.saveContext()
             _exercisePublisher.send(cdExercise?.coreModel)
         } catch {
-            errorPublisher.send(.internalError(.removingExerciseFailed))
+            errorPublisher.send(.storageError(.saveFailed))
         }
     }
 }

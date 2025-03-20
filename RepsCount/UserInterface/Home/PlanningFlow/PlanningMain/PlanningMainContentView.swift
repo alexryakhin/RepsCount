@@ -49,7 +49,6 @@ public struct PlanningMainContentView: PageView {
                 Text("My workout templates")
             }
         }
-        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: { viewModel.handle(.createWorkoutTemplate) }) {

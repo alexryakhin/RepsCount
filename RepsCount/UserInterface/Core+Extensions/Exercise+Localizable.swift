@@ -10,20 +10,20 @@ import CoreUserInterface
 import SwiftUI
 
 extension ExerciseType {
-    public var name: LocalizedStringKey {
-        LocalizedStringKey(rawValue)
+    public var name: String {
+        NSLocalizedString(rawValue, comment: rawValue)
     }
 }
 
 extension ExerciseCategory {
-    public var name: LocalizedStringKey {
-        LocalizedStringKey(rawValue)
+    public var name: String {
+        NSLocalizedString(rawValue, comment: rawValue)
     }
 }
 
 extension ExerciseModel {
-    public var name: LocalizedStringKey {
-        LocalizedStringKey(rawValue)
+    public var name: String {
+        NSLocalizedString(rawValue, comment: rawValue)
     }
 
     public var categoriesLocalizedNames: String {

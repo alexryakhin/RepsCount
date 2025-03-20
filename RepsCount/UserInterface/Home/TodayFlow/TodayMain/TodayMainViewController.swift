@@ -6,7 +6,9 @@ import Core
 public final class TodayMainViewController: PageViewController<TodayMainContentView>, NavigationBarHidden {
 
     public enum Event {
-        case finish
+        case showWorkoutDetails(WorkoutInstance)
+        case showAllWorkouts
+        case showAllExercises
     }
 
     public var onEvent: ((Event) -> Void)?
@@ -38,7 +40,12 @@ public final class TodayMainViewController: PageViewController<TodayMainContentV
     private func setupBindings() {
         viewModel.onOutput = { [weak self] output in
             switch output {
-                // handle output
+            case .showWorkoutDetails(let workout):
+                self?.onEvent?(.showWorkoutDetails(workout))
+            case .showAllWorkouts:
+                self?.onEvent?(.showAllWorkouts)
+            case .showAllExercises:
+                self?.onEvent?(.showAllExercises)
             }
         }
     }

@@ -17,9 +17,10 @@ struct TodayWorkoutEventRow: View {
                 .frame(width: 80)
 
             VStack(alignment: .leading) {
-                Text(event.titleAndStart)
+                Text(event.template.workoutTitle)
                     .font(.headline)
                     .foregroundColor(.primary)
+
                 Text("Planned at: \(event.date, formatter: DateFormatter.shortTime)")
                     .font(.subheadline)
                     .foregroundColor(.secondary)

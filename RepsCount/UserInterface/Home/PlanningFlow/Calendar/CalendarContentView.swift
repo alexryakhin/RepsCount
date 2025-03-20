@@ -61,7 +61,7 @@ struct WorkoutEventRow: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(event.title)
+            Text(event.template.workoutTitle)
                 .font(.headline)
             Text("Planned at: \(event.date, formatter: DateFormatter.shortTime)")
                 .font(.subheadline)

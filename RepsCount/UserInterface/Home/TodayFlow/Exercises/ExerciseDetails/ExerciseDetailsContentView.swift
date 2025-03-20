@@ -25,17 +25,6 @@ public struct ExerciseDetailsContentView: PageView {
         .safeAreaInset(edge: .bottom, alignment: .trailing) {
             addDataButton
         }
-//        .toolbar {
-//            ToolbarItem(placement: .principal) {
-//                VStack {
-//                    Text(LocalizedStringKey(viewModel.exercise.name))
-//                        .font(.headline)
-//                    Text(viewModel.exercise.timestamp.formatted(date: .abbreviated, time: .shortened))
-//                        .font(.caption)
-//                        .foregroundStyle(.secondary)
-//                }
-//            }
-//        }
         .alert("Enter the amount of reps", isPresented: $isShowingAlert) {
             TextField("Amount", text: $viewModel.amountInput)
                 .keyboardType(.decimalPad)

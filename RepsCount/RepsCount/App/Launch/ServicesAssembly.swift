@@ -20,9 +20,7 @@ final class ServicesAssembly: Assembly, Identifiable {
 
         container.register(JSONEncoder.self) { _ in
             let encoder = JSONEncoder()
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd"
-            encoder.dateEncodingStrategy = .formatted(formatter)
+            encoder.dateEncodingStrategy = .iso8601
             encoder.outputFormatting = .sortedKeys
             return encoder
         }.inObjectScope(.container)
@@ -113,6 +111,13 @@ final class ServicesAssembly: Assembly, Identifiable {
         }
         .inObjectScope(.container)
 
+        container.register(WorkoutsProviderInterface.self) { resolver in
+            WorkoutsProvider(
+                coreDataService: resolver ~> CoreDataServiceInterface.self
+            )
+        }
+        .inObjectScope(.container)
+
         container.register(WorkoutTemplateManagerInterface.self) { resolver, workoutTemplateID in
             WorkoutTemplatesManager(
                 workoutTemplateID: workoutTemplateID,
@@ -123,6 +128,22 @@ final class ServicesAssembly: Assembly, Identifiable {
 
         container.register(WorkoutEventManagerInterface.self) { resolver in
             WorkoutEventManager(
+                coreDataService: resolver ~> CoreDataServiceInterface.self
+            )
+        }
+        .inObjectScope(.transient)
+
+        container.register(AddWorkoutManagerInterface.self) { resolver in
+            AddWorkoutManager(
+                coreDataService: resolver ~> CoreDataServiceInterface.self,
+                locationManager: resolver ~> LocationManagerInterface.self
+            )
+        }
+        .inObjectScope(.transient)
+
+        container.register(WorkoutDetailsManagerInterface.self) { resolver, workoutID in
+            WorkoutDetailsManager(
+                workoutID: workoutID,
                 coreDataService: resolver ~> CoreDataServiceInterface.self
             )
         }

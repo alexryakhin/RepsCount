@@ -11,9 +11,8 @@ import CoreUserInterface
 struct ExerciseListCellView: ConfigurableView {
 
     struct Model {
-        let exercise: LocalizedStringKey
+        let exercise: String
         let categories: String
-        let dateFormatted: String
     }
 
     var model: Model
@@ -23,14 +22,13 @@ struct ExerciseListCellView: ConfigurableView {
             VStack(alignment: .leading, spacing: 4) {
                 Text(model.exercise)
                     .font(.headline)
-                + Text(", ")
-                + Text(model.categories)
+                    .foregroundColor(.primary)
 
-                Text(model.dateFormatted)
+                Text(model.categories)
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }
-            .foregroundColor(.primary)
+            .multilineTextAlignment(.leading)
             .frame(maxWidth: .infinity, alignment: .leading)
 
             Image(systemName: "chevron.right")

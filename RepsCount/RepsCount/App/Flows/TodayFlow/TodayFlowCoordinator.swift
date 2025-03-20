@@ -34,10 +34,55 @@ final class TodayFlowCoordinator: Coordinator {
         let controller = resolver ~> TodayMainViewController.self
         controller.onEvent = { [weak self] event in
             switch event {
+            case .showWorkoutDetails(let workout):
+                self?.showWorkoutDetails(for: workout)
+            case .showAllWorkouts:
+                self?.showAllWorkouts()
+            case .showAllExercises:
+                self?.showAllExercises()
             @unknown default:
                 fatalError("Unhandled event")
             }
         }
         navController.addChild(controller)
+    }
+
+    private func showAllExercises() {
+        let controller = resolver ~> ExercisesListViewController.self
+        controller.onEvent = { [weak self] event in
+            switch event {
+            case .showExerciseDetails(let exercise):
+                self?.showExerciseDetails(for: exercise)
+            @unknown default:
+                fatalError("Unhandled event")
+            }
+        }
+        router.push(controller)
+    }
+
+    private func showAllWorkouts() {
+
+    }
+
+    private func showWorkoutDetails(for workout: WorkoutInstance) {
+        let controller = resolver ~> (WorkoutDetailsViewController.self, workout)
+
+        controller.onEvent = { [weak self] event in
+            switch event {
+            case .finish:
+                self?.router.popToRootModule(animated: true)
+            case .showExerciseDetails(let exercise):
+                self?.showExerciseDetails(for: exercise)
+            @unknown default:
+                fatalError("Unhandled event")
+            }
+        }
+
+        router.push(controller)
+    }
+
+    private func showExerciseDetails(for exercise: Exercise) {
+        let controller = resolver ~> (ExerciseDetailsViewController.self, exercise)
+        router.push(controller)
     }
 }

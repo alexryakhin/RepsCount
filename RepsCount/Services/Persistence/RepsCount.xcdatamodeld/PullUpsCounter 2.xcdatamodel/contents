@@ -2,6 +2,8 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="24D81" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Exercise" representedClassName="CDExercise" syncable="YES" codeGenerationType="class">
         <attribute name="address" optional="YES" attributeType="String"/>
+        <attribute name="defaultReps" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="defaultSets" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -21,20 +23,19 @@
     </entity>
     <entity name="WorkoutEvent" representedClassName="CDWorkoutEvent" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="days" optional="YES" attributeType="String"/>
         <attribute name="duration" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="String"/>
-        <attribute name="interval" optional="YES" attributeType="Integer 64" defaultValueString="-1" usesScalarValueType="YES"/>
-        <attribute name="occurrenceCount" optional="YES" attributeType="Integer 64" defaultValueString="-1" usesScalarValueType="YES"/>
         <attribute name="recurrenceId" optional="YES" attributeType="String"/>
-        <attribute name="repeats" optional="YES" attributeType="Integer 64" defaultValueString="-1" usesScalarValueType="YES"/>
         <attribute name="startAt" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="workoutInstance" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutInstance" inverseName="workoutEvent" inverseEntity="WorkoutInstance"/>
         <relationship name="workoutTemplate" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutTemplate" inverseName="workoutEvents" inverseEntity="WorkoutTemplate"/>
     </entity>
     <entity name="WorkoutInstance" representedClassName="CDWorkoutInstance" syncable="YES" codeGenerationType="class">
+        <attribute name="completionTimeStamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="String"/>
         <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise" inverseName="workoutInstance" inverseEntity="Exercise"/>
+        <relationship name="workoutEvent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutEvent" inverseName="workoutInstance" inverseEntity="WorkoutEvent"/>
         <relationship name="workoutTemplate" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutTemplate" inverseName="workoutInstances" inverseEntity="WorkoutTemplate"/>
     </entity>
     <entity name="WorkoutTemplate" representedClassName="CDWorkoutTemplate" syncable="YES" codeGenerationType="class">

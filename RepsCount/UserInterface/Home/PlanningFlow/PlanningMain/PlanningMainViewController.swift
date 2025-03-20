@@ -3,7 +3,7 @@ import SwiftUI
 import CoreUserInterface
 import Core
 
-public final class PlanningMainViewController: PageViewController<PlanningMainContentView> {
+public final class PlanningMainViewController: PageViewController<PlanningMainContentView>, NavigationBarVisible {
 
     public enum Event {
         case createWorkoutTemplate
@@ -28,14 +28,25 @@ public final class PlanningMainViewController: PageViewController<PlanningMainCo
         fatalError("init(coder:) has not been implemented")
     }
 
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNavigationBar()
+    }
+
     override public func setup() {
         super.setup()
         setupBindings()
+        setupNavigationBar()
         tabBarItem = TabBarItem.planning.item
         navigationItem.title = TabBarItem.planning.localizedTitle
     }
 
     // MARK: - Private Methods
+
+    private func setupNavigationBar() {
+        navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
 
     private func setupBindings() {
         viewModel.onOutput = { [weak self] output in

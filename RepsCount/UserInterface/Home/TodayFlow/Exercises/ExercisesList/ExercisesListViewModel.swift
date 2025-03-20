@@ -18,7 +18,6 @@ public class ExercisesListViewModel: DefaultPageViewModel {
     @AppStorage(UDKeys.savesLocation) var savesLocation: Bool = true
 
     enum Input {
-        case showAddExercise
         case showExerciseDetails(Exercise)
         case deleteElements(indices: IndexSet, date: Date)
     }
@@ -45,13 +44,10 @@ public class ExercisesListViewModel: DefaultPageViewModel {
         super.init()
         loadingStarted()
         setupBindings()
-        setupLocationService()
     }
 
     func handle(_ input: Input) {
         switch input {
-        case .showAddExercise:
-            break
         case .showExerciseDetails(let exercise):
             onOutput?(.showExerciseDetails(exercise))
         case .deleteElements(let indices, let date):
@@ -74,7 +70,6 @@ public class ExercisesListViewModel: DefaultPageViewModel {
 
     private func setupBindings() {
         exercisesProvider.exercisesPublisher
-            .dropFirst()
             .removeDuplicates()
             .receive(on: RunLoop.main)
             .sink { [weak self] exercises in
@@ -86,12 +81,6 @@ public class ExercisesListViewModel: DefaultPageViewModel {
                 }
             }
             .store(in: &cancellables)
-    }
-
-    private func setupLocationService() {
-        if savesLocation {
-            locationManager.initiateLocationManager()
-        }
     }
 
     private func prepareExercisesForDisplay(_ exercises: [Exercise]) {

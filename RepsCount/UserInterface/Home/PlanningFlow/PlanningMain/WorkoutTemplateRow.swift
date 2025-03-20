@@ -20,11 +20,14 @@ struct WorkoutTemplateRow: View {
             VStack(alignment: .leading) {
                 Text(template.name)
                     .font(.headline)
-                Text("Exercises: \(template.templateExercises.count)")
+                    .foregroundColor(.primary)
+                Text("Exercises: \(template.templateExercises.map(\.exerciseModel.name).joined(separator: ", "))")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
+                    .lineLimit(3)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
+            .multilineTextAlignment(.leading)
 
             Image(systemName: "chevron.right")
                 .foregroundColor(.secondary)

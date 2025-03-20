@@ -31,11 +31,7 @@ public final class WorkoutEventManager: WorkoutEventManagerInterface {
             let newEvent = CDWorkoutEvent(context: coreDataService.context)
             newEvent.id = UUID().uuidString
             newEvent.workoutTemplate = workoutTemplate
-            newEvent.days = occurrence.days.map({ String($0.rawValue) }).joined(separator: ";")
             newEvent.startAt = occurrence.startAt.int64
-            newEvent.repeats = occurrence.repeats?.rawValue.int64 ?? -1
-            newEvent.interval = occurrence.interval?.int64 ?? -1
-            newEvent.occurrenceCount = occurrence.occurrenceCount?.int64 ?? -1
             newEvent.duration = occurrence.duration.rawValue.int64
             newEvent.date = occurrence.date
             newEvent.recurrenceId = occurrence.recurrenceId
@@ -69,34 +65,52 @@ public final class WorkoutEventManager: WorkoutEventManagerInterface {
         var occurrences: [WorkoutEvent] = []
         let calendar = Calendar.current
         var currentDate = event.date
+        var count = 0
 
-        for _ in 0..<occurrenceCount {
-            let newEvent = WorkoutEvent(
-                template: event.template,
-                days: [],
-                startAt: event.startAt,
-                repeats: nil,
-                interval: nil,
-                occurrenceCount: nil,
-                duration: event.duration,
-                date: currentDate,
-                recurrenceId: event.recurrenceId
-            )
-            occurrences.append(newEvent)
-
-            // Calculate next occurrence
+        while count < occurrenceCount {
             switch recurrence {
             case .daily:
+                occurrences.append(createOccurrence(from: event, date: currentDate))
                 currentDate = calendar.date(byAdding: .day, value: interval, to: currentDate) ?? currentDate
+                count += 1
             case .weekly:
+                // Generate occurrences for each selected day within the weekly interval
+                let selectedWeekdays = event.days.map { $0.weekDay.rawValue }
+
+                for weekday in selectedWeekdays {
+                    if let nextDate = calendar.nextDate(after: currentDate, matching: DateComponents(weekday: weekday), matchingPolicy: .nextTime) {
+                        occurrences.append(createOccurrence(from: event, date: nextDate))
+                        count += 1
+                        if count >= occurrenceCount { break }
+                    }
+                }
+                // Move to the next week after processing all selected days
                 currentDate = calendar.date(byAdding: .weekOfYear, value: interval, to: currentDate) ?? currentDate
+
             case .monthly:
+                occurrences.append(createOccurrence(from: event, date: currentDate))
                 currentDate = calendar.date(byAdding: .month, value: interval, to: currentDate) ?? currentDate
+                count += 1
             @unknown default:
                 fatalError("Unsupported recurrence")
             }
         }
 
         return occurrences
+    }
+
+    private func createOccurrence(from event: WorkoutEvent, date: Date) -> WorkoutEvent {
+        let startsAtDate = Date(timeInterval: TimeInterval(event.startAt), since: date.startOfDay)
+        return WorkoutEvent(
+            template: event.template,
+            days: [],
+            startAt: event.startAt,
+            repeats: nil,
+            interval: nil,
+            occurrenceCount: nil,
+            duration: event.duration,
+            date: startsAtDate,
+            recurrenceId: event.recurrenceId
+        )
     }
 }

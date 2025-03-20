@@ -84,6 +84,14 @@ public final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
     }
 
     private func saveTemplate() {
+        guard workoutName.isNotEmpty else {
+            showAlert(withModel: .init(title: "Empty name", message: "Name of the workout template cannot be empty"))
+            return
+        }
+        guard exercises.isNotEmpty else {
+            showAlert(withModel: .init(title: "Empty exercises", message: "You should add at least one exercise"))
+            return
+        }
         if isEditing {
             workoutTemplatesManager.updateExercises(exercises)
             onOutput?(.dismiss)

@@ -12,8 +12,7 @@ import Shared
 
 open class DefaultPageViewModel: PageViewModel<DefaultLoaderProps, DefaultPlaceholderProps, DefaultErrorProps> {
 
-    @Published public var isShowingAlert: Bool = false
-    @Published public var alertModel = AlertModel(title: .empty)
+    @Published public var alertModel = AlertModel(title: "")
 
     override public func defaultPageErrorHandler(_ error: CoreError, action: @escaping VoidHandler) {
         let props: DefaultErrorProps? = switch error {
@@ -42,6 +41,13 @@ open class DefaultPageViewModel: PageViewModel<DefaultLoaderProps, DefaultPlaceh
     }
 
     public override func showAlert(withModel model: AlertModel) {
+        if isShowingAlert {
+            isShowingAlert = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: { [weak self] in
+                self?.showAlert(withModel: model)
+            })
+            return
+        }
         alertModel = model
         isShowingAlert = true
     }

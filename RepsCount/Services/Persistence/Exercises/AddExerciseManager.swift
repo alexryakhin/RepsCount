@@ -32,7 +32,7 @@ public final class AddExerciseManager: AddExerciseManagerInterface {
             newItem.timestamp = .now
             newItem.name = model.rawValue
             newItem.id = UUID().uuidString
-            if savesLocation, let location = await locationManager.getCurrentLocation() {
+            if savesLocation, let location = try await locationManager.getCurrentLocation() {
                 newItem.latitude = location.latitude
                 newItem.longitude = location.longitude
                 newItem.address = location.address

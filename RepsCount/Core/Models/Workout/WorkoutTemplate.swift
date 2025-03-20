@@ -10,22 +10,26 @@ public struct WorkoutTemplate: Identifiable, Hashable {
     public let name: String
     public let notes: String?
     public let templateExercises: [WorkoutTemplateExercise]
-    public let workoutInstances: [WorkoutInstance]
+    public let workoutInstanceIds: [String]
     public let workoutEventIds: [String]
+
+    public var workoutTitle: String {
+        name + " workout"
+    }
 
     public init(
         id: String,
         name: String,
         notes: String?,
         templateExercises: [WorkoutTemplateExercise],
-        workoutInstances: [WorkoutInstance],
+        workoutInstanceIds: [String],
         workoutEventIds: [String]
     ) {
         self.id = id
         self.name = name
         self.notes = notes
         self.templateExercises = templateExercises
-        self.workoutInstances = workoutInstances
+        self.workoutInstanceIds = workoutInstanceIds
         self.workoutEventIds = workoutEventIds
     }
 }

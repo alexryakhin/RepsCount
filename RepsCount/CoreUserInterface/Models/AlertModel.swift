@@ -9,18 +9,18 @@ import SwiftUI
 import Shared
 
 public struct AlertModel {
-    public let title: String
-    public let message: String?
-    public let actionText: String?
-    public let destructiveActionText: String?
+    public let title: LocalizedStringKey
+    public let message: LocalizedStringKey?
+    public let actionText: LocalizedStringKey?
+    public let destructiveActionText: LocalizedStringKey?
     public let action: VoidHandler?
     public let destructiveAction: VoidHandler?
 
     public init(
-        title: String,
-        message: String? = nil,
-        actionText: String? = nil,
-        destructiveActionText: String? = nil,
+        title: LocalizedStringKey,
+        message: LocalizedStringKey? = nil,
+        actionText: LocalizedStringKey? = nil,
+        destructiveActionText: LocalizedStringKey? = nil,
         action: VoidHandler? = nil,
         destructiveAction: VoidHandler? = nil
     ) {

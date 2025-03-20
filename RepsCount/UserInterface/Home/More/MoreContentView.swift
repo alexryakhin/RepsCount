@@ -14,7 +14,6 @@ public struct MoreContentView: PageView {
     public typealias ViewModel = MoreViewModel
 
     @AppStorage(UDKeys.measurementUnit) var measurementUnit: MeasurementUnit = .kilograms
-    @AppStorage(UDKeys.savesLocation) var savesLocation: Bool = true
     @ObservedObject public var viewModel: ViewModel
 
     public init(viewModel: MoreViewModel) {
@@ -51,7 +50,7 @@ public struct MoreContentView: PageView {
                     Text("Measurement unit")
                 }
 
-                Toggle("Save location", isOn: $savesLocation)
+                Toggle("Save location", isOn: $viewModel.savesLocation)
             }
 
             // MARK: - Follow Me
@@ -98,7 +97,6 @@ public struct MoreContentView: PageView {
             }
         }
         .listStyle(.insetGrouped)
-        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             AnalyticsService.shared.logEvent(.moreOpened)
         }

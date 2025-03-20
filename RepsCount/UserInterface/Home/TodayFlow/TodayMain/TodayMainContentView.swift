@@ -7,6 +7,7 @@ public struct TodayMainContentView: PageView {
 
     public typealias ViewModel = TodayMainViewModel
 
+    @AppStorage(UDKeys.isShowingOnboarding) var isShowingOnboarding: Bool = true
     @ObservedObject public var viewModel: ViewModel
 
     public init(viewModel: TodayMainViewModel) {
@@ -15,12 +16,97 @@ public struct TodayMainContentView: PageView {
 
     public var contentView: some View {
         ScrollViewWithCustomNavBar {
-            LazyVStack {
+            LazyVStack(spacing: 24) {
                 todayWorkoutsSectionView
+                    .animation(.default, value: viewModel.todayWorkouts)
                 plannedWorkoutsSectionView
+                    .animation(.default, value: viewModel.plannedWorkouts)
             }
             .padding(.horizontal, 16)
         } navigationBar: {
+            navigationBarView
+        }
+        .background(Color.background)
+        .sheet(isPresented: $viewModel.isShowingAddWorkoutFromTemplate) {
+            templateSelectionView
+        }
+        .sheet(isPresented: $isShowingOnboarding) {
+            isShowingOnboarding = false
+        } content: {
+            OnboardingView()
+        }
+    }
+
+    public func placeholderView(props: PageState.PlaceholderProps) -> some View {
+        VStack {
+            navigationBarView
+            Spacer()
+            EmptyListView(label: "No Workout Planned", description: "You haven't planned any workouts for today.") {
+                VStack(spacing: 10) {
+                    if viewModel.workoutTemplates.isNotEmpty {
+                        Button("Add Workout from Templates") {
+                            viewModel.handle(.showAddWorkoutFromTemplate)
+                        }
+                        .buttonStyle(.borderedProminent)
+                    }
+
+                    Button("Start a new workout") {
+                        viewModel.handle(.createOpenWorkout)
+                    }
+                    .buttonStyle(.bordered)
+                }
+            }
+            Spacer()
+        }
+    }
+
+    @ViewBuilder
+    private var plannedWorkoutsSectionView: some View {
+        if viewModel.plannedWorkouts.isNotEmpty {
+            VStack(spacing: 8) {
+                Section {
+                    ForEach(viewModel.plannedWorkouts) { event in
+                        Button {
+                            viewModel.handle(.startPlannedWorkout(event))
+                        } label: {
+                            TodayWorkoutEventRow(event: event)
+                                .clippedWithBackground(.surface)
+                        }
+                    }
+                } header: {
+                    CustomSectionHeader(text: "Planned workouts")
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var todayWorkoutsSectionView: some View {
+        if viewModel.todayWorkouts.isNotEmpty {
+            VStack(spacing: 8) {
+                Section {
+                    ForEach(viewModel.todayWorkouts) { workout in
+                        Button {
+                            viewModel.handle(.showWorkoutDetails(workout))
+                        } label: {
+                            TodayWorkoutRow(workout: workout)
+                                .clippedWithBackground(.surface)
+                                .contextMenu {
+                                    Button("Delete", role: .destructive) {
+                                        viewModel.handle(.showDeleteWorkoutAlert(workout))
+                                    }
+                                }
+                        }
+                    }
+                } header: {
+                    CustomSectionHeader(text: "Current workouts")
+                }
+            }
+        }
+    }
+
+    private var navigationBarView: some View {
+        HStack(alignment: .top, spacing: 12) {
             VStack(alignment: .leading, spacing: 0) {
                 Text(Date.now.formatted(date: .long, time: .omitted)) // e.g., March 16
                     .font(.subheadline)
@@ -33,57 +119,61 @@ public struct TodayMainContentView: PageView {
                     .foregroundStyle(.primary)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(vertical: 12, horizontal: 16)
-        }
-        .background(Color.background)
-    }
 
-    public func placeholderView(props: PageState.PlaceholderProps) -> some View {
-        EmptyListView(label: "No Workout Planned", description: "You haven't planned any workouts for today.") {
-            VStack(spacing: 10) {
-                Button("Add Workout from Templates") {
-                    viewModel.handle(.showWorkouts)
-                }
-                .buttonStyle(.borderedProminent)
-
-                Button("Start a new workout") {
-                    viewModel.handle(.createNewWorkout)
-                }
-                .buttonStyle(.bordered)
-            }
-        }
-    }
-
-    private var plannedWorkoutsSectionView: some View {
-        Section {
-            ForEach(viewModel.plannedWorkouts) { event in
-                Button {
-                    viewModel.handle(.startPlannedWorkout(event))
-                } label: {
-                    TodayWorkoutEventRow(event: event)
-                        .clippedWithBackground(.surface)
-                }
-            }
-        } header: {
-            CustomSectionHeader(text: "Planned workouts")
-        }
-    }
-
-    @ViewBuilder
-    private var todayWorkoutsSectionView: some View {
-        if viewModel.todayWorkouts.isNotEmpty {
-            Section {
-                ForEach(viewModel.todayWorkouts) { workout in
+            Menu {
+                Section {
                     Button {
-                        viewModel.handle(.showWorkoutDetails(workout))
+                        viewModel.handle(.createOpenWorkout)
                     } label: {
-                        TodayWorkoutRow(workout: workout)
-                            .clippedWithBackground(.surface)
+                        Label("Add open workout", systemImage: "plus")
+                    }
+                    if viewModel.workoutTemplates.isNotEmpty {
+                        Button {
+                            viewModel.handle(.showAddWorkoutFromTemplate)
+                        } label: {
+                            Label("Add a workout from template", systemImage: "plus.square.on.square")
+                        }
                     }
                 }
-            } header: {
-                CustomSectionHeader(text: "Current workouts")
+                Section {
+                    Button {
+                        viewModel.handle(.showAllWorkouts)
+                    } label: {
+                        Label("Show all workouts", systemImage: "baseball.diamond.bases")
+                    }
+                    Button {
+                        viewModel.handle(.showAllExercises)
+                    } label: {
+                        Label("Show all exercises", systemImage: "baseball.diamond.bases.outs.indicator")
+                    }
+                }
+            } label: {
+                Image(systemName: "ellipsis.circle")
+                    .font(.title3)
             }
+        }
+        .padding(vertical: 12, horizontal: 16)
+    }
+
+    private var templateSelectionView: some View {
+        NavigationView {
+            ScrollView {
+                ListWithDivider(viewModel.workoutTemplates) { template in
+                    Button {
+                        viewModel.isShowingAddWorkoutFromTemplate = false
+                        viewModel.handle(.startWorkoutFromTemplate(template))
+                    } label: {
+                        WorkoutTemplateRow(template: template)
+                    }
+                    .padding(vertical: 12, horizontal: 16)
+                }
+                .background(Color.surface)
+                .clipShape(RoundedRectangle(cornerRadius: 16))
+                .padding(16)
+            }
+            .background(Color.background)
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("Select a template")
         }
     }
 }

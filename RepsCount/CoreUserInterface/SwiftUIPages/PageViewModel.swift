@@ -20,6 +20,7 @@ open class PageViewModel<
 
     // MARK: - Properties
 
+    @Published public var isShowingAlert: Bool = false
     @Published public var additionalState: PageState?
 
     // MARK: - Private Properties
@@ -60,7 +61,7 @@ open class PageViewModel<
     public func defaultErrorReceived(
         _ error: CoreError,
         displayType: ErrorDisplayType,
-        actionText: String? = nil,
+        actionText: LocalizedStringKey? = nil,
         action: @escaping VoidHandler
     ) {
         switch displayType {
@@ -69,8 +70,8 @@ open class PageViewModel<
         case .alert:
             showAlert(
                 withModel: .init(
-                    title: "Error",
-                    message: error.description,
+                    title: "Ooops..",
+                    message: LocalizedStringKey(error.description),
                     actionText: actionText,
                     action: action
                 )

@@ -18,9 +18,19 @@ public struct Exercise: Identifiable, Hashable {
     public let notes: String?
     public let workoutInstanceId: String?
     public let sortingOrder: Int
+    public let defaultReps: Int
+    public let defaultSets: Int
 
     public var isCompleted: Bool {
         Calendar.current.isDateInToday(timestamp)
+    }
+
+    public var totalDuration: TimeInterval? {
+        guard sets.count > 1,
+              let firstSetDate = sets.first?.timestamp,
+              let lastSetDate = sets.last?.timestamp
+        else { return nil }
+        return firstSetDate.distance(to: lastSetDate)
     }
 
     public init(
@@ -31,7 +41,9 @@ public struct Exercise: Identifiable, Hashable {
         location: Location?,
         notes: String?,
         workoutInstanceId: String?,
-        sortingOrder: Int
+        sortingOrder: Int,
+        defaultReps: Int,
+        defaultSets: Int
     ) {
         self.model = model
         self.id = id
@@ -41,5 +53,7 @@ public struct Exercise: Identifiable, Hashable {
         self.notes = notes
         self.workoutInstanceId = workoutInstanceId
         self.sortingOrder = sortingOrder
+        self.defaultReps = defaultReps
+        self.defaultSets = defaultSets
     }
 }

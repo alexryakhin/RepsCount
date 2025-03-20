@@ -75,6 +75,10 @@ public enum CoreError: Error {
         case eventAlreadyExists
         case inputCannotBeEmpty
         case cancelingRecurrenceFailed
+        case addingWorkoutFailed
+        case removingWorkoutFailed
+        case workoutCompleted
+        case unableToCompleteEmptyWorkout
 
         public var description: String {
             switch self {
@@ -92,6 +96,14 @@ public enum CoreError: Error {
                 return "Input cannot be empty"
             case .cancelingRecurrenceFailed:
                 return "Canceling recurrence failed"
+            case .addingWorkoutFailed:
+                return "Adding workout failed"
+            case .removingWorkoutFailed:
+                return "Removing workout failed"
+            case .workoutCompleted:
+                return "Workout completed"
+            case .unableToCompleteEmptyWorkout:
+                return "Unable to complete empty workout"
             }
         }
     }
@@ -105,15 +117,15 @@ public enum CoreError: Error {
         public var description: String {
             switch self {
             case .denied:
-                return NSLocalizedString("The app doesn't have permission to Calendar in Settings.", comment: "Access denied")
+                return "The app doesn't have permission to Calendar in Settings."
              case .restricted:
-                return NSLocalizedString("This device doesn't allow access to Calendar.", comment: "Access restricted")
+                return "This device doesn't allow access to Calendar."
             case .unknown:
-                return NSLocalizedString("An unknown error occured.", comment: "Unknown error")
+                return "An unknown error occured."
             case .upgrade:
                 let access = "The app has write-only access to Calendar in Settings."
                 let update = "Please grant it full access so the app can fetch and delete your events."
-                return NSLocalizedString("\(access) \(update)", comment: "Upgrade to full access")
+                return "\(access) \(update)"
             }
         }
     }

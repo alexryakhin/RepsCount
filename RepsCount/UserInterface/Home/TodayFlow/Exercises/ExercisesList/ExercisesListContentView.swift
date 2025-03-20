@@ -9,7 +9,6 @@ import SwiftUI
 import CoreUserInterface
 import CoreNavigation
 import Core
-import StoreKit
 import struct Services.AnalyticsService
 
 public struct ExercisesListContentView: PageView {
@@ -22,9 +21,6 @@ public struct ExercisesListContentView: PageView {
         let items: [Exercise]
     }
 
-    @AppStorage(UDKeys.isShowingRating) var isShowingRating: Bool = true
-    @AppStorage(UDKeys.isShowingOnboarding) var isShowingOnboarding: Bool = true
-    @Environment(\.requestReview) var requestReview
     @ObservedObject public var viewModel: ViewModel
 
     public init(viewModel: ViewModel) {
@@ -53,46 +49,25 @@ public struct ExercisesListContentView: PageView {
                 )
             }
         }
-        .safeAreaInset(edge: .bottom, alignment: .trailing) {
-            addExerciseButton
-        }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                if viewModel.selectedDate != nil {
-                    Button {
-                        viewModel.selectedDate = nil
-                    } label: {
-                        Image(systemName: "calendar.badge.minus")
-                    }
-                    .tint(.red)
-                }
-            }
-            ToolbarItem(placement: .topBarLeading) {
                 CustomDatePicker(
                     date: $viewModel.selectedDate,
                     minDate: nil,
                     maxDate: Date.now,
                     pickerMode: .date,
-                    labelFont: .system(.body, weight: .bold)
+                    labelFont: .body
                 )
             }
         }
         .animation(.easeIn, value: viewModel.selectedDate)
-        .sheet(isPresented: $isShowingOnboarding) {
-            isShowingOnboarding = false
-        } content: {
-            OnboardingView()
-        }
     }
 
     public func placeholderView(props: PageState.PlaceholderProps) -> some View {
         EmptyListView(
             label: "No exercises yet",
-            description: "Begin to add exercises to your list by tapping on plus icon in bottom right corner"
-        ) {
-            Button("Add your first exercise!", action: addItem)
-                .buttonStyle(.borderedProminent)
-        }
+            description: "Go back and start a workout"
+        )
     }
 
     private func sectionView(for section: ListSection) -> some View {
@@ -104,8 +79,7 @@ public struct ExercisesListContentView: PageView {
                     ExerciseListCellView(
                         model: .init(
                             exercise: exercise.model.name,
-                            categories: exercise.model.categoriesLocalizedNames,
-                            dateFormatted: exercise.timestamp.formatted(date: .omitted, time: .shortened)
+                            categories: exercise.model.categoriesLocalizedNames
                         )
                     )
                 }
@@ -116,25 +90,5 @@ public struct ExercisesListContentView: PageView {
         } header: {
             Text(section.title)
         }
-    }
-
-    private var addExerciseButton: some View {
-        Button {
-            addItem()
-        } label: {
-            Image(systemName: "plus")
-                .font(.system(size: 24, weight: .semibold, design: .monospaced))
-                .padding(8)
-        }
-        .buttonStyle(.bordered)
-        .padding(24)
-    }
-
-    private func addItem() {
-//        if isShowingRating && viewModel.exercises.count > 15 {
-//            requestReview()
-//            isShowingRating = false
-//        }
-        viewModel.handle(.showAddExercise)
     }
 }
