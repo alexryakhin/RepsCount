@@ -1739,6 +1739,16 @@
     "Proceed" : {
 
     },
+    "Progress: %lld sets out of %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Progress: %1$lld sets out of %2$lld"
+          }
+        }
+      }
+    },
     "Pull-ups" : {
       "extractionState" : "manual",
       "localizations" : {

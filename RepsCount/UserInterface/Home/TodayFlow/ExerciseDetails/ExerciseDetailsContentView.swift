@@ -23,7 +23,12 @@ public struct ExerciseDetailsContentView: PageView {
             notesSection
         }
         .safeAreaInset(edge: .bottom, alignment: .trailing) {
-            addDataButton
+            HStack(spacing: 12) {
+                progressGauge
+                addDataButton
+            }
+            .clippedWithPaddingAndBackground(.ultraThinMaterial)
+            .padding(vertical: 12, horizontal: 16)
         }
         .alert("Enter the amount of reps", isPresented: $isShowingAlert) {
             TextField("Amount", text: $viewModel.amountInput)
@@ -49,19 +54,7 @@ public struct ExerciseDetailsContentView: PageView {
         if !viewModel.exercise.sets.isEmpty {
             Section("Sets") {
                 ForEach(Array(viewModel.exercise.sets.enumerated()), id: \.offset) { offset, exerciseSet in
-                    HStack {
-                        if exerciseSet.weight > 0 {
-                            let converted: String = viewModel.measurementUnit.convertFromKilograms(exerciseSet.weight)
-                            Text("#\(offset + 1): \(exerciseSet.amount.formatted()) reps, \(converted)")
-                                .fontWeight(.semibold)
-                        } else {
-                            Text("#\(offset + 1): \(exerciseSet.amount.formatted()) reps")
-                                .fontWeight(.semibold)
-                        }
-                        Spacer()
-                        Text(exerciseSet.timestamp.formatted(date: .omitted, time: .shortened))
-                            .foregroundStyle(.secondary)
-                    }
+                    setCellView(exerciseSet, offset: offset)
                 }
                 .if(viewModel.isEditable, transform: { view in
                     view.onDelete { offsets in
@@ -69,6 +62,31 @@ public struct ExerciseDetailsContentView: PageView {
                     }
                 })
             }
+        }
+    }
+
+    private func setCellView(_ exerciseSet: ExerciseSet, offset: Int) -> some View {
+        HStack {
+            Group {
+                if exerciseSet.weight > 0 {
+                    let converted: String = viewModel.measurementUnit.convertFromKilograms(exerciseSet.weight)
+                    Text("#\(offset + 1): \(exerciseSet.amount.formatted()) reps, \(converted)")
+                        .fontWeight(.semibold)
+                } else {
+                    Text("#\(offset + 1): \(exerciseSet.amount.formatted()) reps")
+                        .fontWeight(.semibold)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+
+            if viewModel.exercise.defaultReps != 0 {
+                Gauge(value: min(exerciseSet.amount / Double(viewModel.exercise.defaultReps), 1)) {}
+                    .gaugeStyle(.accessoryLinear)
+                    .tint(Gradient(colors: [.green, .blue]))
+            }
+
+            Text(exerciseSet.timestamp.formatted(date: .omitted, time: .shortened))
+                .foregroundStyle(.secondary)
         }
     }
 
@@ -132,17 +150,27 @@ public struct ExerciseDetailsContentView: PageView {
     }
 
     @ViewBuilder
+    private var progressGauge: some View {
+        if viewModel.exercise.defaultSets != 0 {
+            Gauge(value: min(Double(viewModel.exercise.sets.count) / Double(viewModel.exercise.defaultSets), 1)) {
+                Text("Progress: \(viewModel.exercise.sets.count) sets out of \(viewModel.exercise.defaultSets)")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+        }
+    }
+
+    @ViewBuilder
     private var addDataButton: some View {
         if viewModel.isEditable {
             Button {
                 isShowingAlert = true
             } label: {
                 Image(systemName: "plus")
-                    .font(.system(size: 24, weight: .semibold, design: .monospaced))
+                    .frame(sideLength: 24)
+                    .fontWeight(.semibold)
                     .padding(8)
             }
-            .buttonStyle(.bordered)
-            .padding(24)
         }
     }
 }
