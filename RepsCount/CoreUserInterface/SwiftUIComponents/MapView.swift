@@ -39,19 +39,19 @@ public struct MapView: View {
                         }
                 } else {
                     ShimmerView(width: width, height: height)
-                        .onAppear {
-                            takeSnapshot(width: width, height: height)
-                        }
                 }
             }
             .onAppear {
                 viewWidth = width  // Store width for snapshot updates
             }
+            .task(id: colorScheme, priority: .userInitiated) {
+                await takeSnapshot(width: width, height: height)
+            }
         }
         .frame(height: viewWidth * 0.66)  // Set height dynamically
     }
 
-    private func takeSnapshot(width: CGFloat, height: CGFloat) {
+    private func takeSnapshot(width: CGFloat, height: CGFloat) async {
         let key = "\(location.latitude),\(location.longitude),\(Int(width)),\(colorScheme)" as NSString
 
         if let cached = MapView.cache.object(forKey: key) {

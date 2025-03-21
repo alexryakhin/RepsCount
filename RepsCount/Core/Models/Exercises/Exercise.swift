@@ -17,8 +17,15 @@ public struct Exercise: Identifiable, Hashable {
     public let location: Location?
     public let notes: String?
     public let workoutInstanceId: String?
-    public let defaultReps: Int
-    public let defaultSets: Int
+    public let defaultReps: Double
+    public let defaultSets: Double
+
+    public var maxReps: Double? {
+        if let maxReps = sets.map(\.amount).max() {
+            return max(defaultReps, maxReps)
+        }
+        return defaultReps.nilIfZero ?? sets.map(\.amount).max()
+    }
 
     public var isCompleted: Bool {
         Calendar.current.isDateInToday(timestamp)
@@ -40,8 +47,8 @@ public struct Exercise: Identifiable, Hashable {
         location: Location?,
         notes: String?,
         workoutInstanceId: String?,
-        defaultReps: Int,
-        defaultSets: Int
+        defaultReps: Double,
+        defaultSets: Double
     ) {
         self.model = model
         self.id = id

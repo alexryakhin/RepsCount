@@ -28,6 +28,14 @@ public extension TimeInterval {
         return formatter.string(from: self)
     }
 
+    /// Formats the specified time interval into hours, minutes, and seconds.
+    var hoursMinutesAndSeconds: String? {
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .short
+        formatter.allowedUnits = [.hour, .minute, .second]
+        return formatter.string(from: self)
+    }
+
     /// Specifies the hour and minutes of the current date.
     var toTodayDate: Date {
         var components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: Date.now)

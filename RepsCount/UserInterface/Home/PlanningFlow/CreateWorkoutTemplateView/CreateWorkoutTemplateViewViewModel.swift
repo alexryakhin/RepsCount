@@ -109,8 +109,8 @@ public final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
 
     private func applyEditing(for exercise: WorkoutTemplateExercise) {
         if let index = exercises.firstIndex(where: { $0.id == exercise.id }) {
-            exercises[index].defaultSets = Int(defaultSetsInput) ?? 0
-            exercises[index].defaultReps = Int(defaultRepsInput) ?? 0
+            exercises[index].defaultSets = Double(defaultSetsInput) ?? 0
+            exercises[index].defaultReps = Double(defaultRepsInput) ?? 0
         }
         defaultSetsInput = ""
         defaultRepsInput = ""

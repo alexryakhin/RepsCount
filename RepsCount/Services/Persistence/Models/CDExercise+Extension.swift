@@ -37,8 +37,8 @@ extension CDExercise {
             location: location,
             notes: notes,
             workoutInstanceId: workoutInstance?.id,
-            defaultReps: defaultReps.int,
-            defaultSets: defaultSets.int
+            defaultReps: defaultReps,
+            defaultSets: defaultSets
         )
     }
 }

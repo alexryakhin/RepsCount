@@ -42,7 +42,7 @@ public struct CalendarContentView: PageView {
     private var plannedWorkoutsSectionView: some View {
         CustomSectionView(header: "Planned workouts") {
             if viewModel.eventsForSelectedDate.isEmpty {
-                EmptyListView(description: "No Workouts Scheduled") {
+                EmptyListView(description: "No Workouts Scheduled", background: .clear) {
                     VStack(spacing: 10) {
                         Button("Schedule a Workout") {
                             viewModel.handle(.scheduleWorkout)
@@ -64,13 +64,5 @@ public struct CalendarContentView: PageView {
                 .clippedWithBackground(.surface)
             }
         }
-    }
-}
-
-extension DateFormatter {
-    static var shortDate: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        return formatter
     }
 }

@@ -2,6 +2,7 @@ import SwiftUI
 import CoreUserInterface
 import CoreNavigation
 import Core
+import Shared
 
 public struct ExerciseDetailsContentView: PageView {
 
@@ -16,12 +17,16 @@ public struct ExerciseDetailsContentView: PageView {
     }
 
     public var contentView: some View {
-        List {
-            setsSection
-            totalSection
-            mapSection
-            notesSection
+        ScrollView {
+            LazyVStack(spacing: 24) {
+                setsSection
+                totalSection
+                mapSection
+                notesSection
+            }
+            .padding(vertical: 12, horizontal: 16)
         }
+        .background(Color.background)
         .safeAreaInset(edge: .bottom, alignment: .trailing) {
             HStack(spacing: 12) {
                 progressGauge
@@ -52,15 +57,18 @@ public struct ExerciseDetailsContentView: PageView {
     @ViewBuilder
     private var setsSection: some View {
         if !viewModel.exercise.sets.isEmpty {
-            Section("Sets") {
-                ForEach(Array(viewModel.exercise.sets.enumerated()), id: \.offset) { offset, exerciseSet in
+            CustomSectionView(header: "Sets") {
+                ListWithDivider(Array(viewModel.exercise.sets.enumerated())) { offset, exerciseSet in
                     setCellView(exerciseSet, offset: offset)
+                        .contextMenu {
+                            if viewModel.isEditable {
+                                Button("Delete", role: .destructive) {
+                                    viewModel.handle(.deleteSet(exerciseSet))
+                                }
+                            }
+                        }
                 }
-                .if(viewModel.isEditable, transform: { view in
-                    view.onDelete { offsets in
-                        viewModel.handle(.deleteSet(at: offsets))
-                    }
-                })
+                .clippedWithBackground(.surface)
             }
         }
     }
@@ -79,71 +87,77 @@ public struct ExerciseDetailsContentView: PageView {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
 
-            if viewModel.exercise.defaultReps != 0 {
-                Gauge(value: min(exerciseSet.amount / Double(viewModel.exercise.defaultReps), 1)) {}
+            if let maxReps = viewModel.exercise.maxReps {
+                Gauge(value: min(exerciseSet.amount / maxReps, 1)) {}
                     .gaugeStyle(.accessoryLinear)
                     .tint(Gradient(colors: [.green, .blue]))
             }
 
-            Text(exerciseSet.timestamp.formatted(date: .omitted, time: .shortened))
+            Text(DateFormatter().convertDateToString(date: exerciseSet.timestamp, format: .timeFull))
+                .font(.system(.subheadline, design: .monospaced))
                 .foregroundStyle(.secondary)
         }
+        .padding(vertical: 12, horizontal: 16)
     }
 
     private var totalSection: some View {
-        Section("Total") {
-            Text("Reps: \(viewModel.totalAmount.formatted())")
-                .fontWeight(.semibold)
-            Text("Sets: \(viewModel.exercise.sets.count)")
-                .fontWeight(.semibold)
-            if viewModel.exercise.sets.count > 1,
-               let firstSetDate = viewModel.exercise.sets.first?.timestamp,
-               let lastSetDate = viewModel.exercise.sets.last?.timestamp {
-                let distance = firstSetDate.distance(to: lastSetDate)
-                Text("Time: \(timeFormatter.string(from: distance)!)")
-                    .fontWeight(.semibold)
+        CustomSectionView(header: "Total") {
+            FormWithDivider {
+                infoCellView("Reps: \(viewModel.totalAmount.formatted())")
+                infoCellView("Sets: \(viewModel.exercise.sets.count.formatted())")
+                if viewModel.exercise.sets.count > 1,
+                   let firstSetDate = viewModel.exercise.sets.first?.timestamp,
+                   let lastSetDate = viewModel.exercise.sets.last?.timestamp {
+                    let distance = firstSetDate.distance(to: lastSetDate)
+                    infoCellView("Time: \(distance.hoursMinutesAndSeconds!)")
+                }
             }
+            .clippedWithBackground(.surface)
         }
+    }
+
+    private func infoCellView(_ text: LocalizedStringKey) -> some View {
+        Text(text)
+            .fontWeight(.semibold)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(vertical: 12, horizontal: 16)
     }
 
     @ViewBuilder
     private var mapSection: some View {
         if let location = viewModel.exercise.location {
-            Section("Map") {
+            CustomSectionView(header: "Map") {
                 MapView(location: .init(latitude: location.latitude, longitude: location.longitude))
-                if let address = location.address {
-                    Text(address)
-                        .fontWeight(.semibold)
-                }
+                    .overlay(alignment: .bottomLeading) {
+                        if let address = location.address {
+                            Text(address)
+                                .font(.subheadline)
+                                .padding(vertical: 8, horizontal: 12)
+                                .clippedWithBackground(.thinMaterial)
+                                .padding(8)
+                                .multilineTextAlignment(.leading)
+                        }
+                    }
             }
         }
     }
 
     @ViewBuilder
     private var notesSection: some View {
-        Section {
-            TextEditor(text: $viewModel.notesInput)
-                .focused($isNotesInputFocused)
-                .frame(height: 150)
-                .overlay(alignment: .topLeading) {
-                    if viewModel.notesInput.isEmpty {
-                        Text("Enter your notes here...")
-                            .foregroundStyle(.secondary)
-                            .allowsHitTesting(false)
-                            .padding(.horizontal, 4)
-                            .padding(.top, 8)
-                    }
-                }
-        } header: {
-            HStack {
-                Text("Notes")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                if isNotesInputFocused {
-                    Button {
-                        UIApplication.shared.endEditing()
-                    } label: {
-                        Text("Done")
-                    }
+        CustomSectionView(header: "Notes") {
+            TextField(
+                "Enter your notes here...",
+                text: $viewModel.notesInput,
+                axis: .vertical
+            )
+            .focused($isNotesInputFocused)
+            .clippedWithPaddingAndBackground(.surface)
+        } headerTrailingContent: {
+            if isNotesInputFocused {
+                Button {
+                    UIApplication.shared.endEditing()
+                } label: {
+                    Text("Done")
                 }
             }
         }
@@ -152,8 +166,8 @@ public struct ExerciseDetailsContentView: PageView {
     @ViewBuilder
     private var progressGauge: some View {
         if viewModel.exercise.defaultSets != 0 {
-            Gauge(value: min(Double(viewModel.exercise.sets.count) / Double(viewModel.exercise.defaultSets), 1)) {
-                Text("Progress: \(viewModel.exercise.sets.count) sets out of \(viewModel.exercise.defaultSets)")
+            Gauge(value: min(Double(viewModel.exercise.sets.count) / viewModel.exercise.defaultSets, 1)) {
+                Text("Progress: \(viewModel.exercise.sets.count.formatted()) sets out of \(viewModel.exercise.defaultSets.formatted())")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
@@ -174,10 +188,3 @@ public struct ExerciseDetailsContentView: PageView {
         }
     }
 }
-
-private let timeFormatter: DateComponentsFormatter = {
-    let formatter = DateComponentsFormatter()
-    formatter.unitsStyle = .abbreviated
-    formatter.allowedUnits = [.hour, .minute, .second]
-    return formatter
-}()

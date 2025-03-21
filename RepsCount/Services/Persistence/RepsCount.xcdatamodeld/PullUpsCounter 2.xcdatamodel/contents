@@ -2,8 +2,8 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="24D81" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Exercise" representedClassName="CDExercise" syncable="YES" codeGenerationType="class">
         <attribute name="address" optional="YES" attributeType="String"/>
-        <attribute name="defaultReps" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="defaultSets" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="defaultReps" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="defaultSets" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -47,8 +47,8 @@
         <relationship name="workoutInstances" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkoutInstance" inverseName="workoutTemplate" inverseEntity="WorkoutInstance"/>
     </entity>
     <entity name="WorkoutTemplateExercise" representedClassName="CDWorkoutTemplateExercise" syncable="YES" codeGenerationType="class">
-        <attribute name="defaultReps" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="defaultSets" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="defaultReps" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="defaultSets" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="exerciseModel" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>

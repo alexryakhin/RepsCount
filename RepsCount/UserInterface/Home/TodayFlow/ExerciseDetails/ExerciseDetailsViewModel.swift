@@ -26,7 +26,7 @@ public final class ExerciseDetailsViewModel: DefaultPageViewModel {
 
     enum Input {
         case addSet
-        case deleteSet(at: IndexSet)
+        case deleteSet(ExerciseSet)
     }
 
     enum Output {
@@ -56,8 +56,8 @@ public final class ExerciseDetailsViewModel: DefaultPageViewModel {
         switch input {
         case .addSet:
             addSet()
-        case .deleteSet(let indexSet):
-            deleteSet(at: indexSet)
+        case .deleteSet(let set):
+            deleteSet(set)
         }
     }
 
@@ -99,7 +99,7 @@ public final class ExerciseDetailsViewModel: DefaultPageViewModel {
         exerciseDetailsManager.addSet(amount, weight: kilograms)
     }
 
-    private func deleteSet(at offsets: IndexSet) {
-        exerciseDetailsManager.deleteSet(atOffsets: offsets)
+    private func deleteSet(_ set: ExerciseSet) {
+        exerciseDetailsManager.deleteSet(set)
     }
 }

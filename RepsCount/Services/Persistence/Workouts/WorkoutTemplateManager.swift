@@ -59,8 +59,8 @@ public final class WorkoutTemplatesManager: WorkoutTemplateManagerInterface {
         for exerciseTemplate in exerciseTemplates {
             let templateExercise = CDWorkoutTemplateExercise(context: coreDataService.context)
             templateExercise.id = exerciseTemplate.id
-            templateExercise.defaultReps = exerciseTemplate.defaultReps.int64
-            templateExercise.defaultSets = exerciseTemplate.defaultSets.int64
+            templateExercise.defaultReps = exerciseTemplate.defaultReps
+            templateExercise.defaultSets = exerciseTemplate.defaultSets
             templateExercise.exerciseModel = exerciseTemplate.exerciseModel.rawValue
             templateExercise.timestamp = exerciseTemplate.timestamp
             templateExercise.workoutTemplate = cdWorkoutTemplate
@@ -81,8 +81,8 @@ public final class WorkoutTemplatesManager: WorkoutTemplateManagerInterface {
         for (index, exerciseTemplate) in exerciseTemplates.enumerated() {
             let templateExercise = CDWorkoutTemplateExercise(context: coreDataService.context)
             templateExercise.id = exerciseTemplate.id
-            templateExercise.defaultReps = exerciseTemplate.defaultReps.int64
-            templateExercise.defaultSets = exerciseTemplate.defaultSets.int64
+            templateExercise.defaultReps = exerciseTemplate.defaultReps
+            templateExercise.defaultSets = exerciseTemplate.defaultSets
             templateExercise.exerciseModel = exerciseTemplate.exerciseModel.rawValue
             templateExercise.timestamp = exerciseTemplate.timestamp
             templateExercise.workoutTemplate = cdWorkoutTemplate

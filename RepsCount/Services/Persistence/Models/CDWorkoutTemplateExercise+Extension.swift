@@ -22,8 +22,8 @@ extension CDWorkoutTemplateExercise {
         return WorkoutTemplateExercise(
             id: id,
             exerciseModel: model,
-            defaultSets: defaultSets.int,
-            defaultReps: defaultReps.int,
+            defaultSets: defaultSets,
+            defaultReps: defaultReps,
             timestamp: timestamp
         )
     }

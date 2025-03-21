@@ -71,6 +71,7 @@ public enum CoreError: Error {
         case removingExerciseFailed
         case removingTemplateFailed
         case removingEventFailed
+        case removingSetFailed
         case templateNotFound
         case eventAlreadyExists
         case inputCannotBeEmpty
@@ -88,6 +89,8 @@ public enum CoreError: Error {
                 return "Removing template failed"
             case .removingEventFailed:
                 return "Removing event failed"
+            case .removingSetFailed:
+                return "Removing set failed"
             case .templateNotFound:
                 return "Template not found"
             case .eventAlreadyExists:

@@ -83,9 +83,13 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
 
     private var workoutNameSectionView: some View {
         CustomSectionView(header: "Workout Name") {
-            TextField("Legs day", text: $viewModel.workoutName, axis: .vertical)
-                .focused($isNameFocused)
-                .clippedWithPaddingAndBackground(.surface)
+            TextField(
+                "Legs day",
+                text: $viewModel.workoutName,
+                axis: .vertical
+            )
+            .focused($isNameFocused)
+            .clippedWithPaddingAndBackground(.surface)
         } headerTrailingContent: {
             if isNameFocused {
                 Button("Done") {
@@ -97,9 +101,13 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
 
     private var notesSectionView: some View {
         CustomSectionView(header: "Notes") {
-            TextField("Something you might need", text: $viewModel.workoutNotes, axis: .vertical)
-                .focused($isNotesFocused)
-                .clippedWithPaddingAndBackground(.surface)
+            TextField(
+                "Something you might need",
+                text: $viewModel.workoutNotes,
+                axis: .vertical
+            )
+            .focused($isNotesFocused)
+            .clippedWithPaddingAndBackground(.surface)
         } headerTrailingContent: {
             if isNotesFocused {
                 Button("Done") {
@@ -115,7 +123,7 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
             VStack(spacing: 8) {
                 Section {
                     ListWithDivider(viewModel.exercises) { exercise in
-                        HStack(alignment: .top, spacing: 12) {
+                        HStack(spacing: 12) {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(exercise.exerciseModel.name)
                                     .bold()

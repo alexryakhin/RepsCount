@@ -8,15 +8,15 @@
 public struct WorkoutTemplateExercise: Identifiable, Hashable {
     public let id: String
     public let exerciseModel: ExerciseModel
-    public var defaultSets: Int
-    public var defaultReps: Int
+    public var defaultSets: Double
+    public var defaultReps: Double
     public let timestamp: Date
 
     public init(
         id: String,
         exerciseModel: ExerciseModel,
-        defaultSets: Int,
-        defaultReps: Int,
+        defaultSets: Double,
+        defaultReps: Double,
         timestamp: Date
     ) {
         self.id = id

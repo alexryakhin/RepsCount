@@ -766,10 +766,16 @@
     "Default reps" : {
 
     },
+    "Default reps (optional)" : {
+
+    },
     "Default reps: %@" : {
 
     },
     "Default sets" : {
+
+    },
+    "Default sets (optional)" : {
 
     },
     "Default sets: %@" : {
@@ -1739,12 +1745,12 @@
     "Proceed" : {
 
     },
-    "Progress: %lld sets out of %lld" : {
+    "Progress: %@ sets out of %@" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Progress: %1$lld sets out of %2$lld"
+            "value" : "Progress: %1$@ sets out of %2$@"
           }
         }
       }
@@ -2123,7 +2129,11 @@
         }
       }
     },
+    "Sets: %@" : {
+
+    },
     "Sets: %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

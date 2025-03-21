@@ -14,6 +14,9 @@ public extension DateFormatter {
         /// 10:00
         case time = "HH:mm"
 
+        /// 10:00
+        case timeFull = "HH:mm:ss"
+
         /// 21 January 2022
         case fullDateWithoutTime = "d MMMM yyyy"
 

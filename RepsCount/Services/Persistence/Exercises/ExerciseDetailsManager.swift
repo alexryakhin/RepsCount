@@ -9,7 +9,7 @@ public protocol ExerciseDetailsManagerInterface {
     var errorPublisher: PassthroughSubject<CoreError, Never> { get }
 
     func addSet(_ amount: Double, weight: Double)
-    func deleteSet(atOffsets offsets: IndexSet)
+    func deleteSet(_ set: ExerciseSet)
     func updateNotes(_ notes: String?)
 }
 
@@ -50,14 +50,21 @@ public final class ExerciseDetailsManager: ExerciseDetailsManagerInterface {
         saveContext()
     }
 
-    public func deleteSet(atOffsets offsets: IndexSet) {
+    public func deleteSet(_ set: ExerciseSet) {
         guard cdExercise?.workoutInstance?.completionTimeStamp == nil else {
             errorPublisher.send(.internalError(.workoutCompleted))
             return
         }
-
-        offsets.compactMap { cdExercise?._exerciseSets[$0] }.forEach(coreDataService.context.delete)
-        saveContext()
+        let fetchRequest = CDExerciseSet.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", set.id)
+        do {
+            if let set = try coreDataService.context.fetch(fetchRequest).first {
+                coreDataService.context.delete(set)
+                saveContext()
+            }
+        } catch {
+            errorPublisher.send(.internalError(.removingSetFailed))
+        }
     }
 
     public func updateNotes(_ notes: String?) {
