@@ -47,5 +47,15 @@ public final class WorkoutDetailsViewController: PageViewController<WorkoutDetai
                 self?.onEvent?(.showExerciseDetails(exercise))
             }
         }
+
+        viewModel.$workout
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] workout in
+                self?.navigationItem.titleView = NavBarTitleView(
+                    title: workout.defaultName,
+                    subtitle: workout.date.formatted(date: .abbreviated, time: .shortened)
+                )
+            }
+            .store(in: &cancellables)
     }
 }

@@ -142,6 +142,7 @@ public final class TodayMainViewModel: DefaultPageViewModel {
             do {
                 if let workoutInstance = try await addWorkoutManager.addWorkout(from: event, savesLocation: savesLocation) {
                     onOutput?(.showWorkoutDetails(workoutInstance))
+                    HapticManager.shared.triggerNotification(type: .success)
                 }
             } catch {
                 errorReceived(error, displayType: .alert)
@@ -153,6 +154,7 @@ public final class TodayMainViewModel: DefaultPageViewModel {
         do {
             if let workoutInstance = try addWorkoutManager.addOpenWorkout() {
                 onOutput?(.showWorkoutDetails(workoutInstance))
+                HapticManager.shared.triggerNotification(type: .success)
             }
         } catch {
             errorReceived(error, displayType: .alert)
@@ -164,6 +166,7 @@ public final class TodayMainViewModel: DefaultPageViewModel {
             do {
                 if let workoutInstance = try await addWorkoutManager.addWorkout(from: template, savesLocation: savesLocation) {
                     onOutput?(.showWorkoutDetails(workoutInstance))
+                    HapticManager.shared.triggerNotification(type: .success)
                 }
             } catch {
                 errorReceived(error, displayType: .alert)

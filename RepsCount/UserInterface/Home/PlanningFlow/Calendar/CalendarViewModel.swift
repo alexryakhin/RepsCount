@@ -21,8 +21,12 @@ public final class CalendarViewModel: DefaultPageViewModel {
 
     var onOutput: ((Output) -> Void)?
 
-    @Published var selectedDate: Date = .now
     @Published private var events: [WorkoutEvent] = []
+    @Published var selectedDate: Date = .now {
+        didSet {
+            HapticManager.shared.triggerSelection()
+        }
+    }
 
     var eventsForSelectedDate: [WorkoutEvent] {
         events

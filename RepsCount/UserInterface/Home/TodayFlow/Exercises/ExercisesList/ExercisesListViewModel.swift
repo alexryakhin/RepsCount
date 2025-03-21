@@ -19,7 +19,7 @@ public class ExercisesListViewModel: DefaultPageViewModel {
 
     enum Input {
         case showExerciseDetails(Exercise)
-        case deleteElements(indices: IndexSet, date: Date)
+        case deleteExercise(Exercise)
     }
 
     enum Output {
@@ -29,7 +29,11 @@ public class ExercisesListViewModel: DefaultPageViewModel {
     var onOutput: ((Output) -> Void)?
 
     @Published private(set) var sections: [ExercisesListContentView.ListSection] = []
-    @Published var selectedDate: Date?
+    @Published var selectedDate: Date? {
+        didSet {
+            HapticManager.shared.triggerSelection()
+        }
+    }
 
     private let locationManager: LocationManagerInterface
     private let exercisesProvider: ExercisesProviderInterface
@@ -50,17 +54,8 @@ public class ExercisesListViewModel: DefaultPageViewModel {
         switch input {
         case .showExerciseDetails(let exercise):
             onOutput?(.showExerciseDetails(exercise))
-        case .deleteElements(let indices, let date):
-            deleteElements(at: indices, for: date)
-        }
-    }
-
-    private func deleteElements(at indices: IndexSet, for date: Date) {
-        if let exercises = sections.first(where: { $0.date == date })?.items {
-            indices.map { exercises[$0] }
-                .forEach { [weak self] in
-                    self?.deleteExercise($0.id)
-                }
+        case .deleteExercise(let exercise):
+            deleteExercise(exercise.id)
         }
     }
 

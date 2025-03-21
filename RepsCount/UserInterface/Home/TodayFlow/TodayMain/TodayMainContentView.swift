@@ -149,7 +149,7 @@ public struct TodayMainContentView: PageView {
                 }
             } label: {
                 Image(systemName: "ellipsis.circle")
-                    .font(.title3)
+                    .frame(sideLength: 24)
             }
         }
         .padding(vertical: 12, horizontal: 16)

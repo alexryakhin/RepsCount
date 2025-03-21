@@ -1,29 +1,21 @@
-//
-//  ExercisesListContentView.swift
-//  RepsCount
-//
-//  Created by Aleksandr Riakhin on 3/8/25.
-//
-
 import SwiftUI
 import CoreUserInterface
 import CoreNavigation
 import Core
-import struct Services.AnalyticsService
 
-public struct ExercisesListContentView: PageView {
+public struct WorkoutsListContentView: PageView {
 
-    public typealias ViewModel = ExercisesListViewModel
+    public typealias ViewModel = WorkoutsListViewModel
 
     struct ListSection: Hashable {
         let date: Date
         let title: String
-        let items: [Exercise]
+        let items: [WorkoutInstance]
     }
 
     @ObservedObject public var viewModel: ViewModel
 
-    public init(viewModel: ViewModel) {
+    public init(viewModel: WorkoutsListViewModel) {
         self.viewModel = viewModel
     }
 
@@ -48,8 +40,8 @@ public struct ExercisesListContentView: PageView {
             if let selectedDate = viewModel.selectedDate,
                viewModel.sections.first(where: { $0.date == selectedDate.startOfDay }) == nil {
                 EmptyListView(
-                    label: "No exercises",
-                    description: "No exercises for this date!"
+                    label: "No workouts",
+                    description: "No workouts for this date!"
                 )
             }
         }
@@ -73,7 +65,7 @@ public struct ExercisesListContentView: PageView {
 
     public func placeholderView(props: PageState.PlaceholderProps) -> some View {
         EmptyListView(
-            label: "No exercises yet",
+            label: "No workouts yet",
             description: "Go back and start a workout"
         )
     }
@@ -81,21 +73,16 @@ public struct ExercisesListContentView: PageView {
     private func sectionView(for section: ListSection) -> some View {
         VStack(spacing: 8) {
             Section {
-                ListWithDivider(section.items) { exercise in
+                ListWithDivider(section.items) { workout in
                     Button {
-                        viewModel.handle(.showExerciseDetails(exercise))
+                        viewModel.handle(.showWorkoutDetails(workout))
                     } label: {
-                        ExerciseListCellView(
-                            model: .init(
-                                exercise: exercise.model.name,
-                                categories: exercise.model.categoriesLocalizedNames
-                            )
-                        )
+                        TodayWorkoutRow(workout: workout)
                     }
                     .padding(vertical: 12, horizontal: 16)
                     .contextMenu {
                         Button("Delete", role: .destructive) {
-                            viewModel.handle(.deleteExercise(exercise))
+                            viewModel.handle(.deleteWorkout(workout))
                         }
                     }
                 }

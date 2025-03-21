@@ -29,7 +29,9 @@ public final class CreateWorkoutTemplateViewViewController: PageViewController<C
     override public func setup() {
         super.setup()
         setupBindings()
-        navigationItem.title = "New workout template"
+        navigationItem.title = viewModel.isEditing 
+        ? NSLocalizedString("Edit workout template", comment: "Edit template")
+        : NSLocalizedString("New workout template", comment: "New template")
     }
 
     // MARK: - Private Methods

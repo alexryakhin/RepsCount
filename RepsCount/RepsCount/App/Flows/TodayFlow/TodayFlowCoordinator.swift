@@ -61,7 +61,16 @@ final class TodayFlowCoordinator: Coordinator {
     }
 
     private func showAllWorkouts() {
-
+        let controller = resolver ~> WorkoutsListViewController.self
+        controller.onEvent = { [weak self] event in
+            switch event {
+            case .showWorkoutDetails(let workout):
+                self?.showWorkoutDetails(for: workout)
+            @unknown default:
+                fatalError("Unhandled event")
+            }
+        }
+        router.push(controller)
     }
 
     private func showWorkoutDetails(for workout: WorkoutInstance) {

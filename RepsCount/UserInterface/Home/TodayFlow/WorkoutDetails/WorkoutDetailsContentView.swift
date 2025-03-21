@@ -43,6 +43,11 @@ public struct WorkoutDetailsContentView: PageView {
                             Label("Mark as complete", systemImage: "flag.fill")
                         }
                     }
+                    Button {
+                        viewModel.handle(.renameWorkout)
+                    } label: {
+                        Label("Rename", systemImage: "square.and.arrow.up")
+                    }
                     Section {
                         Button(role: .destructive) {
                             viewModel.handle(.showDeleteWorkoutAlert)
@@ -53,6 +58,12 @@ public struct WorkoutDetailsContentView: PageView {
                 } label: {
                     Image(systemName: "ellipsis.circle")
                 }
+            }
+        }
+        .alert("Rename workout", isPresented: $viewModel.isShowingAlertToRenameWorkout) {
+            TextField("Enter name", text: $viewModel.nameInput)
+            Button("Rename") {
+                viewModel.handle(.updateName(viewModel.nameInput))
             }
         }
     }

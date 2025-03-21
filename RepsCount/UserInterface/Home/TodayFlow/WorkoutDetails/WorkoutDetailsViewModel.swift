@@ -13,6 +13,7 @@ public final class WorkoutDetailsViewModel: DefaultPageViewModel {
         case showExerciseDetails(Exercise)
         case showDeleteExerciseAlert(Exercise)
         case showDeleteWorkoutAlert
+        case renameWorkout
         case updateName(String)
     }
 
@@ -23,6 +24,8 @@ public final class WorkoutDetailsViewModel: DefaultPageViewModel {
 
     var onOutput: ((Output) -> Void)?
 
+    @Published var isShowingAlertToRenameWorkout: Bool = false
+    @Published var nameInput: String = ""
     @Published var isShowingAddExerciseSheet: Bool = false
     @Published private(set) var workout: WorkoutInstance
 
@@ -88,6 +91,8 @@ public final class WorkoutDetailsViewModel: DefaultPageViewModel {
                     }
                 )
             )
+        case .renameWorkout:
+            isShowingAlertToRenameWorkout.toggle()
         case .updateName(let name):
             workoutDetailsManager.updateName(name)
         }
@@ -101,6 +106,7 @@ public final class WorkoutDetailsViewModel: DefaultPageViewModel {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] workout in
                 self?.workout = workout
+                self?.nameInput = workout.name.orEmpty
             }
             .store(in: &cancellables)
 

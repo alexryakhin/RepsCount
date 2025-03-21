@@ -49,5 +49,13 @@ final class TodayFlowAssembly: Assembly, Identifiable {
             let controller = ExerciseDetailsViewController(viewModel: viewModel)
             return controller
         }
+
+        container.register(WorkoutsListViewController.self) { resolver in
+            let viewModel = WorkoutsListViewModel(
+                workoutsProvider: resolver ~> WorkoutsProviderInterface.self
+            )
+            let controller = WorkoutsListViewController(viewModel: viewModel)
+            return controller
+        }
     }
 }
