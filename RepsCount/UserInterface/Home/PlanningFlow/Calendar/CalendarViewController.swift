@@ -29,7 +29,7 @@ public final class CalendarViewController: PageViewController<CalendarContentVie
     override public func setup() {
         super.setup()
         setupBindings()
-        navigationItem.title = "Calendar"
+        navigationItem.title = NSLocalizedString("Calendar", comment: "Calendar")
     }
 
     // MARK: - Private Methods

@@ -57,9 +57,9 @@ struct AddExerciseView: View {
             }
         }
         .alert("Defaults", isPresented: .constant(exerciseModelToAdd != nil), presenting: exerciseModelToAdd) { model in
-            TextField("Default sets (optional)", text: $defaultSetsInput)
+            TextField("Sets (optional)", text: $defaultSetsInput)
                 .keyboardType(.numberPad)
-            TextField("Default reps (optional)", text: $defaultRepsInput)
+            TextField("Reps (optional)", text: $defaultRepsInput)
                 .keyboardType(.numberPad)
             Button("Cancel", role: .cancel) {
                 defaultSetsInput = ""

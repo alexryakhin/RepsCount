@@ -32,7 +32,7 @@ public final class ScheduleEventViewController: PageViewController<ScheduleEvent
     override public func setup() {
         super.setup()
         setupBindings()
-        navigationItem.title = "Schedule Workout"
+        navigationItem.title = NSLocalizedString("Schedule Workout", comment: "Schedule Workout")
     }
 
     // MARK: - Private Methods
