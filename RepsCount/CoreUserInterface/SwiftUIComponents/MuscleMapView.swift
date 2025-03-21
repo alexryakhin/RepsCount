@@ -1,5 +1,5 @@
 //
-//  MuscleMapView.swift
+//  MuscleMapImageView.swift
 //  RepsCount
 //
 //  Created by Aleksandr Riakhin on 3/15/25.
@@ -8,7 +8,11 @@
 import SwiftUI
 import Core
 
-public struct MuscleMapView: View {
+public struct MuscleMapImageView: View {
+
+    @Environment(\.colorScheme) var colorScheme
+
+    private static let imageCache = NSCache<NSString, UIImage>()
 
     enum ColorStyle {
         case primary
@@ -30,45 +34,69 @@ public struct MuscleMapView: View {
         }
     }
 
+    private let width: CGFloat
+
     private let primaryMuscleGroups: [MuscleGroup]
     private let secondaryMuscleGroups: [MuscleGroup]
 
-    public init(primaryMuscleGroups: [MuscleGroup], secondaryMuscleGroups: [MuscleGroup]) {
+    @State private var frontImage: Image?
+    @State private var backImage: Image?
+
+    public init(
+        primaryMuscleGroups: [MuscleGroup],
+        secondaryMuscleGroups: [MuscleGroup],
+        width: CGFloat = 60
+    ) {
         self.primaryMuscleGroups = primaryMuscleGroups
         self.secondaryMuscleGroups = secondaryMuscleGroups
+        self.width = width
     }
 
-    public init(exercises: [ExerciseModel]) {
+    public init(exercises: [ExerciseModel], width: CGFloat = 60) {
         let allPrimary = exercises.flatMap { $0.primaryMuscleGroups }
         let allSecondary = exercises.flatMap { $0.secondaryMuscleGroups }
-        self.init(primaryMuscleGroups: Array(Set(allPrimary)), secondaryMuscleGroups: Array(Set(allSecondary)))
+        self.init(
+            primaryMuscleGroups: Array(Set(allPrimary)),
+            secondaryMuscleGroups: Array(Set(allSecondary)),
+            width: width
+        )
+    }
+
+    public init(exercise: ExerciseModel, width: CGFloat = 60) {
+        self.init(
+            primaryMuscleGroups: Array(Set(exercise.primaryMuscleGroups)),
+            secondaryMuscleGroups: Array(Set(exercise.secondaryMuscleGroups)),
+            width: width
+        )
     }
 
     public var body: some View {
         HStack(spacing: 8) {
-            InteractiveMap(svgName: "front") { shape in
-                InteractiveShape(shape)
-                    .stroke(Color.accentColor, lineWidth: .onePixel)
-                    .background(background(for: shape))
-                    .onTapGesture {
-                        print("DEBUG50 - tapped \(shape.name)")
-                    }
-            }
-            .aspectRatio(0.35, contentMode: .fit)
-            .frame(maxWidth: .infinity, alignment: .center)
+            if let frontImage, let backImage {
+                frontImage
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: .infinity, alignment: .center)
 
-            InteractiveMap(svgName: "back") { shape in
-                InteractiveShape(shape)
-                    .stroke(Color.accentColor, lineWidth: .onePixel)
-                    .background(background(for: shape))
-                    .onTapGesture {
-                        print("DEBUG50 - tapped \(shape.name)")
-                    }
+                backImage
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: .infinity, alignment: .center)
+            } else {
+                ZStack {
+                    Color.background
+                    ProgressView()
+                }
+                .clipShape(RoundedRectangle(cornerRadius: 12))
             }
-            .aspectRatio(0.35, contentMode: .fit)
-            .frame(maxWidth: .infinity, alignment: .center)
         }
         .aspectRatio(1, contentMode: .fit)
+        .task(id: UUID(), priority: .userInitiated) {
+            async let frontImage = renderMuscleMap(svgName: "front")
+            async let backImage = renderMuscleMap(svgName: "back")
+            self.frontImage = await Image(uiImage: frontImage)
+            self.backImage = await Image(uiImage: backImage)
+        }
     }
 
     @ViewBuilder
@@ -88,5 +116,33 @@ public struct MuscleMapView: View {
         }
         InteractiveShape(shape)
             .fill(style.color)
+    }
+
+    private func renderMuscleMap(svgName: String) async -> UIImage {
+        let primaryMuscleGroups: String = primaryMuscleGroups.map(\.rawValue).joined(separator: ";")
+        let secondaryMuscleGroups: String = secondaryMuscleGroups.map(\.rawValue).joined(separator: ";")
+        let key = "Primary: \(primaryMuscleGroups)| Secondary: \(secondaryMuscleGroups), svgName: \(svgName), width: \(width), colorScheme: \(colorScheme)"
+        if let cached = MuscleMapImageView.imageCache.object(forKey: key as NSString) {
+            return cached
+        }
+
+        let muscleMap = InteractiveMap(svgName: svgName) { shape in
+            InteractiveShape(shape)
+                .stroke(Color.accentColor, lineWidth: 1)
+                .background(background(for: shape))
+        }
+        .padding(1)
+        .environment(\.colorScheme, colorScheme == .light ? .light : .dark)
+
+        let renderer = ImageRenderer(content: muscleMap)
+        renderer.proposedSize = .init(width: width, height: width / 0.35)
+        renderer.scale = UIScreen.main.scale
+
+        if let uiImage = renderer.uiImage {
+            MuscleMapImageView.imageCache.setObject(uiImage, forKey: key as NSString)
+            return uiImage
+        } else {
+            return UIImage()
+        }
     }
 }

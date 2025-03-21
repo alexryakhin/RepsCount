@@ -62,7 +62,7 @@ public final class WorkoutTemplatesManager: WorkoutTemplateManagerInterface {
             templateExercise.defaultReps = exerciseTemplate.defaultReps.int64
             templateExercise.defaultSets = exerciseTemplate.defaultSets.int64
             templateExercise.exerciseModel = exerciseTemplate.exerciseModel.rawValue
-            templateExercise.sortingOrder = exerciseTemplate.sortingOrder.int64
+            templateExercise.timestamp = exerciseTemplate.timestamp
             templateExercise.workoutTemplate = cdWorkoutTemplate
             cdWorkoutTemplate.addToTemplateExercises(templateExercise)
         }
@@ -84,7 +84,7 @@ public final class WorkoutTemplatesManager: WorkoutTemplateManagerInterface {
             templateExercise.defaultReps = exerciseTemplate.defaultReps.int64
             templateExercise.defaultSets = exerciseTemplate.defaultSets.int64
             templateExercise.exerciseModel = exerciseTemplate.exerciseModel.rawValue
-            templateExercise.sortingOrder = index.int64
+            templateExercise.timestamp = exerciseTemplate.timestamp
             templateExercise.workoutTemplate = cdWorkoutTemplate
             cdWorkoutTemplate.addToTemplateExercises(templateExercise)
         }

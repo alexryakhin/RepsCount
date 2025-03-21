@@ -119,7 +119,7 @@ public struct WorkoutDetailsContentView: PageView {
 
     private var muscleMapSectionView: some View {
         CustomSectionView(header: "Target muscles") {
-            MuscleMapView(exercises: viewModel.workout.exercises.map(\.model))
+            MuscleMapImageView(exercises: viewModel.workout.exercises.map(\.model), width: 100)
                 .clippedWithPaddingAndBackground(.surface)
         }
     }

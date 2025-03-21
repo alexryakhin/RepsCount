@@ -15,6 +15,7 @@ extension CDWorkoutTemplateExercise {
     var coreModel: WorkoutTemplateExercise? {
         guard let id,
               let exerciseModel,
+              let timestamp,
               let model = ExerciseModel(rawValue: exerciseModel) else {
             return nil
         }
@@ -23,7 +24,7 @@ extension CDWorkoutTemplateExercise {
             exerciseModel: model,
             defaultSets: defaultSets.int,
             defaultReps: defaultReps.int,
-            sortingOrder: sortingOrder.int
+            timestamp: timestamp
         )
     }
 }

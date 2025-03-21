@@ -17,7 +17,6 @@ public struct Exercise: Identifiable, Hashable {
     public let location: Location?
     public let notes: String?
     public let workoutInstanceId: String?
-    public let sortingOrder: Int
     public let defaultReps: Int
     public let defaultSets: Int
 
@@ -41,7 +40,6 @@ public struct Exercise: Identifiable, Hashable {
         location: Location?,
         notes: String?,
         workoutInstanceId: String?,
-        sortingOrder: Int,
         defaultReps: Int,
         defaultSets: Int
     ) {
@@ -52,7 +50,6 @@ public struct Exercise: Identifiable, Hashable {
         self.location = location
         self.notes = notes
         self.workoutInstanceId = workoutInstanceId
-        self.sortingOrder = sortingOrder
         self.defaultReps = defaultReps
         self.defaultSets = defaultSets
     }

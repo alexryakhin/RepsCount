@@ -14,7 +14,7 @@ struct WorkoutTemplateRow: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            MuscleMapView(exercises: template.templateExercises.map(\.exerciseModel))
+            MuscleMapImageView(exercises: template.templateExercises.map(\.exerciseModel), width: 80)
                 .frame(width: 80)
 
             VStack(alignment: .leading) {

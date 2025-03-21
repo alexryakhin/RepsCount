@@ -46,7 +46,7 @@ public extension ExerciseModel {
         case .hammerCurls:
             [.biceps, .brachioradialis]
         case .chinUps:
-            [.biceps, .latissimusDorsi]
+            [.biceps, .latissimusDorsi, .trapezius]
         case .concentrationCurls:
             [.biceps]
         case .preacherCurls:
@@ -106,13 +106,13 @@ public extension ExerciseModel {
         case .crunches:
             [.rectusAbdominis]
         case .russianTwist:
-            [.externalObliques]
+            [.externalObliques, .rectusAbdominis]
         case .legRaises:
             [.rectusAbdominisLower]
         case .obliqueTwist:
             [.externalObliques]
         case .lSit:
-            [.rectusAbdominis]
+            [.rectusAbdominis, .rectusFemoris, .tensorFasciaeLatae]
         case .legRaisesBar:
             [.rectusAbdominisLower]
         case .legRaisesParallettes:
@@ -128,7 +128,7 @@ public extension ExerciseModel {
         case .seatedRowWideGrip:
             [.rhomboidMajor, .trapezius]
         case .proneYRaises:
-            [.lowerTrapezius, .trapezius]
+            [.lowerTrapezius, .trapezius, .deltoids]
         case .pullUps:
             [.latissimusDorsi, .biceps]
         case .latPulldowns:
@@ -178,7 +178,7 @@ public extension ExerciseModel {
         case .bulgarianSplitSquat:
             [.gluteusMaximus, .rectusFemoris]
         case .pistolSquat:
-            [.gluteusMaximus, .rectusFemoris]
+            [.gluteusMaximus, .rectusFemoris, .gluteusMedius]
         case .stepUps:
             [.gluteusMaximus, .rectusFemoris]
         case .hackSquat:
@@ -220,15 +220,15 @@ public extension ExerciseModel {
 
             // MARK: - Calisthenics
         case .planche:
-            [.deltoids, .pectoralisMajor] // Shoulders and chest drive the hold
+            [.deltoids, .pectoralisMajor, .triceps, .rectusAbdominis]
         case .muscleUps:
-            [.latissimusDorsi, .biceps] // Pull-up phase dominates
+            [.latissimusDorsi, .biceps, .triceps] // Pull-up phase dominates
         case .frontLever:
-            [.latissimusDorsi, .rectusAbdominis] // Back and core for tension
+            [.latissimusDorsi, .rectusAbdominis, .deltoids] // Back and core for tension
         case .backLever:
-            [.latissimusDorsi, .rectusAbdominis] // Back and core for leverage
+            [.latissimusDorsi, .rectusAbdominis, .deltoids] // Back and core for leverage
         case .humanFlag:
-            [.externalObliques, .latissimusDorsi] // Obliques and lats for lateral hold
+            [.externalObliques, .latissimusDorsi, .triceps] // Obliques and lats for lateral hold
         }
     }
 
@@ -239,9 +239,9 @@ public extension ExerciseModel {
         case .uprightRows:
             [.biceps, .triceps]
         case .facePulls:
-            [.deltoids, .infraspinatus]
+            [.trapezius, .rhomboidMajor, .deltoids]
         case .rackPulls:
-            [.triceps, .thoracolumbarFascia, .rectusAbdominis]
+            [.trapezius, .latissimusDorsi, .gluteusMaximus, .bicepsFemoris, .thoracolumbarFascia]
         case .resistanceBandFacePulls:
             [.deltoids, .infraspinatus]
         case .overheadPress:
@@ -277,7 +277,7 @@ public extension ExerciseModel {
         case .cableCurls:
             [.brachialis, .flexorCarpiRadialis]
         case .reverseCurls:
-            [.extensorCarpiRadialis]
+            [.brachioradialis, .biceps]
         case .tricepExtension:
             [.deltoids]
         case .closeGripBenchPress:
@@ -303,7 +303,7 @@ public extension ExerciseModel {
         case .pinchGripHold:
             [.flexorCarpiUlnaris]
         case .dips:
-            [.deltoids, .rectusAbdominis]
+            [.deltoids, .rectusAbdominis, .serratusAnterior]
         case .pushUps:
             [.deltoids, .rectusAbdominis]
         case .diamondPushUps:
@@ -379,7 +379,7 @@ public extension ExerciseModel {
         case .goodMornings:
             [.thoracolumbarFascia, .rectusAbdominis]
         case .superman:
-            [.rectusAbdominis, .bicepsFemoris]
+            [.deltoids, .semitendinosus]
         case .backExtensions:
             [.thoracolumbarFascia, .rectusAbdominis]
         case .gluteBridge:
@@ -401,7 +401,7 @@ public extension ExerciseModel {
         case .bulgarianSplitSquat:
             [.gluteusMedius, .adductorMagnus]
         case .pistolSquat:
-            [.gluteusMedius, .rectusAbdominis]
+            [.gluteusMedius, .rectusAbdominis, .semitendinosus, .gastrocnemius]
         case .stepUps:
             [.gluteusMedius, .rectusAbdominis]
         case .hackSquat:
@@ -443,7 +443,7 @@ public extension ExerciseModel {
 
             // MARK: - Calisthenics
         case .planche:
-            [.triceps, .rectusAbdominis] // Triceps and core assist the hold
+            [.latissimusDorsi, .gluteusMaximus, .externalObliques]
         case .muscleUps:
             [.triceps, .pectoralisMajor] // Triceps and chest for dip phase
         case .frontLever:
@@ -451,7 +451,7 @@ public extension ExerciseModel {
         case .backLever:
             [.triceps, .externalObliques] // Triceps and obliques assist
         case .humanFlag:
-            [.rectusAbdominis, .trapezius] // Core and upper back stabilize
+            [.rectusAbdominis, .externalObliques] // Core and upper back stabilize
         }
     }
 }

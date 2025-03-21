@@ -15,7 +15,7 @@ extension CDWorkoutInstance {
     var _exercises: [CDExercise] {
         let sets = exercises as? Set<CDExercise> ?? []
         return sets.sorted {
-            $0.sortingOrder < $1.sortingOrder
+            $0.timestamp ?? .now < $1.timestamp ?? .now
         }
     }
 

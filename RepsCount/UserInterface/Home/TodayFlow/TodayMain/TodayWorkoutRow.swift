@@ -13,7 +13,7 @@ struct TodayWorkoutRow: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            MuscleMapView(exercises: workout.exercises.map(\.model))
+            MuscleMapImageView(exercises: workout.exercises.map(\.model), width: 80)
                 .frame(width: 80)
 
             VStack(alignment: .leading) {

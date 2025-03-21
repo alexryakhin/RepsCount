@@ -13,4 +13,5 @@ public enum UDKeys {
     public static let measurementUnit = "measurementUnit"
     public static let savesLocation = "savesLocation"
     public static let addToCalendar = "addToCalendar"
+    public static let selectedEquipment = "selectedEquipment"
 }

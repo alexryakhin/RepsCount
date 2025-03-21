@@ -10,19 +10,19 @@ public struct WorkoutTemplateExercise: Identifiable, Hashable {
     public let exerciseModel: ExerciseModel
     public var defaultSets: Int
     public var defaultReps: Int
-    public let sortingOrder: Int
+    public let timestamp: Date
 
     public init(
         id: String,
         exerciseModel: ExerciseModel,
         defaultSets: Int,
         defaultReps: Int,
-        sortingOrder: Int
+        timestamp: Date
     ) {
         self.id = id
         self.exerciseModel = exerciseModel
         self.defaultSets = defaultSets
         self.defaultReps = defaultReps
-        self.sortingOrder = sortingOrder
+        self.timestamp = timestamp
     }
 }

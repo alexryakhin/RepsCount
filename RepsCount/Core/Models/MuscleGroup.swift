@@ -88,4 +88,3 @@ public enum MuscleGroup: String, CaseIterable, Identifiable {
         }
     }
 }
-

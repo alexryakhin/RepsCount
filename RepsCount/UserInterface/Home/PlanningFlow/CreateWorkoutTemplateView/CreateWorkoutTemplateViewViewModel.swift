@@ -8,11 +8,12 @@ import Combine
 public final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
 
     enum Input {
-        case toggleExerciseSelection(ExerciseModel)
-        case appendNewExercise(ExerciseModel)
         case saveTemplate
         case editDefaults(WorkoutTemplateExercise)
         case applyEditing(WorkoutTemplateExercise)
+        case toggleAddExerciseSheet
+        case addExercise(WorkoutTemplateExercise)
+        case removeExercise(WorkoutTemplateExercise)
     }
 
     enum Output {
@@ -25,9 +26,8 @@ public final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
     @Published var workoutNotes: String = ""
     @Published var defaultSetsInput: String = ""
     @Published var defaultRepsInput: String = ""
-    @Published var exerciseModelToAdd: ExerciseModel?
     @Published var editingDefaultsExercise: WorkoutTemplateExercise?
-    @Published var selectedEquipment: Set<ExerciseEquipment> = Set(ExerciseEquipment.allCases)
+    @Published var isShowingAddExerciseSheet: Bool = false
 
     @Published private(set) var isEditing: Bool = false
     @Published private(set) var exercises: [WorkoutTemplateExercise] = []
@@ -47,33 +47,24 @@ public final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
 
     func handle(_ input: Input) {
         switch input {
-        case .toggleExerciseSelection(let model):
-            if let index = exercises.firstIndex(where: { $0.exerciseModel.rawValue == model.rawValue }) {
-                exercises.remove(at: index)
-            } else {
-                exerciseModelToAdd = model
-            }
-        case .appendNewExercise(let model):
-            appendNewExercise(model)
         case .saveTemplate:
             saveTemplate()
         case .editDefaults(let exercise):
             editDefaults(for: exercise)
         case .applyEditing(let exercise):
             applyEditing(for: exercise)
+        case .toggleAddExerciseSheet:
+            isShowingAddExerciseSheet.toggle()
+        case .addExercise(let exercise):
+            exercises.append(exercise)
+        case .removeExercise(let exercise):
+            exercises.removeAll(where: { $0.id == exercise.id })
         }
     }
 
     // MARK: - Private Methods
 
     private func setupBindings() {
-        $selectedEquipment
-            .sink { [weak self] equipment in
-                guard let self else { return }
-                exercises = exercises.filter { equipment.contains($0.exerciseModel.equipment) }
-            }
-            .store(in: &cancellables)
-
         workoutTemplatesManager.workoutTemplatePublisher
             .removeDuplicates()
             .sink { [weak self] template in
@@ -108,21 +99,6 @@ public final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
             )
             onOutput?(.dismiss)
         }
-    }
-
-    private func appendNewExercise(_ model: ExerciseModel) {
-        exercises.append(
-            .init(
-                id: UUID().uuidString,
-                exerciseModel: model,
-                defaultSets: Int(defaultSetsInput) ?? 0,
-                defaultReps: Int(defaultRepsInput) ?? 0,
-                sortingOrder: exercises.count
-            )
-        )
-        defaultSetsInput = ""
-        defaultRepsInput = ""
-        exerciseModelToAdd = nil
     }
 
     private func editDefaults(for exercise: WorkoutTemplateExercise) {

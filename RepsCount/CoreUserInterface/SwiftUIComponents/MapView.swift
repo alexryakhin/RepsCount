@@ -9,9 +9,13 @@ import SwiftUI
 import MapKit
 
 public struct MapView: View {
+
+    @Environment(\.colorScheme) var colorScheme
+
     private let location: CLLocationCoordinate2D
     @State private var snapshotImage: UIImage?
     @State private var viewWidth: CGFloat = 300  // Default width in case GeometryReader is not applied
+    private static let cache = NSCache<NSString, UIImage>()
 
     public init(location: CLLocationCoordinate2D) {
         self.location = location
@@ -30,7 +34,8 @@ public struct MapView: View {
                         .frame(height: height)
                         .clipShape(RoundedRectangle(cornerRadius: 12))
                         .overlay {
-                            Image(systemName: "mappin.and.ellipse")
+                            Image(.mapMarker)
+                                .frame(sideLength: 30)
                         }
                 } else {
                     ShimmerView(width: width, height: height)
@@ -47,6 +52,13 @@ public struct MapView: View {
     }
 
     private func takeSnapshot(width: CGFloat, height: CGFloat) {
+        let key = "\(location.latitude),\(location.longitude),\(Int(width)),\(colorScheme)" as NSString
+
+        if let cached = MapView.cache.object(forKey: key) {
+            self.snapshotImage = cached
+            return
+        }
+
         let options = MKMapSnapshotter.Options()
         options.region = MKCoordinateRegion(
             center: location,
@@ -59,7 +71,8 @@ public struct MapView: View {
         snapshotter.start { snapshot, error in
             guard let snapshot = snapshot else { return }
             DispatchQueue.main.async {
-                snapshotImage = snapshot.image
+                MapView.cache.setObject(snapshot.image, forKey: key)
+                self.snapshotImage = snapshot.image
             }
         }
     }

@@ -15,7 +15,7 @@ extension CDWorkoutTemplate {
     var _templateExercises: [CDWorkoutTemplateExercise] {
         let sets = templateExercises as? Set<CDWorkoutTemplateExercise> ?? []
         return sets.sorted {
-            $0.sortingOrder < $1.sortingOrder
+            $0.timestamp ?? .now < $1.timestamp ?? .now
         }
     }
 
