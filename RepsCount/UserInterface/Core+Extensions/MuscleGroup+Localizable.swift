@@ -54,6 +54,6 @@ extension MuscleGroup {
     }
 
     var commonNameLocalized: String {
-        return NSLocalizedString(commonName, comment: "muscle group name, \(self.rawValue)")
+        return NSLocalizedString(commonName, comment: .empty)
     }
 }

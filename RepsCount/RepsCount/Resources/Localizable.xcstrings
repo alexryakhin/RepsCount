@@ -27,6 +27,12 @@
     "%.1f%%" : {
 
     },
+    "Abdominals" : {
+      "extractionState" : "manual"
+    },
+    "Abductors" : {
+      "extractionState" : "manual"
+    },
     "About app" : {
       "comment" : "About app title",
       "localizations" : {
@@ -89,6 +95,9 @@
           }
         }
       }
+    },
+    "Abs" : {
+      "extractionState" : "manual"
     },
     "Add" : {
       "localizations" : {
@@ -286,6 +295,15 @@
         }
       }
     },
+    "Adding workout failed" : {
+      "comment" : "Adding workout failed"
+    },
+    "Adductors" : {
+      "extractionState" : "manual"
+    },
+    "Afternoon workout" : {
+      "extractionState" : "manual"
+    },
     "Amount" : {
       "localizations" : {
         "de" : {
@@ -313,6 +331,9 @@
           }
         }
       }
+    },
+    "An unknown error occured." : {
+      "comment" : "unknown error"
     },
     "App version:" : {
       "localizations" : {
@@ -397,6 +418,9 @@
           }
         }
       }
+    },
+    "Are you sure you want to delete this event?" : {
+      "comment" : "Are you sure you want to delete this event?"
     },
     "Are you sure you want to delete this exercise?" : {
       "localizations" : {
@@ -512,6 +536,12 @@
         }
       }
     },
+    "Back Extensions" : {
+      "extractionState" : "manual"
+    },
+    "Back Lever" : {
+      "extractionState" : "manual"
+    },
     "Barbell Rows" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -540,6 +570,9 @@
           }
         }
       }
+    },
+    "Bars" : {
+      "extractionState" : "manual"
     },
     "Bench Press" : {
       "extractionState" : "manual",
@@ -599,6 +632,18 @@
         }
       }
     },
+    "Biceps" : {
+      "extractionState" : "manual"
+    },
+    "Brachialis" : {
+      "extractionState" : "manual"
+    },
+    "Brachioradialis" : {
+      "extractionState" : "manual"
+    },
+    "Bulgarian Split Squat" : {
+      "extractionState" : "manual"
+    },
     "Buy Me a Coffee" : {
       "localizations" : {
         "de" : {
@@ -655,6 +700,12 @@
           }
         }
       }
+    },
+    "Cable Curls" : {
+      "extractionState" : "manual"
+    },
+    "Cable Hip Adduction" : {
+      "extractionState" : "manual"
     },
     "Calendar" : {
       "comment" : "Calendar",
@@ -713,6 +764,9 @@
         }
       }
     },
+    "Calf" : {
+      "extractionState" : "manual"
+    },
     "Calf Raises" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -742,7 +796,14 @@
         }
       }
     },
+    "Calisthenics" : {
+      "extractionState" : "manual"
+    },
+    "Calves" : {
+      "extractionState" : "manual"
+    },
     "Cancel" : {
+      "comment" : "Cancel",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -769,6 +830,12 @@
           }
         }
       }
+    },
+    "Canceling recurrence failed" : {
+      "comment" : "Canceling recurrence failed"
+    },
+    "Central Back" : {
+      "extractionState" : "manual"
     },
     "Chest" : {
       "extractionState" : "manual",
@@ -828,6 +895,15 @@
         }
       }
     },
+    "Chin-ups" : {
+      "extractionState" : "manual"
+    },
+    "Clamshells" : {
+      "extractionState" : "manual"
+    },
+    "Close-Grip Bench Press" : {
+      "extractionState" : "manual"
+    },
     "Completed ✅" : {
       "localizations" : {
         "de" : {
@@ -855,6 +931,9 @@
           }
         }
       }
+    },
+    "Concentration Curls" : {
+      "extractionState" : "manual"
     },
     "Contact me" : {
       "localizations" : {
@@ -945,6 +1024,9 @@
           }
         }
       }
+    },
+    "Copenhagen Plank" : {
+      "extractionState" : "manual"
     },
     "Core" : {
       "extractionState" : "manual",
@@ -1144,6 +1226,12 @@
         }
       }
     },
+    "Data corrupted" : {
+      "comment" : "Data corrupted"
+    },
+    "Dead Hang" : {
+      "extractionState" : "manual"
+    },
     "Deadlifts" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1173,7 +1261,14 @@
         }
       }
     },
+    "Decline Bench Press" : {
+      "extractionState" : "manual"
+    },
+    "Decoding error" : {
+      "comment" : "Decoding error"
+    },
     "Default reps" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1201,36 +1296,8 @@
         }
       }
     },
-    "Default reps (optional)" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Standardwiederholungen (optional)"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Répétitions par défaut (facultatif)"
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zadane ponavljanja (opcionalno)"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Повторения по умолчанию (необязательно)"
-          }
-        }
-      }
-    },
     "Default reps: %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1259,6 +1326,7 @@
       }
     },
     "Default sets" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1286,36 +1354,8 @@
         }
       }
     },
-    "Default sets (optional)" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Standardsätze (optional)"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Séries par défaut (facultatif)"
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zadani setovi (opcionalno)"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Подходы по умолчанию (необязательно)"
-          }
-        }
-      }
-    },
     "Default sets: %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1399,6 +1439,12 @@
         }
       }
     },
+    "Delete All Future Events" : {
+      "comment" : "Delete All Future Events"
+    },
+    "Delete Event" : {
+      "comment" : "Delete Event"
+    },
     "Delete exercise" : {
       "localizations" : {
         "de" : {
@@ -1427,6 +1473,9 @@
         }
       }
     },
+    "Delete This Event Only" : {
+      "comment" : "Delete This Event Only"
+    },
     "Delete workout" : {
       "localizations" : {
         "de" : {
@@ -1454,6 +1503,12 @@
           }
         }
       }
+    },
+    "Deltoids" : {
+      "extractionState" : "manual"
+    },
+    "Diamond Push-ups" : {
+      "extractionState" : "manual"
     },
     "Dips" : {
       "extractionState" : "manual",
@@ -1511,6 +1566,12 @@
           }
         }
       }
+    },
+    "Donkey Calf Raises" : {
+      "extractionState" : "manual"
+    },
+    "Dragon Flag" : {
+      "extractionState" : "manual"
     },
     "Dumbbell Flyes" : {
       "extractionState" : "manual",
@@ -1823,7 +1884,14 @@
         }
       }
     },
+    "Evening workout" : {
+      "extractionState" : "manual"
+    },
+    "Event already exists" : {
+      "comment" : "Event already exists"
+    },
     "Exercises" : {
+      "comment" : "Exercises",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1880,6 +1948,21 @@
         }
       }
     },
+    "Farmer's Walk" : {
+      "extractionState" : "manual"
+    },
+    "Forearm Extensors" : {
+      "extractionState" : "manual"
+    },
+    "Forearm Flexors" : {
+      "extractionState" : "manual"
+    },
+    "Forearms" : {
+      "extractionState" : "manual"
+    },
+    "Front Lever" : {
+      "extractionState" : "manual"
+    },
     "Front Raises" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1909,6 +1992,15 @@
         }
       }
     },
+    "Glute Bridge" : {
+      "extractionState" : "manual"
+    },
+    "Glute-Ham Raises" : {
+      "extractionState" : "manual"
+    },
+    "Glutes" : {
+      "extractionState" : "manual"
+    },
     "Go back and start a workout" : {
       "localizations" : {
         "de" : {
@@ -1936,6 +2028,18 @@
           }
         }
       }
+    },
+    "Good Mornings" : {
+      "extractionState" : "manual"
+    },
+    "Groin" : {
+      "extractionState" : "manual"
+    },
+    "Gym" : {
+      "extractionState" : "manual"
+    },
+    "Hack Squat" : {
+      "extractionState" : "manual"
     },
     "Hammer Curls" : {
       "extractionState" : "manual",
@@ -1966,6 +2070,12 @@
         }
       }
     },
+    "Hamstrings" : {
+      "extractionState" : "manual"
+    },
+    "Handstand Push-ups" : {
+      "extractionState" : "manual"
+    },
     "Have ready-to-go workouts for any day" : {
       "localizations" : {
         "de" : {
@@ -1993,6 +2103,15 @@
           }
         }
       }
+    },
+    "Hip Thrust" : {
+      "extractionState" : "manual"
+    },
+    "Human Flag" : {
+      "extractionState" : "manual"
+    },
+    "Hyperextensions" : {
+      "extractionState" : "manual"
     },
     "Incline Bench Press" : {
       "extractionState" : "manual",
@@ -2051,6 +2170,15 @@
         }
       }
     },
+    "Inner Quad" : {
+      "extractionState" : "manual"
+    },
+    "Inner Thigh" : {
+      "extractionState" : "manual"
+    },
+    "Input cannot be empty" : {
+      "comment" : "Input cannot be empty"
+    },
     "Instagram" : {
       "localizations" : {
         "de" : {
@@ -2106,6 +2234,18 @@
           }
         }
       }
+    },
+    "Invalid input" : {
+      "comment" : "Invalid input"
+    },
+    "Invalid response" : {
+      "comment" : "Invalid response"
+    },
+    "Invalid URL" : {
+      "comment" : "Invalid URL"
+    },
+    "Inverted Rows" : {
+      "extractionState" : "manual"
     },
     "kg" : {
       "extractionState" : "manual",
@@ -2165,6 +2305,9 @@
         }
       }
     },
+    "L-sit" : {
+      "extractionState" : "manual"
+    },
     "Lat Pulldowns" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2222,6 +2365,9 @@
           }
         }
       }
+    },
+    "Lats" : {
+      "extractionState" : "manual"
     },
     "lb" : {
       "extractionState" : "manual",
@@ -2281,6 +2427,9 @@
         }
       }
     },
+    "Leg Extensions" : {
+      "extractionState" : "manual"
+    },
     "Leg Press" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2339,6 +2488,12 @@
         }
       }
     },
+    "Leg Raises on Bar" : {
+      "extractionState" : "manual"
+    },
+    "Leg Raises on Parallettes" : {
+      "extractionState" : "manual"
+    },
     "Legs" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2396,6 +2551,15 @@
         }
       }
     },
+    "Lower Abs" : {
+      "extractionState" : "manual"
+    },
+    "Lower Back" : {
+      "extractionState" : "manual"
+    },
+    "Lower Traps" : {
+      "extractionState" : "manual"
+    },
     "Lunges" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2424,6 +2588,12 @@
           }
         }
       }
+    },
+    "Machine Chest Press" : {
+      "extractionState" : "manual"
+    },
+    "Machine Rows" : {
+      "extractionState" : "manual"
     },
     "Manage your workout schedule here: Create repetition for events, set reminders, and more." : {
       "localizations" : {
@@ -2537,6 +2707,12 @@
         }
       }
     },
+    "Missing API key" : {
+      "comment" : "Missing API key"
+    },
+    "Missing field" : {
+      "comment" : "Missing field"
+    },
     "Monthly" : {
       "localizations" : {
         "de" : {
@@ -2565,34 +2741,8 @@
         }
       }
     },
-    "More" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mehr"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Plus"
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Više"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Еще"
-          }
-        }
-      }
+    "Morning workout" : {
+      "extractionState" : "manual"
     },
     "Muscle groups to target" : {
       "localizations" : {
@@ -2621,6 +2771,9 @@
           }
         }
       }
+    },
+    "Muscle-ups" : {
+      "extractionState" : "manual"
     },
     "My workout templates" : {
       "localizations" : {
@@ -2678,6 +2831,9 @@
         }
       }
     },
+    "Neck" : {
+      "extractionState" : "manual"
+    },
     "New workout template" : {
       "comment" : "New template",
       "localizations" : {
@@ -2706,6 +2862,12 @@
           }
         }
       }
+    },
+    "No data" : {
+      "comment" : "No data"
+    },
+    "No Equipment" : {
+      "extractionState" : "manual"
     },
     "No exercises" : {
       "localizations" : {
@@ -2818,6 +2980,9 @@
           }
         }
       }
+    },
+    "No internet connection" : {
+      "comment" : "No internet connection"
     },
     "No Workout Planned" : {
       "localizations" : {
@@ -2987,6 +3152,9 @@
         }
       }
     },
+    "Nordic Curls" : {
+      "extractionState" : "manual"
+    },
     "Notes" : {
       "localizations" : {
         "de" : {
@@ -3044,6 +3212,9 @@
         }
       }
     },
+    "Obliques" : {
+      "extractionState" : "manual"
+    },
     "Occurrences: %@" : {
       "localizations" : {
         "de" : {
@@ -3100,6 +3271,9 @@
         }
       }
     },
+    "One Arm Pull-up" : {
+      "extractionState" : "manual"
+    },
     "Ooops.." : {
       "localizations" : {
         "de" : {
@@ -3128,6 +3302,30 @@
         }
       }
     },
+    "Outer Calf" : {
+      "extractionState" : "manual"
+    },
+    "Outer Quad" : {
+      "extractionState" : "manual"
+    },
+    "Outer Thigh" : {
+      "extractionState" : "manual"
+    },
+    "Overhead Press" : {
+      "extractionState" : "manual"
+    },
+    "Overhead Triceps Extension" : {
+      "extractionState" : "manual"
+    },
+    "Pectorals" : {
+      "extractionState" : "manual"
+    },
+    "Pinch Grip Hold" : {
+      "extractionState" : "manual"
+    },
+    "Pistol Squat" : {
+      "extractionState" : "manual"
+    },
     "Plan ahead" : {
       "localizations" : {
         "de" : {
@@ -3155,6 +3353,12 @@
           }
         }
       }
+    },
+    "Planche" : {
+      "extractionState" : "manual"
+    },
+    "Plank" : {
+      "extractionState" : "manual"
     },
     "Planned at: %@" : {
       "localizations" : {
@@ -3270,6 +3474,9 @@
         }
       }
     },
+    "Preacher Curls" : {
+      "extractionState" : "manual"
+    },
     "Proceed" : {
       "localizations" : {
         "de" : {
@@ -3325,6 +3532,9 @@
           }
         }
       }
+    },
+    "Prone Y-Raises" : {
+      "extractionState" : "manual"
     },
     "Pull-ups" : {
       "extractionState" : "manual",
@@ -3384,6 +3594,15 @@
         }
       }
     },
+    "Quadriceps" : {
+      "extractionState" : "manual"
+    },
+    "Quads" : {
+      "extractionState" : "manual"
+    },
+    "Rack Pulls" : {
+      "extractionState" : "manual"
+    },
     "Rate the app" : {
       "localizations" : {
         "de" : {
@@ -3411,6 +3630,12 @@
           }
         }
       }
+    },
+    "Read failed" : {
+      "comment" : "Read failed"
+    },
+    "Rear Delt Flyes" : {
+      "extractionState" : "manual"
     },
     "Recurrence" : {
       "localizations" : {
@@ -3467,6 +3692,21 @@
           }
         }
       }
+    },
+    "Removing event failed" : {
+      "comment" : "Removing event failed"
+    },
+    "Removing exercise failed" : {
+      "comment" : "Removing exercise failed"
+    },
+    "Removing set failed" : {
+      "comment" : "Removing set failed"
+    },
+    "Removing template failed" : {
+      "comment" : "Removing template failed"
+    },
+    "Removing workout failed" : {
+      "comment" : "Removing workout failed"
     },
     "Rename" : {
       "localizations" : {
@@ -3580,6 +3820,9 @@
         }
       }
     },
+    "Reps" : {
+
+    },
     "Reps (optional)" : {
       "localizations" : {
         "de" : {
@@ -3664,6 +3907,66 @@
           }
         }
       }
+    },
+    "Resistance Band Bicep Curls" : {
+      "extractionState" : "manual"
+    },
+    "Resistance Band Chest Press" : {
+      "extractionState" : "manual"
+    },
+    "Resistance Band Face Pulls" : {
+      "extractionState" : "manual"
+    },
+    "Resistance Band Flyes" : {
+      "extractionState" : "manual"
+    },
+    "Resistance Band Front Raises" : {
+      "extractionState" : "manual"
+    },
+    "Resistance Band Lateral Raises" : {
+      "extractionState" : "manual"
+    },
+    "Resistance Band Lateral Walks" : {
+      "extractionState" : "manual"
+    },
+    "Resistance Band Overhead Press" : {
+      "extractionState" : "manual"
+    },
+    "Resistance Band Pulldowns" : {
+      "extractionState" : "manual"
+    },
+    "Resistance Band Reverse Wrist Curls" : {
+      "extractionState" : "manual"
+    },
+    "Resistance Band Rows" : {
+      "extractionState" : "manual"
+    },
+    "Resistance Band Triceps Extension" : {
+      "extractionState" : "manual"
+    },
+    "Resistance Band Wrist Curls" : {
+      "extractionState" : "manual"
+    },
+    "Resistance Bands" : {
+      "extractionState" : "manual"
+    },
+    "Reverse Curls" : {
+      "extractionState" : "manual"
+    },
+    "Reverse Flyes" : {
+      "extractionState" : "manual"
+    },
+    "Reverse Wrist Curls" : {
+      "extractionState" : "manual"
+    },
+    "Rhomboids" : {
+      "extractionState" : "manual"
+    },
+    "Romanian Deadlifts" : {
+      "extractionState" : "manual"
+    },
+    "Rotator Cuff" : {
+      "extractionState" : "manual"
     },
     "Russian Twist" : {
       "extractionState" : "manual",
@@ -3750,6 +4053,9 @@
           }
         }
       }
+    },
+    "Save failed" : {
+      "comment" : "Save failed"
     },
     "Save location" : {
       "localizations" : {
@@ -3863,6 +4169,15 @@
           }
         }
       }
+    },
+    "Seated Cable Rows" : {
+      "extractionState" : "manual"
+    },
+    "Seated Calf Raises" : {
+      "extractionState" : "manual"
+    },
+    "Seated Row (Wide Grip)" : {
+      "extractionState" : "manual"
     },
     "Select a template" : {
       "localizations" : {
@@ -4059,6 +4374,12 @@
           }
         }
       }
+    },
+    "Serratus" : {
+      "extractionState" : "manual"
+    },
+    "Server unreachable" : {
+      "comment" : "Server unreachable"
     },
     "Sets" : {
       "localizations" : {
@@ -4316,6 +4637,24 @@
         }
       }
     },
+    "Side Plank" : {
+      "extractionState" : "manual"
+    },
+    "Side-Lying Adductor Raises" : {
+      "extractionState" : "manual"
+    },
+    "Side-Lying Leg Raises" : {
+      "extractionState" : "manual"
+    },
+    "Sissy Squat" : {
+      "extractionState" : "manual"
+    },
+    "Skull Crushers" : {
+      "extractionState" : "manual"
+    },
+    "Soleus" : {
+      "extractionState" : "manual"
+    },
     "Something you might need" : {
       "localizations" : {
         "de" : {
@@ -4343,6 +4682,9 @@
           }
         }
       }
+    },
+    "Split Squat" : {
+      "extractionState" : "manual"
     },
     "Squats" : {
       "extractionState" : "manual",
@@ -4401,6 +4743,9 @@
           }
         }
       }
+    },
+    "Standing Calf Raises" : {
+      "extractionState" : "manual"
     },
     "Start a new workout" : {
       "localizations" : {
@@ -4486,6 +4831,9 @@
         }
       }
     },
+    "Step Ups" : {
+      "extractionState" : "manual"
+    },
     "Stones" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -4514,6 +4862,12 @@
           }
         }
       }
+    },
+    "Strength Training" : {
+      "extractionState" : "manual"
+    },
+    "Sumo Deadlifts" : {
+      "extractionState" : "manual"
     },
     "Superman" : {
       "extractionState" : "manual",
@@ -4571,6 +4925,9 @@
           }
         }
       }
+    },
+    "T-bar Rows" : {
+      "extractionState" : "manual"
     },
     "T-Bar Rows" : {
       "extractionState" : "manual",
@@ -4657,6 +5014,24 @@
         }
       }
     },
+    "Template not found" : {
+      "comment" : "Template not found"
+    },
+    "Teres" : {
+      "extractionState" : "manual"
+    },
+    "The app doesn't have permission to Calendar in Settings." : {
+      "comment" : "app doesn't have permission"
+    },
+    "The app has write-only access to Calendar in Settings. Please grant it full access so the app can fetch and delete your events." : {
+      "comment" : "app has write-only access"
+    },
+    "This device doesn't allow access to Calendar." : {
+      "comment" : "device doesn't allow access"
+    },
+    "This is a repeating event." : {
+      "comment" : "This is a repeating event."
+    },
     "Time" : {
       "localizations" : {
         "de" : {
@@ -4712,6 +5087,9 @@
           }
         }
       }
+    },
+    "Timeout" : {
+      "comment" : "Timeout"
     },
     "Today" : {
       "localizations" : {
@@ -4770,6 +5148,9 @@
         }
       }
     },
+    "Toe Raises" : {
+      "extractionState" : "manual"
+    },
     "Total" : {
       "localizations" : {
         "de" : {
@@ -4825,6 +5206,12 @@
           }
         }
       }
+    },
+    "Trapezius" : {
+      "extractionState" : "manual"
+    },
+    "Traps" : {
+      "extractionState" : "manual"
     },
     "Tricep Dips" : {
       "extractionState" : "manual",
@@ -4883,6 +5270,12 @@
           }
         }
       }
+    },
+    "Triceps" : {
+      "extractionState" : "manual"
+    },
+    "Unable to complete empty workout" : {
+      "comment" : "Unable to complete empty workout"
     },
     "Upright Rows" : {
       "extractionState" : "manual",
@@ -5053,6 +5446,9 @@
         }
       }
     },
+    "Workout completed" : {
+      "comment" : "Workout completed"
+    },
     "Workout Name" : {
       "localizations" : {
         "de" : {
@@ -5080,6 +5476,12 @@
           }
         }
       }
+    },
+    "Workouts" : {
+      "comment" : "Workouts"
+    },
+    "Wrist Curls" : {
+      "extractionState" : "manual"
     },
     "X (Twitter)" : {
       "localizations" : {

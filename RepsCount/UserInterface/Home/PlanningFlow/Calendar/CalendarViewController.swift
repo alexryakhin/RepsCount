@@ -29,7 +29,7 @@ public final class CalendarViewController: PageViewController<CalendarContentVie
     override public func setup() {
         super.setup()
         setupBindings()
-        navigationItem.title = NSLocalizedString("Calendar", comment: "Calendar")
+        navigationItem.title = NSLocalizedString("Calendar", comment: .empty)
     }
 
     // MARK: - Private Methods
@@ -47,22 +47,22 @@ public final class CalendarViewController: PageViewController<CalendarContentVie
 
     private func presentDeleteEventAlert(_ event: WorkoutEvent) {
         let alertController = UIAlertController(
-            title: "Are you sure you want to delete this event?",
-            message: event.type == .recurring ? "This is a repeating event." : nil,
+            title: NSLocalizedString("Are you sure you want to delete this event?", comment: .empty),
+            message: event.type == .recurring ? NSLocalizedString("This is a repeating event.", comment: .empty) : nil,
             preferredStyle: .actionSheet
         )
         switch event.type {
         case .recurring:
-            let deleteSingleAction = UIAlertAction(title: "Delete This Event Only", style: .destructive) { [weak self] _ in
+            let deleteSingleAction = UIAlertAction(title: NSLocalizedString("Delete This Event Only", comment: .empty), style: .destructive) { [weak self] _ in
                 self?.viewModel.handle(.handleDeleteEventAlert(event, deleteFutureEvents: false))
             }
-            let deleteAllAction = UIAlertAction(title: "Delete All Future Events", style: .destructive) { [weak self] _ in
+            let deleteAllAction = UIAlertAction(title: NSLocalizedString("Delete All Future Events", comment: .empty), style: .destructive) { [weak self] _ in
                 self?.viewModel.handle(.handleDeleteEventAlert(event, deleteFutureEvents: true))
             }
             alertController.addAction(deleteSingleAction)
             alertController.addAction(deleteAllAction)
         case .single:
-            let deleteSingleAction = UIAlertAction(title: "Delete Event", style: .destructive) { [weak self] _ in
+            let deleteSingleAction = UIAlertAction(title: NSLocalizedString("Delete Event", comment: .empty), style: .destructive) { [weak self] _ in
                 self?.viewModel.handle(.handleDeleteEventAlert(event, deleteFutureEvents: false))
             }
             alertController.addAction(deleteSingleAction)
@@ -70,7 +70,7 @@ public final class CalendarViewController: PageViewController<CalendarContentVie
             fatalError("Unsupported event type")
         }
 
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: .empty), style: .cancel)
         alertController.addAction(cancelAction)
 
         present(alertController, animated: true)

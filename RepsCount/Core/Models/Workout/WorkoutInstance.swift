@@ -24,11 +24,11 @@ public struct WorkoutInstance: Identifiable, Hashable {
         let hour = Calendar.current.component(.hour, from: date)
         switch hour {
         case 5..<12:
-            return "Morning workout"
+            return NSLocalizedString("Morning workout", comment: .empty)
         case 12..<18:
-            return "Afternoon workout"
+            return NSLocalizedString("Afternoon workout", comment: .empty)
         default:
-            return "Evening workout"
+            return NSLocalizedString("Evening workout", comment: .empty)
         }
     }
 

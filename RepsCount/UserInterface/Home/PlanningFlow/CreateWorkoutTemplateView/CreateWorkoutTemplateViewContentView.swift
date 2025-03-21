@@ -52,9 +52,9 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
             .gradientStyle(.bottomButton)
         }
         .alert("Edit defaults", isPresented: .constant(viewModel.editingDefaultsExercise != nil), presenting: viewModel.editingDefaultsExercise) { exercise in
-            TextField("Default sets", text: $viewModel.defaultSetsInput)
+            TextField("Sets", text: $viewModel.defaultSetsInput)
                 .keyboardType(.numberPad)
-            TextField("Default reps", text: $viewModel.defaultRepsInput)
+            TextField("Reps", text: $viewModel.defaultRepsInput)
                 .keyboardType(.numberPad)
             Button("Cancel", role: .cancel) {
                 viewModel.editingDefaultsExercise = nil
@@ -134,10 +134,10 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
                             VStack(alignment: .trailing, spacing: 4) {
-                                Text("Default sets: \(exercise.defaultSets.formatted())")
+                                Text("Sets: \(exercise.defaultSets.formatted())")
                                     .foregroundStyle(.secondary)
                                     .font(.caption)
-                                Text("Default reps: \(exercise.defaultReps.formatted())")
+                                Text("Reps: \(exercise.defaultReps.formatted())")
                                     .foregroundStyle(.secondary)
                                     .font(.caption)
                             }

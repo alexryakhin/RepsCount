@@ -29,7 +29,7 @@ public final class WorkoutsListViewController: PageViewController<WorkoutsListCo
     override public func setup() {
         super.setup()
         setupBindings()
-        navigationItem.title = "Workouts"
+        navigationItem.title = NSLocalizedString("Workouts", comment: .empty)
     }
 
     // MARK: - Private Methods

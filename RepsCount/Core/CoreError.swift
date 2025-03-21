@@ -19,7 +19,7 @@ public enum CoreError: Error {
     public enum NetworkError: Error {
         case timeout
         case serverUnreachable
-        case invalidResponse(statusCode: Int? = nil)
+        case invalidResponse
         case noInternetConnection
         case missingAPIKey
         case decodingError
@@ -28,14 +28,14 @@ public enum CoreError: Error {
 
         public var description: String {
             switch self {
-            case .timeout: "Timeout"
-            case .serverUnreachable: "Server unreachable"
-            case .invalidResponse(let code): "Invalid response: \(code ?? 0)"
-            case .noInternetConnection: "No internet connection"
-            case .missingAPIKey: "Missing API key"
-            case .decodingError: "Decoding error"
-            case .invalidURL: "Invalid URL"
-            case .noData: "No data"
+            case .timeout: NSLocalizedString("Timeout", comment: .empty)
+            case .serverUnreachable: NSLocalizedString("Server unreachable", comment: .empty)
+            case .invalidResponse: NSLocalizedString("Invalid response", comment: .empty)
+            case .noInternetConnection: NSLocalizedString("No internet connection", comment: .empty)
+            case .missingAPIKey: NSLocalizedString("Missing API key", comment: .empty)
+            case .decodingError: NSLocalizedString("Decoding error", comment: .empty)
+            case .invalidURL: NSLocalizedString("Invalid URL", comment: .empty)
+            case .noData: NSLocalizedString("No data", comment: .empty)
             }
         }
     }
@@ -48,21 +48,21 @@ public enum CoreError: Error {
 
         public var description: String {
             switch self {
-            case .saveFailed: "Save failed"
-            case .readFailed: "Read failed"
-            case .dataCorrupted: "Data corrupted"
+            case .saveFailed: NSLocalizedString("Save failed", comment: .empty)
+            case .readFailed: NSLocalizedString("Read failed", comment: .empty)
+            case .dataCorrupted: NSLocalizedString("Data corrupted", comment: .empty)
             }
         }
     }
 
     public enum ValidationError: Error {
-        case invalidInput(field: String)
-        case missingField(field: String)
+        case invalidInput
+        case missingField
 
         public var description: String {
             switch self {
-            case .invalidInput(field: let field): "Invalid input for field: \(field)"
-            case .missingField(field: let field): "Missing field: \(field)"
+            case .invalidInput: NSLocalizedString("Invalid input", comment: .empty)
+            case .missingField: NSLocalizedString("Missing field", comment: .empty)
             }
         }
     }
@@ -84,29 +84,29 @@ public enum CoreError: Error {
         public var description: String {
             switch self {
             case .removingExerciseFailed:
-                return "Removing exercise failed"
+                return NSLocalizedString("Removing exercise failed", comment: .empty)
             case .removingTemplateFailed:
-                return "Removing template failed"
+                return NSLocalizedString("Removing template failed", comment: .empty)
             case .removingEventFailed:
-                return "Removing event failed"
+                return NSLocalizedString("Removing event failed", comment: .empty)
             case .removingSetFailed:
-                return "Removing set failed"
+                return NSLocalizedString("Removing set failed", comment: .empty)
             case .templateNotFound:
-                return "Template not found"
+                return NSLocalizedString("Template not found", comment: .empty)
             case .eventAlreadyExists:
-                return "Event already exists"
+                return NSLocalizedString("Event already exists", comment: .empty)
             case .inputCannotBeEmpty:
-                return "Input cannot be empty"
+                return NSLocalizedString("Input cannot be empty", comment: .empty)
             case .cancelingRecurrenceFailed:
-                return "Canceling recurrence failed"
+                return NSLocalizedString("Canceling recurrence failed", comment: .empty)
             case .addingWorkoutFailed:
-                return "Adding workout failed"
+                return NSLocalizedString("Adding workout failed", comment: .empty)
             case .removingWorkoutFailed:
-                return "Removing workout failed"
+                return NSLocalizedString("Removing workout failed", comment: .empty)
             case .workoutCompleted:
-                return "Workout completed"
+                return NSLocalizedString("Workout completed", comment: .empty)
             case .unableToCompleteEmptyWorkout:
-                return "Unable to complete empty workout"
+                return NSLocalizedString("Unable to complete empty workout", comment: .empty)
             }
         }
     }
@@ -120,15 +120,13 @@ public enum CoreError: Error {
         public var description: String {
             switch self {
             case .denied:
-                return "The app doesn't have permission to Calendar in Settings."
+                return NSLocalizedString("The app doesn't have permission to Calendar in Settings.", comment: .empty)
              case .restricted:
-                return "This device doesn't allow access to Calendar."
+                return NSLocalizedString("This device doesn't allow access to Calendar.", comment: .empty)
             case .unknown:
-                return "An unknown error occured."
+                return NSLocalizedString("An unknown error occured.", comment: .empty)
             case .upgrade:
-                let access = "The app has write-only access to Calendar in Settings."
-                let update = "Please grant it full access so the app can fetch and delete your events."
-                return "\(access) \(update)"
+                return NSLocalizedString("The app has write-only access to Calendar in Settings. Please grant it full access so the app can fetch and delete your events.", comment: .empty)
             }
         }
     }
@@ -140,7 +138,7 @@ public enum CoreError: Error {
         case .validationError(let error): error.description
         case .internalError(let error): error.description
         case .eventStoreError(let error): error.description
-        case .unknownError: "Unknown error"
+        case .unknownError: NSLocalizedString("An unknown error occured.", comment: .empty)
         }
     }
 }

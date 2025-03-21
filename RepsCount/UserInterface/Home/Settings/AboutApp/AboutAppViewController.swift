@@ -29,7 +29,7 @@ public final class AboutAppViewController: PageViewController<AboutAppContentVie
     override public func setup() {
         super.setup()
         setupBindings()
-        navigationItem.title = NSLocalizedString("About app", comment: "About app title")
+        navigationItem.title = NSLocalizedString("About app", comment: .empty)
     }
 
     // MARK: - Private Methods

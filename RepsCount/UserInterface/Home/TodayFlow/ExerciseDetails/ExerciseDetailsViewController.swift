@@ -36,7 +36,7 @@ public final class ExerciseDetailsViewController: PageViewController<ExerciseDet
         navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.titleView = NavBarTitleView(
-            title: NSLocalizedString(viewModel.exercise.model.rawValue, comment: "Exercise name"),
+            title: NSLocalizedString(viewModel.exercise.model.rawValue, comment: .empty),
             subtitle: viewModel.exercise.timestamp.formatted(date: .abbreviated, time: .shortened)
         )
     }

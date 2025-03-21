@@ -30,8 +30,8 @@ public final class CreateWorkoutTemplateViewViewController: PageViewController<C
         super.setup()
         setupBindings()
         navigationItem.title = viewModel.isEditing 
-        ? NSLocalizedString("Edit workout template", comment: "Edit template")
-        : NSLocalizedString("New workout template", comment: "New template")
+        ? NSLocalizedString("Edit workout template", comment: .empty)
+        : NSLocalizedString("New workout template", comment: .empty)
     }
 
     // MARK: - Private Methods
