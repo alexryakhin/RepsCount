@@ -66,6 +66,13 @@ public struct WorkoutDetailsContentView: PageView {
                 viewModel.handle(.updateName(viewModel.nameInput))
             }
         }
+        .sheet(isPresented: $viewModel.isShowingAddExerciseSheet) {
+            AddExerciseView(selectedExercises: viewModel.workout.exercises.map(\.model)) {
+                viewModel.handle(.addExercise($0))
+                viewModel.isShowingAddExerciseSheet = false
+                HapticManager.shared.triggerNotification(type: .success)
+            }
+        }
     }
 
     public func placeholderView(props: PageState.PlaceholderProps) -> some View {
@@ -95,7 +102,7 @@ public struct WorkoutDetailsContentView: PageView {
                                     categories: exercise.model.categoriesLocalizedNames
                                 )
                             )
-                            .clippedWithBackground(.surface)
+                            .clippedWithPaddingAndBackground(.surface)
                             .contextMenu {
                                 Button("Delete", role: .destructive) {
                                     viewModel.handle(.showDeleteExerciseAlert(exercise))
@@ -111,36 +118,27 @@ public struct WorkoutDetailsContentView: PageView {
     }
 
     private var muscleMapSectionView: some View {
-        VStack(spacing: 8) {
-            Section {
-                MuscleMapView(exercises: viewModel.workout.exercises.map(\.model))
-                    .clippedWithBackground(.surface)
-            } header: {
-                CustomSectionHeader(text: "Target muscles")
-            }
+        CustomSectionView(header: "Target muscles") {
+            MuscleMapView(exercises: viewModel.workout.exercises.map(\.model))
+                .clippedWithPaddingAndBackground(.surface)
         }
     }
 
     private var statisticsSectionView: some View {
-        VStack(spacing: 8) {
-            Section {
-                FormWithDivider {
+        CustomSectionView(header: "Info") {
+            FormWithDivider {
+                infoCell(
+                    label: "Exercises",
+                    info: viewModel.workout.exercises.count.formatted()
+                )
+                if let totalDuration = viewModel.workout.totalDuration?.hoursAndMinutes {
                     infoCell(
-                        label: "Exercises",
-                        info: viewModel.workout.exercises.count.formatted()
+                        label: "Time",
+                        info: totalDuration
                     )
-                    if let totalDuration = viewModel.workout.totalDuration?.hoursAndMinutes {
-                        infoCell(
-                            label: "Time",
-                            info: totalDuration
-                        )
-                    }
                 }
-                .background(Color.surface)
-                .clipShape(RoundedRectangle(cornerRadius: 16))
-            } header: {
-                CustomSectionHeader(text: "Info")
             }
+            .clippedWithBackground(Color.surface)
         }
     }
 

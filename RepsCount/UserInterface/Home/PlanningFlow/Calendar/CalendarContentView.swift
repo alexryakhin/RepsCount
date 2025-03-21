@@ -14,38 +14,14 @@ public struct CalendarContentView: PageView {
     }
 
     public var contentView: some View {
-        List {
-            Section {
-                DatePicker("Select date", selection: $viewModel.selectedDate, displayedComponents: .date)
-                    .datePickerStyle(.graphical)
-            } header: {
-                Text("Select date")
+        ScrollView {
+            LazyVStack(spacing: 24) {
+                calendarSectionView
+                plannedWorkoutsSectionView
             }
-
-            Section {
-                if viewModel.eventsForSelectedDate.isEmpty {
-                    EmptyListView(description: "No Workouts Scheduled") {
-                        VStack(spacing: 10) {
-                            Button("Schedule a Workout") {
-                                viewModel.handle(.scheduleWorkout)
-                            }
-                            .buttonStyle(.borderedProminent)
-                        }
-                    }
-                } else {
-                    ForEach(viewModel.eventsForSelectedDate) { event in
-                        WorkoutEventRow(event: event)
-                            .contextMenu {
-                                Button("Delete", role: .destructive) {
-                                    viewModel.handle(.deleteEvent(event))
-                                }
-                            }
-                    }
-                }
-            } header: {
-                Text("Planned workouts")
-            }
+            .padding(vertical: 12, horizontal: 16)
         }
+        .background(Color.background)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: { viewModel.handle(.scheduleWorkout) }) {
@@ -54,18 +30,39 @@ public struct CalendarContentView: PageView {
             }
         }
     }
-}
 
-struct WorkoutEventRow: View {
-    let event: WorkoutEvent
+    private var calendarSectionView: some View {
+        CustomSectionView(header: "Select date") {
+            DatePicker("Select date", selection: $viewModel.selectedDate, displayedComponents: .date)
+                .datePickerStyle(.graphical)
+                .clippedWithPaddingAndBackground(.surface)
+        }
+    }
 
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text(event.template.name)
-                .font(.headline)
-            Text("Planned at: \(event.date, formatter: DateFormatter.shortTime)")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
+    private var plannedWorkoutsSectionView: some View {
+        CustomSectionView(header: "Planned workouts") {
+            if viewModel.eventsForSelectedDate.isEmpty {
+                EmptyListView(description: "No Workouts Scheduled") {
+                    VStack(spacing: 10) {
+                        Button("Schedule a Workout") {
+                            viewModel.handle(.scheduleWorkout)
+                        }
+                        .buttonStyle(.borderedProminent)
+                    }
+                }
+                .clippedWithPaddingAndBackground(.surface)
+            } else {
+                ListWithDivider(viewModel.eventsForSelectedDate) { event in
+                    WorkoutEventRow(event: event)
+                        .padding(vertical: 12, horizontal: 16)
+                        .contextMenu {
+                            Button("Delete", role: .destructive) {
+                                viewModel.handle(.deleteEvent(event))
+                            }
+                        }
+                }
+                .clippedWithBackground(.surface)
+            }
         }
     }
 }

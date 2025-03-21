@@ -6,17 +6,18 @@ import Shared
 import Combine
 import SwiftUI
 
-public final class MoreViewModel: DefaultPageViewModel {
+public final class SettingsViewModel: DefaultPageViewModel {
 
     enum Input {
+        case showAboutApp
     }
 
     enum Output {
+        case showAboutApp
     }
 
     var onOutput: ((Output) -> Void)?
 
-    @AppStorage(UDKeys.isShowingRating) var isShowingRating: Bool = true
     @AppStorage(UDKeys.savesLocation) var savesLocation: Bool = true {
         didSet {
             if savesLocation && !isLocationAccessAuthorized {
@@ -39,6 +40,13 @@ public final class MoreViewModel: DefaultPageViewModel {
         self.locationManager = locationManager
         super.init()
         setupBindings()
+    }
+
+    func handle(_ input: Input) {
+        switch input {
+        case .showAboutApp:
+            onOutput?(.showAboutApp)
+        }
     }
 
     private func setupBindings() {

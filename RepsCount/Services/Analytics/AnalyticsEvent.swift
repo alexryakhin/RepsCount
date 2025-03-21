@@ -11,7 +11,8 @@ import Shared
 public enum AnalyticsEvent {
     case appOpened
     case exercisesListOpened
-    case moreOpened
+    case settingsOpened
+    case aboutAppOpened
 
     case addExerciseTapped
 
@@ -23,7 +24,8 @@ public enum AnalyticsEvent {
         switch self {
         case .appOpened: "appOpened"
         case .exercisesListOpened: "exercisesListOpened"
-        case .moreOpened: "moreOpened"
+        case .settingsOpened: "settingsOpened"
+        case .aboutAppOpened: "aboutAppOpened"
         case .addExerciseTapped: "addExerciseTapped"
         case .buyMeACoffeeTapped: "buyMeACoffeeTapped"
         case .twitterButtonTapped: "twitterButtonTapped"

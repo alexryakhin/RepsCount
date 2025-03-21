@@ -144,7 +144,8 @@ final class ServicesAssembly: Assembly, Identifiable {
         container.register(WorkoutDetailsManagerInterface.self) { resolver, workoutID in
             WorkoutDetailsManager(
                 workoutID: workoutID,
-                coreDataService: resolver ~> CoreDataServiceInterface.self
+                coreDataService: resolver ~> CoreDataServiceInterface.self,
+                locationManager: resolver ~> LocationManagerInterface.self
             )
         }
         .inObjectScope(.transient)

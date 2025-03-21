@@ -16,8 +16,8 @@ public struct PlanningMainContentView: PageView {
     public var contentView: some View {
         ScrollView {
             LazyVStack(spacing: 24) {
-                calendarSection
-                templatesSection
+                calendarSectionView
+                templatesSectionView
             }
             .padding(vertical: 12, horizontal: 16)
         }
@@ -40,53 +40,44 @@ public struct PlanningMainContentView: PageView {
         }
     }
 
-    private var calendarSection: some View {
-        VStack(spacing: 8) {
-            Section {
-                Button {
-                    viewModel.handle(.showCalendar)
-                } label: {
-                    Label {
-                        VStack(alignment: .leading) {
-                            Text("Schedule workouts")
-                                .font(.headline)
-                                .bold()
-                                .foregroundStyle(.primary)
-                            Text("Manage your workout schedule here: Create repetition for events, set reminders, and more.")
-                                .font(.subheadline)
-                                .foregroundStyle(.secondary)
-                        }
-                    } icon: {
-                        Image(systemName: "calendar")
+    private var calendarSectionView: some View {
+        CustomSectionView(header: "Calendar") {
+            Button {
+                viewModel.handle(.showCalendar)
+            } label: {
+                Label {
+                    VStack(alignment: .leading) {
+                        Text("Schedule workouts")
+                            .font(.headline)
+                            .bold()
+                            .foregroundStyle(.primary)
+                        Text("Manage your workout schedule here: Create repetition for events, set reminders, and more.")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
                     }
+                } icon: {
+                    Image(systemName: "calendar")
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .clippedWithBackground(.surface)
-            } header: {
-                CustomSectionHeader(text: "Calendar")
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .clippedWithPaddingAndBackground(.surface)
         }
     }
 
-    private var templatesSection: some View {
-        VStack(spacing: 8) {
-            Section {
-                ForEach(viewModel.workoutTemplates) { template in
-                    Button {
-                        viewModel.handle(.showWorkoutTemplateDetails(template))
-                    } label: {
-                        WorkoutTemplateRow(template: template)
-                            .clippedWithBackground(.surface)
-                            .contextMenu {
-                                Button("Delete", role: .destructive) {
-                                    viewModel.handle(.deleteWorkoutTemplate(template))
-                                }
+    private var templatesSectionView: some View {
+        CustomSectionView(header: "My workout templates") {
+            ForEach(viewModel.workoutTemplates) { template in
+                Button {
+                    viewModel.handle(.showWorkoutTemplateDetails(template))
+                } label: {
+                    WorkoutTemplateRow(template: template)
+                        .clippedWithPaddingAndBackground(.surface)
+                        .contextMenu {
+                            Button("Delete", role: .destructive) {
+                                viewModel.handle(.deleteWorkoutTemplate(template))
                             }
-                    }
+                        }
                 }
-
-            } header: {
-                CustomSectionHeader(text: "My workout templates")
             }
         }
     }

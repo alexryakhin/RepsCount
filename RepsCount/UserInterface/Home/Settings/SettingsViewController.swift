@@ -3,22 +3,23 @@ import SwiftUI
 import CoreUserInterface
 import Core
 
-public final class MoreViewController: PageViewController<MoreContentView>, NavigationBarVisible {
+public final class SettingsViewController: PageViewController<SettingsContentView>, NavigationBarVisible {
 
     public enum Event {
+        case showAboutApp
     }
 
     public var onEvent: ((Event) -> Void)?
 
     // MARK: - Private properties
 
-    private let viewModel: MoreViewModel
+    private let viewModel: SettingsViewModel
 
     // MARK: - Initialization
 
-    public init(viewModel: MoreViewModel) {
+    public init(viewModel: SettingsViewModel) {
         self.viewModel = viewModel
-        super.init(rootView: MoreContentView(viewModel: viewModel))
+        super.init(rootView: SettingsContentView(viewModel: viewModel))
     }
 
     public required init?(coder: NSCoder) {
@@ -34,8 +35,8 @@ public final class MoreViewController: PageViewController<MoreContentView>, Navi
         super.setup()
         setupBindings()
         setupNavigationBar()
-        tabBarItem = TabBarItem.more.item
-        navigationItem.title = TabBarItem.more.localizedTitle
+        tabBarItem = TabBarItem.settings.item
+        navigationItem.title = TabBarItem.settings.localizedTitle
     }
 
     // MARK: - Private Methods
@@ -48,7 +49,8 @@ public final class MoreViewController: PageViewController<MoreContentView>, Navi
     private func setupBindings() {
         viewModel.onOutput = { [weak self] output in
             switch output {
-                // handle output
+            case .showAboutApp:
+                self?.onEvent?(.showAboutApp)
             }
         }
     }

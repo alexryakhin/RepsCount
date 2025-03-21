@@ -7,7 +7,7 @@ import CoreNavigation
 import Services
 import UIKit
 
-final class MoreCoordinator: Coordinator {
+final class SettingsCoordinator: Coordinator {
 
     enum Event {
         case finish
@@ -35,7 +35,20 @@ final class MoreCoordinator: Coordinator {
     // MARK: - Private Methods
 
     private func showMainController() {
-        let controller = resolver ~> MoreViewController.self
-         navController.addChild(controller)
+        let controller = resolver ~> SettingsViewController.self
+        controller.onEvent = { [weak self] event in
+            switch event {
+            case .showAboutApp:
+                self?.showAboutApp()
+            @unknown default:
+                fatalError("Unhandled event: \(event)")
+            }
+        }
+        navController.addChild(controller)
+    }
+
+    private func showAboutApp() {
+        let controller = resolver ~> AboutAppViewController.self
+        router.push(controller)
     }
 }

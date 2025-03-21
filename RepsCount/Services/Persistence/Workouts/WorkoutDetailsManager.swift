@@ -10,6 +10,7 @@ public protocol WorkoutDetailsManagerInterface {
 
     func updateName(_ name: String)
     func markAsComplete()
+    func addExercise(_ exercise: WorkoutTemplateExercise, savesLocation: Bool)
     func deleteExercise(_ exercise: Exercise)
     func deleteWorkout()
 }
@@ -22,6 +23,7 @@ public final class WorkoutDetailsManager: WorkoutDetailsManagerInterface {
     public let errorPublisher = PassthroughSubject<CoreError, Never>()
 
     private let coreDataService: CoreDataServiceInterface
+    private let locationManager: LocationManagerInterface
 
     private let workoutSubject = CurrentValueSubject<WorkoutInstance?, Never>(nil)
     private var cdWorkoutInstance: CDWorkoutInstance?
@@ -29,9 +31,11 @@ public final class WorkoutDetailsManager: WorkoutDetailsManagerInterface {
 
     public init(
         workoutID: String,
-        coreDataService: CoreDataServiceInterface
+        coreDataService: CoreDataServiceInterface,
+        locationManager: LocationManagerInterface
     ) {
         self.coreDataService = coreDataService
+        self.locationManager = locationManager
         fetchWorkout(with: workoutID)
     }
 
@@ -59,6 +63,26 @@ public final class WorkoutDetailsManager: WorkoutDetailsManagerInterface {
         }
         cdWorkoutInstance.completionTimeStamp = .now
         saveContext()
+    }
+
+    public func addExercise(_ exercise: WorkoutTemplateExercise, savesLocation: Bool) {
+        Task {
+            let newCDExercise = CDExercise(context: coreDataService.context)
+            newCDExercise.timestamp = .now
+            newCDExercise.name = exercise.exerciseModel.rawValue
+            newCDExercise.id = UUID().uuidString
+            newCDExercise.defaultReps = exercise.defaultReps.int64
+            newCDExercise.defaultSets = exercise.defaultSets.int64
+            newCDExercise.sortingOrder = exercise.sortingOrder.int64
+            if savesLocation, let location = try await locationManager.getCurrentLocation() {
+                newCDExercise.latitude = location.latitude
+                newCDExercise.longitude = location.longitude
+                newCDExercise.address = location.address
+            }
+            newCDExercise.workoutInstance = cdWorkoutInstance
+            cdWorkoutInstance?.addToExercises(newCDExercise)
+            saveContext()
+        }
     }
 
     public func deleteExercise(_ exercise: Exercise) {

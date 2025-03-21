@@ -67,6 +67,11 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
                 .keyboardType(.numberPad)
             TextField("Default reps", text: $viewModel.defaultRepsInput)
                 .keyboardType(.numberPad)
+            Button("Cancel", role: .cancel) {
+                viewModel.defaultSetsInput = ""
+                viewModel.defaultRepsInput = ""
+                viewModel.exerciseModelToAdd = nil
+            }
             Button("Add") {
                 viewModel.handle(.appendNewExercise(model))
             }
@@ -76,6 +81,9 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
                 .keyboardType(.numberPad)
             TextField("Default reps", text: $viewModel.defaultRepsInput)
                 .keyboardType(.numberPad)
+            Button("Cancel", role: .cancel) {
+                viewModel.editingDefaultsExercise = nil
+            }
             Button("Apply") {
                 viewModel.handle(.applyEditing(exercise))
             }
@@ -83,51 +91,37 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
     }
 
     private var muscleMapSectionView: some View {
-        VStack(spacing: 8) {
-            Section {
-                MuscleMapView(exercises: viewModel.exercises.map(\.exerciseModel))
-                    .clippedWithBackground(.surface)
-                    .onAppear { isMuscleMapVisible = true }
-                    .onDisappear { isMuscleMapVisible = false }
-            } header: {
-                CustomSectionHeader(text: "Muscle groups to target")
-            }
+        CustomSectionView(header: "Muscle groups to target") {
+            MuscleMapView(exercises: viewModel.exercises.map(\.exerciseModel))
+                .clippedWithPaddingAndBackground(.surface)
+                .onAppear { isMuscleMapVisible = true }
+                .onDisappear { isMuscleMapVisible = false }
         }
     }
 
     private var workoutNameSectionView: some View {
-        VStack(spacing: 8) {
-            Section {
-                TextField("Legs day", text: $viewModel.workoutName, axis: .vertical)
-                    .focused($isNameFocused)
-                    .clippedWithBackground(.surface)
-            } header: {
-                HStack {
-                    CustomSectionHeader(text: "Workout Name")
-                    if isNameFocused {
-                        Button("Done") {
-                            isNameFocused = false
-                        }
-                    }
+        CustomSectionView(header: "Workout Name") {
+            TextField("Legs day", text: $viewModel.workoutName, axis: .vertical)
+                .focused($isNameFocused)
+                .clippedWithPaddingAndBackground(.surface)
+        } headerTrailingContent: {
+            if isNameFocused {
+                Button("Done") {
+                    isNameFocused = false
                 }
             }
         }
     }
 
     private var notesSectionView: some View {
-        VStack(spacing: 8) {
-            Section {
-                TextField("Something you might need", text: $viewModel.workoutNotes, axis: .vertical)
-                    .focused($isNotesFocused)
-                    .clippedWithBackground(.surface)
-            } header: {
-                HStack {
-                    CustomSectionHeader(text: "Notes")
-                    if isNotesFocused {
-                        Button("Done") {
-                            isNotesFocused = false
-                        }
-                    }
+        CustomSectionView(header: "Notes") {
+            TextField("Something you might need", text: $viewModel.workoutNotes, axis: .vertical)
+                .focused($isNotesFocused)
+                .clippedWithPaddingAndBackground(.surface)
+        } headerTrailingContent: {
+            if isNotesFocused {
+                Button("Done") {
+                    isNotesFocused = false
                 }
             }
         }
@@ -169,8 +163,7 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
                             }
                         }
                     }
-                    .background(Color.surface)
-                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                    .clippedWithBackground(Color.surface)
                 } header: {
                     CustomSectionHeader(text: "Selected exercises")
                 }
@@ -179,32 +172,28 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
     }
 
     private func exerciseCategorySectionView(for category: ExerciseCategory) -> some View {
-        VStack(spacing: 8) {
-            Section {
-                let filteredExercises = category.exercises.filter {
-                    viewModel.selectedEquipment.contains($0.equipment)
-                }
-                if filteredExercises.isNotEmpty {
-                    HFlow {
-                        ForEach(filteredExercises, id: \.rawValue) { model in
-                            capsuleView(
-                                for: model,
-                                isSelected: viewModel.exercises.contains(
-                                    where: { $0.exerciseModel.rawValue == model.rawValue }
-                                )
+        CustomSectionView(header: LocalizedStringKey(category.name)) {
+            let filteredExercises = category.exercises.filter {
+                viewModel.selectedEquipment.contains($0.equipment)
+            }
+            if filteredExercises.isNotEmpty {
+                HFlow {
+                    ForEach(filteredExercises, id: \.rawValue) { model in
+                        capsuleView(
+                            for: model,
+                            isSelected: viewModel.exercises.contains(
+                                where: { $0.exerciseModel.rawValue == model.rawValue }
                             )
-                        }
+                        )
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .clippedWithBackground(.surface)
-                } else {
-                    Text("No exercises available for this category")
-                        .foregroundStyle(.secondary)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .clippedWithBackground(.surface)
                 }
-            } header: {
-                CustomSectionHeader(text: LocalizedStringKey(category.name))
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .clippedWithPaddingAndBackground(.surface)
+            } else {
+                Text("No exercises available for this category")
+                    .foregroundStyle(.secondary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .clippedWithPaddingAndBackground(.surface)
             }
         }
     }

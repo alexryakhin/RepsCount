@@ -71,26 +71,21 @@ public struct WorkoutsListContentView: PageView {
     }
 
     private func sectionView(for section: ListSection) -> some View {
-        VStack(spacing: 8) {
-            Section {
-                ListWithDivider(section.items) { workout in
-                    Button {
-                        viewModel.handle(.showWorkoutDetails(workout))
-                    } label: {
-                        TodayWorkoutRow(workout: workout)
-                    }
-                    .padding(vertical: 12, horizontal: 16)
-                    .contextMenu {
-                        Button("Delete", role: .destructive) {
-                            viewModel.handle(.deleteWorkout(workout))
-                        }
+        CustomSectionView(header: LocalizedStringKey(section.title)) {
+            ListWithDivider(section.items) { workout in
+                Button {
+                    viewModel.handle(.showWorkoutDetails(workout))
+                } label: {
+                    TodayWorkoutRow(workout: workout)
+                }
+                .padding(vertical: 12, horizontal: 16)
+                .contextMenu {
+                    Button("Delete", role: .destructive) {
+                        viewModel.handle(.deleteWorkout(workout))
                     }
                 }
-                .background(Color.surface)
-                .clipShape(RoundedRectangle(cornerRadius: 16))
-            } header: {
-                CustomSectionHeader(text: LocalizedStringKey(section.title))
             }
+            .clippedWithBackground(Color.surface)
         }
     }
 }

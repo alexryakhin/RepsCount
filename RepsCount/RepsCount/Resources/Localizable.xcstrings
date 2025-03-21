@@ -28,6 +28,7 @@
 
     },
     "About app" : {
+      "comment" : "About app title",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -692,6 +693,9 @@
     "Create Template" : {
 
     },
+    "Create templates" : {
+
+    },
     "Crunches" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -871,6 +875,9 @@
       }
     },
     "Duration" : {
+
+    },
+    "Easily track every rep you perform" : {
 
     },
     "Edit defaults" : {
@@ -1094,6 +1101,9 @@
           }
         }
       }
+    },
+    "Have ready-to-go workouts for any day" : {
+
     },
     "Incline Bench Press" : {
       "extractionState" : "manual",
@@ -1683,6 +1693,9 @@
 
     },
     "Ooops.." : {
+
+    },
+    "Plan ahead" : {
 
     },
     "Planned at: %@" : {
@@ -2565,6 +2578,9 @@
         }
       }
     },
+    "Track exercises" : {
+
+    },
     "Tricep Dips" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2680,6 +2696,9 @@
           }
         }
       }
+    },
+    "Use the calendar to plan your workouts" : {
+
     },
     "Version" : {
       "extractionState" : "stale",

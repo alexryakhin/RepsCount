@@ -4,6 +4,7 @@ import CoreNavigation
 import Services
 import Shared
 import Combine
+import SwiftUI
 
 public final class WorkoutDetailsViewModel: DefaultPageViewModel {
 
@@ -15,6 +16,7 @@ public final class WorkoutDetailsViewModel: DefaultPageViewModel {
         case showDeleteWorkoutAlert
         case renameWorkout
         case updateName(String)
+        case addExercise(WorkoutTemplateExercise)
     }
 
     enum Output {
@@ -23,6 +25,8 @@ public final class WorkoutDetailsViewModel: DefaultPageViewModel {
     }
 
     var onOutput: ((Output) -> Void)?
+
+    @AppStorage(UDKeys.savesLocation) var savesLocation: Bool = true
 
     @Published var isShowingAlertToRenameWorkout: Bool = false
     @Published var nameInput: String = ""
@@ -95,6 +99,8 @@ public final class WorkoutDetailsViewModel: DefaultPageViewModel {
             isShowingAlertToRenameWorkout.toggle()
         case .updateName(let name):
             workoutDetailsManager.updateName(name)
+        case .addExercise(let exerciseTemplate):
+            workoutDetailsManager.addExercise(exerciseTemplate, savesLocation: savesLocation)
         }
     }
 

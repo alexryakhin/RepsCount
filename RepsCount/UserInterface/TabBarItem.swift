@@ -11,13 +11,13 @@ import UIKit
 public enum TabBarItem {
     case today
     case planning
-    case more
+    case settings
 
     public var title: String {
         switch self {
         case .today: "Today"
         case .planning: "Planning"
-        case .more: "More"
+        case .settings: "Settings"
         }
     }
 
@@ -29,7 +29,7 @@ public enum TabBarItem {
         switch self {
         case .today: "doc.text.image"
         case .planning: "figure.run.square.stack"
-        case .more: "ellipsis.circle"
+        case .settings: "gearshape"
         }
     }
 
@@ -37,7 +37,7 @@ public enum TabBarItem {
         switch self {
         case .today: "doc.text.image.fill"
         case .planning: "figure.run.square.stack.fill"
-        case .more: "ellipsis.circle.fill"
+        case .settings: "gearshape.fill"
         }
     }
 

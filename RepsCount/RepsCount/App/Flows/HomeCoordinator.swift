@@ -21,14 +21,14 @@ final class HomeCoordinator: Coordinator {
 
         let todayFlowNavigationController = assignTodayFlowCoordinator()
         let planningFlowNavigationController = assignPlanningFlowCoordinator()
-        let moreNavigationController = assignMoreCoordinator()
+        let settingsNavigationController = assignSettingsCoordinator()
 
         let controller = resolver ~> TabController.self
 
         controller.controllers = [
             todayFlowNavigationController,
             planningFlowNavigationController,
-            moreNavigationController
+            settingsNavigationController
         ]
 
         router.setRootModule(controller)
@@ -70,21 +70,21 @@ final class HomeCoordinator: Coordinator {
         return planningFlowNavigationController
     }
 
-    private func assignMoreCoordinator() -> NavigationController {
-        DIContainer.shared.assemble(assembly: MoreAssembly())
+    private func assignSettingsCoordinator() -> NavigationController {
+        DIContainer.shared.assemble(assembly: SettingsAssembly())
 
         // QuizzesList flow coordinator
-        guard let moreCoordinator = child(ofType: MoreCoordinator.self)
-                ?? resolver.resolve(MoreCoordinator.self, argument: router)
-        else { fatalError("Unable to instantiate MoreCoordinator") }
-        moreCoordinator.start()
+        guard let settingsCoordinator = child(ofType: SettingsCoordinator.self)
+                ?? resolver.resolve(SettingsCoordinator.self, argument: router)
+        else { fatalError("Unable to instantiate SettingsCoordinator") }
+        settingsCoordinator.start()
 
-        let moreNavigationController = moreCoordinator.navController
+        let settingsNavigationController = settingsCoordinator.navController
 
-        if !contains(child: MoreCoordinator.self) {
-            addDependency(moreCoordinator)
+        if !contains(child: SettingsCoordinator.self) {
+            addDependency(settingsCoordinator)
         }
 
-        return moreNavigationController
+        return settingsNavigationController
     }
 }

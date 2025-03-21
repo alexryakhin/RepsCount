@@ -70,7 +70,7 @@ public struct TodayMainContentView: PageView {
                             viewModel.handle(.startPlannedWorkout(event))
                         } label: {
                             TodayWorkoutEventRow(event: event)
-                                .clippedWithBackground(.surface)
+                                .clippedWithPaddingAndBackground(.surface)
                         }
                     }
                 } header: {
@@ -90,7 +90,7 @@ public struct TodayMainContentView: PageView {
                             viewModel.handle(.showWorkoutDetails(workout))
                         } label: {
                             TodayWorkoutRow(workout: workout)
-                                .clippedWithBackground(.surface)
+                                .clippedWithPaddingAndBackground(.surface)
                                 .contextMenu {
                                     Button("Delete", role: .destructive) {
                                         viewModel.handle(.showDeleteWorkoutAlert(workout))
@@ -167,8 +167,7 @@ public struct TodayMainContentView: PageView {
                     }
                     .padding(vertical: 12, horizontal: 16)
                 }
-                .background(Color.surface)
-                .clipShape(RoundedRectangle(cornerRadius: 16))
+                .clippedWithBackground(Color.surface)
                 .padding(16)
             }
             .background(Color.background)

@@ -79,31 +79,26 @@ public struct ExercisesListContentView: PageView {
     }
 
     private func sectionView(for section: ListSection) -> some View {
-        VStack(spacing: 8) {
-            Section {
-                ListWithDivider(section.items) { exercise in
-                    Button {
-                        viewModel.handle(.showExerciseDetails(exercise))
-                    } label: {
-                        ExerciseListCellView(
-                            model: .init(
-                                exercise: exercise.model.name,
-                                categories: exercise.model.categoriesLocalizedNames
-                            )
+        CustomSectionView(header: LocalizedStringKey(section.title)) {
+            ListWithDivider(section.items) { exercise in
+                Button {
+                    viewModel.handle(.showExerciseDetails(exercise))
+                } label: {
+                    ExerciseListCellView(
+                        model: .init(
+                            exercise: exercise.model.name,
+                            categories: exercise.model.categoriesLocalizedNames
                         )
-                    }
-                    .padding(vertical: 12, horizontal: 16)
-                    .contextMenu {
-                        Button("Delete", role: .destructive) {
-                            viewModel.handle(.deleteExercise(exercise))
-                        }
+                    )
+                }
+                .padding(vertical: 12, horizontal: 16)
+                .contextMenu {
+                    Button("Delete", role: .destructive) {
+                        viewModel.handle(.deleteExercise(exercise))
                     }
                 }
-                .background(Color.surface)
-                .clipShape(RoundedRectangle(cornerRadius: 16))
-            } header: {
-                CustomSectionHeader(text: LocalizedStringKey(section.title))
             }
+            .clippedWithBackground(Color.surface)
         }
     }
 }

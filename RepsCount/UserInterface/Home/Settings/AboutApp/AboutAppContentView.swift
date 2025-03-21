@@ -2,21 +2,19 @@ import SwiftUI
 import CoreUserInterface
 import CoreNavigation
 import Core
-import Shared
-import UniformTypeIdentifiers
 import StoreKit
+import Shared
 import struct Services.AnalyticsService
 
-public struct MoreContentView: PageView {
+public struct AboutAppContentView: PageView {
 
     @Environment(\.requestReview) var requestReview
 
-    public typealias ViewModel = MoreViewModel
+    public typealias ViewModel = AboutAppViewModel
 
-    @AppStorage(UDKeys.measurementUnit) var measurementUnit: MeasurementUnit = .kilograms
     @ObservedObject public var viewModel: ViewModel
 
-    public init(viewModel: MoreViewModel) {
+    public init(viewModel: AboutAppViewModel) {
         self.viewModel = viewModel
     }
 
@@ -37,20 +35,6 @@ public struct MoreContentView: PageView {
                 }
             } header: {
                 Text("About app")
-            }
-
-            // MARK: - Settings
-
-            Section {
-                Picker(selection: $measurementUnit) {
-                    ForEach(MeasurementUnit.allCases, id: \.self) { unit in
-                        Text(unit.title)
-                    }
-                } label: {
-                    Text("Measurement unit")
-                }
-
-                Toggle("Save location", isOn: $viewModel.savesLocation)
             }
 
             // MARK: - Follow Me
@@ -98,7 +82,7 @@ public struct MoreContentView: PageView {
         }
         .listStyle(.insetGrouped)
         .onAppear {
-            AnalyticsService.shared.logEvent(.moreOpened)
+            AnalyticsService.shared.logEvent(.aboutAppOpened)
         }
     }
 }

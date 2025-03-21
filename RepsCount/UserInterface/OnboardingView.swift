@@ -26,7 +26,7 @@ struct OnboardingView: View {
                 Spacer()
 
                 VStack(alignment: .leading, spacing: 25) {
-                    ForEach(onboardingCases, id: \.self) { oCase in
+                    ForEach(onboardingCases) { oCase in
                         HStack {
                             Image(systemName: oCase.icon)
                                 .frame(sideLength: 40)
@@ -65,13 +65,18 @@ struct OnboardingView: View {
         }
     }
 
-    struct OnboardingCase: Hashable {
-        var icon: String
-        var title: String
-        var subTitle: String
+    struct OnboardingCase: Identifiable {
+        let id = UUID().uuidString
+        let icon: String
+        let title: LocalizedStringKey
+        let subTitle: LocalizedStringKey
     }
 
     private var onboardingCases = [
+        OnboardingCase(
+            icon: "figure.run.square.stack",
+            title: "Create templates",
+            subTitle: "Have ready-to-go workouts for any day"),
         OnboardingCase(
             icon: "figure.strengthtraining.functional",
             title: "Track exercises",
@@ -80,9 +85,9 @@ struct OnboardingView: View {
             icon: "calendar",
             title: "Plan ahead",
             subTitle: "Use the calendar to plan your workouts"),
-        OnboardingCase(
-            icon: "applewatch",
-            title: "Apple Watch App",
-            subTitle: "Leave your phone at home and train with the watch only!")
+//        OnboardingCase(
+//            icon: "applewatch",
+//            title: "Apple Watch App",
+//            subTitle: "Leave your phone at home and train with the watch only!")
     ]
 }
