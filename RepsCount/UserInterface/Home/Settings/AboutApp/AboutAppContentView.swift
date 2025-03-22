@@ -22,7 +22,7 @@ public struct AboutAppContentView: PageView {
             // MARK: - About
 
             Section {
-                Text(NSLocalizedString("about_app_description_text", comment: .empty))
+                Text("Welcome to RepsCount, your companion for tracking and improving your workout performance!\nI created this app because I myself needed something simple yet powerful to track my progress, and it's pretty hard to do it just in Notes App.\nIf you like the app, please leave a review")
                     .multilineTextAlignment(.leading)
                 HStack(spacing: 8) {
                     Text("App version:")
@@ -35,10 +35,10 @@ public struct AboutAppContentView: PageView {
                 Text("About app")
             }
 
-            // MARK: - Contact Me
+            // MARK: - Follow Me
 
             Section {
-                Text(NSLocalizedString("contact_me_description_text", comment: .empty))
+                Text("Have questions, suggestions, or feedback? I'd love to hear from you. Reach out to get support on Instagram or Twitter!")
                 Button {
                     UIApplication.shared.open(GlobalConstant.twitterUrl)
                     AnalyticsService.shared.logEvent(.twitterButtonTapped)
