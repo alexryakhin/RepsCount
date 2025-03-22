@@ -2,6 +2,7 @@ import SwiftUI
 import CoreUserInterface
 import CoreNavigation
 import Core
+import struct Services.AnalyticsService
 
 public struct CalendarContentView: PageView {
 
@@ -24,10 +25,16 @@ public struct CalendarContentView: PageView {
         .background(Color.background)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                Button(action: { viewModel.handle(.scheduleWorkout) }) {
+                Button {
+                    viewModel.handle(.scheduleWorkout)
+                    AnalyticsService.shared.logEvent(.calendarScreenScheduleWorkoutMenuButtonTapped)
+                } label: {
                     Image(systemName: "calendar.badge.plus")
                 }
             }
+        }
+        .onAppear {
+            AnalyticsService.shared.logEvent(.calendarScreenOpened)
         }
     }
 
@@ -46,6 +53,7 @@ public struct CalendarContentView: PageView {
                     VStack(spacing: 10) {
                         Button("Schedule a Workout") {
                             viewModel.handle(.scheduleWorkout)
+                            AnalyticsService.shared.logEvent(.calendarScreenScheduleWorkoutTapped)
                         }
                         .buttonStyle(.borderedProminent)
                     }
@@ -58,6 +66,7 @@ public struct CalendarContentView: PageView {
                         .contextMenu {
                             Button("Delete", role: .destructive) {
                                 viewModel.handle(.deleteEvent(event))
+                                AnalyticsService.shared.logEvent(.calendarScreenEventRemoveButtonTapped)
                             }
                         }
                 }

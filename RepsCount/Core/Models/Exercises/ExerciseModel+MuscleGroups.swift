@@ -178,7 +178,7 @@ public extension ExerciseModel {
         case .bulgarianSplitSquat:
             [.gluteusMaximus, .rectusFemoris]
         case .pistolSquat:
-            [.gluteusMaximus, .rectusFemoris, .gluteusMedius]
+            [.gluteusMaximus, .rectusFemoris, .gluteusMedius, .vastusLateralis, .vastusMedialis]
         case .stepUps:
             [.gluteusMaximus, .rectusFemoris]
         case .hackSquat:
@@ -220,13 +220,13 @@ public extension ExerciseModel {
 
             // MARK: - Calisthenics
         case .planche:
-            [.deltoids, .pectoralisMajor, .triceps, .rectusAbdominis]
+            [.deltoids, .pectoralisMajor, .triceps, .rectusAbdominis, .rectusAbdominisLower]
         case .muscleUps:
             [.latissimusDorsi, .biceps, .triceps] // Pull-up phase dominates
         case .frontLever:
             [.latissimusDorsi, .rectusAbdominis, .deltoids] // Back and core for tension
         case .backLever:
-            [.latissimusDorsi, .rectusAbdominis, .deltoids] // Back and core for leverage
+            [.latissimusDorsi, .rectusAbdominis, .rectusAbdominisLower, .deltoids] // Back and core for leverage
         case .humanFlag:
             [.externalObliques, .latissimusDorsi, .triceps] // Obliques and lats for lateral hold
         }

@@ -7833,30 +7833,30 @@
         }
       }
     },
-    "Select Add exercise from the menu in the bottom right corner" : {
+    "Select 'Add exercise' from the menu in the top right corner" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wähle „Übung hinzufügen“ aus dem Menü unten rechts"
+            "value" : "Wählen Sie 'Übung hinzufügen' aus dem Menü in der oberen rechten Ecke"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sélectionnez « Ajouter un exercice » dans le menu en bas à droite"
+            "value" : "Sélectionnez 'Ajouter un exercice' dans le menu en haut à droite"
           }
         },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Odaberi 'Dodaj vježbu' iz izbornika u donjem desnom kutu"
+            "value" : "Odaberite 'Dodaj vježbu' iz izbornika u gornjem desnom kutu"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Выберите «Добавить упражнение» в меню в правом нижнем углу"
+            "value" : "Выберите 'Добавить упражнение' в меню в верхнем правом углу"
           }
         }
       }

@@ -11,7 +11,6 @@ public struct SettingsContentView: PageView {
 
     public typealias ViewModel = SettingsViewModel
 
-    @AppStorage(UDKeys.measurementUnit) var measurementUnit: MeasurementUnit = .kilograms
     @ObservedObject public var viewModel: ViewModel
 
     public init(viewModel: SettingsViewModel) {
@@ -23,7 +22,7 @@ public struct SettingsContentView: PageView {
             // MARK: - Settings
 
             Section {
-                Picker(selection: $measurementUnit) {
+                Picker(selection: $viewModel.measurementUnit) {
                     ForEach(MeasurementUnit.allCases, id: \.self) { unit in
                         Text(unit.title)
                     }
@@ -39,12 +38,13 @@ public struct SettingsContentView: PageView {
             Section {
                 Button("About app") {
                     viewModel.handle(.showAboutApp)
+                    AnalyticsService.shared.logEvent(.settingsScreenAboutAppButtonTapped)
                 }
             }
         }
         .listStyle(.insetGrouped)
         .onAppear {
-            AnalyticsService.shared.logEvent(.settingsOpened)
+            AnalyticsService.shared.logEvent(.settingsScreenOpened)
         }
     }
 }

@@ -7,6 +7,7 @@
 
 import Core
 import SwiftUI
+import struct Services.AnalyticsService
 
 struct ExerciseEquipmentFilterView: View {
     @Binding var selectedEquipment: Set<ExerciseEquipment>
@@ -14,7 +15,7 @@ struct ExerciseEquipmentFilterView: View {
     var body: some View {
         Menu {
             ForEach(ExerciseEquipment.allCases, id: \.self) { equipment in
-                Button(action: {
+                Button {
                     guard equipment != .none else { return }
 
                     if selectedEquipment.contains(equipment) {
@@ -22,7 +23,8 @@ struct ExerciseEquipmentFilterView: View {
                     } else {
                         selectedEquipment.insert(equipment)
                     }
-                }) {
+                    AnalyticsService.shared.logEvent(.addExerciseScreenEquipmentChanged)
+                } label: {
                     Label(equipment.localizedName, systemImage: selectedEquipment.contains(equipment) ? "checkmark.circle.fill" : "circle")
                 }
             }

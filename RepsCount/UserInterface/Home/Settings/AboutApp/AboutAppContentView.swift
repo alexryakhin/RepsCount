@@ -80,7 +80,7 @@ public struct AboutAppContentView: PageView {
         }
         .listStyle(.insetGrouped)
         .onAppear {
-            AnalyticsService.shared.logEvent(.aboutAppOpened)
+            AnalyticsService.shared.logEvent(.aboutAppScreenOpened)
         }
     }
 }

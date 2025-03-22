@@ -22,6 +22,7 @@ public final class WorkoutsListViewModel: DefaultPageViewModel {
     @Published var selectedDate: Date? {
         didSet {
             HapticManager.shared.triggerSelection()
+            AnalyticsService.shared.logEvent(.allWorkoutsScreenDateSelected)
         }
     }
 
@@ -44,6 +45,7 @@ public final class WorkoutsListViewModel: DefaultPageViewModel {
             onOutput?(.showWorkoutDetails(workout))
         case .deleteWorkout(let workout):
             deleteWorkout(workout.id)
+            AnalyticsService.shared.logEvent(.allWorkoutsScreenWorkoutRemoved)
         }
     }
 

@@ -89,6 +89,8 @@ public final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
             return
         }
         if isEditing {
+            workoutTemplatesManager.updateName(workoutName)
+            workoutTemplatesManager.updateNotes(workoutNotes)
             workoutTemplatesManager.updateExercises(exercises)
             onOutput?(.dismiss)
         } else {

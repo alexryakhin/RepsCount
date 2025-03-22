@@ -84,9 +84,12 @@ public final class TodayMainViewModel: DefaultPageViewModel {
                     message: "Are you sure you want to delete this workout?",
                     actionText: "Cancel",
                     destructiveActionText: "Delete",
-                    action: {/* Cancel action, do nothing */},
+                    action: {
+                        AnalyticsService.shared.logEvent(.todayScreenWorkoutRemoveCancelButtonTapped)
+                    },
                     destructiveAction: { [weak self, workoutInstance] in
                         self?.deleteWorkout(workoutInstance)
+                        AnalyticsService.shared.logEvent(.todayScreenWorkoutRemoved)
                     }
                 )
             )

@@ -59,9 +59,12 @@ public final class WorkoutDetailsViewModel: DefaultPageViewModel {
                     message: "Are you sure you want to complete this workout? You won't be able to make any changes afterwards",
                     actionText: "Cancel",
                     destructiveActionText: "Proceed",
-                    action: {/* Cancel action, do nothing */},
+                    action: {
+                        AnalyticsService.shared.logEvent(.workoutDetailsMarkAsCompleteCancelTapped)
+                    },
                     destructiveAction: { [weak self] in
                         self?.workoutDetailsManager.markAsComplete()
+                        AnalyticsService.shared.logEvent(.workoutDetailsMarkAsCompleteProceedTapped)
                     }
                 )
             )
@@ -76,9 +79,12 @@ public final class WorkoutDetailsViewModel: DefaultPageViewModel {
                     message: "Are you sure you want to delete this exercise?",
                     actionText: "Cancel",
                     destructiveActionText: "Delete",
-                    action: {/* Cancel action, do nothing */},
+                    action: {
+                        AnalyticsService.shared.logEvent(.workoutDetailsExerciseRemoveCancelButtonTapped)
+                    },
                     destructiveAction: { [weak self, exercise] in
                         self?.deleteExercise(exercise)
+                        AnalyticsService.shared.logEvent(.workoutDetailsExerciseRemoved)
                     }
                 )
             )
@@ -89,9 +95,12 @@ public final class WorkoutDetailsViewModel: DefaultPageViewModel {
                     message: "Are you sure you want to delete this workout?",
                     actionText: "Cancel",
                     destructiveActionText: "Delete",
-                    action: {/* Cancel action, do nothing */},
+                    action: {
+                        AnalyticsService.shared.logEvent(.workoutDetailsDeleteWorkoutCancelTapped)
+                    },
                     destructiveAction: { [weak self] in
                         self?.deleteWorkout()
+                        AnalyticsService.shared.logEvent(.workoutDetailsDeleteWorkoutActionTapped)
                     }
                 )
             )

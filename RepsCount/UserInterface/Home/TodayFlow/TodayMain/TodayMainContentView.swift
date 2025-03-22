@@ -2,6 +2,7 @@ import SwiftUI
 import CoreUserInterface
 import CoreNavigation
 import Core
+import struct Services.AnalyticsService
 
 public struct TodayMainContentView: PageView {
 
@@ -35,6 +36,9 @@ public struct TodayMainContentView: PageView {
         } content: {
             OnboardingView()
         }
+        .onAppear {
+            AnalyticsService.shared.logEvent(.todayScreenOpened)
+        }
     }
 
     public func placeholderView(props: PageState.PlaceholderProps) -> some View {
@@ -46,12 +50,14 @@ public struct TodayMainContentView: PageView {
                     if viewModel.workoutTemplates.isNotEmpty {
                         Button("Add Workout from Templates") {
                             viewModel.handle(.showAddWorkoutFromTemplate)
+                            AnalyticsService.shared.logEvent(.todayScreenAddWorkoutFromTemplatesButtonTapped)
                         }
                         .buttonStyle(.borderedProminent)
                     }
 
                     Button("Start a new workout") {
                         viewModel.handle(.createOpenWorkout)
+                        AnalyticsService.shared.logEvent(.todayScreenAddNewWorkoutButtonTapped)
                     }
                     .buttonStyle(.bordered)
                 }
@@ -68,6 +74,7 @@ public struct TodayMainContentView: PageView {
                     ForEach(viewModel.plannedWorkouts) { event in
                         Button {
                             viewModel.handle(.startPlannedWorkout(event))
+                            AnalyticsService.shared.logEvent(.todayScreenStartPlannedWorkoutTapped)
                         } label: {
                             TodayWorkoutEventRow(event: event)
                                 .clippedWithPaddingAndBackground(.surface)
@@ -88,12 +95,14 @@ public struct TodayMainContentView: PageView {
                     ForEach(viewModel.todayWorkouts) { workout in
                         Button {
                             viewModel.handle(.showWorkoutDetails(workout))
+                            AnalyticsService.shared.logEvent(.todayScreenWorkoutSelected)
                         } label: {
                             TodayWorkoutRow(workout: workout)
                                 .clippedWithPaddingAndBackground(.surface)
                                 .contextMenu {
                                     Button("Delete", role: .destructive) {
                                         viewModel.handle(.showDeleteWorkoutAlert(workout))
+                                        AnalyticsService.shared.logEvent(.todayScreenWorkoutRemoveButtonTapped)
                                     }
                                 }
                         }
@@ -124,12 +133,14 @@ public struct TodayMainContentView: PageView {
                 Section {
                     Button {
                         viewModel.handle(.createOpenWorkout)
+                        AnalyticsService.shared.logEvent(.todayScreenAddNewWorkoutButtonMenuTapped)
                     } label: {
                         Label("Add open workout", systemImage: "plus")
                     }
                     if viewModel.workoutTemplates.isNotEmpty {
                         Button {
                             viewModel.handle(.showAddWorkoutFromTemplate)
+                            AnalyticsService.shared.logEvent(.todayScreenAddWorkoutFromTemplatesMenuButtonTapped)
                         } label: {
                             Label("Add a workout from template", systemImage: "plus.square.on.square")
                         }
@@ -138,11 +149,13 @@ public struct TodayMainContentView: PageView {
                 Section {
                     Button {
                         viewModel.handle(.showAllWorkouts)
+                        AnalyticsService.shared.logEvent(.todayScreenShowAllWorkoutsMenuButtonTapped)
                     } label: {
                         Label("Show all workouts", systemImage: "baseball.diamond.bases")
                     }
                     Button {
                         viewModel.handle(.showAllExercises)
+                        AnalyticsService.shared.logEvent(.todayScreenShowAllExercisesMenuButtonTapped)
                     } label: {
                         Label("Show all exercises", systemImage: "baseball.diamond.bases.outs.indicator")
                     }
@@ -162,6 +175,7 @@ public struct TodayMainContentView: PageView {
                     Button {
                         viewModel.isShowingAddWorkoutFromTemplate = false
                         viewModel.handle(.startWorkoutFromTemplate(template))
+                        AnalyticsService.shared.logEvent(.todayScreenStartWorkoutFromTemplate)
                     } label: {
                         WorkoutTemplateRow(template: template)
                     }

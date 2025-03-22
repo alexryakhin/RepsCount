@@ -3,6 +3,7 @@ import CoreUserInterface
 import CoreNavigation
 import Core
 import Flow
+import struct Services.AnalyticsService
 
 public struct ScheduleEventContentView: PageView {
 
@@ -86,6 +87,7 @@ public struct ScheduleEventContentView: PageView {
                 if viewModel.addToCalendar {
                     Button {
                         viewModel.handle(.showCalendarChooser)
+                        AnalyticsService.shared.logEvent(.scheduleEventScreenSelectSystemCalendarTapped)
                     } label: {
                         if let calendar = viewModel.calendar {
                             HStack {
@@ -108,6 +110,7 @@ public struct ScheduleEventContentView: PageView {
         .safeAreaInset(edge: .bottom) {
             Button {
                 viewModel.handle(.saveEvent)
+                AnalyticsService.shared.logEvent(.scheduleEventScreenSaveButtonTapped)
             } label: {
                 Text("Schedule Workout")
                     .bold()
@@ -119,6 +122,9 @@ public struct ScheduleEventContentView: PageView {
             .padding(.vertical, 12)
             .padding(.horizontal, 16)
             .gradientStyle(.bottomButton)
+        }
+        .onAppear {
+            AnalyticsService.shared.logEvent(.scheduleEventScreenOpened)
         }
     }
 

@@ -23,6 +23,17 @@ public final class SettingsViewModel: DefaultPageViewModel {
             if savesLocation && !isLocationAccessAuthorized {
                 locationManager.requestAccess()
             }
+            if savesLocation {
+                AnalyticsService.shared.logEvent(.settingsScreenSaveLocationTurnedOn)
+            } else {
+                AnalyticsService.shared.logEvent(.settingsScreenSaveLocationTurnedOff)
+            }
+        }
+    }
+
+    @AppStorage(UDKeys.measurementUnit) var measurementUnit: MeasurementUnit = .kilograms {
+        didSet {
+            AnalyticsService.shared.logEvent(.settingsScreenMeasurementUnitChanged)
         }
     }
 

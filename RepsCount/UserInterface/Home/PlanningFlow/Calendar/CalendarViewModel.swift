@@ -25,6 +25,7 @@ public final class CalendarViewModel: DefaultPageViewModel {
     @Published var selectedDate: Date = .now {
         didSet {
             HapticManager.shared.triggerSelection()
+            AnalyticsService.shared.logEvent(.calendarScreenDateSelected)
         }
     }
 
@@ -56,6 +57,11 @@ public final class CalendarViewModel: DefaultPageViewModel {
             onOutput?(.presentDeleteEventAlert(event))
         case .handleDeleteEventAlert(let event, let deleteFutureEvents):
             calendarEventsProvider.deleteEvent(event, shouldDeleteAllFutureEvents: deleteFutureEvents)
+            if deleteFutureEvents {
+                AnalyticsService.shared.logEvent(.calendarScreenEventRemoved)
+            } else {
+                AnalyticsService.shared.logEvent(.calendarScreenEventAndFutureEventsRemoved)
+            }
         }
     }
 

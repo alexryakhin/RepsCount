@@ -9,6 +9,7 @@ import Core
 import CoreUserInterface
 import SwiftUI
 import Flow
+import struct Services.AnalyticsService
 
 struct AddExerciseView: View {
 
@@ -87,6 +88,9 @@ struct AddExerciseView: View {
                 }
             }
         }
+        .onAppear {
+            AnalyticsService.shared.logEvent(.addExerciseScreenOpened)
+        }
     }
 
     @ViewBuilder
@@ -117,7 +121,7 @@ struct AddExerciseView: View {
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(exercise.name)
-                    .font(.title3)
+                    .font(.headline)
                     .fontWeight(.semibold)
                     .lineLimit(2)
 
@@ -137,6 +141,11 @@ struct AddExerciseView: View {
                 if !selectedExercises.contains(exercise) {
                     exerciseModelToAdd = exercise
                     HapticManager.shared.triggerSelection()
+                }
+                if searchText.isEmpty {
+                    AnalyticsService.shared.logEvent(.addExerciseScreenExerciseTap)
+                } else {
+                    AnalyticsService.shared.logEvent(.addExerciseScreenExerciseTapFromSearch)
                 }
             } label: {
                 Image(systemName: selectedExercises.contains(exercise)

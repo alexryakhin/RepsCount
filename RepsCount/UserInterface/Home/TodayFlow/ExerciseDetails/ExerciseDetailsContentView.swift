@@ -3,6 +3,7 @@ import CoreUserInterface
 import CoreNavigation
 import Core
 import Shared
+import struct Services.AnalyticsService
 
 public struct ExerciseDetailsContentView: PageView {
 
@@ -28,12 +29,14 @@ public struct ExerciseDetailsContentView: PageView {
         }
         .background(Color.background)
         .safeAreaInset(edge: .bottom, alignment: .trailing) {
-            HStack(spacing: 12) {
-                progressGauge
-                addDataButton
+            if viewModel.exercise.defaultSets != 0 || viewModel.isEditable {
+                HStack(spacing: 12) {
+                    progressGauge
+                    addDataButton
+                }
+                .clippedWithPaddingAndBackground(.ultraThinMaterial)
+                .padding(vertical: 12, horizontal: 16)
             }
-            .clippedWithPaddingAndBackground(.ultraThinMaterial)
-            .padding(vertical: 12, horizontal: 16)
         }
         .alert(viewModel.exercise.model.metricType.enterValueLocalizedString, isPresented: $isShowingAlert) {
             TextField(viewModel.exercise.model.metricType.amountLocalizedString, text: $viewModel.amountInput)
@@ -43,15 +46,20 @@ public struct ExerciseDetailsContentView: PageView {
             Button("Add") {
                 viewModel.handle(.addSet)
                 isShowingAlert = false
+                AnalyticsService.shared.logEvent(.exerciseDetailsAddSetAlertProceedTapped)
             }
             Button("Cancel", role: .cancel) {
                 viewModel.amountInput = ""
                 viewModel.weightInput = ""
                 isShowingAlert = false
+                AnalyticsService.shared.logEvent(.exerciseDetailsAddSetAlertCancelTapped)
             }
         }
         .navigationBarTitleDisplayMode(.inline)
         .animation(.default, value: viewModel.exercise.sets)
+        .onAppear {
+            AnalyticsService.shared.logEvent(.exerciseDetailsScreenOpened)
+        }
     }
 
     @ViewBuilder
@@ -64,6 +72,7 @@ public struct ExerciseDetailsContentView: PageView {
                             if viewModel.isEditable {
                                 Button("Delete", role: .destructive) {
                                     viewModel.handle(.deleteSet(exerciseSet))
+                                    AnalyticsService.shared.logEvent(.exerciseDetailsSetRemoved)
                                 }
                             }
                         }
@@ -166,6 +175,7 @@ public struct ExerciseDetailsContentView: PageView {
             if isNotesInputFocused {
                 Button {
                     UIApplication.shared.endEditing()
+                    AnalyticsService.shared.logEvent(.exerciseDetailsNotesEdited)
                 } label: {
                     Text("Done")
                 }
@@ -189,6 +199,7 @@ public struct ExerciseDetailsContentView: PageView {
         if viewModel.isEditable {
             Button {
                 isShowingAlert = true
+                AnalyticsService.shared.logEvent(.exerciseDetailsAddSetButtonTapped)
             } label: {
                 Image(systemName: "plus")
                     .frame(sideLength: 24)

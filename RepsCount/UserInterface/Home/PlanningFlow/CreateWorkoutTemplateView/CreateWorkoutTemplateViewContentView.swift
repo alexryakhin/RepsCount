@@ -2,6 +2,7 @@ import SwiftUI
 import CoreUserInterface
 import CoreNavigation
 import Core
+import struct Services.AnalyticsService
 
 public struct CreateWorkoutTemplateViewContentView: PageView {
 
@@ -10,7 +11,6 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
     @ObservedObject public var viewModel: ViewModel
     @FocusState private var isNameFocused: Bool
     @FocusState private var isNotesFocused: Bool
-    @State private var isMuscleMapVisible: Bool = true
 
     public init(viewModel: CreateWorkoutTemplateViewViewModel) {
         self.viewModel = viewModel
@@ -25,6 +25,7 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
                 selectedExerciseSectionView
                 Button {
                     viewModel.handle(.toggleAddExerciseSheet)
+                    AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenAddExerciseButtonTapped)
                 } label: {
                     Text("Add exercises")
                         .bold()
@@ -35,10 +36,20 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
             .padding(vertical: 12, horizontal: 16)
         }
         .background(Color.background)
-        .animation(.default, value: isMuscleMapVisible)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    viewModel.handle(.toggleAddExerciseSheet)
+                    AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenAddExerciseMenuButtonTapped)
+                } label: {
+                    Image(systemName: "calendar.badge.plus")
+                }
+            }
+        }
         .safeAreaInset(edge: .bottom) {
             Button {
                 viewModel.handle(.saveTemplate)
+                AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenSaveButtonTapped)
             } label: {
                 Text(viewModel.isEditing ? "Save Changes" : "Create Template")
                     .bold()
@@ -66,9 +77,11 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
             }
             Button("Cancel", role: .cancel) {
                 viewModel.editingDefaultsExercise = nil
+                AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenCancelEditButtonTapped)
             }
             Button("Apply") {
                 viewModel.handle(.applyEditing(exercise))
+                AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenApplyEditButtonTapped)
             }
         }
         .sheet(isPresented: $viewModel.isShowingAddExerciseSheet) {
@@ -76,7 +89,11 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
                 viewModel.handle(.addExercise(exercise))
                 viewModel.handle(.toggleAddExerciseSheet)
                 HapticManager.shared.triggerNotification(type: .success)
+                AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenExerciseAdded)
             }
+        }
+        .onAppear {
+            AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenOpened)
         }
     }
 
@@ -84,8 +101,6 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
         CustomSectionView(header: "Muscle groups to target") {
             MuscleMapImageView(exercises: viewModel.exercises.map(\.exerciseModel), width: 250)
                 .clippedWithPaddingAndBackground(.surface)
-                .onAppear { isMuscleMapVisible = true }
-                .onDisappear { isMuscleMapVisible = false }
         }
     }
 
@@ -102,6 +117,7 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
             if isNameFocused {
                 Button("Done") {
                     isNameFocused = false
+                    AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenNameChanged)
                 }
             }
         }
@@ -120,6 +136,7 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
             if isNotesFocused {
                 Button("Done") {
                     isNotesFocused = false
+                    AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenNotesChanged)
                 }
             }
         }
@@ -165,9 +182,11 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
                         .contextMenu {
                             Button("Edit defaults") {
                                 viewModel.handle(.editDefaults(exercise))
+                                AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenExerciseEditButtonTapped)
                             }
                             Button("Remove", role: .destructive) {
                                 viewModel.handle(.removeExercise(exercise))
+                                AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenExerciseRemoveButtonTapped)
                             }
                         }
                     }

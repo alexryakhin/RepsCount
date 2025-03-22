@@ -2,6 +2,7 @@ import SwiftUI
 import CoreUserInterface
 import CoreNavigation
 import Core
+import struct Services.AnalyticsService
 
 public struct WorkoutsListContentView: PageView {
 
@@ -61,6 +62,9 @@ public struct WorkoutsListContentView: PageView {
             }
         }
         .animation(.easeIn, value: viewModel.selectedDate)
+        .onAppear {
+            AnalyticsService.shared.logEvent(.allWorkoutsScreenOpened)
+        }
     }
 
     public func placeholderView(props: PageState.PlaceholderProps) -> some View {
@@ -75,6 +79,7 @@ public struct WorkoutsListContentView: PageView {
             ListWithDivider(section.items) { workout in
                 Button {
                     viewModel.handle(.showWorkoutDetails(workout))
+                    AnalyticsService.shared.logEvent(.allWorkoutsScreenWorkoutSelected)
                 } label: {
                     TodayWorkoutRow(workout: workout)
                 }
@@ -82,6 +87,7 @@ public struct WorkoutsListContentView: PageView {
                 .contextMenu {
                     Button("Delete", role: .destructive) {
                         viewModel.handle(.deleteWorkout(workout))
+                        AnalyticsService.shared.logEvent(.allWorkoutsScreenWorkoutRemoveButtonTapped)
                     }
                 }
             }

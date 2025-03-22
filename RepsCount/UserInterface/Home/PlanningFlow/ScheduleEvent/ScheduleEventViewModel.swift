@@ -31,30 +31,69 @@ public final class ScheduleEventViewModel: DefaultPageViewModel {
         didSet {
             Task {
                 await addToCalendarFlagChanged(addToCalendar)
+                if addToCalendar {
+                    AnalyticsService.shared.logEvent(.scheduleEventScreenAddToSystemCalendarTurnedOn)
+                } else {
+                    AnalyticsService.shared.logEvent(.scheduleEventScreenAddToSystemCalendarTurnedOff)
+                }
             }
         }
     }
 
     @Published private(set) var workoutTemplates: [WorkoutTemplate] = []
-    @Published private(set) var selectedTemplate: WorkoutTemplate?
+    @Published private(set) var selectedTemplate: WorkoutTemplate? {
+        didSet {
+            AnalyticsService.shared.logEvent(.scheduleEventScreenTemplateSelected)
+        }
+    }
 
     /// Specifies the days on which the workout event occur.
     @Published var days: [WorkoutEventDay] = []
 
     /// Specifies the workout event recurrence frequency.
-    @Published var repeats: WorkoutEventRecurrence = .daily
+    @Published var repeats: WorkoutEventRecurrence = .daily {
+        didSet {
+            AnalyticsService.shared.logEvent(.scheduleEventScreenRepeatFrequencySelected)
+        }
+    }
 
     /// Specifies the workout event recurrence interval.
-    @Published var interval: Int = 1
+    @Published var interval: Int = 1 {
+        didSet {
+            AnalyticsService.shared.logEvent(.scheduleEventScreenIntervalChanged)
+        }
+    }
 
     /// Specifies how often the workout event occurs.
-    @Published var occurrenceCount: Int = 1
+    @Published var occurrenceCount: Int = 1 {
+        didSet {
+            AnalyticsService.shared.logEvent(.scheduleEventScreenOccurrencesChanged)
+        }
+    }
 
     /// Specifies the duration of the workout
-    @Published var duration: WorkoutEventDuration = .oneHour
+    @Published var duration: WorkoutEventDuration = .oneHour {
+        didSet {
+            AnalyticsService.shared.logEvent(.scheduleEventScreenDurationSelected)
+        }
+    }
 
-    @Published var isRecurring: Bool = false
-    @Published var selectedDate: Date
+    @Published var isRecurring: Bool = false {
+        didSet {
+            if isRecurring {
+                AnalyticsService.shared.logEvent(.scheduleEventScreenRecurrenceTurnedOn)
+            } else {
+                AnalyticsService.shared.logEvent(.scheduleEventScreenRecurrenceTurnedOff)
+            }
+        }
+    }
+
+    @Published var selectedDate: Date {
+        didSet {
+            AnalyticsService.shared.logEvent(.scheduleEventScreenDateSelected)
+        }
+    }
+
     @Published var isWriteOnlyOrFullAccessAuthorized: Bool = false {
         didSet {
             if !isWriteOnlyOrFullAccessAuthorized {

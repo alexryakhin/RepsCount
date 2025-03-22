@@ -82,14 +82,12 @@ public final class ScheduleEventViewController: PageViewController<ScheduleEvent
 extension ScheduleEventViewController: EKCalendarChooserDelegate {
     /// The system calls this when the user taps Done in the UI. Save the user's choice.
     public func calendarChooserDidFinish(_ calendarChooser: EKCalendarChooser) {
-        logInfo("DEBUG50 - calendarChooserDidFinish")
         viewModel.calendar = calendarChooser.selectedCalendars.first
         calendarChooserController?.dismiss(animated: true)
     }
 
     /// The system calls this when the user taps Cancel in the UI. Dismiss the calendar chooser.
     public func calendarChooserDidCancel(_ calendarChooser: EKCalendarChooser) {
-        logInfo("DEBUG50 - calendarChooserDidCancel")
         calendarChooserController?.dismiss(animated: true)
     }
 }

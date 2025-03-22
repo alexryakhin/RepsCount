@@ -2,6 +2,7 @@ import SwiftUI
 import CoreUserInterface
 import CoreNavigation
 import Core
+import struct Services.AnalyticsService
 
 public struct WorkoutDetailsContentView: PageView {
 
@@ -33,24 +34,28 @@ public struct WorkoutDetailsContentView: PageView {
                     if !viewModel.workout.isCompleted {
                         Button {
                             viewModel.handle(.showAddExercise)
+                            AnalyticsService.shared.logEvent(.workoutDetailsAddExerciseMenuButtonTapped)
                         } label: {
                             Label("Add exercise", systemImage: "plus")
                         }
 
                         Button {
                             viewModel.handle(.markAsComplete)
+                            AnalyticsService.shared.logEvent(.workoutDetailsMarkAsCompleteMenuButtonTapped)
                         } label: {
                             Label("Mark as complete", systemImage: "flag.fill")
                         }
                     }
                     Button {
                         viewModel.handle(.renameWorkout)
+                        AnalyticsService.shared.logEvent(.workoutDetailsRenameMenuButtonTapped)
                     } label: {
-                        Label("Rename", systemImage: "square.and.arrow.up")
+                        Label("Rename", systemImage: "pencil")
                     }
                     Section {
                         Button(role: .destructive) {
                             viewModel.handle(.showDeleteWorkoutAlert)
+                            AnalyticsService.shared.logEvent(.workoutDetailsDeleteMenuButtonTapped)
                         } label: {
                             Label("Delete workout", systemImage: "trash")
                         }
@@ -62,8 +67,12 @@ public struct WorkoutDetailsContentView: PageView {
         }
         .alert("Rename workout", isPresented: $viewModel.isShowingAlertToRenameWorkout) {
             TextField("Enter name", text: $viewModel.nameInput)
+            Button("Cancel", role: .cancel) {
+                AnalyticsService.shared.logEvent(.workoutDetailsRenameWorkoutCancelTapped)
+            }
             Button("Rename") {
                 viewModel.handle(.updateName(viewModel.nameInput))
+                AnalyticsService.shared.logEvent(.workoutDetailsRenameWorkoutActionTapped)
             }
         }
         .sheet(isPresented: $viewModel.isShowingAddExerciseSheet) {
@@ -73,17 +82,8 @@ public struct WorkoutDetailsContentView: PageView {
                 HapticManager.shared.triggerNotification(type: .success)
             }
         }
-    }
-
-    public func placeholderView(props: PageState.PlaceholderProps) -> some View {
-        EmptyListView(
-            label: "No exercises yet",
-            description: "Select Add exercise from the menu in the bottom right corner"
-        ) {
-            Button("Add exercise") {
-                viewModel.handle(.showAddExercise)
-            }
-            .buttonStyle(.borderedProminent)
+        .onAppear {
+            AnalyticsService.shared.logEvent(.workoutDetailsScreenOpened)
         }
     }
 
@@ -95,6 +95,7 @@ public struct WorkoutDetailsContentView: PageView {
                     ForEach(viewModel.workout.exercises) { exercise in
                         Button {
                             viewModel.handle(.showExerciseDetails(exercise))
+                            AnalyticsService.shared.logEvent(.workoutDetailsExerciseSelected)
                         } label: {
                             ExerciseListCellView(
                                 model: .init(
@@ -106,6 +107,7 @@ public struct WorkoutDetailsContentView: PageView {
                             .contextMenu {
                                 Button("Delete", role: .destructive) {
                                     viewModel.handle(.showDeleteExerciseAlert(exercise))
+                                    AnalyticsService.shared.logEvent(.workoutDetailsExerciseRemoveButtonTapped)
                                 }
                             }
                         }
@@ -114,6 +116,19 @@ public struct WorkoutDetailsContentView: PageView {
                     CustomSectionHeader(text: "Exercises")
                 }
             }
+        } else {
+            EmptyListView(
+                label: "No exercises yet",
+                description: "Select 'Add exercise' from the menu in the top right corner",
+                background: .clear
+            ) {
+                Button("Add exercise") {
+                    viewModel.handle(.showAddExercise)
+                    AnalyticsService.shared.logEvent(.workoutDetailsAddExerciseButtonTapped)
+                }
+                .buttonStyle(.borderedProminent)
+            }
+            .clippedWithPaddingAndBackground(.surface)
         }
     }
 

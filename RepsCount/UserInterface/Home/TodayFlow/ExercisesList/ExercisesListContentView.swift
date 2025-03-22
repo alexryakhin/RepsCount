@@ -69,6 +69,9 @@ public struct ExercisesListContentView: PageView {
             }
         }
         .animation(.easeIn, value: viewModel.selectedDate)
+        .onAppear {
+            AnalyticsService.shared.logEvent(.allExercisesScreenOpened)
+        }
     }
 
     public func placeholderView(props: PageState.PlaceholderProps) -> some View {
@@ -83,6 +86,7 @@ public struct ExercisesListContentView: PageView {
             ListWithDivider(section.items) { exercise in
                 Button {
                     viewModel.handle(.showExerciseDetails(exercise))
+                    AnalyticsService.shared.logEvent(.allExercisesScreenExerciseSelected)
                 } label: {
                     ExerciseListCellView(
                         model: .init(
@@ -95,6 +99,7 @@ public struct ExercisesListContentView: PageView {
                 .contextMenu {
                     Button("Delete", role: .destructive) {
                         viewModel.handle(.deleteExercise(exercise))
+                        AnalyticsService.shared.logEvent(.allExercisesScreenExerciseRemoveButtonTapped)
                     }
                 }
             }

@@ -2,6 +2,7 @@ import SwiftUI
 import CoreUserInterface
 import CoreNavigation
 import Core
+import struct Services.AnalyticsService
 
 public struct PlanningMainContentView: PageView {
 
@@ -24,10 +25,16 @@ public struct PlanningMainContentView: PageView {
         .background(Color.background)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                Button(action: { viewModel.handle(.createWorkoutTemplate) }) {
+                Button {
+                    viewModel.handle(.createWorkoutTemplate)
+                    AnalyticsService.shared.logEvent(.planningScreenAddTemplateMenuButtonTapped)
+                } label: {
                     Image(systemName: "plus")
                 }
             }
+        }
+        .onAppear {
+            AnalyticsService.shared.logEvent(.planningScreenOpened)
         }
     }
 
@@ -35,6 +42,7 @@ public struct PlanningMainContentView: PageView {
         EmptyListView(label: "No Workouts Created", description: "You haven't created any workout templates yet.") {
             Button("Create New Workout Template") {
                 viewModel.handle(.createWorkoutTemplate)
+                AnalyticsService.shared.logEvent(.planningScreenAddTemplateButtonTapped)
             }
             .buttonStyle(.borderedProminent)
         }
@@ -44,6 +52,7 @@ public struct PlanningMainContentView: PageView {
         CustomSectionView(header: "Calendar") {
             Button {
                 viewModel.handle(.showCalendar)
+                AnalyticsService.shared.logEvent(.planningScreenCalendarTapped)
             } label: {
                 Label {
                     VStack(alignment: .leading, spacing: 4) {
@@ -69,12 +78,14 @@ public struct PlanningMainContentView: PageView {
             ForEach(viewModel.workoutTemplates) { template in
                 Button {
                     viewModel.handle(.showWorkoutTemplateDetails(template))
+                    AnalyticsService.shared.logEvent(.planningScreenTemplateSelected)
                 } label: {
                     WorkoutTemplateRow(template: template)
                         .clippedWithPaddingAndBackground(.surface)
                         .contextMenu {
                             Button("Delete", role: .destructive) {
                                 viewModel.handle(.deleteWorkoutTemplate(template))
+                                AnalyticsService.shared.logEvent(.planningScreenTemplateRemoved)
                             }
                         }
                 }
