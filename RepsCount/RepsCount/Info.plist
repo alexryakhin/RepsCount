@@ -25,6 +25,8 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Add repeating workouts to a calendar that you choose</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

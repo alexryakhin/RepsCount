@@ -1,6 +1,5 @@
 import SwiftUI
 import CoreUserInterface
-import CoreNavigation
 import Core
 import StoreKit
 import Shared

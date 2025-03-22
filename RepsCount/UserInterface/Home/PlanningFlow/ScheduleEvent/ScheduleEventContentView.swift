@@ -1,6 +1,5 @@
 import SwiftUI
 import CoreUserInterface
-import CoreNavigation
 import Core
 import Flow
 import struct Services.AnalyticsService

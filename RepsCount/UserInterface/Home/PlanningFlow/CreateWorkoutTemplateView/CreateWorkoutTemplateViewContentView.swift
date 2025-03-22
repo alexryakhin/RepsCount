@@ -1,6 +1,5 @@
 import SwiftUI
 import CoreUserInterface
-import CoreNavigation
 import Core
 import struct Services.AnalyticsService
 
@@ -42,7 +41,7 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
                     viewModel.handle(.toggleAddExerciseSheet)
                     AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenAddExerciseMenuButtonTapped)
                 } label: {
-                    Image(systemName: "calendar.badge.plus")
+                    Image(systemName: "plus")
                 }
             }
         }

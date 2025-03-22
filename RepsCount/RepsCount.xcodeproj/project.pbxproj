@@ -36,7 +36,6 @@
 		53F4CF422D8013FF004551D5 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F4CED62D8012AA004551D5 /* Core.framework */; };
 		53F4CF472D801402004551D5 /* Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F4CF092D8012C9004551D5 /* Shared.framework */; };
 		53F4CF4B2D80140D004551D5 /* Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F4CF092D8012C9004551D5 /* Shared.framework */; };
-		53F4CF4C2D80140D004551D5 /* Shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53F4CF092D8012C9004551D5 /* Shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53F4CF512D801412004551D5 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 53F4CF502D801412004551D5 /* Swinject */; };
 		53F4CF532D801417004551D5 /* SwinjectAutoregistration in Frameworks */ = {isa = PBXBuildFile; productRef = 53F4CF522D801417004551D5 /* SwinjectAutoregistration */; };
 /* End PBXBuildFile section */
@@ -183,17 +182,6 @@
 				53F4CECC2D8012A1004551D5 /* Services.framework in Embed Frameworks */,
 				53F4CEDD2D8012AA004551D5 /* Core.framework in Embed Frameworks */,
 				53F4CEBA2D801271004551D5 /* UserInterface.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		53F4CF4F2D80140D004551D5 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				53F4CF4C2D80140D004551D5 /* Shared.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -742,7 +730,6 @@
 				53F4CEF42D8012C1004551D5 /* Sources */,
 				53F4CEF52D8012C1004551D5 /* Frameworks */,
 				53F4CEF62D8012C1004551D5 /* Resources */,
-				53F4CF4F2D80140D004551D5 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1095,7 +1082,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RepsCount/RepsCount.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "RepsCount/Resources/Localizable.xcstrings Services/Persistence/RepsCount.xcdatamodeld/PullUpsCounter.xcdatamodel RepsCount/Resources/Assets.xcassets";
 				DEVELOPMENT_TEAM = 69S862NXBP;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1131,7 +1118,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RepsCount/RepsCount.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "RepsCount/Resources/Localizable.xcstrings Services/Persistence/RepsCount.xcdatamodeld/PullUpsCounter.xcdatamodel RepsCount/Resources/Assets.xcassets";
 				DEVELOPMENT_TEAM = 69S862NXBP;
 				GENERATE_INFOPLIST_FILE = YES;
