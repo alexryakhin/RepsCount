@@ -23,7 +23,7 @@ struct ExerciseEquipmentFilterView: View {
                         selectedEquipment.insert(equipment)
                     }
                 }) {
-                    Label(equipment.rawValue, systemImage: selectedEquipment.contains(equipment) ? "checkmark.circle.fill" : "circle")
+                    Label(equipment.localizedName, systemImage: selectedEquipment.contains(equipment) ? "checkmark.circle.fill" : "circle")
                 }
             }
         } label: {

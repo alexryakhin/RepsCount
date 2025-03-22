@@ -38,13 +38,13 @@ public enum WorkoutEventDuration: Int, Hashable, CaseIterable, Identifiable {
         }
     }
 
-    public var stringValue: String {
+    public var localizedName: String {
         switch self {
-        case .fifteenMinutes: return "15 minutes"
-        case .thirtyMinutes: return "30 minutes"
-        case .oneHour: return "1 hour"
-        case .oneHourAndThirtyMinutes: return "1 hour 30 minutes"
-        case .twoHours: return "2 hours"
+        case .fifteenMinutes: return NSLocalizedString("15 minutes", comment: .empty)
+        case .thirtyMinutes: return NSLocalizedString("30 minutes", comment: .empty)
+        case .oneHour: return NSLocalizedString("1 hour", comment: .empty)
+        case .oneHourAndThirtyMinutes: return NSLocalizedString("1 hour 30 minutes", comment: .empty)
+        case .twoHours: return NSLocalizedString("2 hours", comment: .empty)
         }
     }
 }
@@ -60,15 +60,15 @@ public enum WorkoutEventDay: Int, Hashable, CaseIterable, Identifiable {
     case friday = 5
     case saturday = 6
 
-    public var name: String {
+    public var localizedName: String {
         switch self {
-            case .sunday: return "Sunday"
-            case .monday: return  "Monday"
-            case .tuesday: return "Tuesday"
-            case .wednesday: return "Wednesday"
-            case .thursday: return "Thursday"
-            case .friday: return "Friday"
-            case .saturday: return "Saturday"
+            case .sunday: return NSLocalizedString("Sunday", comment: .empty)
+            case .monday: return  NSLocalizedString("Monday", comment: .empty)
+            case .tuesday: return NSLocalizedString("Tuesday", comment: .empty)
+            case .wednesday: return NSLocalizedString("Wednesday", comment: .empty)
+            case .thursday: return NSLocalizedString("Thursday", comment: .empty)
+            case .friday: return NSLocalizedString("Friday", comment: .empty)
+            case .saturday: return NSLocalizedString("Saturday", comment: .empty)
         }
     }
 
@@ -181,14 +181,6 @@ public extension WorkoutEvent {
     var endAtDate: Date {
         Date(timeInterval: duration.timeInterval, since: date)
     }
-
-    var fromStartAtToEndAtAsText: String {
-        return "\(date.timeAsText) to \(endAtDate.timeAsText)"
-    }
-
-    var daysAsText: String {
-        return days.map({ (day: WorkoutEventDay) in day.name }).joined(separator: " and ")
-    }
 }
 
 public extension WorkoutEvent {
@@ -237,14 +229,6 @@ public extension WorkoutEvent {
 }
 
 public extension WorkoutEvent {
-    /// Formats the number of recurring workout event occurrences.
-    var numberOfRecurringWorkoutEvents: String {
-        guard let workoutEventCount = occurrenceCount else {
-            fatalError()
-        }
-        return "No. of workoutEvents: \(workoutEventCount)"
-    }
-
     /// The amount of occurrences of a recurring workout event.
     var recurrenceEnd: EKRecurrenceEnd {
         guard let occurrenceCount else { fatalError("Can't create recurrence end") }

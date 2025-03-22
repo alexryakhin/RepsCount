@@ -13,6 +13,10 @@ public enum ExerciseEquipment: String, CaseIterable, Identifiable, Codable {
 
     public var id: String { rawValue }
 
+    public var localizedName: String {
+        NSLocalizedString(rawValue, comment: .empty)
+    }
+
     public static var allCasesData: Data {
         let allCases = ExerciseEquipment.allCases
         return try! JSONEncoder().encode(allCases)

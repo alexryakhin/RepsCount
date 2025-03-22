@@ -76,12 +76,13 @@ public struct ExerciseDetailsContentView: PageView {
     private func setCellView(_ exerciseSet: ExerciseSet, offset: Int) -> some View {
         HStack {
             Group {
+                let specifier = exerciseSet.amount.defaultSpecifier
                 if exerciseSet.weight > 0 {
                     let converted: String = viewModel.measurementUnit.convertFromKilograms(exerciseSet.weight)
-                    Text("#\(offset + 1): \(exerciseSet.amount.formatted()) reps, \(converted)")
+                    Text("#\(offset + 1): \(exerciseSet.amount, specifier: specifier) reps, \(converted)")
                         .fontWeight(.semibold)
                 } else {
-                    Text("#\(offset + 1): \(exerciseSet.amount.formatted()) reps")
+                    Text("#\(offset + 1): \(exerciseSet.amount, specifier: specifier) reps")
                         .fontWeight(.semibold)
                 }
             }
@@ -167,7 +168,7 @@ public struct ExerciseDetailsContentView: PageView {
     private var progressGauge: some View {
         if viewModel.exercise.defaultSets != 0 {
             Gauge(value: min(Double(viewModel.exercise.sets.count) / viewModel.exercise.defaultSets, 1)) {
-                Text("Progress: \(viewModel.exercise.sets.count.formatted()) sets out of \(viewModel.exercise.defaultSets.formatted())")
+                Text("Progress: \(viewModel.exercise.sets.count) sets out of \(viewModel.exercise.defaultSets.formatted())")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }

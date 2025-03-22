@@ -34,6 +34,7 @@ struct AddExerciseView: View {
                 }
             }
             .navigationTitle("Add exercise")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     ExerciseEquipmentFilterView(selectedEquipment: Binding(get: {
@@ -43,7 +44,7 @@ struct AddExerciseView: View {
                     }))
                 }
             }
-            .searchable(text: $searchText)
+            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
             .overlay {
                 if searchText.isNotEmpty {
                     List(ExerciseModel.allCases.filter {

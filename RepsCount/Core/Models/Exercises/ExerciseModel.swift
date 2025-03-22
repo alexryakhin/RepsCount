@@ -99,7 +99,7 @@ public enum ExerciseModel: String, Identifiable, Hashable, CaseIterable {
     case barbellRows = "Barbell Rows"
     case dumbbellRows = "Dumbbell Rows"
     case seatedCableRows = "Seated Cable Rows"
-    case tBarRows = "T-bar Rows"
+    case tBarRows = "T-Bar Rows"
     case oneArmPullUp = "One Arm Pull-up"
     case resistanceBandPulldowns = "Resistance Band Pulldowns"
     case resistanceBandRows = "Resistance Band Rows"

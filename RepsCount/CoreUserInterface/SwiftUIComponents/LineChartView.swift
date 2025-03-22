@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Shared
 
 public struct LineChartView: View {
     public struct Value: Identifiable {
@@ -66,7 +67,7 @@ public struct LineChartView: View {
                                     .font(.caption)
                                     .fontWeight(.medium)
                                     .foregroundColor(.primary)
-                                Text("\(value.percentage, specifier: "%.1f")%")
+                                Text(NumberFormatter().percentString(value: value.percentage))
                                     .font(.caption2)
                                     .foregroundColor(.secondary)
                             }

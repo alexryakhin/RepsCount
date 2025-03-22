@@ -22,7 +22,7 @@ public struct ScheduleEventContentView: PageView {
 
                 Picker("Duration", selection: $viewModel.duration) {
                     ForEach(WorkoutEventDuration.allCases) { item in
-                        Text(item.stringValue)
+                        Text(item.localizedName)
                             .tag(item)
                     }
                 }
@@ -129,7 +129,7 @@ public struct ScheduleEventContentView: PageView {
                 viewModel.days.remove(at: index)
                 HapticManager.shared.triggerSelection()
             } label: {
-                Text(day.name)
+                Text(day.localizedName)
             }
             .buttonStyle(.borderedProminent)
             .clipShape(Capsule())
@@ -138,7 +138,7 @@ public struct ScheduleEventContentView: PageView {
                 viewModel.days.append(day)
                 HapticManager.shared.triggerSelection()
             } label: {
-                Text(day.name)
+                Text(day.localizedName)
             }
             .buttonStyle(.bordered)
             .clipShape(Capsule())

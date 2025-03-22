@@ -12,7 +12,7 @@ import Shared
 
 open class DefaultPageViewModel: PageViewModel<DefaultLoaderProps, DefaultPlaceholderProps, DefaultErrorProps> {
 
-    @Published public var alertModel = AlertModel(title: "")
+    @Published public var alertModel = AlertModel(title: .init(.empty))
 
     override public func defaultPageErrorHandler(_ error: CoreError, action: @escaping VoidHandler) {
         let props: DefaultErrorProps? = switch error {
