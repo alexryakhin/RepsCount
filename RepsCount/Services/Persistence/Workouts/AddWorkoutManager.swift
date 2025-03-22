@@ -44,7 +44,7 @@ public final class AddWorkoutManager: AddWorkoutManagerInterface {
             newCDExercise.timestamp = .now
             newCDExercise.name = exercise.exerciseModel.rawValue
             newCDExercise.id = UUID().uuidString
-            newCDExercise.defaultReps = exercise.defaultReps
+            newCDExercise.defaultAmount = exercise.defaultAmount
             newCDExercise.defaultSets = exercise.defaultSets
             if savesLocation, let location = try await locationManager.getCurrentLocation() {
                 newCDExercise.latitude = location.latitude
@@ -69,7 +69,7 @@ public final class AddWorkoutManager: AddWorkoutManagerInterface {
             newCDExercise.timestamp = .now
             newCDExercise.name = exercise.exerciseModel.rawValue
             newCDExercise.id = UUID().uuidString
-            newCDExercise.defaultReps = exercise.defaultReps
+            newCDExercise.defaultAmount = exercise.defaultAmount
             newCDExercise.defaultSets = exercise.defaultSets
             if savesLocation, let location = try await locationManager.getCurrentLocation() {
                 newCDExercise.latitude = location.latitude

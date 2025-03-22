@@ -9,20 +9,20 @@ public struct WorkoutTemplateExercise: Identifiable, Hashable {
     public let id: String
     public let exerciseModel: ExerciseModel
     public var defaultSets: Double
-    public var defaultReps: Double
+    public var defaultAmount: Double
     public let timestamp: Date
 
     public init(
         id: String,
         exerciseModel: ExerciseModel,
         defaultSets: Double,
-        defaultReps: Double,
+        defaultAmount: Double,
         timestamp: Date
     ) {
         self.id = id
         self.exerciseModel = exerciseModel
         self.defaultSets = defaultSets
-        self.defaultReps = defaultReps
+        self.defaultAmount = defaultAmount
         self.timestamp = timestamp
     }
 }

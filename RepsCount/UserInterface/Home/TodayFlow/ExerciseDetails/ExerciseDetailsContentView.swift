@@ -35,8 +35,8 @@ public struct ExerciseDetailsContentView: PageView {
             .clippedWithPaddingAndBackground(.ultraThinMaterial)
             .padding(vertical: 12, horizontal: 16)
         }
-        .alert("Enter the amount of reps", isPresented: $isShowingAlert) {
-            TextField("Amount", text: $viewModel.amountInput)
+        .alert(viewModel.exercise.model.metricType.enterValueLocalizedString, isPresented: $isShowingAlert) {
+            TextField(viewModel.exercise.model.metricType.amountLocalizedString, text: $viewModel.amountInput)
                 .keyboardType(.decimalPad)
             TextField("Weight, \(Text(viewModel.measurementUnit.shortName)) (optional)", text: $viewModel.weightInput)
                 .keyboardType(.decimalPad)
@@ -75,15 +75,17 @@ public struct ExerciseDetailsContentView: PageView {
 
     private func setCellView(_ exerciseSet: ExerciseSet, offset: Int) -> some View {
         HStack {
+            let convertedWeight: String = viewModel.measurementUnit.convertFromKilograms(exerciseSet.weight)
             Group {
-                let specifier = exerciseSet.amount.defaultSpecifier
-                if exerciseSet.weight > 0 {
-                    let converted: String = viewModel.measurementUnit.convertFromKilograms(exerciseSet.weight)
-                    Text("#\(offset + 1): \(exerciseSet.amount, specifier: specifier) reps, \(converted)")
+                switch viewModel.exercise.model.metricType {
+                case .weightAndReps:
+                    exerciseSet.setRepsText(index: offset + 1, weight: exerciseSet.weight > 0 ? convertedWeight : nil)
                         .fontWeight(.semibold)
-                } else {
-                    Text("#\(offset + 1): \(exerciseSet.amount, specifier: specifier) reps")
+                case .time:
+                    exerciseSet.setTimeText(index: offset + 1, weight: exerciseSet.weight > 0 ? convertedWeight : nil)
                         .fontWeight(.semibold)
+                @unknown default:
+                    fatalError()
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -104,7 +106,14 @@ public struct ExerciseDetailsContentView: PageView {
     private var totalSection: some View {
         CustomSectionView(header: "Total") {
             FormWithDivider {
-                infoCellView("Reps: \(viewModel.totalAmount.formatted())")
+                switch viewModel.exercise.model.metricType {
+                case .weightAndReps:
+                    infoCellView("Reps: \(viewModel.totalAmount.formatted())")
+                case .time:
+                    infoCellView("Combined time: \(viewModel.totalAmount.hoursMinutesAndSeconds!)")
+                @unknown default:
+                    fatalError()
+                }
                 infoCellView("Sets: \(viewModel.exercise.sets.count.formatted())")
                 if viewModel.exercise.sets.count > 1,
                    let firstSetDate = viewModel.exercise.sets.first?.timestamp,

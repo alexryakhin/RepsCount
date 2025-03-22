@@ -17,12 +17,12 @@ struct WorkoutTemplateRow: View {
             MuscleMapImageView(exercises: template.templateExercises.map(\.exerciseModel), width: 80)
                 .frame(width: 80)
 
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 4) {
                 Text(template.name)
                     .font(.headline)
                     .foregroundColor(.primary)
-                Text("Targets: \(template.templateExercises.map(\.exerciseModel.categoriesLocalizedNames).removedDuplicates.joined(separator: ", "))")
-                    .font(.subheadline)
+                Text("Targets: \(template.templateExercises.map(\.exerciseModel.categories).reduce([], +).removedDuplicates.map(\.name).joined(separator: ", "))")
+                    .font(.caption)
                     .foregroundColor(.secondary)
                     .lineLimit(3)
             }

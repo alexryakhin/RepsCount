@@ -17,14 +17,14 @@ public struct Exercise: Identifiable, Hashable {
     public let location: Location?
     public let notes: String?
     public let workoutInstanceId: String?
-    public let defaultReps: Double
+    public let defaultAmount: Double
     public let defaultSets: Double
 
     public var maxReps: Double? {
         if let maxReps = sets.map(\.amount).max() {
-            return max(defaultReps, maxReps)
+            return max(defaultAmount, maxReps)
         }
-        return defaultReps.nilIfZero ?? sets.map(\.amount).max()
+        return defaultAmount.nilIfZero ?? sets.map(\.amount).max()
     }
 
     public var isCompleted: Bool {
@@ -47,7 +47,7 @@ public struct Exercise: Identifiable, Hashable {
         location: Location?,
         notes: String?,
         workoutInstanceId: String?,
-        defaultReps: Double,
+        defaultAmount: Double,
         defaultSets: Double
     ) {
         self.model = model
@@ -57,7 +57,7 @@ public struct Exercise: Identifiable, Hashable {
         self.location = location
         self.notes = notes
         self.workoutInstanceId = workoutInstanceId
-        self.defaultReps = defaultReps
+        self.defaultAmount = defaultAmount
         self.defaultSets = defaultSets
     }
 }

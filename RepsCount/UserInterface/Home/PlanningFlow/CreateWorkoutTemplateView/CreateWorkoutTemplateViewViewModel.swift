@@ -25,7 +25,7 @@ public final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
     @Published var workoutName: String = ""
     @Published var workoutNotes: String = ""
     @Published var defaultSetsInput: String = ""
-    @Published var defaultRepsInput: String = ""
+    @Published var defaultAmountInput: String = ""
     @Published var editingDefaultsExercise: WorkoutTemplateExercise?
     @Published var isShowingAddExerciseSheet: Bool = false
 
@@ -103,17 +103,17 @@ public final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
 
     private func editDefaults(for exercise: WorkoutTemplateExercise) {
         defaultSetsInput = exercise.defaultSets.formatted()
-        defaultRepsInput = exercise.defaultReps.formatted()
+        defaultAmountInput = exercise.defaultAmount.formatted()
         editingDefaultsExercise = exercise
     }
 
     private func applyEditing(for exercise: WorkoutTemplateExercise) {
         if let index = exercises.firstIndex(where: { $0.id == exercise.id }) {
             exercises[index].defaultSets = Double(defaultSetsInput) ?? 0
-            exercises[index].defaultReps = Double(defaultRepsInput) ?? 0
+            exercises[index].defaultAmount = Double(defaultAmountInput) ?? 0
         }
         defaultSetsInput = ""
-        defaultRepsInput = ""
+        defaultAmountInput = ""
         editingDefaultsExercise = nil
     }
 }

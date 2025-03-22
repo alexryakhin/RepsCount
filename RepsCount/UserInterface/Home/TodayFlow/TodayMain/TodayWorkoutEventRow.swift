@@ -16,7 +16,7 @@ struct TodayWorkoutEventRow: View {
             MuscleMapImageView(exercises: event.template.templateExercises.map(\.exerciseModel), width: 80)
                 .frame(width: 80)
 
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 4) {
                 Text(event.template.name)
                     .font(.headline)
                     .foregroundColor(.primary)

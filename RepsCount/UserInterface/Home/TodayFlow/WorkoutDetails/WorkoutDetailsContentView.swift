@@ -143,7 +143,7 @@ public struct WorkoutDetailsContentView: PageView {
     }
 
     private func infoCell(label: LocalizedStringKey, info: String) -> some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 4) {
             Text(label)
                 .fontWeight(.semibold)
                 .foregroundStyle(.primary)

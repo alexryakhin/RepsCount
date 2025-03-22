@@ -52,10 +52,18 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
             .gradientStyle(.bottomButton)
         }
         .alert("Edit defaults", isPresented: .constant(viewModel.editingDefaultsExercise != nil), presenting: viewModel.editingDefaultsExercise) { exercise in
-            TextField("Sets", text: $viewModel.defaultSetsInput)
+            TextField("Sets (optional)", text: $viewModel.defaultSetsInput)
                 .keyboardType(.numberPad)
-            TextField("Reps", text: $viewModel.defaultRepsInput)
-                .keyboardType(.numberPad)
+            switch exercise.exerciseModel.metricType {
+            case .weightAndReps:
+                TextField("Reps (optional)", text: $viewModel.defaultAmountInput)
+                    .keyboardType(.numberPad)
+            case .time:
+                TextField("Time (sec, optional)", text: $viewModel.defaultAmountInput)
+                    .keyboardType(.numberPad)
+            @unknown default:
+                fatalError()
+            }
             Button("Cancel", role: .cancel) {
                 viewModel.editingDefaultsExercise = nil
             }
@@ -137,9 +145,18 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
                                 Text("Sets: \(exercise.defaultSets.formatted())")
                                     .foregroundStyle(.secondary)
                                     .font(.caption)
-                                Text("Reps: \(exercise.defaultReps.formatted())")
-                                    .foregroundStyle(.secondary)
-                                    .font(.caption)
+                                switch exercise.exerciseModel.metricType {
+                                case .weightAndReps:
+                                    Text("Reps: \(exercise.defaultAmount.formatted())")
+                                        .foregroundStyle(.secondary)
+                                        .font(.caption)
+                                case .time:
+                                    Text("Time (sec): \(exercise.defaultAmount.formatted())")
+                                        .foregroundStyle(.secondary)
+                                        .font(.caption)
+                                @unknown default:
+                                    fatalError()
+                                }
                             }
                         }
                         .padding(.vertical, 12)

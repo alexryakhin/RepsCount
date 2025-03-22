@@ -46,7 +46,7 @@ public struct PlanningMainContentView: PageView {
                 viewModel.handle(.showCalendar)
             } label: {
                 Label {
-                    VStack(alignment: .leading) {
+                    VStack(alignment: .leading, spacing: 4) {
                         Text("Schedule workouts")
                             .font(.headline)
                             .bold()

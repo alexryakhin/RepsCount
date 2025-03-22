@@ -23,7 +23,7 @@ extension CDWorkoutTemplateExercise {
             id: id,
             exerciseModel: model,
             defaultSets: defaultSets,
-            defaultReps: defaultReps,
+            defaultAmount: defaultAmount,
             timestamp: timestamp
         )
     }

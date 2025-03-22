@@ -12,7 +12,7 @@ struct WorkoutEventRow: View {
     let event: WorkoutEvent
 
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 4) {
             Text(event.template.name)
                 .font(.headline)
             Text("Planned at: \(event.date, formatter: DateFormatter.shortTime)")

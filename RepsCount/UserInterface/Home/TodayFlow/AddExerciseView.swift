@@ -22,7 +22,7 @@ struct AddExerciseView: View {
     }
 
     @State private var defaultSetsInput: String = ""
-    @State private var defaultRepsInput: String = ""
+    @State private var defaultAmountInput: String = ""
     @State private var exerciseModelToAdd: ExerciseModel?
     @State private var searchText: String = ""
 
@@ -60,11 +60,19 @@ struct AddExerciseView: View {
         .alert("Defaults", isPresented: .constant(exerciseModelToAdd != nil), presenting: exerciseModelToAdd) { model in
             TextField("Sets (optional)", text: $defaultSetsInput)
                 .keyboardType(.numberPad)
-            TextField("Reps (optional)", text: $defaultRepsInput)
-                .keyboardType(.numberPad)
+            switch model.metricType {
+            case .weightAndReps:
+                TextField("Reps (optional)", text: $defaultAmountInput)
+                    .keyboardType(.numberPad)
+            case .time:
+                TextField("Time (sec, optional)", text: $defaultAmountInput)
+                    .keyboardType(.numberPad)
+            @unknown default:
+                fatalError()
+            }
             Button("Cancel", role: .cancel) {
                 defaultSetsInput = ""
-                defaultRepsInput = ""
+                defaultAmountInput = ""
                 exerciseModelToAdd = nil
             }
             Button("Add") {
@@ -73,7 +81,7 @@ struct AddExerciseView: View {
                         id: UUID().uuidString,
                         exerciseModel: exerciseModelToAdd,
                         defaultSets: Double(defaultSetsInput) ?? 0,
-                        defaultReps: Double(defaultRepsInput) ?? 0,
+                        defaultAmount: Double(defaultAmountInput) ?? 0,
                         timestamp: .now
                     ))
                 }

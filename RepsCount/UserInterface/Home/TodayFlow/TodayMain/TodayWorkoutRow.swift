@@ -16,7 +16,7 @@ struct TodayWorkoutRow: View {
             MuscleMapImageView(exercises: workout.exercises.map(\.model), width: 80)
                 .frame(width: 80)
 
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 4) {
                 Text(workout.defaultName)
                     .font(.headline)
                     .foregroundColor(.primary)
@@ -26,7 +26,7 @@ struct TodayWorkoutRow: View {
                     .font(.subheadline)
                     .foregroundColor(.secondary)
 
-                Text(workout.exercises.map(\.model.categoriesLocalizedNames).removedDuplicates.joined(separator: ", "))
+                Text(workout.exercises.map(\.model.categories).reduce([], +).removedDuplicates.map(\.name).joined(separator: ", "))
                     .font(.caption)
                     .foregroundColor(.secondary)
                     .lineLimit(2)
