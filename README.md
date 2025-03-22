@@ -4,16 +4,19 @@ Welcome to **Reps Counter**, a straightforward and efficient app designed to hel
 
 ## 🚀 Features
 
-### 1. **Simple Rep Tracking**
+### 1. **Workout Planning**
+Create custom workout templates, schedule workouts, and add events to your system calendar for a streamlined training routine.
+
+### 2. **Simple Rep Tracking**
 Easily log the number of repetitions for each exercise in your workout routine. RepsCount keeps it simple, so you can focus on your workout.
 
-### 2. **Workout History**
-Review your past workouts to monitor progress and see how you're improving over time.
+### 3. **Muscle Map**
+Visualize which muscles are targeted by each exercise with an intuitive muscle map, ensuring you’re adding the right exercises to your routine.
 
-### 3. **iCloud Sync**
+### 4. **iCloud Sync**
 Sync your workout data across all your Apple devices, ensuring your progress is always up-to-date.
 
-### 4. **Apple Watch support** *(Coming Soon)*
+### 5. **Apple Watch support** *(Coming Soon)*
 Create and customize your workout routines, tailoring them to your specific fitness goals.
 
 ## 🛠️ Technology Stack
@@ -24,8 +27,11 @@ Built with Swift and SwiftUI, RepsCount offers a clean and user-friendly interfa
 ### 2. **Core Data**
 Your workout data is stored locally on your device using Core Data, with plans for iCloud sync in future updates.
 
-### 3. **Combine Framework**
+### 3. **Combine**
 The app leverages the Combine framework to handle data updates and ensure a smooth user experience.
+
+### 4. **Event Kit**
+I use EventKit to add new events for workouts that user planned.
 
 ## 🎨 UI/UX Design
 
@@ -38,9 +44,10 @@ RepsCount is designed to be as simple and intuitive as possible. The focus is on
 
 ## 📸 Screenshots
 
-<img width="250" src="https://github.com/user-attachments/assets/b1d7eeea-0c7d-4640-a627-ad0480ab6e2a">
-<img width="250" src="https://github.com/user-attachments/assets/40d9c4a4-4806-43c2-a91b-4dbc09b437fd">
-<img width="250" src="https://github.com/user-attachments/assets/9d40934f-4428-4ff5-8092-198dda3ca455">
+<img width="250" src="https://github.com/user-attachments/assets/3fb37e40-3390-444b-b5db-31da65099d25">
+<img width="250" src="https://github.com/user-attachments/assets/13bb4d36-da31-44de-ad24-913288ce3c56">
+<img width="250" src="https://github.com/user-attachments/assets/1dfdd8e9-9f6e-48c0-8fa1-0d44d752fc4b">
+
 
 ## 🔗 Links
 
