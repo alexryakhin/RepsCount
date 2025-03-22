@@ -65,6 +65,7 @@ public final class ExerciseDetailsViewModel: DefaultPageViewModel {
     private func setupBindings() {
         exerciseDetailsManager.exercisePublisher
             .ifNotNil()
+            .dropFirst()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] exercise in
                 self?.exercise = exercise

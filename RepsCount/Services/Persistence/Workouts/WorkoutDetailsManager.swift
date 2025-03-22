@@ -37,6 +37,7 @@ public final class WorkoutDetailsManager: WorkoutDetailsManagerInterface {
         self.coreDataService = coreDataService
         self.locationManager = locationManager
         fetchWorkout(with: workoutID)
+        setupBindings()
     }
 
     public func updateName(_ name: String) {
@@ -128,9 +129,18 @@ public final class WorkoutDetailsManager: WorkoutDetailsManagerInterface {
     private func saveContext() {
         do {
             try coreDataService.saveContext()
-            workoutSubject.send(cdWorkoutInstance?.coreModel)
         } catch {
             errorPublisher.send(.storageError(.saveFailed))
         }
+    }
+
+    private func setupBindings() {
+        coreDataService.dataUpdatedPublisher
+            .sink { [weak self] _ in
+                if let id = self?.cdWorkoutInstance?.id {
+                    self?.fetchWorkout(with: id)
+                }
+            }
+            .store(in: &cancellables)
     }
 }
