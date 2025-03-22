@@ -22,7 +22,7 @@ public struct AboutAppContentView: PageView {
             // MARK: - About
 
             Section {
-                Text("about_app_description_text")
+                Text(NSLocalizedString("about_app_description_text", comment: .empty))
                     .multilineTextAlignment(.leading)
                 HStack(spacing: 8) {
                     Text("App version:")
@@ -35,10 +35,10 @@ public struct AboutAppContentView: PageView {
                 Text("About app")
             }
 
-            // MARK: - Follow Me
+            // MARK: - Contact Me
 
             Section {
-                Text("contact_me_description_text")
+                Text(NSLocalizedString("contact_me_description_text", comment: .empty))
                 Button {
                     UIApplication.shared.open(GlobalConstant.twitterUrl)
                     AnalyticsService.shared.logEvent(.twitterButtonTapped)
