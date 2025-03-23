@@ -1,0 +1,3 @@
+NSCalendarsUsageDescription = "Ajoutez des entraînements récurrents à un calendrier de votre choix";
+NSCalendarsWriteOnlyAccessUsageDescription = "Ajoutez des entraînements récurrents à un calendrier de votre choix";
+NSLocationWhenInUseUsageDescription = "Nécessaire uniquement pour enregistrer le lieu de votre entraînement";

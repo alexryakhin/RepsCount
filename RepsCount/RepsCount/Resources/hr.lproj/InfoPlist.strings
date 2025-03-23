@@ -1,0 +1,3 @@
+NSCalendarsUsageDescription = "Dodajte ponavljajuće treninge u kalendar po vašem izboru";
+NSCalendarsWriteOnlyAccessUsageDescription = "Dodajte ponavljajuće treninge u kalendar po vašem izboru";
+NSLocationWhenInUseUsageDescription = "Potrebno samo za spremanje lokacije vašeg vježbanja";

@@ -1,0 +1,3 @@
+NSCalendarsUsageDescription = "Добавляйте повторяющиеся тренировки в выбранный вами календарь";
+NSCalendarsWriteOnlyAccessUsageDescription = "Добавляйте повторяющиеся тренировки в выбранный вами календарь";
+NSLocationWhenInUseUsageDescription = "Требуется только для сохранения местоположения вашей тренировки";

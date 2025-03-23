@@ -204,6 +204,7 @@
 		530F28862D817C0D002AD126 /* Exceptions for "RepsCount" folder in "UserInterface" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				"/Localized: Resources/InfoPlist.strings",
 				Resources/Assets.xcassets,
 				Resources/back.svg,
 				Resources/front.svg,
@@ -214,6 +215,7 @@
 		530F28872D817C0D002AD126 /* Exceptions for "RepsCount" folder in "CoreUserInterface" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				"/Localized: Resources/InfoPlist.strings",
 				Resources/Assets.xcassets,
 				Resources/back.svg,
 				Resources/front.svg,
@@ -1082,7 +1084,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RepsCount/RepsCount.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "RepsCount/Resources/Localizable.xcstrings Services/Persistence/RepsCount.xcdatamodeld/PullUpsCounter.xcdatamodel RepsCount/Resources/Assets.xcassets";
 				DEVELOPMENT_TEAM = 69S862NXBP;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1118,7 +1120,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RepsCount/RepsCount.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "RepsCount/Resources/Localizable.xcstrings Services/Persistence/RepsCount.xcdatamodeld/PullUpsCounter.xcdatamodel RepsCount/Resources/Assets.xcassets";
 				DEVELOPMENT_TEAM = 69S862NXBP;
 				GENERATE_INFOPLIST_FILE = YES;

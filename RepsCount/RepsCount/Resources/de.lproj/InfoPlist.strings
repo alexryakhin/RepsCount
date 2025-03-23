@@ -1,0 +1,3 @@
+NSCalendarsUsageDescription = "Fügen Sie wiederkehrende Workouts zu einem Kalender Ihrer Wahl hinzu";
+NSCalendarsWriteOnlyAccessUsageDescription = "Fügen Sie wiederkehrende Workouts zu einem Kalender Ihrer Wahl hinzu";
+NSLocationWhenInUseUsageDescription = "Nur erforderlich, um den Ort Ihres Trainings zu speichern";
