@@ -221,13 +221,6 @@
 			);
 			target = 53F4CEE62D8012B6004551D5 /* CoreUserInterface */;
 		};
-		5373AD7D2D82BDF600C80C14 /* Exceptions for "RepsCount" folder in "Core" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Resources/Localizable.xcstrings,
-			);
-			target = 53F4CED52D8012AA004551D5 /* Core */;
-		};
 		53F4CE9B2D80004C004551D5 /* Exceptions for "RepsCount" folder in "RepsCount" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -284,6 +277,13 @@
 			);
 			target = 53F4CE6E2D80004A004551D5 /* RepsCount */;
 		};
+		53F96E6C2D9077BC00D8ED5E /* Exceptions for "RepsCount" folder in "Core" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Resources/Localizable.xcstrings,
+			);
+			target = 53F4CED52D8012AA004551D5 /* Core */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -292,7 +292,7 @@
 			exceptions = (
 				53F4CE9B2D80004C004551D5 /* Exceptions for "RepsCount" folder in "RepsCount" target */,
 				530F28862D817C0D002AD126 /* Exceptions for "RepsCount" folder in "UserInterface" target */,
-				5373AD7D2D82BDF600C80C14 /* Exceptions for "RepsCount" folder in "Core" target */,
+				53F96E6C2D9077BC00D8ED5E /* Exceptions for "RepsCount" folder in "Core" target */,
 				530F28872D817C0D002AD126 /* Exceptions for "RepsCount" folder in "CoreUserInterface" target */,
 			);
 			path = RepsCount;
@@ -818,10 +818,10 @@
 			knownRegions = (
 				en,
 				Base,
-				fr,
-				de,
 				ru,
 				hr,
+				de,
+				fr,
 			);
 			mainGroup = 53F4CE662D80004A004551D5;
 			minimizedProjectReferenceProxies = 1;
@@ -1082,7 +1082,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RepsCount/RepsCount.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "RepsCount/Resources/Localizable.xcstrings Services/Persistence/RepsCount.xcdatamodeld/PullUpsCounter.xcdatamodel RepsCount/Resources/Assets.xcassets";
 				DEVELOPMENT_TEAM = 69S862NXBP;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1098,7 +1098,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "dor.reps-counter.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1118,7 +1118,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RepsCount/RepsCount.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "RepsCount/Resources/Localizable.xcstrings Services/Persistence/RepsCount.xcdatamodeld/PullUpsCounter.xcdatamodel RepsCount/Resources/Assets.xcassets";
 				DEVELOPMENT_TEAM = 69S862NXBP;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1134,7 +1134,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "dor.reps-counter.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1207,6 +1207,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1264,6 +1265,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

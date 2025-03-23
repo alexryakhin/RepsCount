@@ -123,6 +123,9 @@ public enum AnalyticsEvent: String {
     case settingsScreenSaveLocationTurnedOn
     case settingsScreenSaveLocationTurnedOff
     case settingsScreenAboutAppButtonTapped
+    case settingsScreenLanguageButtonTapped
+    case settingsScreenLanguageAlertCancelButtonTapped
+    case settingsScreenLanguageAlertProceedButtonTapped
 
     // MARK: - About app screen
     case aboutAppScreenOpened

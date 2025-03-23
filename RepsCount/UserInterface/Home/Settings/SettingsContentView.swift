@@ -11,6 +11,7 @@ public struct SettingsContentView: PageView {
     public typealias ViewModel = SettingsViewModel
 
     @ObservedObject public var viewModel: ViewModel
+    @State private var isShowingGoToSettingsAlert: Bool = false
 
     public init(viewModel: SettingsViewModel) {
         self.viewModel = viewModel
@@ -26,24 +27,47 @@ public struct SettingsContentView: PageView {
                         Text(unit.title)
                     }
                 } label: {
-                    Text("Measurement unit")
+                    Label("Measurement unit", systemImage: "lines.measurement.horizontal")
+
                 }
 
-                Toggle("Save location", isOn: $viewModel.savesLocation)
+                Toggle(isOn: $viewModel.savesLocation) {
+                    Label("Save location", systemImage: "location.fill")
+                }
+
+                Button {
+                    isShowingGoToSettingsAlert.toggle()
+                    AnalyticsService.shared.logEvent(.settingsScreenLanguageButtonTapped)
+                } label: {
+                    Label("Change language", systemImage: "globe")
+                }
             }
 
             // MARK: - About
 
             Section {
-                Button("About app") {
+                Button {
                     viewModel.handle(.showAboutApp)
                     AnalyticsService.shared.logEvent(.settingsScreenAboutAppButtonTapped)
+                } label: {
+                    Label("About app", systemImage: "info")
                 }
             }
         }
         .listStyle(.insetGrouped)
         .onAppear {
             AnalyticsService.shared.logEvent(.settingsScreenOpened)
+        }
+        .alert("Change language", isPresented: $isShowingGoToSettingsAlert) {
+            Button("Cancel", role: .cancel) {
+                AnalyticsService.shared.logEvent(.settingsScreenLanguageAlertCancelButtonTapped)
+            }
+            Button("Go to settings") {
+                viewModel.handle(.showLanguageSettings)
+                AnalyticsService.shared.logEvent(.settingsScreenLanguageAlertProceedButtonTapped)
+            }
+        } message: {
+            Text("To change the language of the app, go to the Settings app on your device.")
         }
     }
 }

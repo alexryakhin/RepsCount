@@ -9,6 +9,7 @@ public final class SettingsViewModel: DefaultPageViewModel {
 
     enum Input {
         case showAboutApp
+        case showLanguageSettings
     }
 
     enum Output {
@@ -56,6 +57,8 @@ public final class SettingsViewModel: DefaultPageViewModel {
         switch input {
         case .showAboutApp:
             onOutput?(.showAboutApp)
+        case .showLanguageSettings:
+            showLanguageSettings()
         }
     }
 
@@ -66,5 +69,12 @@ public final class SettingsViewModel: DefaultPageViewModel {
                 self?.isLocationAccessAuthorized = (status == .authorizedWhenInUse || status == .authorizedAlways)
             }
             .store(in: &cancellables)
+    }
+
+    private func showLanguageSettings() {
+        guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else { return }
+        if UIApplication.shared.canOpenURL(settingsURL) {
+            UIApplication.shared.open(settingsURL)
+        }
     }
 }

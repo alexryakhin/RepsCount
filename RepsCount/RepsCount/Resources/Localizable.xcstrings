@@ -1516,6 +1516,34 @@
         }
       }
     },
+    "Change language" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sprache ändern"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Changer de langue"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Promijenite jezik"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сменить язык"
+          }
+        }
+      }
+    },
     "Chest" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3319,6 +3347,34 @@
         }
       }
     },
+    "Go to settings" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paramètres"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Idite na postavke"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "В настройки"
+          }
+        }
+      }
+    },
     "Good Mornings" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3523,33 +3579,33 @@
       }
     },
     "Have questions, suggestions, or feedback? I'd love to hear from you. Reach out to get support on Instagram or Twitter!" : {
-        "localizations" : {
-          "de" : {
-            "stringUnit" : {
-              "state" : "translated",
-              "value" : "Haben Sie Fragen, Anregungen oder Feedback? Ich würde gerne von Ihnen hören. Kontaktieren Sie uns, um Unterstützung auf Instagram oder Twitter zu erhalten!"
-            }
-          },
-          "fr" : {
-            "stringUnit" : {
-              "state" : "translated",
-              "value" : "Vous avez des questions, des suggestions ou des commentaires ? J'aimerais avoir de vos nouvelles. Contactez-nous pour obtenir de l'aide sur Instagram ou Twitter !"
-            }
-          },
-          "hr" : {
-            "stringUnit" : {
-              "state" : "translated",
-              "value" : "Imate pitanja, sugestije ili povratne informacije? Voleo bih da čujem od vas. Obratite se da dobijete podršku na Instagramu ili Tvitteru!"
-            }
-          },
-          "ru" : {
-            "stringUnit" : {
-              "state" : "translated",
-              "value" : "Есть вопросы, предложения или отзывы? Я хотел бы услышать ваше мнение. Обратитесь за поддержкой в Instagram или Twitter!"
-            }
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haben Sie Fragen, Anregungen oder Feedback? Ich würde gerne von Ihnen hören. Kontaktieren Sie uns, um Unterstützung auf Instagram oder Twitter zu erhalten!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous avez des questions, des suggestions ou des commentaires ? J'aimerais avoir de vos nouvelles. Contactez-nous pour obtenir de l'aide sur Instagram ou Twitter !"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imate pitanja, sugestije ili povratne informacije? Voleo bih da čujem od vas. Obratite se da dobijete podršku na Instagramu ili Tvitteru!"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Есть вопросы, предложения или отзывы? Я хотел бы услышать ваше мнение. Обратитесь за поддержкой в Instagram или Twitter!"
           }
         }
-      },
+      }
+    },
     "Have ready-to-go workouts for any day" : {
       "localizations" : {
         "de" : {
@@ -9332,6 +9388,34 @@
         }
       }
     },
+    "To change the language of the app, go to the Settings app on your device." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Um die Sprache der App zu ändern, gehen Sie zur Einstellungen-App auf Ihrem Gerät."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pour changer la langue de l'application, allez dans l'application Paramètres de votre appareil."
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Za promjenu jezika aplikacije, idite na aplikaciju Postavke na svom uređaju."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Чтобы изменить язык приложения, перейдите в приложение «Настройки» на вашем устройстве."
+          }
+        }
+      }
+    },
     "Today" : {
       "localizations" : {
         "de" : {
@@ -9819,33 +9903,33 @@
       }
     },
     "Welcome to RepsCount, your companion for tracking and improving your workout performance!\nI created this app because I myself needed something simple yet powerful to track my progress, and it's pretty hard to do it just in Notes App.\nIf you like the app, please leave a review" : {
-        "localizations" : {
-          "de" : {
-            "stringUnit" : {
-              "state" : "translated",
-              "value" : "Willkommen bei RepsCount, Ihrem Begleiter zum Verfolgen und Verbessern Ihrer Trainingsleistung!\n\nIch habe diese App erstellt, weil ich selbst etwas Einfaches, aber Leistungsstarkes brauchte, um meinen Fortschritt zu verfolgen, und es ist ziemlich schwierig, dies nur in der Notes-App zu tun.\n\nWenn Ihnen die App gefällt, hinterlassen Sie bitte eine Bewertung"
-            }
-          },
-          "fr" : {
-            "stringUnit" : {
-              "state" : "translated",
-              "value" : "Bienvenue sur RepsCount, votre compagnon pour suivre et améliorer vos performances d'entraînement !\n\nJ'ai créé cette application parce que j'avais moi-même besoin de quelque chose de simple mais puissant pour suivre mes progrès, et il est assez difficile de le faire uniquement dans l'application Notes.\n\nSi vous aimez l'application, veuillez laisser un commentaire"
-            }
-          },
-          "hr" : {
-            "stringUnit" : {
-              "state" : "translated",
-              "value" : "Dobrodošli u RepsCount, vašeg saputnika za praćenje i poboljšanje performansi vašeg vežbanja!\n\nNapravio sam ovu aplikaciju jer mi je lično bilo potrebno nešto jednostavno, ali moćno da pratim svoj napredak, a prilično je teško to učiniti samo u aplikaciji Notes.\n\nAko vam se sviđa aplikacija, ostavite recenziju"
-            }
-          },
-          "ru" : {
-            "stringUnit" : {
-              "state" : "translated",
-              "value" : "Добро пожаловать в RepsCount, вашего помощника для отслеживания и улучшения результатов тренировок!\n\nЯ создал это приложение, потому что мне самому нужно было что-то простое, но мощное для отслеживания моего прогресса, а сделать это только в приложении «Заметки» довольно сложно.\n\nЕсли вам понравилось приложение, пожалуйста, оставьте отзыв"
-            }
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Willkommen bei RepsCount, Ihrem Begleiter zum Verfolgen und Verbessern Ihrer Trainingsleistung!\n\nIch habe diese App erstellt, weil ich selbst etwas Einfaches, aber Leistungsstarkes brauchte, um meinen Fortschritt zu verfolgen, und es ist ziemlich schwierig, dies nur in der Notes-App zu tun.\n\nWenn Ihnen die App gefällt, hinterlassen Sie bitte eine Bewertung"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bienvenue sur RepsCount, votre compagnon pour suivre et améliorer vos performances d'entraînement !\n\nJ'ai créé cette application parce que j'avais moi-même besoin de quelque chose de simple mais puissant pour suivre mes progrès, et il est assez difficile de le faire uniquement dans l'application Notes.\n\nSi vous aimez l'application, veuillez laisser un commentaire"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dobrodošli u RepsCount, vašeg saputnika za praćenje i poboljšanje performansi vašeg vežbanja!\n\nNapravio sam ovu aplikaciju jer mi je lično bilo potrebno nešto jednostavno, ali moćno da pratim svoj napredak, a prilično je teško to učiniti samo u aplikaciji Notes.\n\nAko vam se sviđa aplikacija, ostavite recenziju"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добро пожаловать в RepsCount, вашего помощника для отслеживания и улучшения результатов тренировок!\n\nЯ создал это приложение, потому что мне самому нужно было что-то простое, но мощное для отслеживания моего прогресса, а сделать это только в приложении «Заметки» довольно сложно.\n\nЕсли вам понравилось приложение, пожалуйста, оставьте отзыв"
           }
         }
-      },
+      }
+    },
     "Workout" : {
       "localizations" : {
         "de" : {
