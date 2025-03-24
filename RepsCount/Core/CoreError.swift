@@ -124,7 +124,7 @@ public enum CoreError: Error {
              case .restricted:
                 return NSLocalizedString("This device doesn't allow access to Calendar.", comment: .empty)
             case .unknown:
-                return NSLocalizedString("An unknown error occured.", comment: .empty)
+                return NSLocalizedString("An unknown error occurred.", comment: .empty)
             case .upgrade:
                 return NSLocalizedString("The app has write-only access to Calendar in Settings. Please grant it full access so the app can fetch and delete your events.", comment: .empty)
             }
@@ -138,7 +138,7 @@ public enum CoreError: Error {
         case .validationError(let error): error.description
         case .internalError(let error): error.description
         case .eventStoreError(let error): error.description
-        case .unknownError: NSLocalizedString("An unknown error occured.", comment: .empty)
+        case .unknownError: NSLocalizedString("An unknown error occurred.", comment: .empty)
         }
     }
 }
