@@ -816,6 +816,7 @@
 				hr,
 				de,
 				fr,
+				es,
 			);
 			mainGroup = 53F4CE662D80004A004551D5;
 			minimizedProjectReferenceProxies = 1;

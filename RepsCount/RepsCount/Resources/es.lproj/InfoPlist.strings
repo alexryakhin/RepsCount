@@ -1,0 +1,3 @@
+NSCalendarsUsageDescription = "Agrega entrenamientos recurrentes a un calendario que elijas";
+NSCalendarsWriteOnlyAccessUsageDescription = "Agrega entrenamientos recurrentes a un calendario que elijas";
+NSLocationWhenInUseUsageDescription = "Solo se necesita para guardar la ubicación de tu ejercicio";
