@@ -46,7 +46,8 @@ public final class ExerciseDetailsViewController: PageViewController<ExerciseDet
     private func setupBindings() {
         viewModel.onOutput = { [weak self] output in
             switch output {
-                // handle output
+            case .finish:
+                self?.onEvent?(.finish)
             }
         }
     }

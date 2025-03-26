@@ -191,7 +191,7 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
                     }
                     .clippedWithBackground(Color.surface)
                 } header: {
-                    CustomSectionHeader(text: "Selected exercises")
+                    CustomSectionHeader("Selected exercises")
                 }
             }
         }

@@ -9,6 +9,7 @@ public struct ExerciseDetailsContentView: PageView {
     public typealias ViewModel = ExerciseDetailsViewModel
 
     @State private var isShowingAlert = false
+    @State private var showConfetti = false
     @FocusState private var isNotesInputFocused: Bool
     @ObservedObject public var viewModel: ViewModel
 
@@ -18,7 +19,7 @@ public struct ExerciseDetailsContentView: PageView {
 
     public var contentView: some View {
         ScrollView {
-            LazyVStack(spacing: 24) {
+            VStack(spacing: 24) {
                 setsSection
                 totalSection
                 mapSection
@@ -26,7 +27,9 @@ public struct ExerciseDetailsContentView: PageView {
             }
             .padding(vertical: 12, horizontal: 16)
         }
-        .background(Color.background)
+        .background(
+            Color.background.ignoresSafeArea().displayConfetti(isActive: $showConfetti)
+        )
         .safeAreaInset(edge: .bottom, alignment: .trailing) {
             if viewModel.exercise.defaultSets != 0 || viewModel.isEditable {
                 HStack(spacing: 12) {
@@ -54,27 +57,48 @@ public struct ExerciseDetailsContentView: PageView {
                 AnalyticsService.shared.logEvent(.exerciseDetailsAddSetAlertCancelTapped)
             }
         }
+        .onChange(of: viewModel.exercise) { newValue in
+            if newValue.defaultSets != 0 && newValue.sets.count >= Int(newValue.defaultSets) && !showConfetti {
+                showConfetti = true
+            }
+        }
         .navigationBarTitleDisplayMode(.inline)
         .animation(.default, value: viewModel.exercise.sets)
         .onAppear {
             AnalyticsService.shared.logEvent(.exerciseDetailsScreenOpened)
         }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Menu {
+                    if viewModel.isEditable {
+                        Button {
+                            // Edit defaults
+                        } label: {
+                            Label("Edit defaults", systemImage: "pencil.and.ellipsis.rectangle")
+                        }
+                    }
+                    Section {
+                        Button(role: .destructive) {
+                            viewModel.handle(.deleteExercise)
+                            AnalyticsService.shared.logEvent(.exerciseDetailsDeleteMenuButtonTapped)
+                        } label: {
+                            Label("Delete exercise", systemImage: "trash")
+                        }
+                    }
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                }
+            }
+        }
+
     }
 
     @ViewBuilder
     private var setsSection: some View {
         if !viewModel.exercise.sets.isEmpty {
-            CustomSectionView(header: "Sets") {
+            CustomSectionView(header: "Sets", footer: "Goal: \(viewModel.exercise.defaultAmount, specifier: viewModel.exercise.defaultAmount.defaultSpecifier) reps in a set") {
                 ListWithDivider(Array(viewModel.exercise.sets.enumerated())) { offset, exerciseSet in
                     setCellView(exerciseSet, offset: offset)
-                        .contextMenu {
-                            if viewModel.isEditable {
-                                Button("Delete", role: .destructive) {
-                                    viewModel.handle(.deleteSet(exerciseSet))
-                                    AnalyticsService.shared.logEvent(.exerciseDetailsSetRemoved)
-                                }
-                            }
-                        }
                 }
                 .clippedWithBackground(.surface)
             }
@@ -82,33 +106,20 @@ public struct ExerciseDetailsContentView: PageView {
     }
 
     private func setCellView(_ exerciseSet: ExerciseSet, offset: Int) -> some View {
-        HStack {
-            let convertedWeight: String = viewModel.measurementUnit.convertFromKilograms(exerciseSet.weight)
-            Group {
-                switch viewModel.exercise.model.metricType {
-                case .weightAndReps:
-                    exerciseSet.setRepsText(index: offset + 1, weight: exerciseSet.weight > 0 ? convertedWeight : nil)
-                        .fontWeight(.semibold)
-                case .time:
-                    exerciseSet.setTimeText(index: offset + 1, weight: exerciseSet.weight > 0 ? convertedWeight : nil)
-                        .fontWeight(.semibold)
-                @unknown default:
-                    fatalError()
-                }
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-
-            if let maxReps = viewModel.exercise.maxReps {
-                Gauge(value: min(exerciseSet.amount / maxReps, 1)) {}
-                    .gaugeStyle(.accessoryLinear)
-                    .tint(Gradient(colors: [.green, .blue]))
-            }
-
-            Text(DateFormatter().convertDateToString(date: exerciseSet.timestamp, format: .timeFull))
-                .font(.system(.subheadline, design: .monospaced))
-                .foregroundStyle(.secondary)
+        SwipeToDeleteView {
+            ExerciseSetRow(
+                exerciseSet: exerciseSet,
+                index: offset + 1,
+                weight: viewModel.measurementUnit.convertFromKilograms(exerciseSet.weight),
+                maxReps: viewModel.exercise.maxReps,
+                metricType: viewModel.exercise.model.metricType
+            )
+            .padding(vertical: 12, horizontal: 16)
+        } onDelete: {
+            viewModel.handle(.deleteSet(exerciseSet))
+            AnalyticsService.shared.logEvent(.exerciseDetailsSetRemoved)
         }
-        .padding(vertical: 12, horizontal: 16)
+        .id(exerciseSet.id)
     }
 
     private var totalSection: some View {
@@ -165,7 +176,7 @@ public struct ExerciseDetailsContentView: PageView {
         CustomSectionView(header: "Notes") {
             TextField(
                 "Enter your notes here...",
-                text: $viewModel.notesInput,
+                text: $viewModel.exercise.notes,
                 axis: .vertical
             )
             .focused($isNotesInputFocused)
@@ -173,7 +184,8 @@ public struct ExerciseDetailsContentView: PageView {
         } headerTrailingContent: {
             if isNotesInputFocused {
                 Button {
-                    UIApplication.shared.endEditing()
+                    isNotesInputFocused = false
+                    viewModel.handle(.updateNotes)
                     AnalyticsService.shared.logEvent(.exerciseDetailsNotesEdited)
                 } label: {
                     Text("Done")

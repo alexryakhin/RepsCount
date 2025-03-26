@@ -10,7 +10,8 @@ public protocol ExerciseDetailsManagerInterface {
 
     func addSet(_ amount: Double, weight: Double)
     func deleteSet(_ set: ExerciseSet)
-    func updateNotes(_ notes: String?)
+    func updateNotes(_ notes: String)
+    func deleteExercise()
 }
 
 public final class ExerciseDetailsManager: ExerciseDetailsManagerInterface {
@@ -20,7 +21,6 @@ public final class ExerciseDetailsManager: ExerciseDetailsManagerInterface {
     }
     public let errorPublisher = PassthroughSubject<CoreError, Never>()
 
-    private let exerciseID: String
     private let coreDataService: CoreDataServiceInterface
 
     private let _exercisePublisher = CurrentValueSubject<Exercise?, Never>(nil)
@@ -31,9 +31,8 @@ public final class ExerciseDetailsManager: ExerciseDetailsManagerInterface {
         exerciseID: String,
         coreDataService: CoreDataServiceInterface
     ) {
-        self.exerciseID = exerciseID
         self.coreDataService = coreDataService
-        fetchExercise()
+        fetchExercise(with: exerciseID)
     }
 
     public func addSet(_ amount: Double, weight: Double) {
@@ -67,14 +66,23 @@ public final class ExerciseDetailsManager: ExerciseDetailsManagerInterface {
         }
     }
 
-    public func updateNotes(_ notes: String?) {
+    public func updateNotes(_ notes: String) {
         cdExercise?.notes = notes
         saveContext()
     }
 
-    private func fetchExercise() {
+    public func deleteExercise() {
+        guard let cdExercise else {
+            errorPublisher.send(.internalError(.removingExerciseFailed))
+            return
+        }
+        coreDataService.context.delete(cdExercise)
+        saveContext()
+    }
+
+    private func fetchExercise(with id: String) {
         let fetchRequest: NSFetchRequest<CDExercise> = CDExercise.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "id == %@", exerciseID)
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
         do {
             if let cdExercise: CDExercise = try coreDataService.context.fetch(fetchRequest).first {
                 self.cdExercise = cdExercise

@@ -14,8 +14,8 @@ public struct Exercise: Identifiable, Hashable {
     public let id: String
     public let timestamp: Date
     public let sets: [ExerciseSet]
+    public var notes: String
     public let location: Location?
-    public let notes: String?
     public let workoutInstanceId: String?
     public let defaultAmount: Double
     public let defaultSets: Double
@@ -44,8 +44,8 @@ public struct Exercise: Identifiable, Hashable {
         id: String,
         timestamp: Date,
         sets: [ExerciseSet],
+        notes: String,
         location: Location?,
-        notes: String?,
         workoutInstanceId: String?,
         defaultAmount: Double,
         defaultSets: Double
@@ -54,8 +54,8 @@ public struct Exercise: Identifiable, Hashable {
         self.id = id
         self.timestamp = timestamp
         self.sets = sets
-        self.location = location
         self.notes = notes
+        self.location = location
         self.workoutInstanceId = workoutInstanceId
         self.defaultAmount = defaultAmount
         self.defaultSets = defaultSets

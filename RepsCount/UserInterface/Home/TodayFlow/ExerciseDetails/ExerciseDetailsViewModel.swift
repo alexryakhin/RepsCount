@@ -9,11 +9,9 @@ public final class ExerciseDetailsViewModel: DefaultPageViewModel {
 
     @AppStorage(UDKeys.measurementUnit) var measurementUnit: MeasurementUnit = .kilograms
 
-    @Published private(set) var exercise: Exercise
-
+    @Published var exercise: Exercise
     @Published var amountInput = ""
     @Published var weightInput = ""
-    @Published var notesInput = ""
 
     var isEditable: Bool {
         Calendar.current.isDateInToday(exercise.timestamp)
@@ -26,10 +24,12 @@ public final class ExerciseDetailsViewModel: DefaultPageViewModel {
     enum Input {
         case addSet
         case deleteSet(ExerciseSet)
+        case updateNotes
+        case deleteExercise
     }
 
     enum Output {
-        // Output actions to pass to the view controller
+        case finish
     }
 
     var onOutput: ((Output) -> Void)?
@@ -57,6 +57,25 @@ public final class ExerciseDetailsViewModel: DefaultPageViewModel {
             addSet()
         case .deleteSet(let set):
             deleteSet(set)
+        case .updateNotes:
+            exerciseDetailsManager.updateNotes(exercise.notes)
+        case .deleteExercise:
+            showAlert(
+                withModel: .init(
+                    title: "Delete exercise",
+                    message: "Are you sure you want to delete this exercise?",
+                    actionText: "Cancel",
+                    destructiveActionText: "Delete",
+                    action: {
+                        AnalyticsService.shared.logEvent(.exerciseDetailsExerciseRemoveCancelButtonTapped)
+                    },
+                    destructiveAction: { [weak self] in
+                        self?.exerciseDetailsManager.deleteExercise()
+                        self?.onOutput?(.finish)
+                        AnalyticsService.shared.logEvent(.exerciseDetailsExerciseRemoveButtonTapped)
+                    }
+                )
+            )
         }
     }
 
@@ -69,7 +88,6 @@ public final class ExerciseDetailsViewModel: DefaultPageViewModel {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] exercise in
                 self?.exercise = exercise
-                self?.notesInput = exercise.notes.orEmpty
             }
             .store(in: &cancellables)
 
@@ -77,14 +95,6 @@ public final class ExerciseDetailsViewModel: DefaultPageViewModel {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] error in
                 self?.errorReceived(error, displayType: .alert)
-            }
-            .store(in: &cancellables)
-
-        $notesInput
-            .removeDuplicates()
-            .debounce(for: 1, scheduler: RunLoop.main)
-            .sink { [weak self] text in
-                self?.exerciseDetailsManager.updateNotes(text)
             }
             .store(in: &cancellables)
     }

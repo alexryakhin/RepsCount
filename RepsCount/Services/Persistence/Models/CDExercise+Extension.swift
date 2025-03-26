@@ -34,8 +34,8 @@ extension CDExercise {
             id: id,
             timestamp: timestamp,
             sets: _exerciseSets.compactMap(\.coreModel),
+            notes: notes.orEmpty,
             location: location,
-            notes: notes,
             workoutInstanceId: workoutInstance?.id,
             defaultAmount: defaultAmount,
             defaultSets: defaultSets

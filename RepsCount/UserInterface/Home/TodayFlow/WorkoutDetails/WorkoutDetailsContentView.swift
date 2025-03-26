@@ -112,7 +112,7 @@ public struct WorkoutDetailsContentView: PageView {
                         }
                     }
                 } header: {
-                    CustomSectionHeader(text: "Exercises")
+                    CustomSectionHeader("Exercises")
                 }
             }
         } else {

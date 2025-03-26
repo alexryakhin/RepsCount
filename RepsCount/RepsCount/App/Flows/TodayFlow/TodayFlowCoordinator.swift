@@ -92,6 +92,16 @@ final class TodayFlowCoordinator: Coordinator {
 
     private func showExerciseDetails(for exercise: Exercise) {
         let controller = resolver ~> (ExerciseDetailsViewController.self, exercise)
+
+        controller.onEvent = { [weak self] event in
+            switch event {
+            case .finish:
+                self?.router.popModule(animated: true)
+            @unknown default:
+                fatalError("Unhandled event")
+            }
+        }
+
         router.push(controller)
     }
 }

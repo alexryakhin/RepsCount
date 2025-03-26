@@ -11,7 +11,7 @@ public struct CustomSectionHeader: View {
 
     private let text: LocalizedStringKey
 
-    public init(text: LocalizedStringKey) {
+    public init(_ text: LocalizedStringKey) {
         self.text = text
     }
 
@@ -21,6 +21,6 @@ public struct CustomSectionHeader: View {
             .font(.footnote)
             .foregroundStyle(.secondary)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, 16)
     }
 }
+

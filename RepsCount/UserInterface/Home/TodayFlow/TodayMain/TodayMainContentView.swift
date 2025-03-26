@@ -80,7 +80,7 @@ public struct TodayMainContentView: PageView {
                         }
                     }
                 } header: {
-                    CustomSectionHeader(text: "Planned workouts")
+                    CustomSectionHeader("Planned workouts")
                 }
             }
         }
@@ -107,7 +107,7 @@ public struct TodayMainContentView: PageView {
                         }
                     }
                 } header: {
-                    CustomSectionHeader(text: "Current workouts")
+                    CustomSectionHeader("Current workouts")
                 }
             }
         }

@@ -51,6 +51,9 @@ public enum AnalyticsEvent: String {
     case exerciseDetailsNotesEdited
     case exerciseDetailsAddSetAlertCancelTapped
     case exerciseDetailsAddSetAlertProceedTapped
+    case exerciseDetailsDeleteMenuButtonTapped
+    case exerciseDetailsExerciseRemoveButtonTapped
+    case exerciseDetailsExerciseRemoveCancelButtonTapped
 
     // MARK: - All workouts screen
     case allWorkoutsScreenOpened
