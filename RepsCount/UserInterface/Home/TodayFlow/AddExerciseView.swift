@@ -61,16 +61,15 @@ struct AddExerciseView: View {
         .alert("Defaults", isPresented: .constant(exerciseModelToAdd != nil), presenting: exerciseModelToAdd) { model in
             TextField("Sets (optional)", text: $defaultSetsInput)
                 .keyboardType(.numberPad)
-            switch model.metricType {
-            case .weightAndReps:
-                TextField("Reps (optional)", text: $defaultAmountInput)
-                    .keyboardType(.numberPad)
-            case .time:
-                TextField("Time (sec, optional)", text: $defaultAmountInput)
-                    .keyboardType(.numberPad)
+            let textFieldTitleKey: LocalizedStringKey = switch model.metricType {
+            case .weightAndReps: "Reps (optional)"
+            case .time: "Time (sec, optional)"
             @unknown default:
                 fatalError()
             }
+            TextField(textFieldTitleKey, text: $defaultAmountInput)
+                .keyboardType(.numberPad)
+
             Button("Cancel", role: .cancel) {
                 defaultSetsInput = ""
                 defaultAmountInput = ""

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>%d sets</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@value@</string>
+		<key>value</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d Sätze</string>
+			<key>one</key>
+			<string>%d Satz</string>
+			<key>two</key>
+			<string>%d Sätze</string>
+			<key>few</key>
+			<string>%d Sätze</string>
+			<key>many</key>
+			<string>%d Sätze</string>
+			<key>other</key>
+			<string>%d Sätze</string>
+		</dict>
+	</dict>
+	<key>%d reps</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@value@</string>
+		<key>value</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d Wiederholungen</string>
+			<key>one</key>
+			<string>%d Wiederholung</string>
+			<key>two</key>
+			<string>%d Wiederholungen</string>
+			<key>few</key>
+			<string>%d Wiederholungen</string>
+			<key>many</key>
+			<string>%d Wiederholungen</string>
+			<key>other</key>
+			<string>%d Wiederholungen</string>
+		</dict>
+	</dict>
+	<key>%d reps short</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@value@</string>
+		<key>value</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d Wh.</string>
+			<key>one</key>
+			<string>%d Wh.</string>
+			<key>two</key>
+			<string>%d Wh.</string>
+			<key>few</key>
+			<string>%d Wh.</string>
+			<key>many</key>
+			<string>%d Wh.</string>
+			<key>other</key>
+			<string>%d Wh.</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

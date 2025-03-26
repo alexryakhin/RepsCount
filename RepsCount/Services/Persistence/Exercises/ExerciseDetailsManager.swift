@@ -11,6 +11,7 @@ public protocol ExerciseDetailsManagerInterface {
     func addSet(_ amount: Double, weight: Double)
     func deleteSet(_ set: ExerciseSet)
     func updateNotes(_ notes: String)
+    func updateDefaults(_ amount: Double, sets: Double)
     func deleteExercise()
 }
 
@@ -68,6 +69,12 @@ public final class ExerciseDetailsManager: ExerciseDetailsManagerInterface {
 
     public func updateNotes(_ notes: String) {
         cdExercise?.notes = notes
+        saveContext()
+    }
+
+    public func updateDefaults(_ amount: Double, sets: Double) {
+        cdExercise?.defaultAmount = amount
+        cdExercise?.defaultSets = sets
         saveContext()
     }
 

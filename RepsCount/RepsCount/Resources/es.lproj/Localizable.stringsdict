@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>%d sets</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@value@</string>
+		<key>value</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d series</string>
+			<key>one</key>
+			<string>%d serie</string>
+			<key>two</key>
+			<string>%d series</string>
+			<key>few</key>
+			<string>%d series</string>
+			<key>many</key>
+			<string>%d series</string>
+			<key>other</key>
+			<string>%d series</string>
+		</dict>
+	</dict>
+	<key>%d reps</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@value@</string>
+		<key>value</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d repeticiones</string>
+			<key>one</key>
+			<string>%d repetición</string>
+			<key>two</key>
+			<string>%d repeticiones</string>
+			<key>few</key>
+			<string>%d repeticiones</string>
+			<key>many</key>
+			<string>%d repeticiones</string>
+			<key>other</key>
+			<string>%d repeticiones</string>
+		</dict>
+	</dict>
+	<key>%d reps short</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@value@</string>
+		<key>value</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d rep.</string>
+			<key>one</key>
+			<string>%d rep</string>
+			<key>two</key>
+			<string>%d rep.</string>
+			<key>few</key>
+			<string>%d rep.</string>
+			<key>many</key>
+			<string>%d rep.</string>
+			<key>other</key>
+			<string>%d rep.</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

@@ -10,6 +10,9 @@ public struct ExerciseDetailsContentView: PageView {
 
     @State private var isShowingAlert = false
     @State private var showConfetti = false
+    @State private var isEditingDefaultsAlertPresented: Bool = false
+    @State private var editingDefaultsAmountInput: String = ""
+    @State private var editingDefaultsSetsInput: String = ""
     @FocusState private var isNotesInputFocused: Bool
     @ObservedObject public var viewModel: ViewModel
 
@@ -72,7 +75,10 @@ public struct ExerciseDetailsContentView: PageView {
                 Menu {
                     if viewModel.isEditable {
                         Button {
-                            // Edit defaults
+                            editingDefaultsAmountInput = viewModel.exercise.defaultAmount != 0 ? viewModel.exercise.defaultAmount.formatted() : ""
+                            editingDefaultsSetsInput = viewModel.exercise.defaultSets != 0 ? viewModel.exercise.defaultSets.formatted() : ""
+                            isEditingDefaultsAlertPresented = true
+                            AnalyticsService.shared.logEvent(.exerciseDetailsEditMenuButtonTapped)
                         } label: {
                             Label("Edit defaults", systemImage: "pencil.and.ellipsis.rectangle")
                         }
@@ -90,18 +96,62 @@ public struct ExerciseDetailsContentView: PageView {
                 }
             }
         }
+        .alert("Edit defaults", isPresented: $isEditingDefaultsAlertPresented) {
+            TextField("Sets (optional)", text: $editingDefaultsSetsInput)
+                .keyboardType(.numberPad)
+            let textFieldTitleKey: LocalizedStringKey = switch viewModel.exercise.model.metricType {
+            case .weightAndReps: "Reps (optional)"
+            case .time: "Time (sec, optional)"
+            @unknown default:
+                fatalError()
+            }
+            TextField(textFieldTitleKey, text: $editingDefaultsAmountInput)
+                .keyboardType(.numberPad)
 
+            Button("Cancel", role: .cancel) {
+                editingDefaultsAmountInput = ""
+                editingDefaultsSetsInput = ""
+                AnalyticsService.shared.logEvent(.exerciseDetailsEditAlertCancelTapped)
+            }
+            Button("Apply") {
+                viewModel.handle(
+                    .updateDefaults(
+                        amount: Double(editingDefaultsAmountInput) ?? 0,
+                        sets: Double(editingDefaultsSetsInput) ?? 0
+                    )
+                )
+                editingDefaultsAmountInput = ""
+                editingDefaultsSetsInput = ""
+                AnalyticsService.shared.logEvent(.exerciseDetailsEditAlertApplyTapped)
+            }
+        }
     }
 
     @ViewBuilder
     private var setsSection: some View {
         if !viewModel.exercise.sets.isEmpty {
-            CustomSectionView(header: "Sets", footer: "Goal: \(viewModel.exercise.defaultAmount, specifier: viewModel.exercise.defaultAmount.defaultSpecifier) reps in a set") {
+            CustomSectionView(header: "Sets", footer: setSectionFooter) {
                 ListWithDivider(Array(viewModel.exercise.sets.enumerated())) { offset, exerciseSet in
                     setCellView(exerciseSet, offset: offset)
                 }
                 .clippedWithBackground(.surface)
             }
+        }
+    }
+
+    private var setSectionFooter: LocalizedStringKey? {
+        if viewModel.exercise.defaultAmount != 0 {
+            let value: String = switch viewModel.exercise.model.metricType {
+            case .weightAndReps:
+                Int(viewModel.exercise.defaultAmount).repsCountLocalized
+            case .time:
+                viewModel.exercise.defaultAmount.formatted(with: [.minute, .second])
+            @unknown default:
+                fatalError("Unsupported metric type")
+            }
+            return "Goal: \(value) in a set"
+        } else {
+            return nil
         }
     }
 
@@ -129,7 +179,7 @@ public struct ExerciseDetailsContentView: PageView {
                 case .weightAndReps:
                     infoCellView("Reps: \(viewModel.totalAmount.formatted())")
                 case .time:
-                    infoCellView("Combined time: \(viewModel.totalAmount.hoursMinutesAndSeconds!)")
+                    infoCellView("Combined time: \(viewModel.totalAmount.formatted(with: [.minute, .second]))")
                 @unknown default:
                     fatalError()
                 }
@@ -138,7 +188,7 @@ public struct ExerciseDetailsContentView: PageView {
                    let firstSetDate = viewModel.exercise.sets.first?.timestamp,
                    let lastSetDate = viewModel.exercise.sets.last?.timestamp {
                     let distance = firstSetDate.distance(to: lastSetDate)
-                    infoCellView("Time: \(distance.hoursMinutesAndSeconds!)")
+                    infoCellView("Time: \(distance.formatted(with: [.hour, .minute, .second]))")
                 }
             }
             .clippedWithBackground(.surface)
@@ -198,7 +248,7 @@ public struct ExerciseDetailsContentView: PageView {
     private var progressGauge: some View {
         if viewModel.exercise.defaultSets != 0 {
             Gauge(value: min(Double(viewModel.exercise.sets.count) / viewModel.exercise.defaultSets, 1)) {
-                Text("Progress: \(viewModel.exercise.sets.count) sets out of \(viewModel.exercise.defaultSets.formatted())")
+                Text("Progress: \(viewModel.exercise.sets.count.setsCountLocalized) out of \(viewModel.exercise.defaultSets.formatted())")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }

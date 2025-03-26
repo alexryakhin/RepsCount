@@ -210,8 +210,7 @@
 "Pounds" = "Livres sterling";
 "Preacher Curls" = "Flexions au pupitre";
 "Proceed" = "Continuer";
-"Progress: %lld sets out of %@|==|plural.one" = "Progression : %1$lld séries sur %2$@";
-"Progress: %lld sets out of %@|==|plural.other" = "Progression : %1$lld séries sur %2$@";
+"Progress: %@ out of %@" = "Progression : %1$@ sur %2$@";
 "Prone Y-Raises" = "Élévations Y en position couchée";
 "Pull-ups" = "Tractions";
 "Push-ups" = "Pompes";
@@ -359,3 +358,4 @@ Si vous aimez l'application, veuillez laisser un commentaire";
 "lb" = "lb";
 "st" = "st";
 "Today" = "Aujourd'hui";
+"Goal: %@ in a set" = "Objectif : %@ dans une série";

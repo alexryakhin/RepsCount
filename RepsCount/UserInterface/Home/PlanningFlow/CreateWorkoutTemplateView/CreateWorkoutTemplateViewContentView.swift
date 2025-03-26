@@ -64,16 +64,15 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
         .alert("Edit defaults", isPresented: .constant(viewModel.editingDefaultsExercise != nil), presenting: viewModel.editingDefaultsExercise) { exercise in
             TextField("Sets (optional)", text: $viewModel.defaultSetsInput)
                 .keyboardType(.numberPad)
-            switch exercise.exerciseModel.metricType {
-            case .weightAndReps:
-                TextField("Reps (optional)", text: $viewModel.defaultAmountInput)
-                    .keyboardType(.numberPad)
-            case .time:
-                TextField("Time (sec, optional)", text: $viewModel.defaultAmountInput)
-                    .keyboardType(.numberPad)
+            let textFieldTitleKey: LocalizedStringKey = switch exercise.exerciseModel.metricType {
+            case .weightAndReps: "Reps (optional)"
+            case .time: "Time (sec, optional)"
             @unknown default:
                 fatalError()
             }
+            TextField(textFieldTitleKey, text: $viewModel.defaultAmountInput)
+                .keyboardType(.numberPad)
+
             Button("Cancel", role: .cancel) {
                 viewModel.editingDefaultsExercise = nil
                 AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenCancelEditButtonTapped)

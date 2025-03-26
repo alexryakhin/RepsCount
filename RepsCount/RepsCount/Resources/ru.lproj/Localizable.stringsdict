@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>%d sets</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@value@</string>
+		<key>value</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d подходов</string>
+			<key>one</key>
+			<string>%d подход</string>
+			<key>two</key>
+			<string>%d подхода</string>
+			<key>few</key>
+			<string>%d подхода</string>
+			<key>many</key>
+			<string>%d подходов</string>
+			<key>other</key>
+			<string>%d подходов</string>
+		</dict>
+	</dict>
+	<key>%d reps</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@value@</string>
+		<key>value</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d повторений</string>
+			<key>one</key>
+			<string>%d повторение</string>
+			<key>two</key>
+			<string>%d повторения</string>
+			<key>few</key>
+			<string>%d повторения</string>
+			<key>many</key>
+			<string>%d повторений</string>
+			<key>other</key>
+			<string>%d повторений</string>
+		</dict>
+	</dict>
+	<key>%d reps short</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@value@</string>
+		<key>value</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d повт.</string>
+			<key>one</key>
+			<string>%d повт.</string>
+			<key>two</key>
+			<string>%d повт.</string>
+			<key>few</key>
+			<string>%d повт.</string>
+			<key>many</key>
+			<string>%d повт.</string>
+			<key>other</key>
+			<string>%d повт.</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

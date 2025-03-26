@@ -206,6 +206,7 @@
 			membershipExceptions = (
 				"/Localized: Resources/InfoPlist.strings",
 				"/Localized: Resources/Localizable.strings",
+				"/Localized: Resources/Localizable.stringsdict",
 				Resources/Assets.xcassets,
 				Resources/back.svg,
 				Resources/front.svg,
@@ -217,11 +218,19 @@
 			membershipExceptions = (
 				"/Localized: Resources/InfoPlist.strings",
 				"/Localized: Resources/Localizable.strings",
+				"/Localized: Resources/Localizable.stringsdict",
 				Resources/Assets.xcassets,
 				Resources/back.svg,
 				Resources/front.svg,
 			);
 			target = 53F4CEE62D8012B6004551D5 /* CoreUserInterface */;
+		};
+		532875E92D93F03500023220 /* Exceptions for "RepsCount" folder in "Core" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"/Localized: Resources/Localizable.stringsdict",
+			);
+			target = 53F4CED52D8012AA004551D5 /* Core */;
 		};
 		53F4CE9B2D80004C004551D5 /* Exceptions for "RepsCount" folder in "RepsCount" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -287,6 +296,7 @@
 			exceptions = (
 				53F4CE9B2D80004C004551D5 /* Exceptions for "RepsCount" folder in "RepsCount" target */,
 				530F28862D817C0D002AD126 /* Exceptions for "RepsCount" folder in "UserInterface" target */,
+				532875E92D93F03500023220 /* Exceptions for "RepsCount" folder in "Core" target */,
 				530F28872D817C0D002AD126 /* Exceptions for "RepsCount" folder in "CoreUserInterface" target */,
 			);
 			path = RepsCount;

@@ -210,8 +210,7 @@
 "Pounds" = "Libras";
 "Preacher Curls" = "Curl en banco predicador";
 "Proceed" = "Continuar";
-"Progress: %lld sets out of %@|==|plural.one" = "Progreso: %1$lld serie de %2$@";
-"Progress: %lld sets out of %@|==|plural.other" = "Progreso: %1$lld series de %2$@";
+"Progress: %@ out of %@" = "Progreso: %1$@ de %2$@";
 "Prone Y-Raises" = "Elevaciones Y en prono";
 "Pull-ups" = "Dominadas";
 "Push-ups" = "Flexiones";
@@ -359,3 +358,4 @@ Si te gusta la app, deja una reseña.";
 "lb" = "lb";
 "st" = "st";
 "Today" = "Hoy";
+"Goal: %@ in a set" = "Objetivo: %@ en una serie";

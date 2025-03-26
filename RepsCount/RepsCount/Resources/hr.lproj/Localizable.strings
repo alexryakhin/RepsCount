@@ -210,9 +210,7 @@
 "Pounds" = "Pounds";
 "Preacher Curls" = "Preacher pregibi";
 "Proceed" = "Nastavi";
-"Progress: %lld sets out of %@|==|plural.few" = "Napredak: %1$lld serija od %2$@";
-"Progress: %lld sets out of %@|==|plural.one" = "Napredak: %1$lld serija od %2$@";
-"Progress: %lld sets out of %@|==|plural.other" = "Napredak: %1$lld serija od %2$@";
+"Progress: %@ out of %@" = "Napredak: %1$@ od %2$@";
 "Prone Y-Raises" = "Ležeće Y-podizanje";
 "Pull-ups" = "Čeonim hvatom";
 "Push-ups" = "Sklekovi";
@@ -360,3 +358,4 @@ Ako vam se sviđa aplikacija, ostavite recenziju";
 "lb" = "funta";
 "st" = "st";
 "Today" = "Danas";
+"Goal: %@ in a set" = "Cilj: %@ u jednoj seriji";

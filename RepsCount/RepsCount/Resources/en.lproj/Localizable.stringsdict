@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>%d sets</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@value@</string>
+		<key>value</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d sets</string>
+			<key>one</key>
+			<string>%d set</string>
+			<key>two</key>
+			<string>%d sets</string>
+			<key>few</key>
+			<string>%d sets</string>
+			<key>many</key>
+			<string>%d sets</string>
+			<key>other</key>
+			<string>%d sets</string>
+		</dict>
+	</dict>
+	<key>%d reps</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@value@</string>
+		<key>value</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d reps</string>
+			<key>one</key>
+			<string>%d rep</string>
+			<key>two</key>
+			<string>%d reps</string>
+			<key>few</key>
+			<string>%d reps</string>
+			<key>many</key>
+			<string>%d reps</string>
+			<key>other</key>
+			<string>%d reps</string>
+		</dict>
+	</dict>
+	<key>%d reps short</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@value@</string>
+		<key>value</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d reps</string>
+			<key>one</key>
+			<string>%d rep</string>
+			<key>two</key>
+			<string>%d reps</string>
+			<key>few</key>
+			<string>%d reps</string>
+			<key>many</key>
+			<string>%d reps</string>
+			<key>other</key>
+			<string>%d reps</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

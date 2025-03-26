@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>%d sets</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@value@</string>
+		<key>value</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d serija</string>
+			<key>one</key>
+			<string>%d serija</string>
+			<key>two</key>
+			<string>%d serije</string>
+			<key>few</key>
+			<string>%d serije</string>
+			<key>many</key>
+			<string>%d serija</string>
+			<key>other</key>
+			<string>%d serija</string>
+		</dict>
+	</dict>
+	<key>%d reps</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@value@</string>
+		<key>value</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d ponavljanja</string>
+			<key>one</key>
+			<string>%d ponavljanje</string>
+			<key>two</key>
+			<string>%d ponavljanja</string>
+			<key>few</key>
+			<string>%d ponavljanja</string>
+			<key>many</key>
+			<string>%d ponavljanja</string>
+			<key>other</key>
+			<string>%d ponavljanja</string>
+		</dict>
+	</dict>
+	<key>%d reps short</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@value@</string>
+		<key>value</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d pon.</string>
+			<key>one</key>
+			<string>%d pon.</string>
+			<key>two</key>
+			<string>%d pon.</string>
+			<key>few</key>
+			<string>%d pon.</string>
+			<key>many</key>
+			<string>%d pon.</string>
+			<key>other</key>
+			<string>%d pon.</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

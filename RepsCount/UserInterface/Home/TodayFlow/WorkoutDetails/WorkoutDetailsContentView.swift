@@ -145,7 +145,7 @@ public struct WorkoutDetailsContentView: PageView {
                     label: "Exercises",
                     info: viewModel.workout.exercises.count.formatted()
                 )
-                if let totalDuration = viewModel.workout.totalDuration?.hoursAndMinutes {
+                if let totalDuration = viewModel.workout.totalDuration?.formatted(with: [.hour, .minute]) {
                     infoCell(
                         label: "Time",
                         info: totalDuration

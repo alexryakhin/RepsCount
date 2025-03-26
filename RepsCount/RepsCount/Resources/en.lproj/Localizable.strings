@@ -210,8 +210,7 @@
 "Pounds" = "Pounds";
 "Preacher Curls" = "Preacher Curls";
 "Proceed" = "Proceed";
-"Progress: %lld sets out of %@|==|plural.one" = "Progress: %1$lld set out of %2$@";
-"Progress: %lld sets out of %@|==|plural.other" = "Progress: %1$lld sets out of %2$@";
+"Progress: %@ out of %@" = "Progress: %1$@ out of %2$@";
 "Prone Y-Raises" = "Prone Y-Raises";
 "Pull-ups" = "Pull-ups";
 "Push-ups" = "Push-ups";
@@ -359,3 +358,4 @@ If you like the app, please leave a review";
 "lb" = "lb";
 "st" = "st";
 "Today" = "Today";
+"Goal: %@ in a set" = "Goal: %@ in a set";

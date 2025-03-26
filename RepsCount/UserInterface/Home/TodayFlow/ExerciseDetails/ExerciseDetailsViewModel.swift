@@ -25,6 +25,7 @@ public final class ExerciseDetailsViewModel: DefaultPageViewModel {
         case addSet
         case deleteSet(ExerciseSet)
         case updateNotes
+        case updateDefaults(amount: Double, sets: Double)
         case deleteExercise
     }
 
@@ -59,6 +60,8 @@ public final class ExerciseDetailsViewModel: DefaultPageViewModel {
             deleteSet(set)
         case .updateNotes:
             exerciseDetailsManager.updateNotes(exercise.notes)
+        case .updateDefaults(let amount, let sets):
+            exerciseDetailsManager.updateDefaults(amount, sets: sets)
         case .deleteExercise:
             showAlert(
                 withModel: .init(

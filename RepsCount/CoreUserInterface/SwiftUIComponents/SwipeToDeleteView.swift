@@ -15,6 +15,9 @@ Use this view if you need a swipe to delete gesture in a custom row (not using `
 Apply `.id()` modifier on to SwipeToDeleteView inside LazyVStack to avoid bugs with reusing cells
 */
 public struct SwipeToDeleteView<Content: View>: View {
+
+    @Environment(\.layoutDirection) var layoutDirection
+
     @State private var offset: CGFloat = 0
     @State private var isDeleteShowing: Bool = false
     @State private var size: CGSize = .zero
@@ -63,24 +66,26 @@ public struct SwipeToDeleteView<Content: View>: View {
             .gesture(
                 DragGesture(minimumDistance: 20)
                     .onChanged { value in
-                        if value.translation.width < 0 && !isDeleteShowing {
-                            offset = value.translation.width
-                        } else if value.translation.width < threshold && isDeleteShowing {
-                            offset = value.translation.width - threshold
-                        } else if value.translation.width > 0 && isDeleteShowing {
-                            offset = min(0, value.translation.width - threshold)
+                        let translation = layoutDirection == .rightToLeft ? -value.translation.width : value.translation.width
+                        if translation < 0 && !isDeleteShowing {
+                            offset = translation
+                        } else if translation < threshold && isDeleteShowing {
+                            offset = translation - threshold
+                        } else if translation > 0 && isDeleteShowing {
+                            offset = min(0, translation - threshold)
                         }
                         if swipeToDeleteViewActiveId.value != id {
                             swipeToDeleteViewActiveId.send(id)
                         }
                     }
                     .onEnded { value in
-                        if value.translation.width < -size.width + threshold && !isDeleteShowing || value.translation.width < -size.width + threshold * 2 && isDeleteShowing {
+                        let translation = layoutDirection == .rightToLeft ? -value.translation.width : value.translation.width
+                        if translation < -size.width + threshold && !isDeleteShowing || translation < -size.width + threshold * 2 && isDeleteShowing {
                             withAnimation {
                                 offset = -size.width
                                 onDelete()
                             }
-                        } else if value.translation.width < -threshold {
+                        } else if translation < -threshold {
                             withAnimation {
                                 offset = -threshold
                                 isDeleteShowing = true

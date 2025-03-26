@@ -10,27 +10,18 @@ import SwiftUI
 
 extension ExerciseSet {
     func setRepsText(index: Int, weight: String?) -> Text {
-        let specifier = amount.defaultSpecifier
         if let weight {
-            return Text("#\(index): \(amount, specifier: specifier) reps, \(weight)")
+            return Text("#\(index): \(Int(amount).repsCountShortLocalized), \(weight)")
         } else {
-            return Text("#\(index): \(amount, specifier: specifier) reps")
+            return Text("#\(index): \(Int(amount).repsCountShortLocalized)")
         }
     }
 
     func setTimeText(index: Int, weight: String?) -> Text {
         if let weight {
-            return Text("#\(index): \(timeFormatter.string(from: amount)!), \(weight)")
+            return Text("#\(index): \(amount.formatted(with: [.minute, .second])), \(weight)")
         } else {
-            return Text("#\(index): \(timeFormatter.string(from: amount)!)")
+            return Text("#\(index): \(amount.formatted(with: [.minute, .second]))")
         }
     }
 }
-
-private var timeFormatter: DateComponentsFormatter = {
-    let timeFormatter = DateComponentsFormatter()
-    timeFormatter.unitsStyle = .short
-    timeFormatter.allowedUnits = [.minute, .second]
-
-    return timeFormatter
-}()
