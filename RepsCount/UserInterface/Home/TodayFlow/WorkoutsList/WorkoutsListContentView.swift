@@ -80,11 +80,10 @@ public struct WorkoutsListContentView: PageView {
                     viewModel.handle(.showWorkoutDetails(workout))
                     AnalyticsService.shared.logEvent(.allWorkoutsScreenWorkoutSelected)
                 } label: {
-                    TodayWorkoutRow(workout: workout)
-                }
-                .padding(vertical: 12, horizontal: 16)
-                .contextMenu {
-                    Button("Delete", role: .destructive) {
+                    SwipeToDeleteView {
+                        TodayWorkoutRow(workout: workout)
+                            .padding(vertical: 12, horizontal: 16)
+                    } onDelete: {
                         viewModel.handle(.deleteWorkout(workout))
                         AnalyticsService.shared.logEvent(.allWorkoutsScreenWorkoutRemoveButtonTapped)
                     }

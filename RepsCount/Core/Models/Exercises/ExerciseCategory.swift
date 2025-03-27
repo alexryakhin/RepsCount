@@ -44,7 +44,17 @@ public enum ExerciseCategory: String, CaseIterable {
                 .resistanceBandLateralRaises,
                 .resistanceBandFrontRaises,
                 .resistanceBandOverheadPress,
-                .planche
+                .planche,
+                .burpees,
+                .mountainClimbers,
+                .jumpingJacks,
+                .bearCrawls,
+                .manMakers,
+                .cleanAndPress,
+                .snatch,
+                .thrusters,
+                .wallBalls,
+                .battleRopes
             ]
         case .biceps:
             return [
@@ -52,6 +62,7 @@ public enum ExerciseCategory: String, CaseIterable {
                 .hammerCurls,
                 .pullUps,
                 .chinUps,
+                .australianPullUps,
                 .concentrationCurls,
                 .preacherCurls,
                 .cableCurls,
@@ -66,7 +77,12 @@ public enum ExerciseCategory: String, CaseIterable {
                 .skullCrushers,
                 .overheadTricepsExtension,
                 .resistanceBandTricepsExtension,
-                .muscleUps
+                .muscleUps,
+                .burpees,
+                .squatThrusts,
+                .bearCrawls,
+                .manMakers,
+                .thrusters
             ]
         case .forearms:
             return [
@@ -76,7 +92,8 @@ public enum ExerciseCategory: String, CaseIterable {
                 .resistanceBandWristCurls,
                 .resistanceBandReverseWristCurls,
                 .farmerWalk,
-                .pinchGripHold
+                .pinchGripHold,
+                .battleRopes
             ]
         case .pectorals:
             return [
@@ -92,7 +109,11 @@ public enum ExerciseCategory: String, CaseIterable {
                 .resistanceBandChestPress,
                 .resistanceBandFlyes,
                 .machineChestPress,
-                .planche
+                .planche,
+                .burpees,
+                .squatThrusts,
+                .inchworms,
+                .manMakers
             ]
         case .abdominals:
             return [
@@ -109,7 +130,14 @@ public enum ExerciseCategory: String, CaseIterable {
                 .planche,
                 .frontLever,
                 .backLever,
-                .humanFlag
+                .humanFlag,
+                .burpees,
+                .mountainClimbers,
+                .squatThrusts,
+                .bearCrawls,
+                .inchworms,
+                .manMakers,
+                .battleRopes
             ]
         case .centralBack:
             return [
@@ -120,6 +148,7 @@ public enum ExerciseCategory: String, CaseIterable {
         case .lats:
             return [
                 .pullUps,
+                .australianPullUps,
                 .latPulldowns,
                 .barbellRows,
                 .dumbbellRows,
@@ -140,7 +169,9 @@ public enum ExerciseCategory: String, CaseIterable {
                 .hyperextensions,
                 .goodMornings,
                 .superman,
-                .backExtensions
+                .backExtensions,
+                .kettlebellSwings,
+                .tireFlips
             ]
         case .glutes:
             return [
@@ -153,7 +184,15 @@ public enum ExerciseCategory: String, CaseIterable {
                 .splitSquat,
                 .bulgarianSplitSquat,
                 .pistolSquat,
-                .stepUps
+                .stepUps,
+                .jumpSquats,
+                .cleanAndPress,
+                .snatch,
+                .thrusters,
+                .wallBalls,
+                .kettlebellSwings,
+                .sledPush,
+                .tireFlips
             ]
         case .quadriceps:
             return [
@@ -166,7 +205,19 @@ public enum ExerciseCategory: String, CaseIterable {
                 .stepUps,
                 .hackSquat,
                 .sissySquat,
-                .legExtensions
+                .legExtensions,
+                .jumpSquats,
+                .burpees,
+                .mountainClimbers,
+                .squatThrusts,
+                .bearCrawls,
+                .manMakers,
+                .cleanAndPress,
+                .snatch,
+                .thrusters,
+                .wallBalls,
+                .sledPush,
+                .tireFlips
             ]
         case .hamstrings:
             return [
@@ -174,7 +225,9 @@ public enum ExerciseCategory: String, CaseIterable {
                 .romanianDeadlifts,
                 .nordicCurls,
                 .gluteHamRaises,
-                .deadlifts
+                .deadlifts,
+                .inchworms,
+                .kettlebellSwings
             ]
         case .adductors:
             return [
@@ -187,7 +240,8 @@ public enum ExerciseCategory: String, CaseIterable {
             return [
                 .sideLyingLegRaises,
                 .clamshells,
-                .resistanceBandLateralWalks
+                .resistanceBandLateralWalks,
+                .jumpingJacks
             ]
         case .calves:
             return [
@@ -195,7 +249,10 @@ public enum ExerciseCategory: String, CaseIterable {
                 .toeRaises,
                 .seatedCalfRaises,
                 .standingCalfRaises,
-                .donkeyCalfRaises
+                .donkeyCalfRaises,
+                .jumpSquats,
+                .jumpingJacks,
+                .sledPush
             ]
         }
     }

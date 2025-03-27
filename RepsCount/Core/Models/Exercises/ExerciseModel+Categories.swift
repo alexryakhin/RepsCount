@@ -220,15 +220,50 @@ public extension ExerciseModel {
 
             // MARK: - Calisthenics
         case .planche:
-            return [.pectorals, .deltoids, .abdominals] // Chest, shoulders, core
+            return [.pectorals, .deltoids, .abdominals]
         case .muscleUps:
-            return [.lats, .biceps, .triceps] // Back, biceps, triceps
+            return [.lats, .biceps, .triceps]
         case .frontLever:
-            return [.lats, .abdominals] // Lats and core
+            return [.lats, .abdominals]
         case .backLever:
-            return [.lats, .abdominals] // Lats and core
+            return [.lats, .abdominals]
         case .humanFlag:
-            return [.abdominals, .lats] // Core and lats
+            return [.abdominals, .lats]
+
+        case .australianPullUps:
+            return [.lats, .biceps]
+        case .jumpSquats:
+            return [.quadriceps, .glutes, .calves]
+        case .burpees:
+            return [.pectorals, .quadriceps, .abdominals, .triceps, .deltoids]
+        case .mountainClimbers:
+            return [.abdominals, .quadriceps, .deltoids]
+        case .jumpingJacks:
+            return [.calves, .abductors, .deltoids]
+        case .squatThrusts:
+            return [.quadriceps, .pectorals, .triceps, .abdominals]
+        case .bearCrawls:
+            return [.deltoids, .triceps, .abdominals, .quadriceps]
+        case .inchworms:
+            return [.hamstrings, .abdominals, .pectorals]
+        case .manMakers:
+            return [.quadriceps, .deltoids, .triceps, .pectorals, .abdominals]
+        case .cleanAndPress:
+            return [.quadriceps, .deltoids, .trapezius, .glutes]
+        case .snatch:
+            return [.quadriceps, .glutes, .trapezius, .deltoids]
+        case .thrusters:
+            return [.quadriceps, .glutes, .deltoids, .triceps]
+        case .wallBalls:
+            return [.quadriceps, .glutes, .deltoids]
+        case .kettlebellSwings:
+            return [.glutes, .hamstrings, .lowerBack]
+        case .battleRopes:
+            return [.deltoids, .forearms, .abdominals]
+        case .sledPush:
+            return [.quadriceps, .glutes, .calves]
+        case .tireFlips:
+            return [.quadriceps, .glutes, .trapezius, .lowerBack]
         }
     }
 }

@@ -65,7 +65,7 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
             TextField("Sets (optional)", text: $viewModel.defaultSetsInput)
                 .keyboardType(.numberPad)
             let textFieldTitleKey: LocalizedStringKey = switch exercise.exerciseModel.metricType {
-            case .weightAndReps: "Reps (optional)"
+            case .reps: "Reps (optional)"
             case .time: "Time (sec, optional)"
             @unknown default:
                 fatalError()
@@ -161,7 +161,7 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
                                     .foregroundStyle(.secondary)
                                     .font(.caption)
                                 switch exercise.exerciseModel.metricType {
-                                case .weightAndReps:
+                                case .reps:
                                     Text("Reps: \(exercise.defaultAmount.formatted())")
                                         .foregroundStyle(.secondary)
                                         .font(.caption)

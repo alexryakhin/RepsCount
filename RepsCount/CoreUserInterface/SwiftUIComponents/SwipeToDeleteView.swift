@@ -20,6 +20,7 @@ public struct SwipeToDeleteView<Content: View>: View {
 
     @State private var offset: CGFloat = 0
     @State private var isDeleteShowing: Bool = false
+    @State private var isAlertPresented: Bool = false
     @State private var size: CGSize = .zero
     @State private var id = UUID()
     private let threshold: CGFloat = 80
@@ -41,8 +42,7 @@ public struct SwipeToDeleteView<Content: View>: View {
                 .opacity(offset < 0 ? 1 : 0)
             Button(role: .destructive, action: {
                 withAnimation {
-                    offset = -size.width
-                    onDelete()
+                    delete()
                 }
             }) {
                 Image(systemName: "trash")
@@ -82,8 +82,7 @@ public struct SwipeToDeleteView<Content: View>: View {
                         let translation = layoutDirection == .rightToLeft ? -value.translation.width : value.translation.width
                         if translation < -size.width + threshold && !isDeleteShowing || translation < -size.width + threshold * 2 && isDeleteShowing {
                             withAnimation {
-                                offset = -size.width
-                                onDelete()
+                                delete()
                             }
                         } else if translation < -threshold {
                             withAnimation {
@@ -99,5 +98,11 @@ public struct SwipeToDeleteView<Content: View>: View {
                     }
             )
         }
+    }
+
+    private func delete() {
+        onDelete()
+        offset = 0
+        isDeleteShowing = false
     }
 }

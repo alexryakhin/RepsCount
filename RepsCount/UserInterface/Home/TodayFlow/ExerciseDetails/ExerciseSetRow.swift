@@ -24,7 +24,7 @@ struct ExerciseSetRow: View {
         HStack {
             Group {
                 switch metricType {
-                case .weightAndReps:
+                case .reps:
                     exerciseSet.setRepsText(index: index, weight: exerciseSet.weight > 0 ? weight : nil)
                         .fontWeight(.semibold)
                 case .time:

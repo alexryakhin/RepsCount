@@ -100,7 +100,7 @@ public struct ExerciseDetailsContentView: PageView {
             TextField("Sets (optional)", text: $editingDefaultsSetsInput)
                 .keyboardType(.numberPad)
             let textFieldTitleKey: LocalizedStringKey = switch viewModel.exercise.model.metricType {
-            case .weightAndReps: "Reps (optional)"
+            case .reps: "Reps (optional)"
             case .time: "Time (sec, optional)"
             @unknown default:
                 fatalError()
@@ -142,7 +142,7 @@ public struct ExerciseDetailsContentView: PageView {
     private var setSectionFooter: LocalizedStringKey? {
         if viewModel.exercise.defaultAmount != 0 {
             let value: String = switch viewModel.exercise.model.metricType {
-            case .weightAndReps:
+            case .reps:
                 Int(viewModel.exercise.defaultAmount).repsCountLocalized
             case .time:
                 viewModel.exercise.defaultAmount.formatted(with: [.minute, .second])
@@ -176,7 +176,7 @@ public struct ExerciseDetailsContentView: PageView {
         CustomSectionView(header: "Total") {
             FormWithDivider {
                 switch viewModel.exercise.model.metricType {
-                case .weightAndReps:
+                case .reps:
                     infoCellView("Reps: \(viewModel.totalAmount.formatted())")
                 case .time:
                     infoCellView("Combined time: \(viewModel.totalAmount.formatted(with: [.minute, .second]))")

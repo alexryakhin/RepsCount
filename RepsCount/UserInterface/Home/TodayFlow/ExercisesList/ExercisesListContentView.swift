@@ -87,16 +87,15 @@ public struct ExercisesListContentView: PageView {
                     viewModel.handle(.showExerciseDetails(exercise))
                     AnalyticsService.shared.logEvent(.allExercisesScreenExerciseSelected)
                 } label: {
-                    ExerciseListCellView(
-                        model: .init(
-                            exercise: exercise.model.name,
-                            categories: exercise.model.categoriesLocalizedNames
+                    SwipeToDeleteView {
+                        ExerciseListCellView(
+                            model: .init(
+                                exercise: exercise.model.name,
+                                categories: exercise.model.categoriesLocalizedNames
+                            )
                         )
-                    )
-                }
-                .padding(vertical: 12, horizontal: 16)
-                .contextMenu {
-                    Button("Delete", role: .destructive) {
+                        .padding(vertical: 12, horizontal: 16)
+                    } onDelete: {
                         viewModel.handle(.deleteExercise(exercise))
                         AnalyticsService.shared.logEvent(.allExercisesScreenExerciseRemoveButtonTapped)
                     }

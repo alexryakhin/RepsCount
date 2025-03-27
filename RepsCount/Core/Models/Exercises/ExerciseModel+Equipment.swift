@@ -260,6 +260,41 @@ public extension ExerciseModel {
             return .bars // Pull-up bar or rings
         case .humanFlag:
             return .bars // Vertical pole or bar
+
+        case .australianPullUps:
+            return .bars
+        case .jumpSquats:
+            return .none
+        case .burpees:
+            return .none
+        case .mountainClimbers:
+            return .none
+        case .jumpingJacks:
+            return .none
+        case .squatThrusts:
+            return .none
+        case .bearCrawls:
+            return .none
+        case .inchworms:
+            return .none
+        case .manMakers:
+            return .gym // Typically done with dumbbells
+        case .cleanAndPress:
+            return .gym // Usually requires barbell or dumbbells
+        case .snatch:
+            return .gym // Requires barbell
+        case .thrusters:
+            return .gym // Dumbbells or barbell
+        case .wallBalls:
+            return .gym // Medicine ball and wall target
+        case .kettlebellSwings:
+            return .gym // Kettlebell needed
+        case .battleRopes:
+            return .gym
+        case .sledPush:
+            return .gym
+        case .tireFlips:
+            return .gym
         }
     }
 }

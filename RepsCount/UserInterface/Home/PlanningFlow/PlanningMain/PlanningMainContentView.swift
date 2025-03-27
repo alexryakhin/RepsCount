@@ -79,14 +79,14 @@ public struct PlanningMainContentView: PageView {
                     viewModel.handle(.showWorkoutTemplateDetails(template))
                     AnalyticsService.shared.logEvent(.planningScreenTemplateSelected)
                 } label: {
-                    WorkoutTemplateRow(template: template)
-                        .clippedWithPaddingAndBackground(.surface)
-                        .contextMenu {
-                            Button("Delete", role: .destructive) {
-                                viewModel.handle(.deleteWorkoutTemplate(template))
-                                AnalyticsService.shared.logEvent(.planningScreenTemplateRemoved)
-                            }
-                        }
+                    SwipeToDeleteView {
+                        WorkoutTemplateRow(template: template)
+                            .padding(vertical: 12, horizontal: 16)
+                    } onDelete: {
+                        viewModel.handle(.deleteWorkoutTemplate(template))
+                        AnalyticsService.shared.logEvent(.planningScreenTemplateRemoved)
+                    }
+                    .clippedWithBackground(.surface)
                 }
             }
         }

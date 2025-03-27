@@ -96,14 +96,14 @@ public struct TodayMainContentView: PageView {
                             viewModel.handle(.showWorkoutDetails(workout))
                             AnalyticsService.shared.logEvent(.todayScreenWorkoutSelected)
                         } label: {
-                            TodayWorkoutRow(workout: workout)
-                                .clippedWithPaddingAndBackground(.surface)
-                                .contextMenu {
-                                    Button("Delete", role: .destructive) {
-                                        viewModel.handle(.showDeleteWorkoutAlert(workout))
-                                        AnalyticsService.shared.logEvent(.todayScreenWorkoutRemoveButtonTapped)
-                                    }
-                                }
+                            SwipeToDeleteView {
+                                TodayWorkoutRow(workout: workout)
+                                    .padding(vertical: 12, horizontal: 16)
+                            } onDelete: {
+                                viewModel.handle(.showDeleteWorkoutAlert(workout))
+                                AnalyticsService.shared.logEvent(.todayScreenWorkoutRemoveButtonTapped)
+                            }
+                            .clippedWithBackground(.surface)
                         }
                     }
                 } header: {

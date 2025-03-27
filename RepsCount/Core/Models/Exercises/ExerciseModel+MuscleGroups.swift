@@ -229,6 +229,40 @@ public extension ExerciseModel {
             [.latissimusDorsi, .rectusAbdominis, .rectusAbdominisLower, .deltoids] // Back and core for leverage
         case .humanFlag:
             [.externalObliques, .latissimusDorsi, .triceps] // Obliques and lats for lateral hold
+        case .australianPullUps:
+            [.latissimusDorsi, .biceps, .rhomboidMajor]
+        case .jumpSquats:
+            [.rectusFemoris, .gluteusMaximus, .gastrocnemius]
+        case .burpees:
+            [.rectusFemoris, .pectoralisMajor, .triceps, .deltoids, .rectusAbdominis]
+        case .mountainClimbers:
+            [.rectusAbdominis, .rectusFemoris, .deltoids]
+        case .jumpingJacks:
+            [.deltoids, .gastrocnemius, .gluteusMedius]
+        case .squatThrusts:
+            [.rectusFemoris, .pectoralisMajor, .triceps, .rectusAbdominis]
+        case .bearCrawls:
+            [.deltoids, .triceps, .rectusAbdominis, .rectusFemoris]
+        case .inchworms:
+            [.bicepsFemoris, .semitendinosus, .rectusAbdominis, .pectoralisMajor]
+        case .manMakers:
+            [.rectusFemoris, .deltoids, .pectoralisMajor, .triceps, .rectusAbdominis]
+        case .cleanAndPress:
+            [.rectusFemoris, .gluteusMaximus, .trapezius, .deltoids]
+        case .snatch:
+            [.gluteusMaximus, .rectusFemoris, .trapezius, .deltoids]
+        case .thrusters:
+            [.rectusFemoris, .gluteusMaximus, .triceps, .deltoids]
+        case .wallBalls:
+            [.rectusFemoris, .gluteusMaximus, .deltoids]
+        case .kettlebellSwings:
+            [.gluteusMaximus, .bicepsFemoris, .thoracolumbarFascia]
+        case .battleRopes:
+            [.deltoids, .flexorCarpiRadialis, .rectusAbdominis]
+        case .sledPush:
+            [.rectusFemoris, .gluteusMaximus, .soleus]
+        case .tireFlips:
+            [.gluteusMaximus, .rectusFemoris, .trapezius, .latissimusDorsi]
         }
     }
 
@@ -452,6 +486,41 @@ public extension ExerciseModel {
             [.triceps, .externalObliques] // Triceps and obliques assist
         case .humanFlag:
             [.rectusAbdominis, .externalObliques] // Core and upper back stabilize
+
+        case .australianPullUps:
+            [.deltoids, .lowerTrapezius, .teresMajor]
+        case .jumpSquats:
+            [.gluteusMedius, .sartorius, .soleus]
+        case .burpees:
+            [.gastrocnemius, .serratusAnterior, .gluteusMaximus]
+        case .mountainClimbers:
+            [.gastrocnemius, .externalObliques, .triceps]
+        case .jumpingJacks:
+            [.tensorFasciaeLatae, .rectusAbdominis, .sartorius]
+        case .squatThrusts:
+            [.gluteusMaximus, .gastrocnemius, .externalObliques]
+        case .bearCrawls:
+            [.pectoralisMajor, .gluteusMedius, .serratusAnterior]
+        case .inchworms:
+            [.gastrocnemius, .deltoids, .serratusAnterior]
+        case .manMakers:
+            [.gastrocnemius, .serratusAnterior, .latissimusDorsi]
+        case .cleanAndPress:
+            [.rectusAbdominis, .triceps, .latissimusDorsi]
+        case .snatch:
+            [.rectusAbdominis, .serratusAnterior, .biceps]
+        case .thrusters:
+            [.pectoralisMajor, .rectusAbdominis, .gastrocnemius]
+        case .wallBalls:
+            [.triceps, .rectusAbdominis, .pectoralisMajor]
+        case .kettlebellSwings:
+            [.rectusAbdominis, .deltoids, .bicepsFemoris]
+        case .battleRopes:
+            [.trapezius, .rhomboidMajor, .externalObliques]
+        case .sledPush:
+            [.rectusAbdominis, .pectoralisMajor, .deltoids]
+        case .tireFlips:
+            [.rectusAbdominis, .biceps, .thoracolumbarFascia]
         }
     }
 }

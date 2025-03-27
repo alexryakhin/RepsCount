@@ -62,7 +62,7 @@ struct AddExerciseView: View {
             TextField("Sets (optional)", text: $defaultSetsInput)
                 .keyboardType(.numberPad)
             let textFieldTitleKey: LocalizedStringKey = switch model.metricType {
-            case .weightAndReps: "Reps (optional)"
+            case .reps: "Reps (optional)"
             case .time: "Time (sec, optional)"
             @unknown default:
                 fatalError()

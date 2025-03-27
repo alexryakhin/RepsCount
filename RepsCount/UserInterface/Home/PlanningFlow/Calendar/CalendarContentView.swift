@@ -60,14 +60,13 @@ public struct CalendarContentView: PageView {
                 .clippedWithPaddingAndBackground(.surface)
             } else {
                 ListWithDivider(viewModel.eventsForSelectedDate) { event in
-                    WorkoutEventRow(event: event)
-                        .padding(vertical: 12, horizontal: 16)
-                        .contextMenu {
-                            Button("Delete", role: .destructive) {
-                                viewModel.handle(.deleteEvent(event))
-                                AnalyticsService.shared.logEvent(.calendarScreenEventRemoveButtonTapped)
-                            }
-                        }
+                    SwipeToDeleteView {
+                        WorkoutEventRow(event: event)
+                            .padding(vertical: 12, horizontal: 16)
+                    } onDelete: {
+                        viewModel.handle(.deleteEvent(event))
+                        AnalyticsService.shared.logEvent(.calendarScreenEventRemoveButtonTapped)
+                    }
                 }
                 .clippedWithBackground(.surface)
             }

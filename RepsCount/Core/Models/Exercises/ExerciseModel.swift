@@ -105,6 +105,7 @@ public enum ExerciseModel: String, Identifiable, Hashable, CaseIterable {
     case resistanceBandRows = "Resistance Band Rows"
     case invertedRows = "Inverted Rows"
     case machineRows = "Machine Rows"
+    case australianPullUps = "Australian Pull-ups"
 
     // MARK: - Lower Back
 
@@ -132,6 +133,7 @@ public enum ExerciseModel: String, Identifiable, Hashable, CaseIterable {
     case hackSquat = "Hack Squat"
     case sissySquat = "Sissy Squat"
     case legExtensions = "Leg Extensions"
+    case jumpSquats = "Jump Squats"
 
     // MARK: - Hamstrings
 
@@ -168,6 +170,24 @@ public enum ExerciseModel: String, Identifiable, Hashable, CaseIterable {
     case backLever = "Back Lever"
     case humanFlag = "Human Flag"
     case handstandPushUps = "Handstand Push-ups"
+
+    // MARK: - Full Body
+
+    case burpees = "Burpees"
+    case mountainClimbers = "Mountain Climbers"
+    case jumpingJacks = "Jumping Jacks"
+    case squatThrusts = "Squat Thrusts"
+    case bearCrawls = "Bear Crawls"
+    case inchworms = "Inchworms"
+    case manMakers = "Man Makers"
+    case cleanAndPress = "Clean and Press"
+    case snatch = "Snatch"
+    case thrusters = "Thrusters"
+    case wallBalls = "Wall Balls"
+    case kettlebellSwings = "Kettlebell Swings"
+    case battleRopes = "Battle Ropes"
+    case sledPush = "Sled Push"
+    case tireFlips = "Tire Flips"
 
     public var id: String { rawValue }
 }

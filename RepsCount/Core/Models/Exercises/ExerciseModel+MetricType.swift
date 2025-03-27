@@ -21,8 +21,10 @@ public extension ExerciseModel {
             return .time
         case .planche, .frontLever, .backLever, .humanFlag: // Calisthenics isometric holds
             return .time
+        case .mountainClimbers, .jumpingJacks, .bearCrawls, .inchworms, .battleRopes, .sledPush:
+            return .time
         default:
-            return .weightAndReps
+            return .reps
         }
     }
 }

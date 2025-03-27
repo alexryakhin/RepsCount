@@ -96,19 +96,19 @@ public struct WorkoutDetailsContentView: PageView {
                             viewModel.handle(.showExerciseDetails(exercise))
                             AnalyticsService.shared.logEvent(.workoutDetailsExerciseSelected)
                         } label: {
-                            ExerciseListCellView(
-                                model: .init(
-                                    exercise: exercise.model.name,
-                                    categories: exercise.model.categoriesLocalizedNames
+                            SwipeToDeleteView {
+                                ExerciseListCellView(
+                                    model: .init(
+                                        exercise: exercise.model.name,
+                                        categories: exercise.model.categoriesLocalizedNames
+                                    )
                                 )
-                            )
-                            .clippedWithPaddingAndBackground(.surface)
-                            .contextMenu {
-                                Button("Delete", role: .destructive) {
-                                    viewModel.handle(.showDeleteExerciseAlert(exercise))
-                                    AnalyticsService.shared.logEvent(.workoutDetailsExerciseRemoveButtonTapped)
-                                }
+                                .padding(vertical: 12, horizontal: 16)
+                            } onDelete: {
+                                viewModel.handle(.showDeleteExerciseAlert(exercise))
+                                AnalyticsService.shared.logEvent(.workoutDetailsExerciseRemoveButtonTapped)
                             }
+                            .clippedWithBackground(.surface)
                         }
                     }
                 } header: {
