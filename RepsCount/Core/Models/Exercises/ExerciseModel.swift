@@ -62,7 +62,9 @@ public enum ExerciseModel: String, Identifiable, Hashable, CaseIterable {
 
     case dips = "Dips"
     case pushUps = "Push-ups"
+    case widePushUps = "Wide Push-ups"
     case diamondPushUps = "Diamond Push-ups"
+    case inclinePushUps = "Incline Push-Ups"
     case dumbbellFlyes = "Dumbbell Flyes"
     case benchPress = "Bench Press"
     case chestPress = "Chest Press"
@@ -134,6 +136,7 @@ public enum ExerciseModel: String, Identifiable, Hashable, CaseIterable {
     case sissySquat = "Sissy Squat"
     case legExtensions = "Leg Extensions"
     case jumpSquats = "Jump Squats"
+    case wallSit = "Wall Sit"
 
     // MARK: - Hamstrings
 
@@ -168,8 +171,16 @@ public enum ExerciseModel: String, Identifiable, Hashable, CaseIterable {
     case muscleUps = "Muscle-ups"
     case frontLever = "Front Lever"
     case backLever = "Back Lever"
+    case elbowLever = "Elbow Lever"
     case humanFlag = "Human Flag"
     case handstandPushUps = "Handstand Push-ups"
+    case scapulaPullUps = "Scapula Pull-ups"
+    case scapulaPushUps = "Scapula Push-ups"
+    case pikePushUps = "Pike Push-ups"
+    case plancheLean = "Planche Lean"
+    case frogPose = "Frog Pose"
+    case handstandToeTouch = "Handstand Toe Touch"
+    case lSitLegLifts = "L-Sit Leg Lifts"
 
     // MARK: - Full Body
 
