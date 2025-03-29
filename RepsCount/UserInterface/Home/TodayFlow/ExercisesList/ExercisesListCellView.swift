@@ -6,27 +6,30 @@
 //
 
 import SwiftUI
+import Core
 import CoreUserInterface
 
-struct ExerciseListCellView: ConfigurableView {
+struct ExerciseListCellView: View {
 
-    struct Model {
-        let exercise: String
-        let categories: String
-    }
-
-    var model: Model
+    var exercise: Exercise
 
     var body: some View {
         HStack(spacing: 8) {
             VStack(alignment: .leading, spacing: 4) {
-                Text(model.exercise)
+                Text(exercise.model.name)
                     .font(.headline)
                     .foregroundColor(.primary)
 
-                Text(model.categories)
+                Text(exercise.model.categoriesLocalizedNames)
                     .font(.subheadline)
                     .foregroundColor(.secondary)
+
+                if exercise.defaultSets != 0 {
+                    ProgressView(value: min(Double(exercise.sets.count) / exercise.defaultSets, 1))
+                        .progressViewStyle(.linear)
+                        .padding(.top, 4)
+                }
+
             }
             .multilineTextAlignment(.leading)
             .frame(maxWidth: .infinity, alignment: .leading)

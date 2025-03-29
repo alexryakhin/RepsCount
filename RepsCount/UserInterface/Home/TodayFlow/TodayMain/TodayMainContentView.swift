@@ -37,6 +37,7 @@ public struct TodayMainContentView: PageView {
         }
         .onAppear {
             AnalyticsService.shared.logEvent(.todayScreenOpened)
+            viewModel.handle(.updateDate)
         }
     }
 
@@ -81,6 +82,7 @@ public struct TodayMainContentView: PageView {
                     }
                 } header: {
                     CustomSectionHeader("Planned workouts")
+                        .padding(.horizontal, 12)
                 }
             }
         }
@@ -108,6 +110,7 @@ public struct TodayMainContentView: PageView {
                     }
                 } header: {
                     CustomSectionHeader("Current workouts")
+                        .padding(.horizontal, 12)
                 }
             }
         }
@@ -116,7 +119,7 @@ public struct TodayMainContentView: PageView {
     private var navigationBarView: some View {
         HStack(alignment: .top, spacing: 12) {
             VStack(alignment: .leading, spacing: 0) {
-                Text(Date.now.formatted(date: .long, time: .omitted)) // e.g., March 16
+                Text(viewModel.currentDate.formatted(date: .long, time: .omitted)) // e.g., March 16
                     .font(.subheadline)
                     .fontWeight(.semibold)
                     .foregroundStyle(.secondary)
@@ -187,13 +190,5 @@ public struct TodayMainContentView: PageView {
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("Select a template")
         }
-    }
-}
-
-extension DateFormatter {
-    static var shortTime: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.timeStyle = .short
-        return formatter
     }
 }

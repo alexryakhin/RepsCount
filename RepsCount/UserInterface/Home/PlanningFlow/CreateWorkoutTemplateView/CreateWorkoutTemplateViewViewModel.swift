@@ -13,6 +13,8 @@ public final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
         case toggleAddExerciseSheet
         case addExercise(WorkoutTemplateExercise)
         case removeExercise(WorkoutTemplateExercise)
+        case updateName
+        case updateNotes
     }
 
     enum Output {
@@ -55,9 +57,17 @@ public final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
         case .toggleAddExerciseSheet:
             isShowingAddExerciseSheet.toggle()
         case .addExercise(let exercise):
-            exercises.append(exercise)
+            if isEditing {
+                workoutTemplatesManager.addExerciseTemplate(exercise)
+            } else {
+                exercises.append(exercise)
+            }
         case .removeExercise(let exercise):
-            exercises.removeAll(where: { $0.id == exercise.id })
+            workoutTemplatesManager.deleteExerciseTemplate(exercise)
+        case .updateName:
+            workoutTemplatesManager.updateName(workoutName)
+        case .updateNotes:
+            workoutTemplatesManager.updateNotes(workoutNotes)
         }
     }
 
@@ -65,15 +75,15 @@ public final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
 
     private func setupBindings() {
         workoutTemplatesManager.workoutTemplatePublisher
+            .ifNotNil()
             .removeDuplicates()
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] template in
                 guard let self else { return }
-                if let template {
-                    isEditing = true
-                    workoutName = template.name
-                    workoutNotes = template.notes.orEmpty
-                    exercises = template.templateExercises
-                }
+                isEditing = true
+                workoutName = template.name
+                workoutNotes = template.notes.orEmpty
+                exercises = template.templateExercises
             }
             .store(in: &cancellables)
     }
@@ -87,24 +97,17 @@ public final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
             showAlert(withModel: .init(title: "Empty exercises", message: "You should add at least one exercise"))
             return
         }
-        if isEditing {
-            workoutTemplatesManager.updateName(workoutName)
-            workoutTemplatesManager.updateNotes(workoutNotes)
-            workoutTemplatesManager.updateExercises(exercises)
-            onOutput?(.dismiss)
-        } else {
-            workoutTemplatesManager.createNewWorkoutTemplate(
-                name: workoutName,
-                notes: workoutNotes.nilIfEmpty,
-                exerciseTemplates: exercises
-            )
-            onOutput?(.dismiss)
-        }
+        workoutTemplatesManager.createNewWorkoutTemplate(
+            name: workoutName,
+            notes: workoutNotes.nilIfEmpty,
+            exerciseTemplates: exercises
+        )
+        onOutput?(.dismiss)
     }
 
     private func editDefaults(for exercise: WorkoutTemplateExercise) {
-        defaultSetsInput = exercise.defaultSets.formatted()
-        defaultAmountInput = exercise.defaultAmount.formatted()
+        defaultSetsInput = exercise.defaultSets == 0 ? "" : exercise.defaultSets.formatted()
+        defaultAmountInput = exercise.defaultAmount == 0 ? "" : exercise.defaultAmount.formatted()
         editingDefaultsExercise = exercise
     }
 
@@ -112,6 +115,7 @@ public final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
         if let index = exercises.firstIndex(where: { $0.id == exercise.id }) {
             exercises[index].defaultSets = Double(defaultSetsInput) ?? 0
             exercises[index].defaultAmount = Double(defaultAmountInput) ?? 0
+            workoutTemplatesManager.updateExerciseTemplate(exercises[index])
         }
         defaultSetsInput = ""
         defaultAmountInput = ""

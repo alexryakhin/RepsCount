@@ -295,6 +295,28 @@ public extension ExerciseModel {
             return .gym
         case .tireFlips:
             return .gym
+        case .widePushUps:
+            return .none
+        case .inclinePushUps:
+            return .none
+        case .wallSit:
+            return .none
+        case .elbowLever:
+            return .none
+        case .scapulaPullUps:
+            return .bars
+        case .scapulaPushUps:
+            return .none
+        case .pikePushUps:
+            return .none
+        case .plancheLean:
+            return .none
+        case .frogPose:
+            return .none
+        case .handstandToeTouch:
+            return .none
+        case .lSitLegLifts:
+            return .bars
         }
     }
 }

@@ -80,7 +80,7 @@ public struct ExerciseDetailsContentView: PageView {
                             isEditingDefaultsAlertPresented = true
                             AnalyticsService.shared.logEvent(.exerciseDetailsEditMenuButtonTapped)
                         } label: {
-                            Label("Edit defaults", systemImage: "pencil.and.ellipsis.rectangle")
+                            Label("Edit", systemImage: "pencil.and.ellipsis.rectangle")
                         }
                     }
                     Section {
@@ -96,7 +96,7 @@ public struct ExerciseDetailsContentView: PageView {
                 }
             }
         }
-        .alert("Edit defaults", isPresented: $isEditingDefaultsAlertPresented) {
+        .alert("Edit", isPresented: $isEditingDefaultsAlertPresented) {
             TextField("Sets (optional)", text: $editingDefaultsSetsInput)
                 .keyboardType(.numberPad)
             let textFieldTitleKey: LocalizedStringKey = switch viewModel.exercise.model.metricType {

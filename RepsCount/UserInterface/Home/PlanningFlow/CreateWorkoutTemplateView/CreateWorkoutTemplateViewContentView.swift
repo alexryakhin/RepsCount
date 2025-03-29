@@ -46,22 +46,24 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
             }
         }
         .safeAreaInset(edge: .bottom) {
-            Button {
-                viewModel.handle(.saveTemplate)
-                AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenSaveButtonTapped)
-            } label: {
-                Text(viewModel.isEditing ? "Save Changes" : "Create Template")
-                    .bold()
-                    .frame(maxWidth: .infinity)
-                    .padding(12)
-                    .cornerRadius(12)
+            if !viewModel.isEditing {
+                Button {
+                    viewModel.handle(.saveTemplate)
+                    AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenSaveButtonTapped)
+                } label: {
+                    Text("Create Template")
+                        .bold()
+                        .frame(maxWidth: .infinity)
+                        .padding(12)
+                        .cornerRadius(12)
+                }
+                .buttonStyle(.borderedProminent)
+                .padding(.vertical, 12)
+                .padding(.horizontal, 16)
+                .gradientStyle(.bottomButton)
             }
-            .buttonStyle(.borderedProminent)
-            .padding(.vertical, 12)
-            .padding(.horizontal, 16)
-            .gradientStyle(.bottomButton)
         }
-        .alert("Edit defaults", isPresented: .constant(viewModel.editingDefaultsExercise != nil), presenting: viewModel.editingDefaultsExercise) { exercise in
+        .alert("Edit", isPresented: .constant(viewModel.editingDefaultsExercise != nil), presenting: viewModel.editingDefaultsExercise) { exercise in
             TextField("Sets (optional)", text: $viewModel.defaultSetsInput)
                 .keyboardType(.numberPad)
             let textFieldTitleKey: LocalizedStringKey = switch exercise.exerciseModel.metricType {
@@ -114,6 +116,7 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
         } headerTrailingContent: {
             if isNameFocused {
                 Button("Done") {
+                    viewModel.handle(.updateName)
                     isNameFocused = false
                     AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenNameChanged)
                 }
@@ -133,6 +136,7 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
         } headerTrailingContent: {
             if isNotesFocused {
                 Button("Done") {
+                    viewModel.handle(.updateNotes)
                     isNotesFocused = false
                     AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenNotesChanged)
                 }
@@ -146,51 +150,21 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
             VStack(spacing: 8) {
                 Section {
                     ListWithDivider(viewModel.exercises) { exercise in
-                        HStack(spacing: 12) {
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(exercise.exerciseModel.name)
-                                    .bold()
-                                    .foregroundStyle(.primary)
-                                Text(exercise.exerciseModel.categoriesLocalizedNames)
-                                    .foregroundStyle(.secondary)
-                                    .font(.caption)
-                            }
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            VStack(alignment: .trailing, spacing: 4) {
-                                Text("Sets: \(exercise.defaultSets.formatted())")
-                                    .foregroundStyle(.secondary)
-                                    .font(.caption)
-                                switch exercise.exerciseModel.metricType {
-                                case .reps:
-                                    Text("Reps: \(exercise.defaultAmount.formatted())")
-                                        .foregroundStyle(.secondary)
-                                        .font(.caption)
-                                case .time:
-                                    Text("Time (sec): \(exercise.defaultAmount.formatted())")
-                                        .foregroundStyle(.secondary)
-                                        .font(.caption)
-                                @unknown default:
-                                    fatalError()
-                                }
-                            }
-                        }
-                        .padding(.vertical, 12)
-                        .padding(.horizontal, 16)
-                        .background(Color.systemBackground.opacity(0.02))
-                        .contextMenu {
-                            Button("Edit defaults") {
+                        SwipeToDeleteView {
+                            WorkoutTemplateExerciseRow(exercise: exercise) {
                                 viewModel.handle(.editDefaults(exercise))
                                 AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenExerciseEditButtonTapped)
                             }
-                            Button("Remove", role: .destructive) {
-                                viewModel.handle(.removeExercise(exercise))
-                                AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenExerciseRemoveButtonTapped)
-                            }
+                            .padding(vertical: 12, horizontal: 16)
+                        } onDelete: {
+                            viewModel.handle(.removeExercise(exercise))
+                            AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenExerciseRemoveButtonTapped)
                         }
                     }
                     .clippedWithBackground(Color.surface)
                 } header: {
                     CustomSectionHeader("Selected exercises")
+                        .padding(.horizontal, 12)
                 }
             }
         }

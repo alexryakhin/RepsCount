@@ -22,7 +22,7 @@ struct TodayWorkoutRow: View {
                     .foregroundColor(.primary)
                     .lineLimit(1)
 
-                Text("Started at: \(workout.date, formatter: DateFormatter.shortTime)")
+                Text("Started at: \(workout.date.formatted(date: .omitted, time: .shortened))")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
 

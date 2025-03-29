@@ -263,6 +263,28 @@ public extension ExerciseModel {
             [.rectusFemoris, .gluteusMaximus, .soleus]
         case .tireFlips:
             [.gluteusMaximus, .rectusFemoris, .trapezius, .latissimusDorsi]
+        case .widePushUps:
+            [.pectoralisMajor, .triceps, .deltoids]
+        case .inclinePushUps:
+            [.pectoralisMajor, .triceps, .deltoids]
+        case .wallSit:
+            [.rectusFemoris, .gluteusMaximus]
+        case .elbowLever:
+            [.rectusAbdominis, .pectoralisMajor, .triceps]
+        case .scapulaPullUps:
+            [.latissimusDorsi, .trapezius]
+        case .scapulaPushUps:
+            [.pectoralisMajor, .trapezius]
+        case .pikePushUps:
+            [.deltoids, .triceps, .pectoralisMajor]
+        case .plancheLean:
+            [.pectoralisMajor, .rectusAbdominis, .deltoids]
+        case .frogPose:
+            [.adductorMagnus, .rectusAbdominis]
+        case .handstandToeTouch:
+            [.deltoids, .rectusAbdominis, .trapezius]
+        case .lSitLegLifts:
+            [.rectusAbdominis, .rectusFemoris]
         }
     }
 
@@ -521,6 +543,28 @@ public extension ExerciseModel {
             [.rectusAbdominis, .pectoralisMajor, .deltoids]
         case .tireFlips:
             [.rectusAbdominis, .biceps, .thoracolumbarFascia]
+        case .widePushUps:
+            [.deltoids, .rectusAbdominis]
+        case .inclinePushUps:
+            [.deltoids, .rectusAbdominis]
+        case .wallSit:
+            [.rectusAbdominis, .gluteusMedius]
+        case .elbowLever:
+            [.deltoids, .latissimusDorsi]
+        case .scapulaPullUps:
+            [.rhomboidMajor, .deltoids]
+        case .scapulaPushUps:
+            [.serratusAnterior, .deltoids]
+        case .pikePushUps:
+            [.trapezius, .rectusAbdominis]
+        case .plancheLean:
+            [.trapezius, .latissimusDorsi]
+        case .frogPose:
+            [.gracilis, .gluteusMaximus]
+        case .handstandToeTouch:
+            [.triceps, .serratusAnterior]
+        case .lSitLegLifts:
+            [.tensorFasciaeLatae]
         }
     }
 }

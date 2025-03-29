@@ -97,6 +97,20 @@ public struct SwipeToDeleteView<Content: View>: View {
                         }
                     }
             )
+            .simultaneousGesture(
+                TapGesture().onEnded { _ in
+                    withAnimation {
+                        offset = 0
+                        isDeleteShowing = false
+                    }
+                }
+            )
+        }
+        .onDisappear {
+            withAnimation {
+                offset = 0
+                isDeleteShowing = false
+            }
         }
     }
 

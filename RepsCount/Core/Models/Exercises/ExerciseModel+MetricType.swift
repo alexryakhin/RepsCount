@@ -23,6 +23,8 @@ public extension ExerciseModel {
             return .time
         case .mountainClimbers, .jumpingJacks, .bearCrawls, .inchworms, .battleRopes, .sledPush:
             return .time
+        case .wallSit, .elbowLever, .plancheLean, .frogPose:
+            return .time
         default:
             return .reps
         }

@@ -11,7 +11,7 @@ import Foundation
 public extension ExerciseModel {
     var type: ExerciseType {
         switch self {
-        case .planche, .frontLever, .backLever, .humanFlag, .muscleUps, .handstandPushUps:
+        case .planche, .frontLever, .backLever, .humanFlag, .muscleUps, .handstandPushUps, .elbowLever, .scapulaPushUps, .scapulaPullUps, .plancheLean, .pikePushUps, .handstandToeTouch, .frogPose, .lSitLegLifts:
             return .calisthenics
         default:
             return .strengthTraining

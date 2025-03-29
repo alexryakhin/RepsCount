@@ -88,13 +88,8 @@ public struct ExercisesListContentView: PageView {
                     AnalyticsService.shared.logEvent(.allExercisesScreenExerciseSelected)
                 } label: {
                     SwipeToDeleteView {
-                        ExerciseListCellView(
-                            model: .init(
-                                exercise: exercise.model.name,
-                                categories: exercise.model.categoriesLocalizedNames
-                            )
-                        )
-                        .padding(vertical: 12, horizontal: 16)
+                        ExerciseListCellView(exercise: exercise)
+                            .padding(vertical: 12, horizontal: 16)
                     } onDelete: {
                         viewModel.handle(.deleteExercise(exercise))
                         AnalyticsService.shared.logEvent(.allExercisesScreenExerciseRemoveButtonTapped)

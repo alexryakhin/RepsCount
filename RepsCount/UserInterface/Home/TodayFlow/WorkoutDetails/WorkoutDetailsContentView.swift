@@ -21,6 +21,7 @@ public struct WorkoutDetailsContentView: PageView {
                     statisticsSectionView
                 }
                 exercisesSectionView
+                notesSectionView
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
@@ -97,13 +98,8 @@ public struct WorkoutDetailsContentView: PageView {
                             AnalyticsService.shared.logEvent(.workoutDetailsExerciseSelected)
                         } label: {
                             SwipeToDeleteView {
-                                ExerciseListCellView(
-                                    model: .init(
-                                        exercise: exercise.model.name,
-                                        categories: exercise.model.categoriesLocalizedNames
-                                    )
-                                )
-                                .padding(vertical: 12, horizontal: 16)
+                                ExerciseListCellView(exercise: exercise)
+                                    .padding(vertical: 12, horizontal: 16)
                             } onDelete: {
                                 viewModel.handle(.showDeleteExerciseAlert(exercise))
                                 AnalyticsService.shared.logEvent(.workoutDetailsExerciseRemoveButtonTapped)
@@ -113,6 +109,7 @@ public struct WorkoutDetailsContentView: PageView {
                     }
                 } header: {
                     CustomSectionHeader("Exercises")
+                        .padding(.horizontal, 12)
                 }
             }
         } else {
@@ -153,6 +150,18 @@ public struct WorkoutDetailsContentView: PageView {
                 }
             }
             .clippedWithBackground(Color.surface)
+        }
+    }
+
+    @ViewBuilder
+    private var notesSectionView: some View {
+        if let notes = viewModel.workout.workoutTemplate?.notes?.nilIfEmpty {
+            CustomSectionView(header: "Notes") {
+                Text(notes)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .multilineTextAlignment(.leading)
+                    .clippedWithPaddingAndBackground(.surface)
+            }
         }
     }
 

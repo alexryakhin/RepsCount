@@ -18,6 +18,7 @@ public final class TodayMainViewModel: DefaultPageViewModel {
         case showDeleteWorkoutAlert(WorkoutInstance)
         case startPlannedWorkout(WorkoutEvent)
         case startWorkoutFromTemplate(WorkoutTemplate)
+        case updateDate
     }
 
     enum Output {
@@ -29,6 +30,7 @@ public final class TodayMainViewModel: DefaultPageViewModel {
     var onOutput: ((Output) -> Void)?
 
     @Published var isShowingAddWorkoutFromTemplate: Bool = false
+    @Published private(set) var currentDate = Date.now
     @Published private(set) var plannedWorkouts: [WorkoutEvent] = []
     @Published private(set) var todayWorkouts: [WorkoutInstance] = []
     @Published private(set) var workoutTemplates: [WorkoutTemplate] = []
@@ -92,6 +94,11 @@ public final class TodayMainViewModel: DefaultPageViewModel {
                     }
                 )
             )
+        case .updateDate:
+            if currentDate.startOfDay != .now.startOfDay {
+                currentDate = .now
+                calendarEventsProvider.fetchEvents()
+            }
         }
     }
 

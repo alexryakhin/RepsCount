@@ -21,7 +21,7 @@ struct TodayWorkoutEventRow: View {
                     .font(.headline)
                     .foregroundColor(.primary)
 
-                Text("Planned at: \(event.date, formatter: DateFormatter.shortTime)")
+                Text("Planned at: \(event.date.formatted(date: .omitted, time: .shortened))")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }

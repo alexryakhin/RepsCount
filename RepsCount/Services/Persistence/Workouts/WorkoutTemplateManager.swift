@@ -10,7 +10,9 @@ public protocol WorkoutTemplateManagerInterface {
 
     func updateName(_ name: String)
     func updateNotes(_ notes: String?)
-    func updateExercises(_ exerciseTemplates: [WorkoutTemplateExercise])
+    func addExerciseTemplate(_ exerciseTemplate: WorkoutTemplateExercise)
+    func updateExerciseTemplate(_ exerciseTemplate: WorkoutTemplateExercise)
+    func deleteExerciseTemplate(_ exerciseTemplate: WorkoutTemplateExercise)
 
     func createNewWorkoutTemplate(
         name: String,
@@ -44,6 +46,7 @@ public final class WorkoutTemplatesManager: WorkoutTemplateManagerInterface {
 
     public func updateName(_ name: String) {
         cdWorkoutTemplate?.name = name
+        saveContext()
     }
 
     public func updateNotes(_ notes: String?) {
@@ -51,22 +54,42 @@ public final class WorkoutTemplatesManager: WorkoutTemplateManagerInterface {
         saveContext()
     }
 
-    public func updateExercises(_ exerciseTemplates: [WorkoutTemplateExercise]) {
-        guard let cdWorkoutTemplate else { return }
-        cdWorkoutTemplate._templateExercises.forEach { [weak self] in
-            self?.coreDataService.context.delete($0)
-        }
-        for exerciseTemplate in exerciseTemplates {
-            let templateExercise = CDWorkoutTemplateExercise(context: coreDataService.context)
-            templateExercise.id = exerciseTemplate.id
-            templateExercise.defaultAmount = exerciseTemplate.defaultAmount
-            templateExercise.defaultSets = exerciseTemplate.defaultSets
-            templateExercise.exerciseModel = exerciseTemplate.exerciseModel.rawValue
-            templateExercise.timestamp = exerciseTemplate.timestamp
-            templateExercise.workoutTemplate = cdWorkoutTemplate
-            cdWorkoutTemplate.addToTemplateExercises(templateExercise)
-        }
+    public func addExerciseTemplate(_ exerciseTemplate: WorkoutTemplateExercise) {
+        let templateExercise = CDWorkoutTemplateExercise(context: coreDataService.context)
+        templateExercise.id = exerciseTemplate.id
+        templateExercise.defaultAmount = exerciseTemplate.defaultAmount
+        templateExercise.defaultSets = exerciseTemplate.defaultSets
+        templateExercise.exerciseModel = exerciseTemplate.exerciseModel.rawValue
+        templateExercise.timestamp = exerciseTemplate.timestamp
+        templateExercise.workoutTemplate = cdWorkoutTemplate
+        cdWorkoutTemplate?.addToTemplateExercises(templateExercise)
         saveContext()
+    }
+
+    public func updateExerciseTemplate(_ exerciseTemplate: WorkoutTemplateExercise) {
+        if let cdExerciseTemplate = fetchExerciseTemplate(with: exerciseTemplate.id) {
+            cdExerciseTemplate.defaultAmount = exerciseTemplate.defaultAmount
+            cdExerciseTemplate.defaultSets = exerciseTemplate.defaultSets
+            saveContext()
+        }
+    }
+
+    public func deleteExerciseTemplate(_ exerciseTemplate: WorkoutTemplateExercise) {
+        if let cdExerciseTemplate = fetchExerciseTemplate(with: exerciseTemplate.id) {
+            coreDataService.context.delete(cdExerciseTemplate)
+            saveContext()
+        }
+    }
+
+    private func fetchExerciseTemplate(with id: String) -> CDWorkoutTemplateExercise? {
+        let fetchRequest = CDWorkoutTemplateExercise.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
+        do {
+            return try coreDataService.context.fetch(fetchRequest).first
+        } catch {
+            errorPublisher.send(.storageError(.readFailed))
+            return nil
+        }
     }
 
     public func createNewWorkoutTemplate(
@@ -78,7 +101,7 @@ public final class WorkoutTemplatesManager: WorkoutTemplateManagerInterface {
         cdWorkoutTemplate.id = UUID().uuidString
         cdWorkoutTemplate.name = name
         cdWorkoutTemplate.notes = notes
-        for (index, exerciseTemplate) in exerciseTemplates.enumerated() {
+        for exerciseTemplate in exerciseTemplates {
             let templateExercise = CDWorkoutTemplateExercise(context: coreDataService.context)
             templateExercise.id = exerciseTemplate.id
             templateExercise.defaultAmount = exerciseTemplate.defaultAmount

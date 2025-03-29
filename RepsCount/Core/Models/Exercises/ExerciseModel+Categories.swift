@@ -264,6 +264,28 @@ public extension ExerciseModel {
             return [.quadriceps, .glutes, .calves]
         case .tireFlips:
             return [.quadriceps, .glutes, .trapezius, .lowerBack]
+        case .widePushUps:
+            return [.pectorals, .triceps, .deltoids]
+        case .inclinePushUps:
+            return [.pectorals, .triceps, .deltoids]
+        case .wallSit:
+            return [.quadriceps, .glutes]
+        case .elbowLever:
+            return [.abdominals, .pectorals, .triceps]
+        case .scapulaPullUps:
+            return [.lats, .trapezius]
+        case .scapulaPushUps:
+            return [.pectorals, .trapezius]
+        case .pikePushUps:
+            return [.deltoids, .triceps, .pectorals]
+        case .plancheLean:
+            return [.pectorals, .abdominals, .deltoids]
+        case .frogPose:
+            return [.adductors, .abdominals]
+        case .handstandToeTouch:
+            return [.deltoids, .abdominals, .trapezius]
+        case .lSitLegLifts:
+            return [.abdominals, .quadriceps]
         }
     }
 }

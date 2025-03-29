@@ -24,12 +24,14 @@ public struct AboutAppContentView: PageView {
             Section {
                 Text("Welcome to RepsCount, your companion for tracking and improving your workout performance!\nI created this app because I myself needed something simple yet powerful to track my progress, and it's pretty hard to do it just in Notes App.\nIf you like the app, please leave a review")
                     .multilineTextAlignment(.leading)
-                HStack(spacing: 8) {
-                    Text("App version:")
-                        .bold()
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    Text(GlobalConstant.currentFullAppVersion)
-                        .foregroundColor(.secondary)
+                if let appVersion = GlobalConstant.appVersion {
+                    HStack(spacing: 8) {
+                        Text("App version:")
+                            .bold()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        Text(appVersion)
+                            .foregroundColor(.secondary)
+                    }
                 }
             } header: {
                 Text("About app")
