@@ -43,5 +43,14 @@ public final class CreateWorkoutTemplateViewViewController: PageViewController<C
                 self?.onEvent?(.finish)
             }
         }
+
+        viewModel.$isEditing
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isEditing in
+                self?.navigationItem.title = isEditing
+                ? NSLocalizedString("Edit workout template", comment: .empty)
+                : NSLocalizedString("New workout template", comment: .empty)
+            }
+            .store(in: &cancellables)
     }
 }

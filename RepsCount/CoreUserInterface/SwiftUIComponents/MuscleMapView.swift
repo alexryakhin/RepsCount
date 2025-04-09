@@ -55,17 +55,19 @@ public struct MuscleMapImageView: View {
     // MARK: - Body
     public var body: some View {
         HStack(spacing: 8) {
-            Group {
-                if let frontImage, let backImage {
-                    frontImageView(image: frontImage)
-                    backImageView(image: backImage)
-                } else {
-                    loadingView
-                }
+            if let frontImage, let backImage {
+                frontImageView(image: frontImage)
+                backImageView(image: backImage)
+            } else {
+                loadingView
+                    .onAppear {
+                        loadImages()
+                    }
             }
         }
-        .task(id: UUID()) {
-            await loadImages()
+        .task(id: cacheKey(for: "")) {
+            frontImage = nil
+            backImage = nil
         }
     }
 
@@ -145,12 +147,14 @@ public struct MuscleMapImageView: View {
         return "\(svgName)|\(primary)|\(secondary)|\(width)|\(colorScheme)" as NSString
     }
 
-    private func loadImages() async {
-        async let front = renderMuscleMap(svgName: "front")
-        async let back = renderMuscleMap(svgName: "back")
-        let (frontResult, backResult) = await (front, back)
+    private func loadImages() {
+        Task { @MainActor in
+            async let front = renderMuscleMap(svgName: "front")
+            async let back = renderMuscleMap(svgName: "back")
+            let (frontResult, backResult) = await (front, back)
 
-        frontImage = Image(uiImage: frontResult)
-        backImage = Image(uiImage: backResult)
+            frontImage = Image(uiImage: frontResult)
+            backImage = Image(uiImage: backResult)
+        }
     }
 }
