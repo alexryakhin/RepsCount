@@ -36,7 +36,7 @@ open class PageViewController<Content: PageView>: UIHostingController<Content> {
     }
 
     open func setup() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .systemGroupedBackground
     }
 
     public final func setupSearchBar(placeholder: String = "Search exercises") {

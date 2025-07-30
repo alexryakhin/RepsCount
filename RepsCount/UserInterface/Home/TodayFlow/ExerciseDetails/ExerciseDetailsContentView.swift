@@ -31,7 +31,7 @@ public struct ExerciseDetailsContentView: PageView {
             .padding(vertical: 12, horizontal: 16)
         }
         .background(
-            Color.background.ignoresSafeArea().displayConfetti(isActive: $showConfetti)
+            Color(.systemGroupedBackground).ignoresSafeArea().displayConfetti(isActive: $showConfetti)
         )
         .safeAreaInset(edge: .bottom, alignment: .trailing) {
             if viewModel.exercise.defaultSets != 0 || viewModel.isEditable {
@@ -39,7 +39,7 @@ public struct ExerciseDetailsContentView: PageView {
                     progressGauge
                     addDataButton
                 }
-                .clippedWithPaddingAndBackground(.ultraThinMaterial)
+                .clippedWithPaddingAndBackgroundMaterial(.ultraThinMaterial)
                 .padding(vertical: 12, horizontal: 16)
             }
         }
@@ -134,7 +134,7 @@ public struct ExerciseDetailsContentView: PageView {
                 ListWithDivider(Array(viewModel.exercise.sets.enumerated())) { offset, exerciseSet in
                     setCellView(exerciseSet, offset: offset)
                 }
-                .clippedWithBackground(.surface)
+                .clippedWithBackground()
             }
         }
     }
@@ -191,7 +191,7 @@ public struct ExerciseDetailsContentView: PageView {
                     infoCellView("Time: \(distance.formatted(with: [.hour, .minute, .second]))")
                 }
             }
-            .clippedWithBackground(.surface)
+            .clippedWithBackground()
         }
     }
 
@@ -212,7 +212,7 @@ public struct ExerciseDetailsContentView: PageView {
                             Text(address)
                                 .font(.subheadline)
                                 .padding(vertical: 8, horizontal: 12)
-                                .clippedWithBackground(.thinMaterial)
+                                .clippedWithBackgroundMaterial(.thinMaterial)
                                 .padding(8)
                                 .multilineTextAlignment(.leading)
                         }
@@ -230,7 +230,7 @@ public struct ExerciseDetailsContentView: PageView {
                 axis: .vertical
             )
             .focused($isNotesInputFocused)
-            .clippedWithPaddingAndBackground(.surface)
+            .clippedWithPaddingAndBackground()
         } headerTrailingContent: {
             if isNotesInputFocused {
                 Button {

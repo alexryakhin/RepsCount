@@ -46,7 +46,7 @@ public struct ListFlowPicker<SelectionItem: Selectable>: View {
             }
         }
         .listRowBackground(
-            error != nil ? Color.red.opacity(0.4) : Color.surface
+            error != nil ? Color.red.opacity(0.4) : Color(.secondarySystemGroupedBackground)
         )
         .onChange(of: selection) { _ in
             if error != nil {

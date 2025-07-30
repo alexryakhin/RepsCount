@@ -16,7 +16,7 @@ public struct EmptyListView<Actions: View>: View {
     public init(
         label: LocalizedStringKey? = nil,
         description: LocalizedStringKey? = nil,
-        background: Color = Color.systemBackground,
+        background: Color = Color(.systemGroupedBackground),
         @ViewBuilder actions: @escaping () -> Actions = { EmptyView() }
     ) {
         self.label = label

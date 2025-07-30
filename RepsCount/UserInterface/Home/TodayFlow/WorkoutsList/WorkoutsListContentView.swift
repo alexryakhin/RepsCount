@@ -34,7 +34,7 @@ public struct WorkoutsListContentView: PageView {
             }
             .padding(vertical: 12, horizontal: 16)
         }
-        .background(Color.background)
+        .background(Color(.systemGroupedBackground))
         .animation(.default, value: viewModel.sections)
         .overlay {
             if let selectedDate = viewModel.selectedDate,
@@ -89,7 +89,7 @@ public struct WorkoutsListContentView: PageView {
                     }
                 }
             }
-            .clippedWithBackground(Color.surface)
+            .clippedWithBackground()
         }
     }
 }

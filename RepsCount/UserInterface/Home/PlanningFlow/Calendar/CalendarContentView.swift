@@ -21,7 +21,7 @@ public struct CalendarContentView: PageView {
             }
             .padding(vertical: 12, horizontal: 16)
         }
-        .background(Color.background)
+        .background(Color(.systemGroupedBackground))
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
@@ -41,7 +41,7 @@ public struct CalendarContentView: PageView {
         CustomSectionView(header: "Select date") {
             DatePicker("Select date", selection: $viewModel.selectedDate, displayedComponents: .date)
                 .datePickerStyle(.graphical)
-                .clippedWithPaddingAndBackground(.surface)
+                .clippedWithPaddingAndBackground()
         }
     }
 
@@ -57,7 +57,7 @@ public struct CalendarContentView: PageView {
                         .buttonStyle(.borderedProminent)
                     }
                 }
-                .clippedWithPaddingAndBackground(.surface)
+                .clippedWithPaddingAndBackground()
             } else {
                 ListWithDivider(viewModel.eventsForSelectedDate) { event in
                     SwipeToDeleteView {
@@ -68,7 +68,7 @@ public struct CalendarContentView: PageView {
                         AnalyticsService.shared.logEvent(.calendarScreenEventRemoveButtonTapped)
                     }
                 }
-                .clippedWithBackground(.surface)
+                .clippedWithBackground()
             }
         }
     }

@@ -30,11 +30,11 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
                         .bold()
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                .clippedWithPaddingAndBackground(.surface)
+                .clippedWithPaddingAndBackground()
             }
             .padding(vertical: 12, horizontal: 16)
         }
-        .background(Color.background)
+        .background(Color(.systemGroupedBackground))
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
@@ -100,7 +100,7 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
     private var muscleMapSectionView: some View {
         CustomSectionView(header: "Muscle groups to target") {
             MuscleMapImageView(exercises: viewModel.exercises.map(\.exerciseModel), width: 250)
-                .clippedWithPaddingAndBackground(.surface)
+                .clippedWithPaddingAndBackground()
         }
     }
 
@@ -112,7 +112,7 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
                 axis: .vertical
             )
             .focused($isNameFocused)
-            .clippedWithPaddingAndBackground(.surface)
+            .clippedWithPaddingAndBackground()
         } headerTrailingContent: {
             if isNameFocused {
                 Button("Done") {
@@ -132,7 +132,7 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
                 axis: .vertical
             )
             .focused($isNotesFocused)
-            .clippedWithPaddingAndBackground(.surface)
+            .clippedWithPaddingAndBackground()
         } headerTrailingContent: {
             if isNotesFocused {
                 Button("Done") {
@@ -161,7 +161,7 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
                             AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenExerciseRemoveButtonTapped)
                         }
                     }
-                    .clippedWithBackground(Color.surface)
+                    .clippedWithBackground()
                 } header: {
                     CustomSectionHeader("Selected exercises")
                         .padding(.horizontal, 12)

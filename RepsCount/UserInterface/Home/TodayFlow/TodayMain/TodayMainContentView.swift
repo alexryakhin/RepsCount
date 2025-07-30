@@ -26,7 +26,7 @@ public struct TodayMainContentView: PageView {
         } navigationBar: {
             navigationBarView
         }
-        .background(Color.background)
+        .background(Color(.systemGroupedBackground))
         .sheet(isPresented: $viewModel.isShowingAddWorkoutFromTemplate) {
             templateSelectionView
         }
@@ -77,7 +77,7 @@ public struct TodayMainContentView: PageView {
                             AnalyticsService.shared.logEvent(.todayScreenStartPlannedWorkoutTapped)
                         } label: {
                             TodayWorkoutEventRow(event: event)
-                                .clippedWithPaddingAndBackground(.surface)
+                                .clippedWithPaddingAndBackground()
                         }
                     }
                 } header: {
@@ -105,7 +105,7 @@ public struct TodayMainContentView: PageView {
                                 viewModel.handle(.showDeleteWorkoutAlert(workout))
                                 AnalyticsService.shared.logEvent(.todayScreenWorkoutRemoveButtonTapped)
                             }
-                            .clippedWithBackground(.surface)
+                            .clippedWithBackground()
                         }
                     }
                 } header: {
@@ -183,10 +183,10 @@ public struct TodayMainContentView: PageView {
                     }
                     .padding(vertical: 12, horizontal: 16)
                 }
-                .clippedWithBackground(Color.surface)
+                .clippedWithBackground()
                 .padding(16)
             }
-            .background(Color.background)
+            .background(Color(.systemGroupedBackground))
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("Select a template")
         }

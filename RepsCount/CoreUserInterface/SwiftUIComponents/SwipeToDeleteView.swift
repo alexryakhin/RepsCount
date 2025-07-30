@@ -53,7 +53,7 @@ public struct SwipeToDeleteView<Content: View>: View {
             ChildSizeReader(size: $size) {
                 content()
             }
-            .background(Color.surface)
+            .background(Color(.secondarySystemGroupedBackground))
             .offset(x: offset)
             .onReceive(swipeToDeleteViewActiveId, perform: { newID in
                 if newID != id && isDeleteShowing {

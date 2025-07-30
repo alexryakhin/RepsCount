@@ -32,7 +32,7 @@ public extension PageView {
         contentView
             .overlay {
                 if let additionalState = viewModel.additionalState {
-                    Color.systemBackground.ignoresSafeArea()
+                    Color(.systemGroupedBackground).ignoresSafeArea()
                     switch additionalState {
                     case .loading(let props):
                         loaderView(props: props)

@@ -21,7 +21,7 @@ public struct PlanningMainContentView: PageView {
             }
             .padding(vertical: 12, horizontal: 16)
         }
-        .background(Color.background)
+        .background(Color(.systemGroupedBackground))
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
@@ -68,7 +68,7 @@ public struct PlanningMainContentView: PageView {
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .clippedWithPaddingAndBackground(.surface)
+            .clippedWithPaddingAndBackground()
         }
     }
 
@@ -86,7 +86,7 @@ public struct PlanningMainContentView: PageView {
                         viewModel.handle(.deleteWorkoutTemplate(template))
                         AnalyticsService.shared.logEvent(.planningScreenTemplateRemoved)
                     }
-                    .clippedWithBackground(.surface)
+                    .clippedWithBackground()
                 }
             }
         }

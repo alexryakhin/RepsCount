@@ -43,9 +43,9 @@ public enum GradientStyle {
         switch self {
         case .bottomButton:
             return [
-                .systemBackground.opacity(0),
-                .systemBackground,
-                .systemBackground
+                Color(.systemBackground).opacity(0),
+                Color(.systemBackground),
+                Color(.systemBackground)
             ]
         }
     }

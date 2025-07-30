@@ -15,8 +15,8 @@ public struct MuscleMapImageView: View {
             switch self {
             case .primary: return .primaryMuscleGroup
             case .secondary: return .secondaryMuscleGroup
-            case .notInvolved: return .quaternarySystemFill
-            case .background: return .background
+            case .notInvolved: return Color(.quaternarySystemFill)
+            case .background: return Color(.systemGroupedBackground)
             }
         }
     }
@@ -88,7 +88,7 @@ public struct MuscleMapImageView: View {
 
     private var loadingView: some View {
         ZStack {
-            Color.background
+            Color(.systemGroupedBackground)
             ProgressView()
         }
         .clipShape(RoundedRectangle(cornerRadius: 12))

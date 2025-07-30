@@ -129,7 +129,7 @@ struct AddExerciseView: View {
                         Text(muscleGroup.commonNameLocalized)
                             .font(.caption)
                             .padding(vertical: 4, horizontal: 8)
-                            .background(Color.secondarySystemFill)
+                            .background(Color(.secondarySystemFill))
                             .clipShape(Capsule())
                     }
                 }

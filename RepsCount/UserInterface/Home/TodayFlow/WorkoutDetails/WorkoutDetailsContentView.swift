@@ -26,7 +26,7 @@ public struct WorkoutDetailsContentView: PageView {
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
         }
-        .background(Color.background)
+        .background(Color(.systemGroupedBackground))
         .animation(.default, value: viewModel.workout)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
@@ -104,7 +104,7 @@ public struct WorkoutDetailsContentView: PageView {
                                 viewModel.handle(.showDeleteExerciseAlert(exercise))
                                 AnalyticsService.shared.logEvent(.workoutDetailsExerciseRemoveButtonTapped)
                             }
-                            .clippedWithBackground(.surface)
+                            .clippedWithBackground()
                         }
                     }
                 } header: {
@@ -124,14 +124,14 @@ public struct WorkoutDetailsContentView: PageView {
                 }
                 .buttonStyle(.borderedProminent)
             }
-            .clippedWithPaddingAndBackground(.surface)
+            .clippedWithPaddingAndBackground()
         }
     }
 
     private var muscleMapSectionView: some View {
         CustomSectionView(header: "Target muscles") {
             MuscleMapImageView(exercises: viewModel.workout.exercises.map(\.model), width: 100)
-                .clippedWithPaddingAndBackground(.surface)
+                .clippedWithPaddingAndBackground()
         }
     }
 
@@ -149,7 +149,7 @@ public struct WorkoutDetailsContentView: PageView {
                     )
                 }
             }
-            .clippedWithBackground(Color.surface)
+            .clippedWithBackground()
         }
     }
 
@@ -160,7 +160,7 @@ public struct WorkoutDetailsContentView: PageView {
                 Text(notes)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .multilineTextAlignment(.leading)
-                    .clippedWithPaddingAndBackground(.surface)
+                    .clippedWithPaddingAndBackground()
             }
         }
     }

@@ -19,10 +19,10 @@ enum ButtonStyleConfig {
     var backgroundColor: Color {
         switch self {
         case .primary, .primaryMini, .primarySmallHorPadding: .accentColor
-        case .secondary, .secondaryMini: .secondarySystemBackground
-        case .tertiary, .tertiaryMini: .tertiarySystemBackground
-        case .dark, .darkMini: .darkText
-        case .white, .whiteMini: .lightGray
+        case .secondary, .secondaryMini: Color(.secondarySystemBackground)
+        case .tertiary, .tertiaryMini: Color(.tertiarySystemBackground)
+        case .dark, .darkMini: Color(.darkText)
+        case .white, .whiteMini: Color(.lightGray)
         case .text, .textMini: .clear
         }
     }
@@ -30,10 +30,10 @@ enum ButtonStyleConfig {
     var backgroundPressedColor: Color {
         switch self {
         case .primary, .primaryMini, .primarySmallHorPadding: .accentColor.opacity(0.8)
-        case .secondary, .secondaryMini: .secondarySystemFill
+        case .secondary, .secondaryMini: Color(.secondarySystemFill)
         case .tertiary, .tertiaryMini: .accentColor
-        case .dark, .darkMini: .secondaryLabel
-        case .white, .whiteMini: .lightGray
+        case .dark, .darkMini: Color(.secondaryLabel)
+        case .white, .whiteMini: Color(.lightGray)
         case .text, .textMini: .clear
         }
     }
@@ -41,18 +41,18 @@ enum ButtonStyleConfig {
     var backgroundDisabledColor: Color {
         switch self {
         case .primary, .primaryMini, .primarySmallHorPadding: .accentColor.opacity(0.8)
-        case .secondary, .secondaryMini: .secondarySystemFill
+        case .secondary, .secondaryMini: Color(.secondarySystemFill)
         case .tertiary, .tertiaryMini: .accentColor
-        case .dark, .darkMini: .label
-        case .white, .whiteMini: .secondarySystemBackground
+        case .dark, .darkMini: Color(.label)
+        case .white, .whiteMini: Color(.secondarySystemBackground)
         case .text, .textMini: .clear
         }
     }
 
     var foregroundColor: Color {
         switch self {
-        case .primary, .primaryMini, .dark, .darkMini, .primarySmallHorPadding: .lightText
-        case .secondary, .secondaryMini, .white, .whiteMini: .label
+        case .primary, .primaryMini, .dark, .darkMini, .primarySmallHorPadding: Color(.lightText)
+        case .secondary, .secondaryMini, .white, .whiteMini: Color(.label)
         case .tertiary, .tertiaryMini: .accentColor
         case .text, .textMini: .accentColor
         }
@@ -60,10 +60,10 @@ enum ButtonStyleConfig {
 
     var foregroundDisabledColor: Color {
         switch self {
-        case .primary, .primaryMini, .dark, .darkMini, .primarySmallHorPadding: .darkGray
-        case .secondary, .secondaryMini, .white, .whiteMini: .quaternaryLabel
+        case .primary, .primaryMini, .dark, .darkMini, .primarySmallHorPadding: Color(.darkGray)
+        case .secondary, .secondaryMini, .white, .whiteMini: Color(.quaternaryLabel)
         case .tertiary, .tertiaryMini: .accentColor
-        case .text, .textMini: .secondaryLabel
+        case .text, .textMini: Color(.secondaryLabel)
         }
     }
 

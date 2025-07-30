@@ -13,7 +13,7 @@ struct OnboardingView: View {
 
     var body: some View {
         ZStack {
-            Color.systemBackground
+            Color(.systemGroupedBackground)
                 .ignoresSafeArea()
             VStack {
                 Text("Welcome to\nReps Counter")

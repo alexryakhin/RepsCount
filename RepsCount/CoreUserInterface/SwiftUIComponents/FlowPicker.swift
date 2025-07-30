@@ -91,7 +91,7 @@ public struct FlowPicker<SelectionItem: Selectable>: View {
 
             FlowPickerView(selection: $selection, items: items)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .clippedWithPaddingAndBackground(.surface)
+                .clippedWithPaddingAndBackground()
                 .overlay {
                     var color: Color {
                         if error != nil {
