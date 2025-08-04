@@ -8,12 +8,12 @@
 import Foundation
 import SwiftUI
 
-public struct DefaultPlaceholderProps: Equatable {
+struct DefaultPlaceholderProps: Equatable {
 
     let title: LocalizedStringKey?
     let subtitle: LocalizedStringKey?
 
-    public init(
+    init(
         title: LocalizedStringKey? = nil,
         subtitle: LocalizedStringKey? = nil
     ) {

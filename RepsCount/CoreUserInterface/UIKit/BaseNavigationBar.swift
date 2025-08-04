@@ -7,16 +7,16 @@
 
 import UIKit
 
-open class BaseNavigationBar: UINavigationBar {
+class BaseNavigationBar: UINavigationBar {
 
     // MARK: - Init
     
-    override public init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
 
-    public required init?(coder: NSCoder) {
+    required init?(coder: NSCoder) {
         super.init(coder: coder)
         setup()
     }
@@ -26,4 +26,4 @@ open class BaseNavigationBar: UINavigationBar {
     open func setup() { }
 }
 
-public final class NavigationBar: BaseNavigationBar {}
+final class NavigationBar: BaseNavigationBar {}

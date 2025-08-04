@@ -7,18 +7,18 @@
 
 import UIKit
 
-open class BaseTabController: UITabBarController {
+class BaseTabController: UITabBarController {
 
-    public required init() {
+    required init() {
         super.init(nibName: nil, bundle: nil)
         setup()
     }
 
-    public required init?(coder: NSCoder) {
+    required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override public func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
@@ -26,10 +26,10 @@ open class BaseTabController: UITabBarController {
     open func setup() {}
 }
 
-public final class TabController: BaseTabController {
+final class TabController: BaseTabController {
     // MARK: - Public Properties
 
-    public var controllers = [NavigationController]() {
+    var controllers = [NavigationController]() {
         didSet {
             viewControllers = controllers
             selectedIndex = 0
@@ -38,7 +38,7 @@ public final class TabController: BaseTabController {
 
     // MARK: - Public Methods
 
-    public func forceSwitchTab(to tabIndex: Int) {
+    func forceSwitchTab(to tabIndex: Int) {
         selectedIndex = tabIndex
     }
 }

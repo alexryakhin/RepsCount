@@ -1,9 +1,8 @@
 import SwiftUI
 import Combine
 import CoreData
-import Core
 
-public protocol ExerciseDetailsManagerInterface {
+protocol ExerciseDetailsManagerInterface {
 
     var exercisePublisher: AnyPublisher<Exercise?, Never> { get }
     var errorPublisher: PassthroughSubject<CoreError, Never> { get }
@@ -15,12 +14,12 @@ public protocol ExerciseDetailsManagerInterface {
     func deleteExercise()
 }
 
-public final class ExerciseDetailsManager: ExerciseDetailsManagerInterface {
+final class ExerciseDetailsManager: ExerciseDetailsManagerInterface {
 
-    public var exercisePublisher: AnyPublisher<Exercise?, Never> {
+    var exercisePublisher: AnyPublisher<Exercise?, Never> {
         _exercisePublisher.eraseToAnyPublisher()
     }
-    public let errorPublisher = PassthroughSubject<CoreError, Never>()
+    let errorPublisher = PassthroughSubject<CoreError, Never>()
 
     private let coreDataService: CoreDataServiceInterface
 
@@ -28,7 +27,7 @@ public final class ExerciseDetailsManager: ExerciseDetailsManagerInterface {
     private var cdExercise: CDExercise?
     private var cancellables: Set<AnyCancellable> = []
 
-    public init(
+    init(
         exerciseID: String,
         coreDataService: CoreDataServiceInterface
     ) {
@@ -36,7 +35,7 @@ public final class ExerciseDetailsManager: ExerciseDetailsManagerInterface {
         fetchExercise(with: exerciseID)
     }
 
-    public func addSet(_ amount: Double, weight: Double) {
+    func addSet(_ amount: Double, weight: Double) {
         guard cdExercise?.workoutInstance?.completionTimeStamp == nil else {
             errorPublisher.send(.internalError(.workoutCompleted))
             return
@@ -50,7 +49,7 @@ public final class ExerciseDetailsManager: ExerciseDetailsManagerInterface {
         saveContext()
     }
 
-    public func deleteSet(_ set: ExerciseSet) {
+    func deleteSet(_ set: ExerciseSet) {
         guard cdExercise?.workoutInstance?.completionTimeStamp == nil else {
             errorPublisher.send(.internalError(.workoutCompleted))
             return
@@ -67,18 +66,18 @@ public final class ExerciseDetailsManager: ExerciseDetailsManagerInterface {
         }
     }
 
-    public func updateNotes(_ notes: String) {
+    func updateNotes(_ notes: String) {
         cdExercise?.notes = notes
         saveContext()
     }
 
-    public func updateDefaults(_ amount: Double, sets: Double) {
+    func updateDefaults(_ amount: Double, sets: Double) {
         cdExercise?.defaultAmount = amount
         cdExercise?.defaultSets = sets
         saveContext()
     }
 
-    public func deleteExercise() {
+    func deleteExercise() {
         guard let cdExercise else {
             errorPublisher.send(.internalError(.removingExerciseFailed))
             return

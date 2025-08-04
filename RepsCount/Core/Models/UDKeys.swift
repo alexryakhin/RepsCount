@@ -7,11 +7,11 @@
 
 import Foundation
 
-public enum UDKeys {
-    public static let isShowingRating = "isShowingRating"
-    public static let isShowingOnboarding = "isShowingOnboarding"
-    public static let measurementUnit = "measurementUnit"
-    public static let savesLocation = "savesLocation"
-    public static let addToCalendar = "addToCalendar"
-    public static let selectedEquipment = "selectedEquipment"
+enum UDKeys {
+    static let isShowingRating = "isShowingRating"
+    static let isShowingOnboarding = "isShowingOnboarding"
+    static let measurementUnit = "measurementUnit"
+    static let savesLocation = "savesLocation"
+    static let addToCalendar = "addToCalendar"
+    static let selectedEquipment = "selectedEquipment"
 }

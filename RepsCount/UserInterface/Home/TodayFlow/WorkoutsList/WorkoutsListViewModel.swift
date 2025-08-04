@@ -1,10 +1,7 @@
-import Core
-import CoreUserInterface
-import Services
-import Shared
 import Combine
+import Foundation
 
-public final class WorkoutsListViewModel: DefaultPageViewModel {
+final class WorkoutsListViewModel: DefaultPageViewModel {
 
     enum Input {
         case showWorkoutDetails(WorkoutInstance)
@@ -32,7 +29,7 @@ public final class WorkoutsListViewModel: DefaultPageViewModel {
 
     // MARK: - Initialization
 
-    public init(workoutsProvider: WorkoutsProviderInterface) {
+    init(workoutsProvider: WorkoutsProviderInterface) {
         self.workoutsProvider = workoutsProvider
         super.init()
         setupBindings()

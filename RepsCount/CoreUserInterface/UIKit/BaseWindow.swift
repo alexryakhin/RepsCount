@@ -7,12 +7,12 @@
 
 import UIKit
 
-public final class BaseWindow: UIWindow {
+final class BaseWindow: UIWindow {
     #if DEBUG
-    public var onShakeDetected: (() -> Void)?
+    var onShakeDetected: (() -> Void)?
     #endif
 
-    override public func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         super.motionEnded(motion, with: event)
 
         #if DEBUG

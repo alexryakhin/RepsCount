@@ -1,11 +1,7 @@
-import Core
-import CoreUserInterface
-import Services
-import Shared
 import Combine
 import SwiftUI
 
-public final class WorkoutDetailsViewModel: DefaultPageViewModel {
+final class WorkoutDetailsViewModel: DefaultPageViewModel {
 
     enum Input {
         case markAsComplete
@@ -39,7 +35,7 @@ public final class WorkoutDetailsViewModel: DefaultPageViewModel {
 
     // MARK: - Initialization
 
-    public init(
+    init(
         workout: WorkoutInstance,
         workoutDetailsManager: WorkoutDetailsManagerInterface
     ) {
@@ -116,7 +112,7 @@ public final class WorkoutDetailsViewModel: DefaultPageViewModel {
 
     private func setupBindings() {
         workoutDetailsManager.workoutPublisher
-            .ifNotNil()
+            .compactMap { $0 }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] workout in
                 self?.workout = workout

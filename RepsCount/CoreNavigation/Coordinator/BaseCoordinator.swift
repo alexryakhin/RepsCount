@@ -1,26 +1,25 @@
 import UIKit
-import Shared
 
 // swiftlint:disable final_class
 /// Abstract coordinator class
-open class BaseCoordinator: CoordinatorInterface {
+class BaseCoordinator: CoordinatorInterface {
 
-    public typealias DefaultFinishHandler = () -> Void
+    typealias DefaultFinishHandler = () -> Void
 
-    public var childCoordinators: [CoordinatorInterface] = []
+    var childCoordinators: [CoordinatorInterface] = []
 
     open func start() {
         assertionFailure("\(String(describing: self)) `start` method must be implemented")
     }
 
-    public func addDependency(_ coordinator: CoordinatorInterface) {
+    func addDependency(_ coordinator: CoordinatorInterface) {
         for element in childCoordinators where element === coordinator {
             return
         }
         childCoordinators.append(coordinator)
     }
 
-    public func removeDependency(_ coordinator: CoordinatorInterface?) {
+    func removeDependency(_ coordinator: CoordinatorInterface?) {
         guard
             !childCoordinators.isEmpty,
             let coordinator = coordinator
@@ -32,7 +31,7 @@ open class BaseCoordinator: CoordinatorInterface {
         }
     }
 
-    public func removeDependency<T: CoordinatorInterface>(of coordinatorType: T.Type) {
+    func removeDependency<T: CoordinatorInterface>(of coordinatorType: T.Type) {
         guard !childCoordinators.isEmpty else {
             return
         }
@@ -43,18 +42,18 @@ open class BaseCoordinator: CoordinatorInterface {
         }
     }
 
-    public func removeAllDependencies() {
+    func removeAllDependencies() {
         childCoordinators.removeAll()
     }
 
-    public init() { }
+    init() { }
 
     deinit {
         logInfo("DEINIT \(String(describing: self))")
     }
 }
 
-public extension BaseCoordinator {
+extension BaseCoordinator {
     func contains<C: CoordinatorInterface>(child _: C.Type) -> Bool {
         return childCoordinators.contains(where: { type(of: $0) == C.self })
     }

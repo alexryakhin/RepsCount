@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum ErrorDisplayType {
+enum ErrorDisplayType {
     case none
     case page
     case alert

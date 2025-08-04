@@ -1,11 +1,7 @@
-import Core
-import CoreUserInterface
-import Services
-import Shared
 import Combine
 import EventKit
 
-public final class CalendarViewModel: DefaultPageViewModel {
+final class CalendarViewModel: DefaultPageViewModel {
 
     enum Input {
         case scheduleWorkout
@@ -41,7 +37,7 @@ public final class CalendarViewModel: DefaultPageViewModel {
 
     // MARK: - Initialization
 
-    public init(calendarEventsProvider: WorkoutEventsProviderInterface) {
+    init(calendarEventsProvider: WorkoutEventsProviderInterface) {
         self.calendarEventsProvider = calendarEventsProvider
         super.init()
         setupBindings()

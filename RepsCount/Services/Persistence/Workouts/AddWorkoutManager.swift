@@ -7,20 +7,19 @@
 
 import Foundation
 import CoreData
-import Core
 
-public protocol AddWorkoutManagerInterface {
+protocol AddWorkoutManagerInterface {
     func addOpenWorkout() throws(CoreError) -> WorkoutInstance?
     func addWorkout(from template: WorkoutTemplate, savesLocation: Bool) async throws(CoreError) -> WorkoutInstance?
     func addWorkout(from event: WorkoutEvent, savesLocation: Bool) async throws(CoreError) -> WorkoutInstance?
 }
 
-public final class AddWorkoutManager: AddWorkoutManagerInterface {
+final class AddWorkoutManager: AddWorkoutManagerInterface {
 
     private let coreDataService: CoreDataServiceInterface
     private let locationManager: LocationManagerInterface
 
-    public init(
+    init(
         coreDataService: CoreDataServiceInterface,
         locationManager: LocationManagerInterface
     ) {
@@ -28,7 +27,7 @@ public final class AddWorkoutManager: AddWorkoutManagerInterface {
         self.locationManager = locationManager
     }
 
-    public func addWorkout(from event: WorkoutEvent, savesLocation: Bool) async throws(CoreError) -> WorkoutInstance? {
+    func addWorkout(from event: WorkoutEvent, savesLocation: Bool) async throws(CoreError) -> WorkoutInstance? {
         if let workout = try getWorkoutInstance(with: event.id) {
             return workout.coreModel
         }
@@ -58,7 +57,7 @@ public final class AddWorkoutManager: AddWorkoutManagerInterface {
         return newItem.coreModel
     }
 
-    public func addWorkout(from template: WorkoutTemplate, savesLocation: Bool) async throws(CoreError) -> WorkoutInstance? {
+    func addWorkout(from template: WorkoutTemplate, savesLocation: Bool) async throws(CoreError) -> WorkoutInstance? {
         let newItem = CDWorkoutInstance(context: coreDataService.context)
         newItem.date = .now
         newItem.id = UUID().uuidString
@@ -83,7 +82,7 @@ public final class AddWorkoutManager: AddWorkoutManagerInterface {
         return newItem.coreModel
     }
 
-    public func addOpenWorkout() throws(CoreError) -> WorkoutInstance? {
+    func addOpenWorkout() throws(CoreError) -> WorkoutInstance? {
         let newItem = CDWorkoutInstance(context: coreDataService.context)
         newItem.date = .now
         newItem.id = UUID().uuidString

@@ -5,7 +5,6 @@
 //  Created by Aleksandr Riakhin on 3/21/25.
 //
 
-import Core
 import SwiftUI
 
 extension ExerciseSet {

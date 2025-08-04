@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol APIPath {
+protocol APIPath {
     var path: String { get }
     var httpMethod: HTTPMethod { get }
     var queryParams: [URLQueryItem]? { get }

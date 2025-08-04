@@ -5,7 +5,9 @@
 //  Created by Aleksandr Riakhin on 3/26/25.
 //
 
-public extension Int {
+import Foundation
+
+extension Int {
     var repsCountLocalized: String {
         let repsCountFormat = NSLocalizedString("%d reps", comment: .empty)
         let repsCountString = String.localizedStringWithFormat(repsCountFormat, self)

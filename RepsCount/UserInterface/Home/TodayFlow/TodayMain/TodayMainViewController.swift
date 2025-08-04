@@ -1,17 +1,15 @@
 import UIKit
 import SwiftUI
-import CoreUserInterface
-import Core
 
-public final class TodayMainViewController: PageViewController<TodayMainContentView>, NavigationBarHidden {
+final class TodayMainViewController: PageViewController<TodayMainContentView>, NavigationBarHidden {
 
-    public enum Event {
+    enum Event {
         case showWorkoutDetails(WorkoutInstance)
         case showAllWorkouts
         case showAllExercises
     }
 
-    public var onEvent: ((Event) -> Void)?
+    var onEvent: ((Event) -> Void)?
 
     // MARK: - Private properties
 
@@ -19,16 +17,16 @@ public final class TodayMainViewController: PageViewController<TodayMainContentV
 
     // MARK: - Initialization
 
-    public init(viewModel: TodayMainViewModel) {
+    init(viewModel: TodayMainViewModel) {
         self.viewModel = viewModel
         super.init(rootView: TodayMainContentView(viewModel: viewModel))
     }
 
-    public required init?(coder: NSCoder) {
+    required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override public func setup() {
+    override func setup() {
         super.setup()
         setupBindings()
         tabBarItem = TabBarItem.today.item

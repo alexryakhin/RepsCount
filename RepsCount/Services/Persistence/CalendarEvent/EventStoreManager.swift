@@ -7,9 +7,8 @@
 
 import EventKit
 import Combine
-import Core
 
-public protocol EventStoreManagerInterface {
+protocol EventStoreManagerInterface {
     /// Specifies the authorization status for the app.
     var authorizationStatusPublisher: AnyPublisher<EKAuthorizationStatus, Never> { get }
     var store: EKEventStore { get }
@@ -18,31 +17,31 @@ public protocol EventStoreManagerInterface {
     func saveWorkoutEvent(_ workoutEvent: WorkoutEvent, calendar: EKCalendar?) async throws
 }
 
-public final class EventStoreManager: EventStoreManagerInterface {
+final class EventStoreManager: EventStoreManagerInterface {
 
     /// Specifies the authorization status for the app.
-    public var authorizationStatusPublisher: AnyPublisher<EKAuthorizationStatus, Never> {
+    var authorizationStatusPublisher: AnyPublisher<EKAuthorizationStatus, Never> {
         authorizationStatusSubject.eraseToAnyPublisher()
     }
 
-    public var store: EKEventStore {
+    var store: EKEventStore {
          dataStore.eventStore
     }
 
     private let dataStore: EventDataStore
     private let authorizationStatusSubject = CurrentValueSubject<EKAuthorizationStatus, Never>(.notDetermined)
 
-    public init(dataStore: EventDataStore) {
+    init(dataStore: EventDataStore) {
         self.dataStore = dataStore
         authorizationStatusSubject.value = EKEventStore.authorizationStatus(for: .event)
     }
 
-    public func setupEventStore() async throws {
+    func setupEventStore() async throws {
         _ = try await dataStore.verifyAuthorizationStatus()
         authorizationStatusSubject.value = EKEventStore.authorizationStatus(for: .event)
     }
 
-    public func saveWorkoutEvent(_ workoutEvent: WorkoutEvent, calendar: EKCalendar? = nil) async throws {
+    func saveWorkoutEvent(_ workoutEvent: WorkoutEvent, calendar: EKCalendar? = nil) async throws {
         try await dataStore.addWorkoutEvent(workoutEvent, calendar: calendar)
     }
 }

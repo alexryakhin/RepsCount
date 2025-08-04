@@ -7,27 +7,26 @@
 
 import Foundation
 import SwiftUI
-import Shared
 
-public struct DefaultErrorProps: Hashable {
+struct DefaultErrorProps: Hashable {
 
-    public struct ActionControlProps {
+    struct ActionControlProps {
 
-        public let title: String
-        public let action: VoidHandler
+        let title: String
+        let action: VoidHandler
 
-        public init(title: String, action: @escaping VoidHandler) {
+        init(title: String, action: @escaping VoidHandler) {
             self.title = title
             self.action = action
         }
     }
 
-    public let title: String
-    public let message: String
-    public let image: Image?
-    public let actionProps: ActionControlProps?
+    let title: String
+    let message: String
+    let image: Image?
+    let actionProps: ActionControlProps?
 
-    public init(
+    init(
         title: String,
         message: String,
         image: Image?,
@@ -39,7 +38,7 @@ public struct DefaultErrorProps: Hashable {
         self.actionProps = actionProps
     }
 
-    public func hash(into hasher: inout Hasher) {
+    func hash(into hasher: inout Hasher) {
         hasher.combine(title)
         hasher.combine(message)
         if let actionProps {
@@ -47,12 +46,12 @@ public struct DefaultErrorProps: Hashable {
         }
     }
 
-    public static func == (lhs: DefaultErrorProps, rhs: DefaultErrorProps) -> Bool {
+    static func == (lhs: DefaultErrorProps, rhs: DefaultErrorProps) -> Bool {
         return lhs.hashValue == rhs.hashValue
     }
 }
 
-public extension DefaultErrorProps {
+extension DefaultErrorProps {
 
     static func common(message: String?, action: @escaping VoidHandler) -> Self {
         DefaultErrorProps(

@@ -7,21 +7,7 @@
 
 import SwiftUI
 
-public extension View {
-    func editModeDisablingLayerView() -> some View {
-        self.background(
-            VStack {
-                Spacer()
-                    .frame(
-                        width: UIScreen.width - 32,
-                        height: UIScreen.height
-                    )
-            }
-                .background(Color.black.opacity(0.00000001)) // a hack so clear color would still be touchable
-                .editModeDisabling()
-        )
-    }
-
+extension View {
     func editModeDisabling() -> some View {
         self
             .onTapGesture {
@@ -37,25 +23,12 @@ public extension View {
     }
 
     func padding(
-        vertical: CGFloat = 0,
-        horizontal: CGFloat = 0
+        vertical: CGFloat,
+        horizontal: CGFloat
     ) -> some View {
         self
             .padding(.vertical, vertical)
             .padding(.horizontal, horizontal)
-    }
-
-    func padding(
-        top: CGFloat = 0,
-        leading: CGFloat = 0,
-        bottom: CGFloat = 0,
-        trailing: CGFloat = 0
-    ) -> some View {
-        self
-            .padding(.top, top)
-            .padding(.leading, leading)
-            .padding(.bottom, bottom)
-            .padding(.trailing, trailing)
     }
 
     func backgroundColor(_ color: Color) -> some View {
@@ -89,7 +62,7 @@ public extension View {
     }
 }
 
-public extension Image {
+extension Image {
     func frame(sideLength: CGFloat) -> some View {
         self
             .resizable()
@@ -98,13 +71,13 @@ public extension Image {
     }
 }
 
-public extension UIApplication {
+extension UIApplication {
     func endEditing() {
         sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 
-public extension View {
+extension View {
     @ViewBuilder
     func scrollTargetLayoutIfAvailable() -> some View {
         if #available(iOS 17, *) {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension ExerciseModel {
+extension ExerciseModel {
     var metricType: ExerciseMetricType {
         switch self {
         case .lSit, .plank, .sidePlank, .dragonFlag: // Existing core holds

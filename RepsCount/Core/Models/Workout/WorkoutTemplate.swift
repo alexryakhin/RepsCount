@@ -5,15 +5,15 @@
 //  Created by Aleksandr Riakhin on 3/16/25.
 //
 
-public struct WorkoutTemplate: Identifiable, Hashable {
-    public let id: String
-    public let name: String
-    public let notes: String?
-    public let templateExercises: [WorkoutTemplateExercise]
-    public let workoutInstanceIds: [String]
-    public let workoutEventIds: [String]
+struct WorkoutTemplate: Identifiable, Hashable {
+    let id: String
+    let name: String
+    let notes: String?
+    let templateExercises: [WorkoutTemplateExercise]
+    let workoutInstanceIds: [String]
+    let workoutEventIds: [String]
 
-    public init(
+    init(
         id: String,
         name: String,
         notes: String?,

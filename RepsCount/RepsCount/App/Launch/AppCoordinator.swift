@@ -5,13 +5,10 @@
 //  Created by Aleksandr Riakhin on 3/8/25.
 //
 
-import CoreNavigation
-import CoreUserInterface
 import SwiftUI
 import Swinject
 import SwinjectAutoregistration
 import Combine
-import Shared
 
 final class AppCoordinator: BaseCoordinator {
 

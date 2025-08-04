@@ -1,15 +1,13 @@
 import UIKit
 import SwiftUI
-import CoreUserInterface
-import Core
 
-public final class AboutAppViewController: PageViewController<AboutAppContentView>, NavigationBarVisible {
+final class AboutAppViewController: PageViewController<AboutAppContentView>, NavigationBarVisible {
 
-    public enum Event {
+    enum Event {
         case finish
     }
 
-    public var onEvent: ((Event) -> Void)?
+    var onEvent: ((Event) -> Void)?
 
     // MARK: - Private properties
 
@@ -17,16 +15,16 @@ public final class AboutAppViewController: PageViewController<AboutAppContentVie
 
     // MARK: - Initialization
 
-    public init(viewModel: AboutAppViewModel) {
+    init(viewModel: AboutAppViewModel) {
         self.viewModel = viewModel
         super.init(rootView: AboutAppContentView(viewModel: viewModel))
     }
 
-    public required init?(coder: NSCoder) {
+    required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override public func setup() {
+    override func setup() {
         super.setup()
         setupBindings()
         navigationItem.title = NSLocalizedString("About app", comment: .empty)

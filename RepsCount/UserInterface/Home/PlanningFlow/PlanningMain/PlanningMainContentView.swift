@@ -1,19 +1,16 @@
 import SwiftUI
-import CoreUserInterface
-import Core
-import struct Services.AnalyticsService
 
-public struct PlanningMainContentView: PageView {
+struct PlanningMainContentView: PageView {
 
-    public typealias ViewModel = PlanningMainViewModel
+    typealias ViewModel = PlanningMainViewModel
 
-    @ObservedObject public var viewModel: ViewModel
+    @ObservedObject var viewModel: ViewModel
 
-    public init(viewModel: PlanningMainViewModel) {
+    init(viewModel: PlanningMainViewModel) {
         self.viewModel = viewModel
     }
 
-    public var contentView: some View {
+    var contentView: some View {
         ScrollView {
             LazyVStack(spacing: 24) {
                 calendarSectionView
@@ -37,7 +34,7 @@ public struct PlanningMainContentView: PageView {
         }
     }
 
-    public func placeholderView(props: PageState.PlaceholderProps) -> some View {
+    func placeholderView(props: PageState.PlaceholderProps) -> some View {
         EmptyListView(label: "No Workouts Created", description: "You haven't created any workout templates yet.") {
             Button("Create New Workout Template") {
                 viewModel.handle(.createWorkoutTemplate)

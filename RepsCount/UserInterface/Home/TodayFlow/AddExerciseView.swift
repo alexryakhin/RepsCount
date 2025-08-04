@@ -5,11 +5,8 @@
 //  Created by Aleksandr Riakhin on 3/21/25.
 //
 
-import Core
-import CoreUserInterface
 import SwiftUI
 import Flow
-import struct Services.AnalyticsService
 
 struct AddExerciseView: View {
 

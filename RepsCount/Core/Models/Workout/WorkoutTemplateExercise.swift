@@ -5,14 +5,16 @@
 //  Created by Aleksandr Riakhin on 3/16/25.
 //
 
-public struct WorkoutTemplateExercise: Identifiable, Hashable {
-    public let id: String
-    public let exerciseModel: ExerciseModel
-    public var defaultSets: Double
-    public var defaultAmount: Double
-    public let timestamp: Date
+import Foundation
 
-    public init(
+struct WorkoutTemplateExercise: Identifiable, Hashable {
+    let id: String
+    let exerciseModel: ExerciseModel
+    var defaultSets: Double
+    var defaultAmount: Double
+    let timestamp: Date
+
+    init(
         id: String,
         exerciseModel: ExerciseModel,
         defaultSets: Double,

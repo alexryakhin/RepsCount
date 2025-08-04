@@ -6,21 +6,20 @@
 //
 
 import CoreData
-import Core
 
-public protocol WorkoutEventManagerInterface {
+protocol WorkoutEventManagerInterface {
     func createNewWorkoutEvent(from event: WorkoutEvent) throws(CoreError)
 }
 
-public final class WorkoutEventManager: WorkoutEventManagerInterface {
+final class WorkoutEventManager: WorkoutEventManagerInterface {
 
     private let coreDataService: CoreDataServiceInterface
 
-    public init(coreDataService: CoreDataServiceInterface) {
+    init(coreDataService: CoreDataServiceInterface) {
         self.coreDataService = coreDataService
     }
 
-    public func createNewWorkoutEvent(from event: WorkoutEvent) throws(CoreError) {
+    func createNewWorkoutEvent(from event: WorkoutEvent) throws(CoreError) {
         guard let workoutTemplate = try getWorkoutTemplate(id: event.template.id) else {
             throw CoreError.internalError(.templateNotFound)
         }

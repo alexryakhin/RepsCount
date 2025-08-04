@@ -9,14 +9,14 @@ import Swinject
 import SwinjectAutoregistration
 import UIKit
 
-open class Coordinator: BaseCoordinator, RoutableCoordinator {
+class Coordinator: BaseCoordinator, RoutableCoordinator {
 
-    public static let resolver: Resolver = DIContainer.shared.resolver
-    public let resolver: Resolver = DIContainer.shared.resolver
+    static let resolver: Resolver = DIContainer.shared.resolver
+    let resolver: Resolver = DIContainer.shared.resolver
 
-    public let router: RouterInterface
+    let router: RouterInterface
 
-    public required init(router: RouterInterface) {
+    required init(router: RouterInterface) {
         self.router = router
     }
 

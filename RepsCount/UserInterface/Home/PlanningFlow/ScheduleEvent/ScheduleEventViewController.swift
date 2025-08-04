@@ -1,17 +1,14 @@
 import UIKit
 import SwiftUI
-import CoreUserInterface
-import Core
-import Shared
 import EventKitUI
 
-public final class ScheduleEventViewController: PageViewController<ScheduleEventContentView> {
+final class ScheduleEventViewController: PageViewController<ScheduleEventContentView> {
 
-    public enum Event {
+    enum Event {
         case finish
     }
 
-    public var onEvent: ((Event) -> Void)?
+    var onEvent: ((Event) -> Void)?
 
     // MARK: - Private properties
 
@@ -20,16 +17,16 @@ public final class ScheduleEventViewController: PageViewController<ScheduleEvent
 
     // MARK: - Initialization
 
-    public init(viewModel: ScheduleEventViewModel) {
+    init(viewModel: ScheduleEventViewModel) {
         self.viewModel = viewModel
         super.init(rootView: ScheduleEventContentView(viewModel: viewModel))
     }
 
-    public required init?(coder: NSCoder) {
+    required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override public func setup() {
+    override func setup() {
         super.setup()
         setupBindings()
         navigationItem.title = NSLocalizedString("Schedule Workout", comment: .empty)
@@ -81,13 +78,13 @@ public final class ScheduleEventViewController: PageViewController<ScheduleEvent
 
 extension ScheduleEventViewController: EKCalendarChooserDelegate {
     /// The system calls this when the user taps Done in the UI. Save the user's choice.
-    public func calendarChooserDidFinish(_ calendarChooser: EKCalendarChooser) {
+    func calendarChooserDidFinish(_ calendarChooser: EKCalendarChooser) {
         viewModel.calendar = calendarChooser.selectedCalendars.first
         calendarChooserController?.dismiss(animated: true)
     }
 
     /// The system calls this when the user taps Cancel in the UI. Dismiss the calendar chooser.
-    public func calendarChooserDidCancel(_ calendarChooser: EKCalendarChooser) {
+    func calendarChooserDidCancel(_ calendarChooser: EKCalendarChooser) {
         calendarChooserController?.dismiss(animated: true)
     }
 }

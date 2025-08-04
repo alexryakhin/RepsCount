@@ -8,14 +8,14 @@
 
 import Foundation
 
-public struct ExerciseSet: Identifiable, Hashable {
-    public let amount: Double
-    public let weight: Double
-    public let id: String
-    public let timestamp: Date
-    public let exerciseID: String
+struct ExerciseSet: Identifiable, Hashable {
+    let amount: Double
+    let weight: Double
+    let id: String
+    let timestamp: Date
+    let exerciseID: String
 
-    public init(
+    init(
         amount: Double,
         weight: Double,
         id: String,

@@ -8,7 +8,7 @@
 import SwiftUI
 import MapKit
 
-public struct MapView: View {
+struct MapView: View {
 
     @Environment(\.colorScheme) var colorScheme
 
@@ -17,11 +17,11 @@ public struct MapView: View {
     @State private var viewWidth: CGFloat = 300  // Default width in case GeometryReader is not applied
     private static let cache = NSCache<NSString, UIImage>()
 
-    public init(location: CLLocationCoordinate2D) {
+    init(location: CLLocationCoordinate2D) {
         self.location = location
     }
 
-    public var body: some View {
+    var body: some View {
         GeometryReader { geometry in
             let width = geometry.size.width
             let height = width * 0.66  // Maintain aspect ratio

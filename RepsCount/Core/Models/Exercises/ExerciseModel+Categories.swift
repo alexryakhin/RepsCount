@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension ExerciseModel {
+extension ExerciseModel {
     var categories: [ExerciseCategory] {
         switch self {
         case .shrugs:

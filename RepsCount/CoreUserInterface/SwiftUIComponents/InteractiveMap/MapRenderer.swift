@@ -6,15 +6,15 @@ import SwiftUI
  - pathData: A struct that holds everything about path (`id`, `name`, `path`, `boundingRect` and `svgBounds`),
  */
 @available(iOS 13.0, macOS 10.15, *)
-public struct InteractiveShape : Shape {
+struct InteractiveShape : Shape {
     let pathData : PathData
     
-    public func path(in rect: CGRect) -> Path {
+    func path(in rect: CGRect) -> Path {
         let path = executeCommand(svgData : pathData, rect: rect)
         return path
     }
     
-    public init (_ pathData: PathData) {
+    init (_ pathData: PathData) {
         self.pathData = pathData
     }
 }
@@ -22,13 +22,13 @@ public struct InteractiveShape : Shape {
 
 /// Default attributes for Map
 @available(iOS 13.0, macOS 10.15, *)
-public struct Attributes {
-    public var strokeWidth : Double
-    public var strokeColor : Color
-    public var background: Color
+struct Attributes {
+    var strokeWidth : Double
+    var strokeColor : Color
+    var background: Color
     
     
-    public init(
+    init(
         strokeWidth : Double = 1.2,
         strokeColor: Color = .black,
         background: Color = Color(.sRGB, white: 0.5, opacity: 1)
@@ -40,7 +40,7 @@ public struct Attributes {
 }
 
 @available(iOS 13.0, macOS 10.15, *)
-public struct InteractiveMap<Content> : View where Content : View {
+struct InteractiveMap<Content> : View where Content : View {
     /// name of the SVG, can be written with or without file extension
     let svgName : String
     
@@ -48,14 +48,14 @@ public struct InteractiveMap<Content> : View where Content : View {
     var content: ((_ pathData: PathData) -> Content)
     
     
-    public init(svgName: String, @ViewBuilder content: @escaping (_ pathData: PathData) -> Content) {
+    init(svgName: String, @ViewBuilder content: @escaping (_ pathData: PathData) -> Content) {
         self.svgName = svgName
         self.content = content
     }
 
     @State private var pathData = [PathData]()
     
-    public var body: some View {
+    var body: some View {
         GeometryReader { geo in
             ZStack {
                 // the data is not initialized yet. That is, we're waiting for .onAppear to be triggered.
@@ -82,14 +82,14 @@ extension InteractiveShape {
     /// - `strokeWidth : Double = 1.2,`
     /// - `strokeColor: Color = .black,`
     /// - `background: Color = Color(.sRGB, white: 0.5, opacity: 1)`
-    public func initWithAttributes() -> some View {
+    func initWithAttributes() -> some View {
         let attributes = Attributes()
         return self
             .stroke(attributes.strokeColor, lineWidth: attributes.strokeWidth)
             .background(self.fill(attributes.background))
     }
     
-    public func initWithAttributes(_ attributes : Attributes) -> some View {
+    func initWithAttributes(_ attributes : Attributes) -> some View {
         self
             .stroke(attributes.strokeColor, lineWidth: attributes.strokeWidth)
             .background(self.fill(attributes.background))

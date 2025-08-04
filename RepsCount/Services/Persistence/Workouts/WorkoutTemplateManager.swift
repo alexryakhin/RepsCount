@@ -1,9 +1,8 @@
 import SwiftUI
 import Combine
 import CoreData
-import Core
 
-public protocol WorkoutTemplateManagerInterface {
+protocol WorkoutTemplateManagerInterface {
 
     var workoutTemplatePublisher: AnyPublisher<WorkoutTemplate?, Never> { get }
     var errorPublisher: PassthroughSubject<CoreError, Never> { get }
@@ -21,12 +20,12 @@ public protocol WorkoutTemplateManagerInterface {
     )
 }
 
-public final class WorkoutTemplatesManager: WorkoutTemplateManagerInterface {
+final class WorkoutTemplatesManager: WorkoutTemplateManagerInterface {
 
-    public var workoutTemplatePublisher: AnyPublisher<WorkoutTemplate?, Never> {
+    var workoutTemplatePublisher: AnyPublisher<WorkoutTemplate?, Never> {
         workoutTemplateSubject.eraseToAnyPublisher()
     }
-    public let errorPublisher = PassthroughSubject<CoreError, Never>()
+    let errorPublisher = PassthroughSubject<CoreError, Never>()
 
     private let coreDataService: CoreDataServiceInterface
 
@@ -34,7 +33,7 @@ public final class WorkoutTemplatesManager: WorkoutTemplateManagerInterface {
     private var cdWorkoutTemplate: CDWorkoutTemplate?
     private var cancellables: Set<AnyCancellable> = []
 
-    public init(
+    init(
         workoutTemplateID: String?,
         coreDataService: CoreDataServiceInterface
     ) {
@@ -44,17 +43,17 @@ public final class WorkoutTemplatesManager: WorkoutTemplateManagerInterface {
         }
     }
 
-    public func updateName(_ name: String) {
+    func updateName(_ name: String) {
         cdWorkoutTemplate?.name = name
         saveContext()
     }
 
-    public func updateNotes(_ notes: String?) {
+    func updateNotes(_ notes: String?) {
         cdWorkoutTemplate?.notes = notes
         saveContext()
     }
 
-    public func addExerciseTemplate(_ exerciseTemplate: WorkoutTemplateExercise) {
+    func addExerciseTemplate(_ exerciseTemplate: WorkoutTemplateExercise) {
         let templateExercise = CDWorkoutTemplateExercise(context: coreDataService.context)
         templateExercise.id = exerciseTemplate.id
         templateExercise.defaultAmount = exerciseTemplate.defaultAmount
@@ -66,7 +65,7 @@ public final class WorkoutTemplatesManager: WorkoutTemplateManagerInterface {
         saveContext()
     }
 
-    public func updateExerciseTemplate(_ exerciseTemplate: WorkoutTemplateExercise) {
+    func updateExerciseTemplate(_ exerciseTemplate: WorkoutTemplateExercise) {
         if let cdExerciseTemplate = fetchExerciseTemplate(with: exerciseTemplate.id) {
             cdExerciseTemplate.defaultAmount = exerciseTemplate.defaultAmount
             cdExerciseTemplate.defaultSets = exerciseTemplate.defaultSets
@@ -74,7 +73,7 @@ public final class WorkoutTemplatesManager: WorkoutTemplateManagerInterface {
         }
     }
 
-    public func deleteExerciseTemplate(_ exerciseTemplate: WorkoutTemplateExercise) {
+    func deleteExerciseTemplate(_ exerciseTemplate: WorkoutTemplateExercise) {
         if let cdExerciseTemplate = fetchExerciseTemplate(with: exerciseTemplate.id) {
             coreDataService.context.delete(cdExerciseTemplate)
             saveContext()
@@ -92,7 +91,7 @@ public final class WorkoutTemplatesManager: WorkoutTemplateManagerInterface {
         }
     }
 
-    public func createNewWorkoutTemplate(
+    func createNewWorkoutTemplate(
         name: String,
         notes: String?,
         exerciseTemplates: [WorkoutTemplateExercise]

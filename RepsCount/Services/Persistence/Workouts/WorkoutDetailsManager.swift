@@ -1,9 +1,8 @@
 import SwiftUI
 import Combine
 import CoreData
-import Core
 
-public protocol WorkoutDetailsManagerInterface {
+protocol WorkoutDetailsManagerInterface {
 
     var workoutPublisher: AnyPublisher<WorkoutInstance?, Never> { get }
     var errorPublisher: PassthroughSubject<CoreError, Never> { get }
@@ -15,12 +14,12 @@ public protocol WorkoutDetailsManagerInterface {
     func deleteWorkout()
 }
 
-public final class WorkoutDetailsManager: WorkoutDetailsManagerInterface {
+final class WorkoutDetailsManager: WorkoutDetailsManagerInterface {
 
-    public var workoutPublisher: AnyPublisher<WorkoutInstance?, Never> {
+    var workoutPublisher: AnyPublisher<WorkoutInstance?, Never> {
         workoutSubject.eraseToAnyPublisher()
     }
-    public let errorPublisher = PassthroughSubject<CoreError, Never>()
+    let errorPublisher = PassthroughSubject<CoreError, Never>()
 
     private let coreDataService: CoreDataServiceInterface
     private let locationManager: LocationManagerInterface
@@ -29,7 +28,7 @@ public final class WorkoutDetailsManager: WorkoutDetailsManagerInterface {
     private var cdWorkoutInstance: CDWorkoutInstance?
     private var cancellables: Set<AnyCancellable> = []
 
-    public init(
+    init(
         workoutID: String,
         coreDataService: CoreDataServiceInterface,
         locationManager: LocationManagerInterface
@@ -40,7 +39,7 @@ public final class WorkoutDetailsManager: WorkoutDetailsManagerInterface {
         setupBindings()
     }
 
-    public func updateName(_ name: String) {
+    func updateName(_ name: String) {
         guard let cdWorkoutInstance else {
             errorPublisher.send(.unknownError)
             return
@@ -53,7 +52,7 @@ public final class WorkoutDetailsManager: WorkoutDetailsManagerInterface {
         saveContext()
     }
 
-    public func markAsComplete() {
+    func markAsComplete() {
         guard let cdWorkoutInstance else {
             errorPublisher.send(.unknownError)
             return
@@ -66,7 +65,7 @@ public final class WorkoutDetailsManager: WorkoutDetailsManagerInterface {
         saveContext()
     }
 
-    public func addExercise(_ exercise: WorkoutTemplateExercise, savesLocation: Bool) {
+    func addExercise(_ exercise: WorkoutTemplateExercise, savesLocation: Bool) {
         Task {
             let newCDExercise = CDExercise(context: coreDataService.context)
             newCDExercise.timestamp = .now
@@ -85,7 +84,7 @@ public final class WorkoutDetailsManager: WorkoutDetailsManagerInterface {
         }
     }
 
-    public func deleteExercise(_ exercise: Exercise) {
+    func deleteExercise(_ exercise: Exercise) {
         let request = CDExercise.fetchRequest()
         request.predicate = NSPredicate(format: "id == %@", exercise.id)
 
@@ -101,7 +100,7 @@ public final class WorkoutDetailsManager: WorkoutDetailsManagerInterface {
         }
     }
 
-    public func deleteWorkout() {
+    func deleteWorkout() {
         guard let cdWorkoutInstance else {
             errorPublisher.send(.unknownError)
             return

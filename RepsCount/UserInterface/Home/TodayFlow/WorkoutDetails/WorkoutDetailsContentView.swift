@@ -1,19 +1,16 @@
 import SwiftUI
-import CoreUserInterface
-import Core
-import struct Services.AnalyticsService
 
-public struct WorkoutDetailsContentView: PageView {
+struct WorkoutDetailsContentView: PageView {
 
-    public typealias ViewModel = WorkoutDetailsViewModel
+    typealias ViewModel = WorkoutDetailsViewModel
 
-    @ObservedObject public var viewModel: ViewModel
+    @ObservedObject var viewModel: ViewModel
 
-    public init(viewModel: WorkoutDetailsViewModel) {
+    init(viewModel: WorkoutDetailsViewModel) {
         self.viewModel = viewModel
     }
 
-    public var contentView: some View {
+    var contentView: some View {
         ScrollView {
             LazyVStack(spacing: 24) {
                 HStack(spacing: 8) {

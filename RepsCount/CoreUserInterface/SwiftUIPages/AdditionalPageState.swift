@@ -7,34 +7,34 @@
 
 import Foundation
 
-public enum AdditionalPageState<
+enum AdditionalPageState<
     LoaderProps,
     PlaceholderProps,
     ErrorProps
 > {
-    public typealias LoaderProps = LoaderProps
-    public typealias PlaceholderProps = PlaceholderProps
-    public typealias ErrorProps = ErrorProps
+    typealias LoaderProps = LoaderProps
+    typealias PlaceholderProps = PlaceholderProps
+    typealias ErrorProps = ErrorProps
 
     case loading(LoaderProps = DefaultLoaderProps())
     case placeholder(PlaceholderProps = DefaultPlaceholderProps())
     case error(ErrorProps)
 
-    public var isLoading: Bool {
+    var isLoading: Bool {
         if case .loading = self {
             return true
         }
         return false
     }
 
-    public var isEmpty: Bool {
+    var isEmpty: Bool {
         if case .placeholder = self {
             return true
         }
         return false
     }
 
-    public var isError: Bool {
+    var isError: Bool {
         if case .error = self {
             return true
         }

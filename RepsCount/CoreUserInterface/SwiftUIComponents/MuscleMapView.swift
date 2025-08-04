@@ -1,7 +1,6 @@
 import SwiftUI
-import Core
 
-public struct MuscleMapImageView: View {
+struct MuscleMapImageView: View {
     @Environment(\.colorScheme) private var colorScheme
 
     // MARK: - Constants and Types
@@ -30,7 +29,7 @@ public struct MuscleMapImageView: View {
     @State private var backImage: Image?
 
     // MARK: - Initializers
-    public init(
+    init(
         primaryMuscleGroups: [MuscleGroup],
         secondaryMuscleGroups: [MuscleGroup],
         width: CGFloat = 60
@@ -40,20 +39,20 @@ public struct MuscleMapImageView: View {
         self.width = width
     }
 
-    public init(exercises: [ExerciseModel], width: CGFloat = 60) {
+    init(exercises: [ExerciseModel], width: CGFloat = 60) {
         self.primaryMuscleGroups = Set(exercises.flatMap(\.primaryMuscleGroups))
         self.secondaryMuscleGroups = Set(exercises.flatMap(\.secondaryMuscleGroups))
         self.width = width
     }
 
-    public init(exercise: ExerciseModel, width: CGFloat = 60) {
+    init(exercise: ExerciseModel, width: CGFloat = 60) {
         self.primaryMuscleGroups = Set(exercise.primaryMuscleGroups)
         self.secondaryMuscleGroups = Set(exercise.secondaryMuscleGroups)
         self.width = width
     }
 
     // MARK: - Body
-    public var body: some View {
+    var body: some View {
         HStack(spacing: 8) {
             if let frontImage, let backImage {
                 frontImageView(image: frontImage)

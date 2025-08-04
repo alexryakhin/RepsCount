@@ -1,11 +1,7 @@
 import Combine
 import Swinject
 import SwinjectAutoregistration
-import CoreNavigation
-import CoreUserInterface
 import UIKit
-import UserInterface
-import Core
 
 final class TodayFlowCoordinator: Coordinator {
 

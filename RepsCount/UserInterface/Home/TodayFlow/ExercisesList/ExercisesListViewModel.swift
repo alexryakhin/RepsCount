@@ -5,14 +5,11 @@
 //  Created by Aleksandr Riakhin on 3/8/25.
 //
 
-import Core
-import CoreUserInterface
-import Services
 import Combine
 import UIKit
 import SwiftUI
 
-public class ExercisesListViewModel: DefaultPageViewModel {
+class ExercisesListViewModel: DefaultPageViewModel {
 
     @AppStorage(UDKeys.savesLocation) var savesLocation: Bool = true
 
@@ -39,7 +36,7 @@ public class ExercisesListViewModel: DefaultPageViewModel {
     private let exercisesProvider: ExercisesProviderInterface
     private var cancellables: Set<AnyCancellable> = []
 
-    public init(
+    init(
         locationManager: LocationManagerInterface,
         exercisesProvider: ExercisesProviderInterface
     ) {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension ExerciseModel {
+extension ExerciseModel {
     var primaryMuscleGroups: [MuscleGroup] {
         switch self {
         case .shrugs:

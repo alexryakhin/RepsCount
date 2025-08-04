@@ -1,22 +1,21 @@
 import Foundation
 import UIKit
-import Shared
 
-open class Router: NSObject, RouterInterface {
+class Router: NSObject, RouterInterface {
     
-    public var rootController: UINavigationController?
+    var rootController: UINavigationController?
     private var completions: [UIViewController: () -> Void]
 
-    public init(rootController: UINavigationController) {
+    init(rootController: UINavigationController) {
         self.rootController = rootController
         completions = [:]
     }
 
-    public func toPresent() -> UIViewController? {
+    func toPresent() -> UIViewController? {
         return rootController
     }
 
-    public func present(_ module: Presentable?, modalPresentationStyle: UIModalPresentationStyle, animated: Bool) {
+    func present(_ module: Presentable?, modalPresentationStyle: UIModalPresentationStyle, animated: Bool) {
         guard let controller = module?.toPresent() else { return }
         controller.modalPresentationStyle = modalPresentationStyle
 
@@ -27,24 +26,24 @@ open class Router: NSObject, RouterInterface {
         topController?.present(controller, animated: animated, completion: nil)
     }
 
-    public func set(modules: [Presentable], animated: Bool) {
+    func set(modules: [Presentable], animated: Bool) {
         let controllers = modules.compactMap { $0.toPresent() }
         rootController?.setViewControllers(controllers, animated: animated)
     }
 
-    public func firstIndex<T>(_ : T.Type) -> Int? {
+    func firstIndex<T>(_ : T.Type) -> Int? {
         rootController?.viewControllers.firstIndex(where: { $0 is T })
     }
 
-    public func dismissModule(_ module: Presentable?, animated: Bool, completion: (() -> Void)?) {
+    func dismissModule(_ module: Presentable?, animated: Bool, completion: (() -> Void)?) {
         module?.toPresent()?.dismiss(animated: animated, completion: completion)
     }
 
-    public func dismissModule(animated: Bool, completion: (() -> Void)?) {
+    func dismissModule(animated: Bool, completion: (() -> Void)?) {
         rootController?.dismiss(animated: animated, completion: completion)
     }
 
-    public func push(_ module: Presentable?, animated: Bool) {
+    func push(_ module: Presentable?, animated: Bool) {
         guard
             let controller = module?.toPresent(),
             controller is UINavigationController == false
@@ -65,7 +64,7 @@ open class Router: NSObject, RouterInterface {
     }
 
     // Pushes to most top contoller if it is a Navigation Controller
-    public func pushToTop(_ module: Presentable?, animated: Bool) {
+    func pushToTop(_ module: Presentable?, animated: Bool) {
         guard
             let controller = module?.toPresent(),
             controller is UINavigationController == false
@@ -91,13 +90,13 @@ open class Router: NSObject, RouterInterface {
         topController.pushViewController(controller, animated: animated)
     }
 
-    public func popModule(animated: Bool) {
+    func popModule(animated: Bool) {
         if let controller = rootController?.popViewController(animated: animated) {
             runCompletion(for: controller)
         }
     }
 
-    public func popAndReplaceModule(_ module: Presentable?, animated: Bool) {
+    func popAndReplaceModule(_ module: Presentable?, animated: Bool) {
         guard let rootController else {
             return
         }
@@ -119,13 +118,13 @@ open class Router: NSObject, RouterInterface {
         popModule(animated: animated)
     }
 
-    public func removeModule<T: Presentable>(_ module: T) {
+    func removeModule<T: Presentable>(_ module: T) {
         if let controllerIndex = firstIndex(T.self) {
             rootController?.viewControllers.remove(at: controllerIndex)
         }
     }
 
-    public func setRootModule(_ module: Presentable?, animated: Bool) {
+    func setRootModule(_ module: Presentable?, animated: Bool) {
         guard let controller = module?.toPresent() else {
             return
         }
@@ -134,7 +133,7 @@ open class Router: NSObject, RouterInterface {
         dismissModule()
     }
 
-    public func replaceLast(_ module: Presentable?, animated: Bool) {
+    func replaceLast(_ module: Presentable?, animated: Bool) {
         guard let controller = module?.toPresent() else {
             return
         }
@@ -145,7 +144,7 @@ open class Router: NSObject, RouterInterface {
         rootController?.setViewControllers(newControllers, animated: animated)
     }
 
-    public func popToModule(_ module: Presentable?, animated: Bool) {
+    func popToModule(_ module: Presentable?, animated: Bool) {
         guard let controller = module?.toPresent() else {
             return
         }
@@ -155,7 +154,7 @@ open class Router: NSObject, RouterInterface {
         }
     }
 
-    public func popToModule<T: Presentable>(_: T.Type, animated: Bool, failHandler: (() -> Void)?) {
+    func popToModule<T: Presentable>(_: T.Type, animated: Bool, failHandler: (() -> Void)?) {
         guard let module = firstChild(T.self) else {
             failHandler?()
             return
@@ -164,7 +163,7 @@ open class Router: NSObject, RouterInterface {
         popToModule(module, animated: animated)
     }
 
-    public func popToRootModule(animated: Bool) {
+    func popToRootModule(animated: Bool) {
         if let controllers = rootController?.popToRootViewController(animated: animated) {
             controllers.forEach { controller in
                 runCompletion(for: controller)
@@ -172,7 +171,7 @@ open class Router: NSObject, RouterInterface {
         }
     }
 
-    public func addAsChild(_ module: Presentable?) {
+    func addAsChild(_ module: Presentable?) {
         guard
             let rootController = rootController,
             let controller = module?.toPresent() else {
@@ -184,7 +183,7 @@ open class Router: NSObject, RouterInterface {
         rootController.view.addSubview(controller.view)
     }
 
-    public func add(_ submodule: Presentable?, asChildTo module: Presentable?) {
+    func add(_ submodule: Presentable?, asChildTo module: Presentable?) {
         guard
             let subcontroller = submodule?.toPresent(),
             let controller = module?.toPresent()
@@ -203,11 +202,11 @@ open class Router: NSObject, RouterInterface {
         completions.removeValue(forKey: controller)
     }
 
-    public func contains<T>(_: T.Type) -> Bool {
+    func contains<T>(_: T.Type) -> Bool {
         return rootController?.viewControllers.contains(T.self) ?? false
     }
 
-    public func firstChild<T>(_: T.Type) -> T? {
+    func firstChild<T>(_: T.Type) -> T? {
         return rootController?.viewControllers.first(T.self)
     }
 

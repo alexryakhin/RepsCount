@@ -6,12 +6,12 @@
 //
 import Foundation
 
-public struct Location: Hashable {
-    public let latitude: Double
-    public let longitude: Double
-    public let address: String?
+struct Location: Hashable {
+    let latitude: Double
+    let longitude: Double
+    let address: String?
 
-    public init(
+    init(
         latitude: Double,
         longitude: Double,
         address: String?

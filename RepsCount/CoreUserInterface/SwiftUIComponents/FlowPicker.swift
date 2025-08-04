@@ -8,20 +8,20 @@
 import Flow
 import SwiftUI
 
-public protocol Selectable: Hashable {
+protocol Selectable: Hashable {
     var name: LocalizedStringKey { get }
 }
 
 extension String: Selectable {
-    public var name: LocalizedStringKey { LocalizedStringKey(self) }
+    var name: LocalizedStringKey { LocalizedStringKey(self) }
 }
 
-public struct FlowPickerView<SelectionItem: Selectable>: View {
+struct FlowPickerView<SelectionItem: Selectable>: View {
 
     @Binding private var selection: SelectionItem?
     private let items: [SelectionItem]
 
-    public init(
+    init(
         selection: Binding<SelectionItem?>,
         items: [SelectionItem]
     ) {
@@ -29,7 +29,7 @@ public struct FlowPickerView<SelectionItem: Selectable>: View {
         self.items = items
     }
 
-    public var body: some View {
+    var body: some View {
         HFlow {
             ForEach(items, id: \.self) { item in
                 capsuleView(for: item)
@@ -61,7 +61,7 @@ public struct FlowPickerView<SelectionItem: Selectable>: View {
     }
 }
 
-public struct FlowPicker<SelectionItem: Selectable>: View {
+struct FlowPicker<SelectionItem: Selectable>: View {
 
     @Binding private var selection: SelectionItem?
     @Binding private var error: LocalizedStringKey?
@@ -69,7 +69,7 @@ public struct FlowPicker<SelectionItem: Selectable>: View {
     private let header: LocalizedStringKey
     private let caption: LocalizedStringKey?
 
-    public init(
+    init(
         selection: Binding<SelectionItem?>,
         error: Binding<LocalizedStringKey?> = .constant(nil),
         items: [SelectionItem],
@@ -83,7 +83,7 @@ public struct FlowPicker<SelectionItem: Selectable>: View {
         self.caption = caption
     }
 
-    public var body: some View {
+    var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(header)
                 .font(.subheadline)

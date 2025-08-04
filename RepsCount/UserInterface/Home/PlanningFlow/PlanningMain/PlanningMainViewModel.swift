@@ -1,10 +1,7 @@
-import Core
-import CoreUserInterface
-import Services
-import Shared
 import Combine
+import Foundation
 
-public final class PlanningMainViewModel: DefaultPageViewModel {
+final class PlanningMainViewModel: DefaultPageViewModel {
 
     enum Input {
         case createWorkoutTemplate
@@ -30,7 +27,7 @@ public final class PlanningMainViewModel: DefaultPageViewModel {
 
     // MARK: - Initialization
 
-    public init(workoutTemplatesProvider: WorkoutTemplatesProviderInterface) {
+    init(workoutTemplatesProvider: WorkoutTemplatesProviderInterface) {
         self.workoutTemplatesProvider = workoutTemplatesProvider
         super.init()
         setupBindings()

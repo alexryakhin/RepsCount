@@ -1,24 +1,23 @@
 import UIKit
-import Shared
 
-open class BaseNavigationController: UINavigationController {
+class BaseNavigationController: UINavigationController {
 
-    override public init(rootViewController: UIViewController) {
+    override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
         setup()
     }
 
-    override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         setup()
     }
 
-    override public init(navigationBarClass: AnyClass?, toolbarClass: AnyClass?) {
+    override init(navigationBarClass: AnyClass?, toolbarClass: AnyClass?) {
         super.init(navigationBarClass: navigationBarClass, toolbarClass: toolbarClass)
         setup()
     }
 
-    public required init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -35,7 +34,7 @@ extension BaseNavigationController {
     }
 }
 
-public final class NavigationController: BaseNavigationController, UINavigationControllerDelegate {}
+final class NavigationController: BaseNavigationController, UINavigationControllerDelegate {}
 
-public protocol NavigationBarVisible {}
-public protocol NavigationBarHidden {}
+protocol NavigationBarVisible {}
+protocol NavigationBarHidden {}

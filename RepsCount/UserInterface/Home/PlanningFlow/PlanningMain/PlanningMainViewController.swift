@@ -1,17 +1,15 @@
 import UIKit
 import SwiftUI
-import CoreUserInterface
-import Core
 
-public final class PlanningMainViewController: PageViewController<PlanningMainContentView>, NavigationBarVisible {
+final class PlanningMainViewController: PageViewController<PlanningMainContentView>, NavigationBarVisible {
 
-    public enum Event {
+    enum Event {
         case createWorkoutTemplate
         case editWorkoutTemplate(WorkoutTemplate)
         case showCalendar
     }
 
-    public var onEvent: ((Event) -> Void)?
+    var onEvent: ((Event) -> Void)?
 
     // MARK: - Private properties
 
@@ -19,21 +17,21 @@ public final class PlanningMainViewController: PageViewController<PlanningMainCo
 
     // MARK: - Initialization
 
-    public init(viewModel: PlanningMainViewModel) {
+    init(viewModel: PlanningMainViewModel) {
         self.viewModel = viewModel
         super.init(rootView: PlanningMainContentView(viewModel: viewModel))
     }
 
-    public required init?(coder: NSCoder) {
+    required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    public override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationBar()
     }
 
-    override public func setup() {
+    override func setup() {
         super.setup()
         setupBindings()
         setupNavigationBar()

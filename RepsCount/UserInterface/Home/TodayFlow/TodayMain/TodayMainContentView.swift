@@ -1,20 +1,17 @@
 import SwiftUI
-import CoreUserInterface
-import Core
-import struct Services.AnalyticsService
 
-public struct TodayMainContentView: PageView {
+struct TodayMainContentView: PageView {
 
-    public typealias ViewModel = TodayMainViewModel
+    typealias ViewModel = TodayMainViewModel
 
     @AppStorage(UDKeys.isShowingOnboarding) var isShowingOnboarding: Bool = true
-    @ObservedObject public var viewModel: ViewModel
+    @ObservedObject var viewModel: ViewModel
 
-    public init(viewModel: TodayMainViewModel) {
+    init(viewModel: TodayMainViewModel) {
         self.viewModel = viewModel
     }
 
-    public var contentView: some View {
+    var contentView: some View {
         ScrollViewWithCustomNavBar {
             LazyVStack(spacing: 24) {
                 todayWorkoutsSectionView
@@ -41,7 +38,7 @@ public struct TodayMainContentView: PageView {
         }
     }
 
-    public func placeholderView(props: PageState.PlaceholderProps) -> some View {
+    func placeholderView(props: PageState.PlaceholderProps) -> some View {
         VStack {
             navigationBarView
             Spacer()

@@ -1,20 +1,17 @@
 import SwiftUI
-import CoreUserInterface
-import Core
 import Flow
-import struct Services.AnalyticsService
 
-public struct ScheduleEventContentView: PageView {
+struct ScheduleEventContentView: PageView {
 
-    public typealias ViewModel = ScheduleEventViewModel
+    typealias ViewModel = ScheduleEventViewModel
 
-    @ObservedObject public var viewModel: ViewModel
+    @ObservedObject var viewModel: ViewModel
 
-    public init(viewModel: ScheduleEventViewModel) {
+    init(viewModel: ScheduleEventViewModel) {
         self.viewModel = viewModel
     }
 
-    public var contentView: some View {
+    var contentView: some View {
         List {
             Section {
                 DatePicker("Start date", selection: $viewModel.selectedDate, displayedComponents: [.date, .hourAndMinute])
@@ -120,7 +117,6 @@ public struct ScheduleEventContentView: PageView {
             .buttonStyle(.borderedProminent)
             .padding(.vertical, 12)
             .padding(.horizontal, 16)
-            .gradientStyle(.bottomButton)
         }
         .onAppear {
             AnalyticsService.shared.logEvent(.scheduleEventScreenOpened)

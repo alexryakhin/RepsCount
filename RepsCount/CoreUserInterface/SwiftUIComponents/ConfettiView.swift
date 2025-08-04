@@ -93,7 +93,7 @@ struct DisplayConfettiModifier: ViewModifier {
     }
 }
 
-public extension View {
+extension View {
     func displayConfetti(isActive: Binding<Bool>) -> some View {
         self.modifier(DisplayConfettiModifier(isActive: isActive))
     }

@@ -8,9 +8,9 @@
 import Foundation
 import SwiftUI
 
-public struct CustomDatePicker: View {
+struct CustomDatePicker: View {
 
-    public enum PickerMode {
+    enum PickerMode {
         case date
         case dateAndTime
         case time
@@ -26,7 +26,7 @@ public struct CustomDatePicker: View {
     @State private var placeholderSize: CGSize = .zero
     @State private var isEditing: Bool = false
 
-    public init(
+    init(
         date: Binding<Date?>,
         minDate: Date? = nil,
         maxDate: Date? = nil,
@@ -47,7 +47,7 @@ public struct CustomDatePicker: View {
         set: { date = $0 }
     }
 
-    public var body: some View {
+    var body: some View {
         ZStack {
             DatePickerView(
                 selection: dateSelection,

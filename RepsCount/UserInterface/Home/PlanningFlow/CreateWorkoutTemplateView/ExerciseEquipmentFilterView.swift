@@ -5,9 +5,7 @@
 //  Created by Aleksandr Riakhin on 3/16/25.
 //
 
-import Core
 import SwiftUI
-import struct Services.AnalyticsService
 
 struct ExerciseEquipmentFilterView: View {
     @Binding var selectedEquipment: Set<ExerciseEquipment>

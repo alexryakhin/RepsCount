@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum ExerciseModel: String, Identifiable, Hashable, CaseIterable {
+enum ExerciseModel: String, Identifiable, Hashable, CaseIterable {
 
     // MARK: - Trapezius
 
@@ -200,5 +200,5 @@ public enum ExerciseModel: String, Identifiable, Hashable, CaseIterable {
     case sledPush = "Sled Push"
     case tireFlips = "Tire Flips"
 
-    public var id: String { rawValue }
+    var id: String { rawValue }
 }

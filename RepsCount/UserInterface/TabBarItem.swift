@@ -8,12 +8,12 @@
 import Foundation
 import UIKit
 
-public enum TabBarItem {
+enum TabBarItem {
     case today
     case planning
     case settings
 
-    public var title: String {
+    var title: String {
         switch self {
         case .today: "Today"
         case .planning: "Planning"
@@ -21,11 +21,11 @@ public enum TabBarItem {
         }
     }
 
-    public var localizedTitle: String {
+    var localizedTitle: String {
         NSLocalizedString(title, comment: title)
     }
 
-    public var image: String {
+    var image: String {
         switch self {
         case .today: "doc.text.image"
         case .planning: "figure.run.square.stack"
@@ -33,7 +33,7 @@ public enum TabBarItem {
         }
     }
 
-    public var selectedImage: String {
+    var selectedImage: String {
         switch self {
         case .today: "doc.text.image.fill"
         case .planning: "figure.run.square.stack.fill"
@@ -41,7 +41,7 @@ public enum TabBarItem {
         }
     }
 
-    public var item: UITabBarItem {
+    var item: UITabBarItem {
         UITabBarItem(
             title: localizedTitle,
             image: .init(systemName: image),

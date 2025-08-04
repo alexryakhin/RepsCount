@@ -1,14 +1,14 @@
 import UIKit
 
 /// Coordinator managing user history
-public protocol CoordinatorInterface: AnyObject {
+protocol CoordinatorInterface: AnyObject {
 
     func start()
     func open(url: String?)
     func open(url: URL)
 }
 
-public extension CoordinatorInterface {
+extension CoordinatorInterface {
     
     func open(url: String?) {
         guard
@@ -25,6 +25,6 @@ public extension CoordinatorInterface {
     }
 }
 
-public protocol RoutableCoordinator: CoordinatorInterface {
+protocol RoutableCoordinator: CoordinatorInterface {
     var router: RouterInterface { get }
 }

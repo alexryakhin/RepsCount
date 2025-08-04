@@ -9,15 +9,15 @@ import SwiftUI
 import UIKit
 import class Combine.AnyCancellable
 
-open class PageViewController<Content: PageView>: UIHostingController<Content> {
+class PageViewController<Content: PageView>: UIHostingController<Content> {
 
-    public var onSearchSubmit: ((String) -> Void)?
-    public var onSearchCancel: (() -> Void)?
-    public var onSearchEnded: (() -> Void)?
+    var onSearchSubmit: ((String) -> Void)?
+    var onSearchCancel: (() -> Void)?
+    var onSearchEnded: (() -> Void)?
 
-    public var cancellables: Set<AnyCancellable> = []
+    var cancellables: Set<AnyCancellable> = []
 
-    override public init(rootView: Content) {
+    override init(rootView: Content) {
         super.init(rootView: rootView)
         setup()
     }
@@ -31,7 +31,7 @@ open class PageViewController<Content: PageView>: UIHostingController<Content> {
         }
     }
 
-    public required init?(coder: NSCoder) {
+    required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -39,7 +39,7 @@ open class PageViewController<Content: PageView>: UIHostingController<Content> {
         view.backgroundColor = .systemGroupedBackground
     }
 
-    public final func setupSearchBar(placeholder: String = "Search exercises") {
+    final func setupSearchBar(placeholder: String = "Search exercises") {
         // Initialize the search controller
         let searchController = BaseSearchController()
         searchController.obscuresBackgroundDuringPresentation = false
@@ -55,7 +55,7 @@ open class PageViewController<Content: PageView>: UIHostingController<Content> {
         definesPresentationContext = true
     }
 
-    public final func setupTransparentNavBar() {
+    final func setupTransparentNavBar() {
         let appearance = UINavigationBarAppearance()
 
         // Configure the appearance with a transparent background
@@ -70,7 +70,7 @@ open class PageViewController<Content: PageView>: UIHostingController<Content> {
         navigationController?.navigationBar.compactAppearance = appearance
     }
 
-    public final func resetNavBarAppearance() {
+    final func resetNavBarAppearance() {
         let standardAppearance = UINavigationBarAppearance()
         standardAppearance.configureWithDefaultBackground()
         let scrollEdgeAppearance = UINavigationBarAppearance()

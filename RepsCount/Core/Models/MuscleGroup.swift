@@ -5,7 +5,7 @@
 //  Created by Aleksandr Riakhin on 3/15/25.
 //
 
-public enum MuscleGroup: String, CaseIterable, Identifiable {
+enum MuscleGroup: String, CaseIterable, Identifiable {
     case adductors
     case biceps
     case brachialis
@@ -44,9 +44,9 @@ public enum MuscleGroup: String, CaseIterable, Identifiable {
     case teresMajor
     case thoracolumbarFascia
 
-    public var id: String { rawValue }
+    var id: String { rawValue }
 
-    public var latinName: String {
+    var latinName: String {
         switch self {
         case .adductors: "Adductor Longus and Pectineus"
         case .biceps: "Biceps Brachii"

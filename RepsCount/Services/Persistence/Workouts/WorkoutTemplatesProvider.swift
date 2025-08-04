@@ -7,9 +7,8 @@
 
 import CoreData
 import Combine
-import Core
 
-public protocol WorkoutTemplatesProviderInterface {
+protocol WorkoutTemplatesProviderInterface {
     var templatesPublisher: AnyPublisher<[WorkoutTemplate], Never> { get }
     var templatesErrorPublisher: PassthroughSubject<CoreError, Never> { get }
 
@@ -17,25 +16,25 @@ public protocol WorkoutTemplatesProviderInterface {
     func fetchTemplates()
 }
 
-public final class WorkoutTemplatesProvider: WorkoutTemplatesProviderInterface {
+final class WorkoutTemplatesProvider: WorkoutTemplatesProviderInterface {
 
-    public var templatesPublisher: AnyPublisher<[WorkoutTemplate], Never> {
+    var templatesPublisher: AnyPublisher<[WorkoutTemplate], Never> {
         return templatesSubject.eraseToAnyPublisher()
     }
 
-    public let templatesErrorPublisher = PassthroughSubject<CoreError, Never>()
+    let templatesErrorPublisher = PassthroughSubject<CoreError, Never>()
 
     private let coreDataService: CoreDataServiceInterface
     private let templatesSubject = CurrentValueSubject<[WorkoutTemplate], Never>([])
     private var cancellables: Set<AnyCancellable> = []
 
-    public init(coreDataService: CoreDataServiceInterface) {
+    init(coreDataService: CoreDataServiceInterface) {
         self.coreDataService = coreDataService
         setupBindings()
         fetchTemplates()
     }
 
-    public func fetchTemplates() {
+    func fetchTemplates() {
         let request = CDWorkoutTemplate.fetchRequest()
         do {
             let templates = try coreDataService.context.fetch(request)
@@ -45,7 +44,7 @@ public final class WorkoutTemplatesProvider: WorkoutTemplatesProviderInterface {
         }
     }
 
-    public func delete(with id: String) {
+    func delete(with id: String) {
         let request = CDWorkoutTemplate.fetchRequest()
         request.predicate = NSPredicate(format: "id == %@", id)
 

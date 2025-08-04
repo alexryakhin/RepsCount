@@ -4,8 +4,6 @@
 //
 //  Created by Aleksandr Riakhin on 3/19/25.
 //
-import Core
-import CoreUserInterface
 import SwiftUI
 
 struct TodayWorkoutRow: View {

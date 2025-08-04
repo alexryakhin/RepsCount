@@ -1,21 +1,18 @@
 import SwiftUI
-import CoreUserInterface
-import Core
-import struct Services.AnalyticsService
 
-public struct CreateWorkoutTemplateViewContentView: PageView {
+struct CreateWorkoutTemplateViewContentView: PageView {
 
-    public typealias ViewModel = CreateWorkoutTemplateViewViewModel
+    typealias ViewModel = CreateWorkoutTemplateViewViewModel
 
-    @ObservedObject public var viewModel: ViewModel
+    @ObservedObject var viewModel: ViewModel
     @FocusState private var isNameFocused: Bool
     @FocusState private var isNotesFocused: Bool
 
-    public init(viewModel: CreateWorkoutTemplateViewViewModel) {
+    init(viewModel: CreateWorkoutTemplateViewViewModel) {
         self.viewModel = viewModel
     }
 
-    public var contentView: some View {
+    var contentView: some View {
         ScrollView {
             LazyVStack(spacing: 24) {
                 muscleMapSectionView
@@ -60,7 +57,6 @@ public struct CreateWorkoutTemplateViewContentView: PageView {
                 .buttonStyle(.borderedProminent)
                 .padding(.vertical, 12)
                 .padding(.horizontal, 16)
-                .gradientStyle(.bottomButton)
             }
         }
         .alert("Edit", isPresented: .constant(viewModel.editingDefaultsExercise != nil), presenting: viewModel.editingDefaultsExercise) { exercise in

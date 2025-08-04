@@ -7,18 +7,17 @@
 
 import Foundation
 import CoreData
-import Core
 
-public protocol AddExerciseManagerInterface {
+protocol AddExerciseManagerInterface {
     func addExercise(from model: ExerciseModel, savesLocation: Bool) throws(CoreError)
 }
 
-public final class AddExerciseManager: AddExerciseManagerInterface {
+final class AddExerciseManager: AddExerciseManagerInterface {
 
     private let coreDataService: CoreDataServiceInterface
     private let locationManager: LocationManagerInterface
 
-    public init(
+    init(
         coreDataService: CoreDataServiceInterface,
         locationManager: LocationManagerInterface
     ) {
@@ -26,7 +25,7 @@ public final class AddExerciseManager: AddExerciseManagerInterface {
         self.locationManager = locationManager
     }
 
-    public func addExercise(from model: ExerciseModel, savesLocation: Bool) throws(CoreError) {
+    func addExercise(from model: ExerciseModel, savesLocation: Bool) throws(CoreError) {
         Task { @MainActor in
             let newItem = CDExercise(context: coreDataService.context)
             newItem.timestamp = .now

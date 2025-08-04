@@ -7,7 +7,7 @@
 
 import Foundation
 
-public extension Numeric {
+extension Numeric {
     @inlinable func `if`(_ condition: Bool, transform: (Self) -> Self) -> Self {
         if condition {
             transform(self)
@@ -20,3 +20,16 @@ public extension Numeric {
         self == 0 ? nil : self
     }
 }
+
+extension Int64 {
+    var int: Int {
+        Int(self)
+    }
+}
+
+extension Int {
+    var int64: Int64 {
+        Int64(self)
+    }
+}
+

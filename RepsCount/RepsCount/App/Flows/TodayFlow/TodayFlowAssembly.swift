@@ -1,8 +1,5 @@
 import Swinject
 import SwinjectAutoregistration
-import CoreNavigation
-import UserInterface
-import Services
 
 final class TodayFlowAssembly: Assembly, Identifiable {
 

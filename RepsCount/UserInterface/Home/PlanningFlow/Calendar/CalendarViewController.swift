@@ -1,15 +1,13 @@
 import UIKit
 import SwiftUI
-import CoreUserInterface
-import Core
 
-public final class CalendarViewController: PageViewController<CalendarContentView>, NavigationBarVisible {
+final class CalendarViewController: PageViewController<CalendarContentView>, NavigationBarVisible {
 
-    public enum Event {
+    enum Event {
         case scheduleWorkout(configModel: ScheduleEventViewModel.ConfigModel)
     }
 
-    public var onEvent: ((Event) -> Void)?
+    var onEvent: ((Event) -> Void)?
 
     // MARK: - Private properties
 
@@ -17,16 +15,16 @@ public final class CalendarViewController: PageViewController<CalendarContentVie
 
     // MARK: - Initialization
 
-    public init(viewModel: CalendarViewModel) {
+    init(viewModel: CalendarViewModel) {
         self.viewModel = viewModel
         super.init(rootView: CalendarContentView(viewModel: viewModel))
     }
 
-    public required init?(coder: NSCoder) {
+    required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override public func setup() {
+    override func setup() {
         super.setup()
         setupBindings()
         navigationItem.title = NSLocalizedString("Calendar", comment: .empty)

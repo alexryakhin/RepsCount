@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct DefaultLoaderProps: Equatable {
+struct DefaultLoaderProps: Equatable {
 
-    public init() { }
+    init() { }
 }

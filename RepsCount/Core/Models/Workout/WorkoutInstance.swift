@@ -5,16 +5,18 @@
 //  Created by Aleksandr Riakhin on 3/16/25.
 //
 
-public struct WorkoutInstance: Identifiable, Hashable {
-    public let id: String
-    public let date: Date
-    public let exercises: [Exercise]
-    public let workoutTemplate: WorkoutTemplate?
-    public let workoutEvent: WorkoutEvent?
-    public let completionTimeStamp: Date?
-    public let name: String?
+import Foundation
 
-    public var defaultName: String {
+struct WorkoutInstance: Identifiable, Hashable {
+    let id: String
+    let date: Date
+    let exercises: [Exercise]
+    let workoutTemplate: WorkoutTemplate?
+    let workoutEvent: WorkoutEvent?
+    let completionTimeStamp: Date?
+    let name: String?
+
+    var defaultName: String {
         if let name = name?.nilIfEmpty {
             return name
         } else if let name = workoutTemplate?.name {
@@ -32,16 +34,16 @@ public struct WorkoutInstance: Identifiable, Hashable {
         }
     }
 
-    public var isCompleted: Bool {
+    var isCompleted: Bool {
         completionTimeStamp != nil
     }
 
-    public var totalDuration: TimeInterval? {
+    var totalDuration: TimeInterval? {
         guard let completionTimeStamp else { return nil }
         return date.distance(to: completionTimeStamp)
     }
 
-    public init(
+    init(
         id: String,
         date: Date,
         exercises: [Exercise],

@@ -1,15 +1,13 @@
 import UIKit
 import SwiftUI
-import CoreUserInterface
-import Core
 
-public final class CreateWorkoutTemplateViewViewController: PageViewController<CreateWorkoutTemplateViewContentView>, NavigationBarVisible {
+final class CreateWorkoutTemplateViewViewController: PageViewController<CreateWorkoutTemplateViewContentView>, NavigationBarVisible {
 
-    public enum Event {
+    enum Event {
         case finish
     }
 
-    public var onEvent: ((Event) -> Void)?
+    var onEvent: ((Event) -> Void)?
 
     // MARK: - Private properties
 
@@ -17,16 +15,16 @@ public final class CreateWorkoutTemplateViewViewController: PageViewController<C
 
     // MARK: - Initialization
 
-    public init(viewModel: CreateWorkoutTemplateViewViewModel) {
+    init(viewModel: CreateWorkoutTemplateViewViewModel) {
         self.viewModel = viewModel
         super.init(rootView: CreateWorkoutTemplateViewContentView(viewModel: viewModel))
     }
 
-    public required init?(coder: NSCoder) {
+    required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override public func setup() {
+    override func setup() {
         super.setup()
         setupBindings()
         navigationItem.title = viewModel.isEditing 

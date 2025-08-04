@@ -1,15 +1,11 @@
-import Core
-import CoreUserInterface
-import Services
-import Shared
 import Combine
 import EventKit
 import SwiftUI
 
-public final class ScheduleEventViewModel: DefaultPageViewModel {
+final class ScheduleEventViewModel: DefaultPageViewModel {
 
-    public struct ConfigModel {
-        public let selectedDate: Date
+    struct ConfigModel {
+        let selectedDate: Date
     }
 
     enum Input {
@@ -113,7 +109,7 @@ public final class ScheduleEventViewModel: DefaultPageViewModel {
 
     // MARK: - Initialization
 
-    public init(
+    init(
         configModel: ConfigModel,
         workoutEventManager: WorkoutEventManagerInterface,
         workoutTemplatesProvider: WorkoutTemplatesProviderInterface,

@@ -8,12 +8,12 @@
 import Foundation
 import struct SwiftUI.LocalizedStringKey
 
-public enum MeasurementUnit: Int, CaseIterable {
+enum MeasurementUnit: Int, CaseIterable {
     case kilograms
     case pounds
     case stones
 
-    public var title: LocalizedStringKey {
+    var title: LocalizedStringKey {
         switch self {
         case .kilograms: "Kilograms"
         case .pounds: "Pounds"
@@ -21,7 +21,7 @@ public enum MeasurementUnit: Int, CaseIterable {
         }
     }
 
-    public var shortName: LocalizedStringKey {
+    var shortName: LocalizedStringKey {
         switch self {
         case .kilograms: "kg"
         case .pounds: "lb"
@@ -29,7 +29,7 @@ public enum MeasurementUnit: Int, CaseIterable {
         }
     }
 
-    public var unitMass: UnitMass {
+    var unitMass: UnitMass {
         switch self {
         case .kilograms: return .kilograms
         case .pounds: return .pounds
@@ -37,22 +37,22 @@ public enum MeasurementUnit: Int, CaseIterable {
         }
     }
 
-    public func convertToKilograms(_ value: Double) -> Measurement<UnitMass> {
+    func convertToKilograms(_ value: Double) -> Measurement<UnitMass> {
         let m = Measurement(value: value, unit: unitMass)
         return m.converted(to: .kilograms)
     }
 
-    public func convertTo(_ value: Double, unit: MeasurementUnit) -> Measurement<UnitMass> {
+    func convertTo(_ value: Double, unit: MeasurementUnit) -> Measurement<UnitMass> {
         let m = Measurement(value: value, unit: unitMass)
         return m.converted(to: unit.unitMass)
     }
 
-    public func convertFromKilograms(_ value: Double) -> Measurement<UnitMass> {
+    func convertFromKilograms(_ value: Double) -> Measurement<UnitMass> {
         let m = Measurement(value: value, unit: UnitMass.kilograms)
         return m.converted(to: unitMass)
     }
 
-    public func convertFromKilograms(_ value: Double) -> String {
+    func convertFromKilograms(_ value: Double) -> String {
         let measurement = Measurement(value: value, unit: UnitMass.kilograms)
         let formatter = MeasurementFormatter()
         formatter.unitStyle = .medium

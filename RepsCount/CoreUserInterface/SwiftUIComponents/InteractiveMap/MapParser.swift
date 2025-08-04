@@ -1,7 +1,7 @@
 import SwiftUI
 
 @available(macOS 10.15, iOS 13.0, *)
-public class MapParser : NSObject, XMLParserDelegate {
+class MapParser : NSObject, XMLParserDelegate {
     
     var size: CGSize
     var pathDatas: [PathData] = []
@@ -56,7 +56,7 @@ public class MapParser : NSObject, XMLParserDelegate {
     }
     
     // XMLParser Delegate
-    public func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
+    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
         
         /*
          *
@@ -161,12 +161,12 @@ public class MapParser : NSObject, XMLParserDelegate {
         }
     }
     
-    public func parserDidEndDocument(_ parser: XMLParser) {
+    func parserDidEndDocument(_ parser: XMLParser) {
         self.computeBounds()
     }
     
     
-    public func computeBounds() {
+    func computeBounds() {
         bounds.origin.x = CGFloat.greatestFiniteMagnitude
         bounds.origin.y = CGFloat.greatestFiniteMagnitude
         var maxx = -CGFloat.greatestFiniteMagnitude
@@ -208,14 +208,14 @@ public class MapParser : NSObject, XMLParserDelegate {
     }
 }
 
-public struct PathExecutionCommand : CustomStringConvertible, Identifiable, Sendable {
-    public var id = UUID()
+struct PathExecutionCommand : CustomStringConvertible, Identifiable, Sendable {
+    var id = UUID()
     var coordinate: CGPoint // (x, y)
     var command : String
-    public var description: String { return "PathExecutionCommand(coordinate: \(coordinate), command: \(command))\n" }
+    var description: String { return "PathExecutionCommand(coordinate: \(coordinate), command: \(command))\n" }
     
     
-    public init(coordinate : CGPoint, command: String) {
+    init(coordinate : CGPoint, command: String) {
         self.coordinate = coordinate
         self.command = command
     }

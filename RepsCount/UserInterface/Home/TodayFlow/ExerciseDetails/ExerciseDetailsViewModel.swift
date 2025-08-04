@@ -1,11 +1,7 @@
-import Core
-import CoreUserInterface
-import Services
-import Shared
 import Combine
 import SwiftUI
 
-public final class ExerciseDetailsViewModel: DefaultPageViewModel {
+final class ExerciseDetailsViewModel: DefaultPageViewModel {
 
     @AppStorage(UDKeys.measurementUnit) var measurementUnit: MeasurementUnit = .kilograms
 
@@ -42,7 +38,7 @@ public final class ExerciseDetailsViewModel: DefaultPageViewModel {
 
     // MARK: - Initialization
 
-    public init(
+    init(
         exercise: Exercise,
         exerciseDetailsManager: ExerciseDetailsManagerInterface
     ) {
@@ -86,7 +82,7 @@ public final class ExerciseDetailsViewModel: DefaultPageViewModel {
 
     private func setupBindings() {
         exerciseDetailsManager.exercisePublisher
-            .ifNotNil()
+            .compactMap { $0 }
             .dropFirst()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] exercise in

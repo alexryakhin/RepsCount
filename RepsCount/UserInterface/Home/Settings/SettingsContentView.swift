@@ -1,23 +1,19 @@
 import SwiftUI
-import CoreUserInterface
-import Core
-import Shared
 import UniformTypeIdentifiers
 import StoreKit
-import struct Services.AnalyticsService
 
-public struct SettingsContentView: PageView {
+struct SettingsContentView: PageView {
 
-    public typealias ViewModel = SettingsViewModel
+    typealias ViewModel = SettingsViewModel
 
-    @ObservedObject public var viewModel: ViewModel
+    @ObservedObject var viewModel: ViewModel
     @State private var isShowingGoToSettingsAlert: Bool = false
 
-    public init(viewModel: SettingsViewModel) {
+    init(viewModel: SettingsViewModel) {
         self.viewModel = viewModel
     }
 
-    public var contentView: some View {
+    var contentView: some View {
         List {
             // MARK: - Settings
 

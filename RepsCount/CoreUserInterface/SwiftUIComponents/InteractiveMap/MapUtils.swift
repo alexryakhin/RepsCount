@@ -134,35 +134,35 @@ func executeCommand(svgData: PathData, rect: CGRect) -> Path {
 ///
 ///
 @available(iOS 13.0, macOS 10.15, *)
-public struct PathData : Identifiable, Sendable {
-    public var id : String = ""
-    public var name: String = ""
-    public var boundingBox: CGRect? = nil
-    public var svgBounds: CGRect? = nil
+struct PathData : Identifiable, Sendable {
+    var id : String = ""
+    var name: String = ""
+    var boundingBox: CGRect? = nil
+    var svgBounds: CGRect? = nil
     var path = [PathExecutionCommand]()
 
 
-    public init(name: String, id: String, path: [PathExecutionCommand], boundingBox: CGRect) {
+    init(name: String, id: String, path: [PathExecutionCommand], boundingBox: CGRect) {
         self.name = name
         self.id = id
         self.path = path
         self.boundingBox = boundingBox
     }
     
-    public init(name: String, id: String, path: [PathExecutionCommand]) {
+    init(name: String, id: String, path: [PathExecutionCommand]) {
         self.name = name
         self.id = id
         self.path = path
     }
     
-    public init() {
+    init() {
         
     }
 }
 
 @available(iOS 13.0, macOS 10.15, *)
 extension PathData : Equatable {
-    public static func == (lhs: PathData, rhs: PathData) -> Bool {
+    static func == (lhs: PathData, rhs: PathData) -> Bool {
         lhs.id == rhs.id
     }
 }

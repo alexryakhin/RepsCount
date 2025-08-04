@@ -7,11 +7,11 @@
 
 import UIKit
 
-final public class BaseSearchController: UISearchController, UISearchBarDelegate, UISearchControllerDelegate {
+final class BaseSearchController: UISearchController, UISearchBarDelegate, UISearchControllerDelegate {
 
-    public var onSearchSubmit: ((String) -> Void)?
-    public var onSearchCancel: (() -> Void)?
-    public var onSearchEnded: (() -> Void)?
+    var onSearchSubmit: ((String) -> Void)?
+    var onSearchCancel: (() -> Void)?
+    var onSearchEnded: (() -> Void)?
 
     override init(searchResultsController: UIViewController? = nil) {
         super.init(searchResultsController: searchResultsController)
@@ -23,7 +23,7 @@ final public class BaseSearchController: UISearchController, UISearchBarDelegate
         customizeSearchBar()
     }
 
-    override public func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
 
@@ -35,17 +35,17 @@ final public class BaseSearchController: UISearchController, UISearchBarDelegate
         searchTextField.layer.masksToBounds = true
     }
 
-    public func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         onSearchCancel?()
     }
 
-    public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let text = searchBar.text {
             onSearchSubmit?(text)
         }
     }
 
-    public func didDismissSearchController(_ searchController: UISearchController) {
+    func didDismissSearchController(_ searchController: UISearchController) {
         onSearchEnded?()
     }
 

@@ -6,8 +6,9 @@
 //
 
 import Combine
+import Foundation
 
-public extension Publisher {
+extension Publisher {
 
     func asVoid() -> AnyPublisher<Void, Failure> {
         map { _ in Void() }.eraseToAnyPublisher()
@@ -26,7 +27,7 @@ public extension Publisher {
     }
 }
 
-public extension Publisher where Output == Bool {
+extension Publisher where Output == Bool {
 
     /// `Bool` publisher, ignores `false` input
     func ifTrue() -> AnyPublisher<Bool, Failure> {
@@ -49,7 +50,7 @@ public extension Publisher where Output == Bool {
     }
 }
 
-public extension Publisher {
+extension Publisher {
 
     /// Ignores output when last value of `filteringPublisher` is `false`
     func filter<O: Publisher>(whenTrue filteringPublisher: O) -> AnyPublisher<Output, Failure> where O.Output == Bool, O.Failure == Failure {
@@ -62,7 +63,7 @@ public extension Publisher {
     }
 }
 
-public extension Publisher where Output: OptionalType {
+extension Publisher where Output: OptionalType {
 
     /// `Output.Wrapped` publisher, ignores `nil` input
     func ifNotNil() -> AnyPublisher<Output.Wrapped, Failure> {
@@ -85,7 +86,7 @@ public extension Publisher where Output: OptionalType {
     }
 }
 
-public extension Publisher where Output == Bool {
+extension Publisher where Output == Bool {
 
     func isTrue() -> AnyPublisher<Bool, Failure> {
         map { $0 == true }.eraseToAnyPublisher()
@@ -100,7 +101,7 @@ public extension Publisher where Output == Bool {
     }
 }
 
-public extension Publisher where Output == String {
+extension Publisher where Output == String {
 
     func isEmpty() -> AnyPublisher<Bool, Failure> {
         map { $0.isEmpty }.eraseToAnyPublisher()
@@ -111,14 +112,14 @@ public extension Publisher where Output == String {
     }
 }
 
-public extension Publisher {
+extension Publisher {
 
     func replace<O>(withElement element: O) -> AnyPublisher<O, Failure> {
         map { _ in element }.eraseToAnyPublisher()
     }
 }
 
-public extension Publisher where Output: AdditiveArithmetic {
+extension Publisher where Output: AdditiveArithmetic {
 
     func isZero() -> AnyPublisher<Bool, Failure> {
         map { $0 == .zero }.eraseToAnyPublisher()
@@ -129,7 +130,7 @@ public extension Publisher where Output: AdditiveArithmetic {
     }
 }
 
-public extension Publisher where Output: OptionalType {
+extension Publisher where Output: OptionalType {
 
     func isNil() -> AnyPublisher<Bool, Failure> {
         flatMap { output -> AnyPublisher<Bool, Failure> in
@@ -153,7 +154,7 @@ public extension Publisher where Output: OptionalType {
     }
 }
 
-public extension Publisher where Output == Bool {
+extension Publisher where Output == Bool {
 
     func or<P: Publisher>(_ other: P) -> AnyPublisher<Bool, Failure> where P.Output == Bool, P.Failure == Failure {
         Publishers.CombineLatest(self, other)
@@ -168,7 +169,7 @@ public extension Publisher where Output == Bool {
     }
 }
 
-public extension Publisher {
+extension Publisher {
 
     func withLatestFrom<P>(
         _ other: P

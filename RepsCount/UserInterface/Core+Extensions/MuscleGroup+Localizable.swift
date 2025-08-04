@@ -5,11 +5,10 @@
 //  Created by Aleksandr Riakhin on 3/21/25.
 //
 
-import Core
 import SwiftUI
 
 extension MuscleGroup {
-    public var commonName: String {
+    var commonName: String {
         switch self {
         case .adductors: "Adductors"
         case .biceps: "Biceps"

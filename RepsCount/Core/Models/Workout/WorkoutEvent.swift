@@ -8,19 +8,18 @@
 
 import Foundation
 import EventKit
-import Shared
 
 /// Defines the type of a workout event.
-public enum WorkoutEventType: Int, Hashable, CaseIterable, Identifiable {
-    public var id: Int { rawValue }
+enum WorkoutEventType: Int, Hashable, CaseIterable, Identifiable {
+    var id: Int { rawValue }
 
     case single = 0
     case recurring = 1
 }
 
 /// Defines the duration of a workout event.
-public enum WorkoutEventDuration: Int, Hashable, CaseIterable, Identifiable {
-    public var id: Int { rawValue }
+enum WorkoutEventDuration: Int, Hashable, CaseIterable, Identifiable {
+    var id: Int { rawValue }
 
     case fifteenMinutes = 0
     case thirtyMinutes = 1
@@ -28,7 +27,7 @@ public enum WorkoutEventDuration: Int, Hashable, CaseIterable, Identifiable {
     case oneHourAndThirtyMinutes = 3
     case twoHours = 4
 
-    public var timeInterval: TimeInterval {
+    var timeInterval: TimeInterval {
         switch self {
         case .fifteenMinutes: return 900
         case .thirtyMinutes: return 1800
@@ -38,7 +37,7 @@ public enum WorkoutEventDuration: Int, Hashable, CaseIterable, Identifiable {
         }
     }
 
-    public var localizedName: String {
+    var localizedName: String {
         switch self {
         case .fifteenMinutes: return NSLocalizedString("15 minutes", comment: .empty)
         case .thirtyMinutes: return NSLocalizedString("30 minutes", comment: .empty)
@@ -49,8 +48,8 @@ public enum WorkoutEventDuration: Int, Hashable, CaseIterable, Identifiable {
     }
 }
 
-public enum WorkoutEventDay: Int, Hashable, CaseIterable, Identifiable {
-    public var id: Int { rawValue }
+enum WorkoutEventDay: Int, Hashable, CaseIterable, Identifiable {
+    var id: Int { rawValue }
 
     case sunday = 0
     case monday = 1
@@ -60,7 +59,7 @@ public enum WorkoutEventDay: Int, Hashable, CaseIterable, Identifiable {
     case friday = 5
     case saturday = 6
 
-    public var localizedName: String {
+    var localizedName: String {
         switch self {
             case .sunday: return NSLocalizedString("Sunday", comment: .empty)
             case .monday: return  NSLocalizedString("Monday", comment: .empty)
@@ -72,7 +71,7 @@ public enum WorkoutEventDay: Int, Hashable, CaseIterable, Identifiable {
         }
     }
 
-    public var weekDay: EKWeekday {
+    var weekDay: EKWeekday {
         switch self {
             case .monday: return .monday
             case .tuesday: return .tuesday
@@ -84,19 +83,19 @@ public enum WorkoutEventDay: Int, Hashable, CaseIterable, Identifiable {
         }
     }
 
-    public var dayOfWeek: EKRecurrenceDayOfWeek {
+    var dayOfWeek: EKRecurrenceDayOfWeek {
         return EKRecurrenceDayOfWeek(self.weekDay)
     }
 }
 
-public enum WorkoutEventRecurrence: Int, Hashable, CaseIterable, Identifiable {
-    public var id: Int { rawValue }
+enum WorkoutEventRecurrence: Int, Hashable, CaseIterable, Identifiable {
+    var id: Int { rawValue }
 
     case daily = 0
     case weekly = 1
     case monthly = 2
 
-    public var frequency: EKRecurrenceFrequency {
+    var frequency: EKRecurrenceFrequency {
         switch self {
         case .daily: return .daily
         case .weekly: return .weekly
@@ -106,45 +105,45 @@ public enum WorkoutEventRecurrence: Int, Hashable, CaseIterable, Identifiable {
 }
 
 /// Provides information about a workout event.
-public struct WorkoutEvent: Identifiable, Hashable {
-    public let id: String
+struct WorkoutEvent: Identifiable, Hashable {
+    let id: String
 
     /// Template selected for the event
-    public let template: WorkoutTemplate
+    let template: WorkoutTemplate
 
     /// Specifies whether the workout event is a recurring event or a single event.
-    public var type: WorkoutEventType {
+    var type: WorkoutEventType {
         recurrenceId == nil ? .single : .recurring
     }
 
     /// Specifies the days on which the workout event occur.
-    public let days: [WorkoutEventDay]
+    let days: [WorkoutEventDay]
 
     /// Specifies the time at which the workout event starts.
-    public let startAt: Int
+    let startAt: Int
 
     /// Specifies the workout event recurrence frequency.
-    public let repeats: WorkoutEventRecurrence?
+    let repeats: WorkoutEventRecurrence?
 
     /// Specifies the workout event recurrence interval.
-    public let interval: Int?
+    let interval: Int?
 
     /// Specifies how often the workout event occurs.
-    public let occurrenceCount: Int?
+    let occurrenceCount: Int?
 
     /// If event is recurring, then it will have this id
-    public let recurrenceId: String?
+    let recurrenceId: String?
 
     /// Specifies the duration of the workout
-    public let duration: WorkoutEventDuration
+    let duration: WorkoutEventDuration
 
     /// Specifies the date of the event.
-    public let date: Date
+    let date: Date
 
     /// The id of the workout if user actually started a workout based on the event. One to one connection
-    public let workoutInstanceId: String?
+    let workoutInstanceId: String?
 
-    public init(
+    init(
         template: WorkoutTemplate,
         days: [WorkoutEventDay],
         startAt: Int,
@@ -172,18 +171,18 @@ public struct WorkoutEvent: Identifiable, Hashable {
 }
 
 extension WorkoutEvent: Equatable {
-    public static func ==(lhs: WorkoutEvent, rhs: WorkoutEvent) -> Bool {
+    static func ==(lhs: WorkoutEvent, rhs: WorkoutEvent) -> Bool {
         lhs.id == rhs.id
     }
 }
 
-public extension WorkoutEvent {
+extension WorkoutEvent {
     var endAtDate: Date {
         Date(timeInterval: duration.timeInterval, since: date)
     }
 }
 
-public extension WorkoutEvent {
+extension WorkoutEvent {
     /// Create the date at which a drop-in workout event starts.
     func workoutEventWithDate(date: Date) -> Date {
         let result = TimeInterval(startAt)
@@ -228,7 +227,7 @@ public extension WorkoutEvent {
     }
 }
 
-public extension WorkoutEvent {
+extension WorkoutEvent {
     /// The amount of occurrences of a recurring workout event.
     var recurrenceEnd: EKRecurrenceEnd {
         guard let occurrenceCount else { fatalError("Can't create recurrence end") }

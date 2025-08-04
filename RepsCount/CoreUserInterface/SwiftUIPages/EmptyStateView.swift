@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-public struct EmptyStateView: View {
+struct EmptyStateView: View {
 
     private let imageSystemName: String?
     private let title: String
     private let subtitle: String?
     private let instructions: String?
 
-    public init(
+    init(
         imageSystemName: String? = nil,
         title: String,
         subtitle: String? = nil,
@@ -26,7 +26,7 @@ public struct EmptyStateView: View {
         self.instructions = instructions
     }
 
-    public var body: some View {
+    var body: some View {
         VStack(spacing: 20) {
             if let imageSystemName {
                 Image(systemName: imageSystemName)

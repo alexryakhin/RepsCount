@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension ExerciseModel {
+extension ExerciseModel {
     var equipment: ExerciseEquipment {
         switch self {
         // MARK: - Trapezius

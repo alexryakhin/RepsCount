@@ -14,7 +14,7 @@ private var swipeToDeleteViewActiveId: CurrentValueSubject<UUID?, Never> = .init
 Use this view if you need a swipe to delete gesture in a custom row (not using `List`)
 Apply `.id()` modifier on to SwipeToDeleteView inside LazyVStack to avoid bugs with reusing cells
 */
-public struct SwipeToDeleteView<Content: View>: View {
+struct SwipeToDeleteView<Content: View>: View {
 
     @Environment(\.layoutDirection) var layoutDirection
 
@@ -28,7 +28,7 @@ public struct SwipeToDeleteView<Content: View>: View {
     private let content: () -> Content
     private let onDelete: () -> Void
 
-    public init(
+    init(
         content: @escaping () -> Content,
         onDelete: @escaping () -> Void
     ) {
@@ -36,7 +36,7 @@ public struct SwipeToDeleteView<Content: View>: View {
         self.onDelete = onDelete
     }
 
-    public var body: some View {
+    var body: some View {
         ZStack(alignment: .trailing) {
             Color.red
                 .opacity(offset < 0 ? 1 : 0)

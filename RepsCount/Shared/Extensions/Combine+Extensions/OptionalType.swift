@@ -7,7 +7,7 @@
 
 import Combine
 
-public protocol OptionalType {
+protocol OptionalType {
     
     associatedtype Wrapped
 
@@ -16,7 +16,7 @@ public protocol OptionalType {
 
 extension Optional: OptionalType {
     
-    public var value: Wrapped? {
+    var value: Wrapped? {
         return self
     }
 }

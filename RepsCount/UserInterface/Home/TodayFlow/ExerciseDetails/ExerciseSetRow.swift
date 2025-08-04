@@ -7,9 +7,6 @@
 
 import Foundation
 import SwiftUI
-import Shared
-import Core
-import CoreUserInterface
 
 struct ExerciseSetRow: View {
     var exerciseSet: ExerciseSet
@@ -42,7 +39,7 @@ struct ExerciseSetRow: View {
                     .tint(Gradient(colors: [.green, .blue]))
             }
 
-            Text(DateFormatter().convertDateToString(date: exerciseSet.timestamp, format: .timeFull))
+            Text(exerciseSet.timestamp.formatted(date: .omitted, time: .standard))
                 .font(.system(.subheadline, design: .monospaced))
                 .foregroundStyle(.secondary)
         }

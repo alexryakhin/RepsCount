@@ -1,11 +1,7 @@
-import Core
-import CoreUserInterface
-import Services
-import Shared
 import Combine
 import SwiftUI
 
-public final class TodayMainViewModel: DefaultPageViewModel {
+final class TodayMainViewModel: DefaultPageViewModel {
 
     @AppStorage(UDKeys.savesLocation) var savesLocation: Bool = true
 
@@ -46,7 +42,7 @@ public final class TodayMainViewModel: DefaultPageViewModel {
 
     // MARK: - Initialization
 
-    public init(
+    init(
         calendarEventsProvider: WorkoutEventsProviderInterface,
         addWorkoutManager: AddWorkoutManagerInterface,
         workoutsProvider: WorkoutsProviderInterface,

@@ -7,10 +7,9 @@
 
 import Foundation
 import CoreLocation
-import Core
 import Combine
 
-public protocol LocationManagerInterface: AnyObject {
+protocol LocationManagerInterface: AnyObject {
     /// Specifies the authorization status for the app.
     var authorizationStatusPublisher: AnyPublisher<CLAuthorizationStatus, Never> { get }
 
@@ -18,27 +17,27 @@ public protocol LocationManagerInterface: AnyObject {
     func getCurrentLocation() async throws(CoreError) -> Location?
 }
 
-public final class LocationManager: NSObject, LocationManagerInterface, CLLocationManagerDelegate {
+final class LocationManager: NSObject, LocationManagerInterface, CLLocationManagerDelegate {
 
     /// Specifies the authorization status for the app.
-    public var authorizationStatusPublisher: AnyPublisher<CLAuthorizationStatus, Never> {
+    var authorizationStatusPublisher: AnyPublisher<CLAuthorizationStatus, Never> {
         authorizationStatusSubject.eraseToAnyPublisher()
     }
 
     private let locationManager = CLLocationManager()
     private let authorizationStatusSubject = CurrentValueSubject<CLAuthorizationStatus, Never>(.notDetermined)
 
-    public override init() {
+    override init() {
         super.init()
         authorizationStatusSubject.value = locationManager.authorizationStatus
         initiateLocationManager()
     }
 
-    public func requestAccess() {
+    func requestAccess() {
         locationManager.requestWhenInUseAuthorization()
     }
 
-    public func getCurrentLocation() async throws(CoreError) -> Location? {
+    func getCurrentLocation() async throws(CoreError) -> Location? {
         try verifyAuthorizationStatus()
         locationManager.startUpdatingLocation()
         guard let currentLocation = locationManager.location else {

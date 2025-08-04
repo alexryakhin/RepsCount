@@ -6,17 +6,16 @@
 //
 
 import SwiftUI
-import Shared
 
-public struct AlertModel {
-    public let title: LocalizedStringKey
-    public let message: LocalizedStringKey?
-    public let actionText: LocalizedStringKey?
-    public let destructiveActionText: LocalizedStringKey?
-    public let action: VoidHandler?
-    public let destructiveAction: VoidHandler?
+struct AlertModel {
+    let title: LocalizedStringKey
+    let message: LocalizedStringKey?
+    let actionText: LocalizedStringKey?
+    let destructiveActionText: LocalizedStringKey?
+    let action: VoidHandler?
+    let destructiveAction: VoidHandler?
 
-    public init(
+    init(
         title: LocalizedStringKey,
         message: LocalizedStringKey? = nil,
         actionText: LocalizedStringKey? = nil,

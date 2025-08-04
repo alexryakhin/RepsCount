@@ -11,7 +11,7 @@ struct PageLoadingView: View {
 
     private let props: DefaultLoaderProps
 
-    public init(
+    init(
         props: DefaultLoaderProps
     ) {
         self.props = props

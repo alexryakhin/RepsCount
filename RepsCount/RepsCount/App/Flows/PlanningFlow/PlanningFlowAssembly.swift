@@ -1,8 +1,5 @@
 import Swinject
 import SwinjectAutoregistration
-import CoreNavigation
-import UserInterface
-import Services
 import EventKit
 
 final class PlanningFlowAssembly: Assembly, Identifiable {

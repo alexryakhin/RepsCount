@@ -7,43 +7,41 @@
 
 import Combine
 import SwiftUI
-import Shared
-import Core
 
-open class PageViewModel<
+class PageViewModel<
     LoaderProps,
     PlaceholderProps,
     ErrorProps
 >: ObservableObject {
 
-    public typealias PageState = AdditionalPageState<LoaderProps, PlaceholderProps, ErrorProps>
+    typealias PageState = AdditionalPageState<LoaderProps, PlaceholderProps, ErrorProps>
 
     // MARK: - Properties
 
-    @Published public var isShowingAlert: Bool = false
-    @Published public var additionalState: PageState?
+    @Published var isShowingAlert: Bool = false
+    @Published var additionalState: PageState?
 
     // MARK: - Private Properties
 
     private var cancellables = Set<AnyCancellable>()
 
-    public init() { }
+    init() { }
 
     deinit {
         logInfo("DEINIT: \(String(describing: type(of: self)))")
     }
 
-    public func setState(_ newState: PageState) {
+    func setState(_ newState: PageState) {
         additionalState = newState
     }
 
-    public func resetAdditionalState() {
+    func resetAdditionalState() {
         withAnimation {
             additionalState = nil
         }
     }
 
-    public func errorReceived(
+    func errorReceived(
         _ error: Error,
         displayType: ErrorDisplayType,
         actionText: String? = nil,
@@ -58,7 +56,7 @@ open class PageViewModel<
     }
 
     /// Override this function to implement custom error processing
-    public func defaultErrorReceived(
+    func defaultErrorReceived(
         _ error: CoreError,
         displayType: ErrorDisplayType,
         actionText: LocalizedStringKey? = nil,

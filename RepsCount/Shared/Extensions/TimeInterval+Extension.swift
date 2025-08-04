@@ -7,7 +7,7 @@
 
 import Foundation
 
-public extension TimeInterval {
+extension TimeInterval {
     /// Converts the time interval into hours.
     var hour: Int {
         let division = self / 3600

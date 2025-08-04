@@ -7,7 +7,7 @@
 
 import Foundation
 
-public extension NumberFormatter {
+extension NumberFormatter {
 
     func percentString(value: Double) -> String {
         let formatter = self

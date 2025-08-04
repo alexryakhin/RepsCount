@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-public protocol PageView: View {
+protocol PageView: View {
     associatedtype ContentView: View
     associatedtype LoaderView: View
     associatedtype ErrorView: View
@@ -26,7 +26,7 @@ public protocol PageView: View {
     @ViewBuilder func errorView(props: PageState.ErrorProps) -> ErrorView
 }
 
-public extension PageView {
+extension PageView {
     @ViewBuilder
     var body: some View {
         contentView

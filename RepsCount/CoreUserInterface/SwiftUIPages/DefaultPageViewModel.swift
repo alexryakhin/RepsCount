@@ -7,14 +7,12 @@
 
 import Foundation
 import Combine
-import Core
-import Shared
 
-open class DefaultPageViewModel: PageViewModel<DefaultLoaderProps, DefaultPlaceholderProps, DefaultErrorProps> {
+class DefaultPageViewModel: PageViewModel<DefaultLoaderProps, DefaultPlaceholderProps, DefaultErrorProps> {
 
-    @Published public var alertModel = AlertModel(title: .init(.empty))
+    @Published var alertModel = AlertModel(title: .init(.empty))
 
-    override public func defaultPageErrorHandler(_ error: CoreError, action: @escaping VoidHandler) {
+    override func defaultPageErrorHandler(_ error: CoreError, action: @escaping VoidHandler) {
         let props: DefaultErrorProps? = switch error {
         case .networkError(let error):
                 .common(message: error.description, action: action)
@@ -32,15 +30,15 @@ open class DefaultPageViewModel: PageViewModel<DefaultLoaderProps, DefaultPlaceh
         }
     }
 
-    public override func presentErrorPage(withProps errorProps: DefaultErrorProps) {
+    override func presentErrorPage(withProps errorProps: DefaultErrorProps) {
         additionalState = .error(errorProps)
     }
 
-    public override func loadingStarted() {
+    override func loadingStarted() {
         additionalState = .loading()
     }
 
-    public override func showAlert(withModel model: AlertModel) {
+    override func showAlert(withModel model: AlertModel) {
         if isShowingAlert {
             isShowingAlert = false
             DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: { [weak self] in

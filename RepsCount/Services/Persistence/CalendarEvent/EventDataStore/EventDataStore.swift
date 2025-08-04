@@ -1,15 +1,14 @@
 import EventKit
-import Core
 
-public actor EventDataStore {
-    public let eventStore: EKEventStore
+actor EventDataStore {
+    let eventStore: EKEventStore
 
-    public init() {
+    init() {
         self.eventStore = EKEventStore()
     }
 
     /// Prompts the user for write-only authorization to Calendar.
-    public func requestWriteOnlyAccess() async throws(CoreError) -> Bool {
+    func requestWriteOnlyAccess() async throws(CoreError) -> Bool {
         if #available(iOS 17.0, *) {
             do {
                 return try await eventStore.requestWriteOnlyAccessToEvents()
@@ -27,7 +26,7 @@ public actor EventDataStore {
     }
 
     /// Verifies the authorization status for the app.
-    public func verifyAuthorizationStatus() async throws(CoreError) -> Bool {
+    func verifyAuthorizationStatus() async throws(CoreError) -> Bool {
         let status = EKEventStore.authorizationStatus(for: .event)
 
         switch status {
@@ -47,7 +46,7 @@ public actor EventDataStore {
     }
 
     /// Create an event with the specified workout details, then save it with all its occurrences to the user's Calendar.
-    public func addWorkoutEvent(_ workoutEvent: WorkoutEvent, calendar: EKCalendar? = nil) throws(CoreError) {
+    func addWorkoutEvent(_ workoutEvent: WorkoutEvent, calendar: EKCalendar? = nil) throws(CoreError) {
         let newEvent = workoutEvent.event(store: eventStore, calendar: calendar)
         do {
             try self.eventStore.save(newEvent, span: .futureEvents)

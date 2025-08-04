@@ -5,7 +5,7 @@
 //  Created by Aleksandr Riakhin on 3/12/25.
 //
 
-public enum ExerciseCategory: String, CaseIterable {
+enum ExerciseCategory: String, CaseIterable {
     case trapezius = "Trapezius"
     case deltoids = "Deltoids"
     case biceps = "Biceps"
@@ -23,7 +23,7 @@ public enum ExerciseCategory: String, CaseIterable {
     case abductors = "Abductors"
     case calves = "Calves"
 
-    public var exercises: [ExerciseModel] {
+    var exercises: [ExerciseModel] {
         switch self {
         case .trapezius:
             return [

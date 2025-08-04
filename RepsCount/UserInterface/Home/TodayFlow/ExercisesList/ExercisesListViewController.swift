@@ -7,16 +7,14 @@
 
 import UIKit
 import SwiftUI
-import CoreUserInterface
-import Core
 
-public final class ExercisesListViewController: PageViewController<ExercisesListContentView>, NavigationBarVisible {
+final class ExercisesListViewController: PageViewController<ExercisesListContentView>, NavigationBarVisible {
 
-    public enum Event {
+    enum Event {
         case showExerciseDetails(Exercise)
     }
 
-    public var onEvent: ((Event) -> Void)?
+    var onEvent: ((Event) -> Void)?
 
     // MARK: - Private properties
 
@@ -24,7 +22,7 @@ public final class ExercisesListViewController: PageViewController<ExercisesList
 
     // MARK: - Initialization
 
-    public init(viewModel: ExercisesListViewModel) {
+    init(viewModel: ExercisesListViewModel) {
         self.viewModel = viewModel
         super.init(rootView: ExercisesListContentView(viewModel: viewModel))
     }
@@ -33,7 +31,7 @@ public final class ExercisesListViewController: PageViewController<ExercisesList
         fatalError("init(coder:) has not been implemented")
     }
 
-    override public func setup() {
+    override func setup() {
         super.setup()
         setupBindings()
         navigationItem.title = NSLocalizedString("Exercises", comment: .empty)

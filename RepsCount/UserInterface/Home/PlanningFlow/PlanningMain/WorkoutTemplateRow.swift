@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-import Core
-import CoreUserInterface
 
 struct WorkoutTemplateRow: View {
     let template: WorkoutTemplate

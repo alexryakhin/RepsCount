@@ -6,13 +6,10 @@
 //
 
 import SwiftUI
-import CoreUserInterface
-import Core
-import struct Services.AnalyticsService
 
-public struct ExercisesListContentView: PageView {
+struct ExercisesListContentView: PageView {
 
-    public typealias ViewModel = ExercisesListViewModel
+    typealias ViewModel = ExercisesListViewModel
 
     struct ListSection: Hashable {
         let date: Date
@@ -20,13 +17,13 @@ public struct ExercisesListContentView: PageView {
         let items: [Exercise]
     }
 
-    @ObservedObject public var viewModel: ViewModel
+    @ObservedObject var viewModel: ViewModel
 
-    public init(viewModel: ViewModel) {
+    init(viewModel: ViewModel) {
         self.viewModel = viewModel
     }
 
-    public var contentView: some View {
+    var contentView: some View {
         ScrollView {
             LazyVStack(spacing: 24) {
                 if viewModel.selectedDate == nil {
@@ -73,7 +70,7 @@ public struct ExercisesListContentView: PageView {
         }
     }
 
-    public func placeholderView(props: PageState.PlaceholderProps) -> some View {
+    func placeholderView(props: PageState.PlaceholderProps) -> some View {
         EmptyListView(
             label: "No exercises yet",
             description: "Go back and start a workout"

@@ -5,8 +5,6 @@
 //  Created by Aleksandr Riakhin on 3/29/25.
 //
 import SwiftUI
-import CoreUserInterface
-import Core
 
 struct WorkoutTemplateExerciseRow: View {
     var exercise: WorkoutTemplateExercise

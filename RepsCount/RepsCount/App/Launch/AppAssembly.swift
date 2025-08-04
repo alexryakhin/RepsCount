@@ -5,8 +5,6 @@
 //  Created by Aleksandr Riakhin on 3/8/25.
 //
 
-import CoreNavigation
-import CoreUserInterface
 import Swinject
 import SwinjectAutoregistration
 import UIKit

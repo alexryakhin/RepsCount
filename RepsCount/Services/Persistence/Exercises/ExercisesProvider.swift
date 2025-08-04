@@ -7,9 +7,8 @@
 
 import CoreData
 import Combine
-import Core
 
-public protocol ExercisesProviderInterface {
+protocol ExercisesProviderInterface {
     var exercisesPublisher: AnyPublisher<[Exercise], Never> { get }
     var exercisesErrorPublisher: PassthroughSubject<CoreError, Never> { get }
 
@@ -17,25 +16,25 @@ public protocol ExercisesProviderInterface {
     func fetchExercises()
 }
 
-public final class ExercisesProvider: ExercisesProviderInterface {
+final class ExercisesProvider: ExercisesProviderInterface {
 
-    public var exercisesPublisher: AnyPublisher<[Exercise], Never> {
+    var exercisesPublisher: AnyPublisher<[Exercise], Never> {
         return exercisesSubject.eraseToAnyPublisher()
     }
 
-    public let exercisesErrorPublisher = PassthroughSubject<CoreError, Never>()
+    let exercisesErrorPublisher = PassthroughSubject<CoreError, Never>()
 
     private let coreDataService: CoreDataServiceInterface
     private let exercisesSubject = CurrentValueSubject<[Exercise], Never>([])
     private var cancellables: Set<AnyCancellable> = []
 
-    public init(coreDataService: CoreDataServiceInterface) {
+    init(coreDataService: CoreDataServiceInterface) {
         self.coreDataService = coreDataService
         setupBindings()
         fetchExercises()
     }
 
-    public func fetchExercises() {
+    func fetchExercises() {
         let request = CDExercise.fetchRequest()
         do {
             let exercises = try coreDataService.context.fetch(request)
@@ -45,7 +44,7 @@ public final class ExercisesProvider: ExercisesProviderInterface {
         }
     }
 
-    public func delete(with id: String) {
+    func delete(with id: String) {
         let request = CDExercise.fetchRequest()
         request.predicate = NSPredicate(format: "id == %@", id)
 

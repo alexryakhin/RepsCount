@@ -6,17 +6,16 @@
 //
 
 import Foundation
-import Core
 import UIKit
 
-open class BaseAPIService {
+class BaseAPIService {
 
     open var baseURL: String { fatalError("baseURL must be overridden") }
     open var apiKey: String { fatalError("apiKey must be overridden") }
 
     private let decoder: JSONDecoder
 
-    public init(decoder: JSONDecoder) {
+    init(decoder: JSONDecoder) {
         self.decoder = decoder
     }
 

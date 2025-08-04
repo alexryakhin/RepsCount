@@ -1,19 +1,16 @@
 import SwiftUI
-import CoreUserInterface
-import Core
-import struct Services.AnalyticsService
 
-public struct CalendarContentView: PageView {
+struct CalendarContentView: PageView {
 
-    public typealias ViewModel = CalendarViewModel
+    typealias ViewModel = CalendarViewModel
 
-    @ObservedObject public var viewModel: ViewModel
+    @ObservedObject var viewModel: ViewModel
 
-    public init(viewModel: CalendarViewModel) {
+    init(viewModel: CalendarViewModel) {
         self.viewModel = viewModel
     }
 
-    public var contentView: some View {
+    var contentView: some View {
         ScrollView {
             LazyVStack(spacing: 24) {
                 calendarSectionView

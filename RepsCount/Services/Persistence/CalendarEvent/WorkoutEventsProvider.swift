@@ -7,9 +7,8 @@
 
 import Combine
 import CoreData
-import Core
 
-public protocol WorkoutEventsProviderInterface {
+protocol WorkoutEventsProviderInterface {
     var eventsPublisher: AnyPublisher<[WorkoutEvent], Never> { get }
     var eventsErrorPublisher: PassthroughSubject<CoreError, Never> { get }
 
@@ -17,25 +16,25 @@ public protocol WorkoutEventsProviderInterface {
     func fetchEvents()
 }
 
-public final class WorkoutEventsProvider: WorkoutEventsProviderInterface {
+final class WorkoutEventsProvider: WorkoutEventsProviderInterface {
 
-    public var eventsPublisher: AnyPublisher<[WorkoutEvent], Never> {
+    var eventsPublisher: AnyPublisher<[WorkoutEvent], Never> {
         return eventsSubject.eraseToAnyPublisher()
     }
 
-    public let eventsErrorPublisher = PassthroughSubject<CoreError, Never>()
+    let eventsErrorPublisher = PassthroughSubject<CoreError, Never>()
 
     private let coreDataService: CoreDataServiceInterface
     private let eventsSubject = CurrentValueSubject<[WorkoutEvent], Never>([])
     private var cancellables: Set<AnyCancellable> = []
 
-    public init(coreDataService: CoreDataServiceInterface) {
+    init(coreDataService: CoreDataServiceInterface) {
         self.coreDataService = coreDataService
         setupBindings()
         fetchEvents()
     }
 
-    public func fetchEvents() {
+    func fetchEvents() {
         let request = CDWorkoutEvent.fetchRequest()
         do {
             let events = try coreDataService.context.fetch(request)
@@ -45,7 +44,7 @@ public final class WorkoutEventsProvider: WorkoutEventsProviderInterface {
         }
     }
 
-    public func deleteEvent(_ event: WorkoutEvent, shouldDeleteAllFutureEvents: Bool) {
+    func deleteEvent(_ event: WorkoutEvent, shouldDeleteAllFutureEvents: Bool) {
         if shouldDeleteAllFutureEvents {
             deleteFutureRecurrences(for: event)
         } else {

@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Core
 
 struct WorkoutEventRow: View {
     let event: WorkoutEvent

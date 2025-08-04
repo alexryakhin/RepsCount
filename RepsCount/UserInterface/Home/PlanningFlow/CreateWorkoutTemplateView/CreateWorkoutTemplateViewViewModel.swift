@@ -1,10 +1,7 @@
-import Core
-import CoreUserInterface
-import Services
-import Shared
 import Combine
+import Foundation
 
-public final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
+final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
 
     enum Input {
         case saveTemplate
@@ -40,7 +37,7 @@ public final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
 
     // MARK: - Initialization
 
-    public init(workoutTemplatesManager: WorkoutTemplateManagerInterface) {
+    init(workoutTemplatesManager: WorkoutTemplateManagerInterface) {
         self.workoutTemplatesManager = workoutTemplatesManager
         super.init()
         setupBindings()
@@ -75,7 +72,7 @@ public final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
 
     private func setupBindings() {
         workoutTemplatesManager.workoutTemplatePublisher
-            .ifNotNil()
+            .compactMap { $0 }
             .removeDuplicates()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] template in

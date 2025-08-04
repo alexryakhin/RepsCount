@@ -1,13 +1,13 @@
 import UIKit
 
 /// Identical controllers could be pushed one by one
-public protocol AllowDuplicating {}
+protocol AllowDuplicating {}
 
-public enum RouterName {
-    public static let root = "root"
+enum RouterName {
+    static let root = "root"
 }
 
-public protocol RouterInterface: Presentable {
+protocol RouterInterface: Presentable {
 
     var rootController: UINavigationController? { get }
 
@@ -46,7 +46,7 @@ public protocol RouterInterface: Presentable {
     func firstIndex<T>(_ : T.Type) -> Int?
 }
 
-public extension RouterInterface {
+extension RouterInterface {
 
     func present(_ module: Presentable?) {
         present(module, modalPresentationStyle: .automatic, animated: true)

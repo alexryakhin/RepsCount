@@ -1,12 +1,8 @@
 import SwiftUI
-import CoreUserInterface
-import Core
-import Shared
-import struct Services.AnalyticsService
 
-public struct ExerciseDetailsContentView: PageView {
+struct ExerciseDetailsContentView: PageView {
 
-    public typealias ViewModel = ExerciseDetailsViewModel
+    typealias ViewModel = ExerciseDetailsViewModel
 
     @State private var isShowingAlert = false
     @State private var showConfetti = false
@@ -14,13 +10,13 @@ public struct ExerciseDetailsContentView: PageView {
     @State private var editingDefaultsAmountInput: String = ""
     @State private var editingDefaultsSetsInput: String = ""
     @FocusState private var isNotesInputFocused: Bool
-    @ObservedObject public var viewModel: ViewModel
+    @ObservedObject var viewModel: ViewModel
 
-    public init(viewModel: ExerciseDetailsViewModel) {
+    init(viewModel: ExerciseDetailsViewModel) {
         self.viewModel = viewModel
     }
 
-    public var contentView: some View {
+    var contentView: some View {
         ScrollView {
             VStack(spacing: 24) {
                 setsSection

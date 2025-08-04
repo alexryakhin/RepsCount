@@ -1,11 +1,5 @@
 import Swinject
 import SwinjectAutoregistration
-import UserInterface
-import Core
-import CoreUserInterface
-import CoreNavigation
-import Services
-import Shared
 
 final class SettingsAssembly: Assembly, Identifiable {
 

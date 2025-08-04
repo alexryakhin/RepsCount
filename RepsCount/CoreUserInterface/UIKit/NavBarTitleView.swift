@@ -7,7 +7,7 @@
 
 import UIKit
 
-public final class NavBarTitleView: UIView {
+final class NavBarTitleView: UIView {
 
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -23,7 +23,7 @@ public final class NavBarTitleView: UIView {
         return label
     }()
 
-    public init(title: String, subtitle: String? = nil) {
+    init(title: String, subtitle: String? = nil) {
         super.init(frame: .zero)
         titleLabel.text = title
         subtitleLabel.text = subtitle

@@ -8,7 +8,7 @@
 import Flow
 import SwiftUI
 
-public struct ListFlowPicker<SelectionItem: Selectable>: View {
+struct ListFlowPicker<SelectionItem: Selectable>: View {
 
     @Binding private var selection: SelectionItem?
     @Binding private var error: LocalizedStringKey?
@@ -16,7 +16,7 @@ public struct ListFlowPicker<SelectionItem: Selectable>: View {
     private let header: LocalizedStringKey
     private let caption: LocalizedStringKey?
 
-    public init(
+    init(
         selection: Binding<SelectionItem?>,
         error: Binding<LocalizedStringKey?> = .constant(nil),
         items: [SelectionItem],
@@ -30,7 +30,7 @@ public struct ListFlowPicker<SelectionItem: Selectable>: View {
         self.caption = caption
     }
 
-    public var body: some View {
+    var body: some View {
         Section {
             FlowPickerView(selection: $selection, items: items)
                 .frame(maxWidth: .infinity, alignment: .leading)

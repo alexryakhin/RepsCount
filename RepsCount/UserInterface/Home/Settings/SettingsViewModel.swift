@@ -1,11 +1,7 @@
-import Core
-import CoreUserInterface
-import Services
-import Shared
 import Combine
 import SwiftUI
 
-public final class SettingsViewModel: DefaultPageViewModel {
+final class SettingsViewModel: DefaultPageViewModel {
 
     enum Input {
         case showAboutApp
@@ -47,7 +43,7 @@ public final class SettingsViewModel: DefaultPageViewModel {
         }
     }
 
-    public init(locationManager: LocationManagerInterface) {
+    init(locationManager: LocationManagerInterface) {
         self.locationManager = locationManager
         super.init()
         setupBindings()

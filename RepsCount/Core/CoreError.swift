@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum CoreError: Error {
+enum CoreError: Error {
     case networkError(NetworkError)
     case storageError(StorageError)
     case validationError(ValidationError)
@@ -16,7 +16,7 @@ public enum CoreError: Error {
     case unknownError
 
     // Nested enum for Network Errors
-    public enum NetworkError: Error {
+    enum NetworkError: Error {
         case timeout
         case serverUnreachable
         case invalidResponse
@@ -26,7 +26,7 @@ public enum CoreError: Error {
         case invalidURL
         case noData
 
-        public var description: String {
+        var description: String {
             switch self {
             case .timeout: NSLocalizedString("Timeout", comment: .empty)
             case .serverUnreachable: NSLocalizedString("Server unreachable", comment: .empty)
@@ -41,12 +41,12 @@ public enum CoreError: Error {
     }
 
     // StorageError and ValidationError can follow a similar pattern if needed
-    public enum StorageError: Error {
+    enum StorageError: Error {
         case saveFailed
         case readFailed
         case dataCorrupted
 
-        public var description: String {
+        var description: String {
             switch self {
             case .saveFailed: NSLocalizedString("Save failed", comment: .empty)
             case .readFailed: NSLocalizedString("Read failed", comment: .empty)
@@ -55,11 +55,11 @@ public enum CoreError: Error {
         }
     }
 
-    public enum ValidationError: Error {
+    enum ValidationError: Error {
         case invalidInput
         case missingField
 
-        public var description: String {
+        var description: String {
             switch self {
             case .invalidInput: NSLocalizedString("Invalid input", comment: .empty)
             case .missingField: NSLocalizedString("Missing field", comment: .empty)
@@ -67,7 +67,7 @@ public enum CoreError: Error {
         }
     }
 
-    public enum InternalError: Error {
+    enum InternalError: Error {
         case removingExerciseFailed
         case removingTemplateFailed
         case removingEventFailed
@@ -81,7 +81,7 @@ public enum CoreError: Error {
         case workoutCompleted
         case unableToCompleteEmptyWorkout
 
-        public var description: String {
+        var description: String {
             switch self {
             case .removingExerciseFailed:
                 return NSLocalizedString("Removing exercise failed", comment: .empty)
@@ -111,13 +111,13 @@ public enum CoreError: Error {
         }
     }
 
-    public enum EventStoreError: Error {
+    enum EventStoreError: Error {
         case denied
         case restricted
         case unknown
         case upgrade
 
-        public var description: String {
+        var description: String {
             switch self {
             case .denied:
                 return NSLocalizedString("The app doesn't have permission to Calendar in Settings.", comment: .empty)
@@ -131,7 +131,7 @@ public enum CoreError: Error {
         }
     }
 
-    public var description: String {
+    var description: String {
         switch self {
         case .networkError(let error): error.description
         case .storageError(let error): error.description

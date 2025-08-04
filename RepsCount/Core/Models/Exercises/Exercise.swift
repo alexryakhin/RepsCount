@@ -9,29 +9,29 @@
 import Foundation
 import CoreLocation
 
-public struct Exercise: Identifiable, Hashable {
-    public let model: ExerciseModel
-    public let id: String
-    public let timestamp: Date
-    public let sets: [ExerciseSet]
-    public var notes: String
-    public let location: Location?
-    public let workoutInstanceId: String?
-    public let defaultAmount: Double
-    public let defaultSets: Double
+struct Exercise: Identifiable, Hashable {
+    let model: ExerciseModel
+    let id: String
+    let timestamp: Date
+    let sets: [ExerciseSet]
+    var notes: String
+    let location: Location?
+    let workoutInstanceId: String?
+    let defaultAmount: Double
+    let defaultSets: Double
 
-    public var maxReps: Double? {
+    var maxReps: Double? {
         if let maxReps = sets.map(\.amount).max() {
             return max(defaultAmount, maxReps)
         }
         return defaultAmount.nilIfZero ?? sets.map(\.amount).max()
     }
 
-    public var isCompleted: Bool {
+    var isCompleted: Bool {
         Calendar.current.isDateInToday(timestamp)
     }
 
-    public var totalDuration: TimeInterval? {
+    var totalDuration: TimeInterval? {
         guard sets.count > 1,
               let firstSetDate = sets.first?.timestamp,
               let lastSetDate = sets.last?.timestamp
@@ -39,7 +39,7 @@ public struct Exercise: Identifiable, Hashable {
         return firstSetDate.distance(to: lastSetDate)
     }
 
-    public init(
+    init(
         model: ExerciseModel,
         id: String,
         timestamp: Date,

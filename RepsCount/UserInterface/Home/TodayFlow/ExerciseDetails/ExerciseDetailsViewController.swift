@@ -1,15 +1,13 @@
 import UIKit
 import SwiftUI
-import CoreUserInterface
-import Core
 
-public final class ExerciseDetailsViewController: PageViewController<ExerciseDetailsContentView>, NavigationBarVisible {
+final class ExerciseDetailsViewController: PageViewController<ExerciseDetailsContentView>, NavigationBarVisible {
 
-    public enum Event {
+    enum Event {
         case finish
     }
 
-    public var onEvent: ((Event) -> Void)?
+    var onEvent: ((Event) -> Void)?
 
     // MARK: - Private properties
 
@@ -17,16 +15,16 @@ public final class ExerciseDetailsViewController: PageViewController<ExerciseDet
 
     // MARK: - Initialization
 
-    public init(viewModel: ExerciseDetailsViewModel) {
+    init(viewModel: ExerciseDetailsViewModel) {
         self.viewModel = viewModel
         super.init(rootView: ExerciseDetailsContentView(viewModel: viewModel))
     }
 
-    public required init?(coder: NSCoder) {
+    required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override public func setup() {
+    override func setup() {
         super.setup()
         setupBindings()
         setupNavigationBar()

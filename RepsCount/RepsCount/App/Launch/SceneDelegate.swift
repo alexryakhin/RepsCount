@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import CoreUserInterface
-import CoreNavigation
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
