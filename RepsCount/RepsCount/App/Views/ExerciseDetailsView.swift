@@ -45,7 +45,6 @@ struct ExerciseDetailsView: View {
     
     var body: some View {
         ExerciseDetailsContentView(viewModel: viewModel)
-            .navigationTitle(LocalizationKeys.Navigation.exerciseDetails)
-            .navigationBarTitleDisplayMode(.large)
+            .navigationTitle(Loc.Navigation.exerciseDetails.localized)
     }
 }

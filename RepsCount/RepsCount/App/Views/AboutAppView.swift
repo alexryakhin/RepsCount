@@ -17,7 +17,6 @@ struct AboutAppView: View {
     
     var body: some View {
         AboutAppContentView(viewModel: viewModel)
-            .navigationTitle(LocalizationKeys.Navigation.aboutApp)
-            .navigationBarTitleDisplayMode(.large)
+            .navigationTitle(Loc.Navigation.aboutApp.localized)
     }
 }

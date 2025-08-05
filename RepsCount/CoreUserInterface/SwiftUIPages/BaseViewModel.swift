@@ -64,9 +64,9 @@ class BaseViewModel: ObservableObject {
     func showError(_ error: Error) {
         self.error = error
         showAlert(withModel: .init(
-            title: LocalizationKeys.Alerts.error,
+            title: Loc.Alerts.error.localized,
             message: error.localizedDescription,
-            actionText: LocalizationKeys.Common.ok
+            actionText: Loc.Common.ok.localized
         ))
     }
     

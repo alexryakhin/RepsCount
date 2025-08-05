@@ -37,7 +37,7 @@ struct WorkoutTemplateExerciseRow: View {
                 @unknown default:
                     fatalError()
                 }
-                Button("Edit", action: onEdit)
+                Button(Loc.Common.edit.localized, action: onEdit)
                     .font(.caption)
             }
         }

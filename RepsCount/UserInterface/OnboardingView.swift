@@ -50,7 +50,7 @@ struct OnboardingView: View {
                 Button {
                     dismiss()
                 } label: {
-                    Text("Continue")
+                    Text(Loc.Common.continue_.localized)
                         .bold()
                         .frame(maxWidth: .infinity)
                         .padding(12)

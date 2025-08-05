@@ -27,8 +27,11 @@ struct CreateWorkoutTemplateView: View {
     
     var body: some View {
         CreateWorkoutTemplateViewContentView(viewModel: viewModel)
-            .navigationTitle(workoutTemplateID == nil ? LocalizationKeys.Planning.createTemplate : LocalizationKeys.Planning.editWorkoutTemplate)
-            .navigationBarTitleDisplayMode(.large)
+            .navigationTitle(
+                workoutTemplateID == nil
+                ? Loc.Planning.createTemplate.localized
+                : Loc.Planning.editWorkoutTemplate.localized
+            )
             .onReceive(viewModel.output) { output in
                 handleOutput(output)
             }

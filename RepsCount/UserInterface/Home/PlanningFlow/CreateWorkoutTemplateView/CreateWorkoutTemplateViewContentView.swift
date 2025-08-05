@@ -58,22 +58,22 @@ struct CreateWorkoutTemplateViewContentView: View {
             }
         }
         .alert("Edit", isPresented: .constant(viewModel.editingDefaultsExercise != nil), presenting: viewModel.editingDefaultsExercise) { exercise in
-            TextField("Sets (optional)", text: $viewModel.defaultSetsInput)
+            TextField(Loc.ExerciseDetails.setsOptional.localized, text: $viewModel.defaultSetsInput)
                 .keyboardType(.numberPad)
             let textFieldTitleKey: String = switch exercise.exerciseModel.metricType {
-            case .reps: LocalizationKeys.ExerciseDetails.repsOptional
-            case .time: LocalizationKeys.ExerciseDetails.timeOptional
+            case .reps: Loc.ExerciseDetails.repsOptional
+            case .time: Loc.ExerciseDetails.timeOptional
             @unknown default:
                 fatalError()
             }
-            TextField(textFieldTitleKey, text: $viewModel.defaultAmountInput)
+            TextField(textFieldTitleKey.localized, text: $viewModel.defaultAmountInput)
                 .keyboardType(.numberPad)
 
-            Button("Cancel", role: .cancel) {
+                            Button(Loc.Common.cancel.localized, role: .cancel) {
                 viewModel.editingDefaultsExercise = nil
                 AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenCancelEditButtonTapped)
             }
-            Button("Apply") {
+                            Button(Loc.Common.apply.localized) {
                 viewModel.handle(.applyEditing(exercise))
                 AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenApplyEditButtonTapped)
             }
@@ -94,14 +94,14 @@ struct CreateWorkoutTemplateViewContentView: View {
     }
 
     private var muscleMapSectionView: some View {
-        CustomSectionView(header: "Muscle groups to target") {
+        CustomSectionView(header: Loc.Planning.muscleGroupsToTarget.localized) {
             MuscleMapImageView(exercises: viewModel.exercises.map(\.exerciseModel), width: 250)
                 .clippedWithPaddingAndBackground()
         }
     }
 
     private var workoutNameSectionView: some View {
-        CustomSectionView(header: "Workout Name") {
+        CustomSectionView(header: Loc.Planning.workoutName.localized) {
             TextField(
                 "Legs day",
                 text: $viewModel.workoutName,
@@ -111,7 +111,7 @@ struct CreateWorkoutTemplateViewContentView: View {
             .clippedWithPaddingAndBackground()
         } headerTrailingContent: {
             if isNameFocused {
-                Button("Done") {
+                Button(Loc.Common.done.localized) {
                     viewModel.handle(.updateName)
                     isNameFocused = false
                     AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenNameChanged)
@@ -121,7 +121,7 @@ struct CreateWorkoutTemplateViewContentView: View {
     }
 
     private var notesSectionView: some View {
-        CustomSectionView(header: "Notes") {
+        CustomSectionView(header: Loc.WorkoutDetails.notes.localized) {
             TextField(
                 "Something you might need",
                 text: $viewModel.workoutNotes,
@@ -131,7 +131,7 @@ struct CreateWorkoutTemplateViewContentView: View {
             .clippedWithPaddingAndBackground()
         } headerTrailingContent: {
             if isNotesFocused {
-                Button("Done") {
+                Button(Loc.Common.done.localized) {
                     viewModel.handle(.updateNotes)
                     isNotesFocused = false
                     AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenNotesChanged)
@@ -159,7 +159,7 @@ struct CreateWorkoutTemplateViewContentView: View {
                     }
                     .clippedWithBackground()
                 } header: {
-                    CustomSectionHeader("Selected exercises")
+                    CustomSectionHeader(Loc.Planning.selectedExercises.localized)
                         .padding(.horizontal, 12)
                 }
             }

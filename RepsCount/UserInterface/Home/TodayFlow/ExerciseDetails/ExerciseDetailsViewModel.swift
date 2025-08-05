@@ -58,10 +58,10 @@ final class ExerciseDetailsViewModel: BaseViewModel {
         case .deleteExercise:
             showAlert(
                 withModel: .init(
-                    title: LocalizationKeys.ExerciseDetails.deleteExercise,
-                    message: LocalizationKeys.ExerciseDetails.deleteExerciseMessage,
-                    actionText: LocalizationKeys.Common.cancel,
-                    destructiveActionText: LocalizationKeys.Common.delete,
+                    title: Loc.ExerciseDetails.deleteExercise.localized,
+                    message: Loc.ExerciseDetails.deleteExerciseMessage.localized,
+                    actionText: Loc.Common.cancel.localized,
+                    destructiveActionText: Loc.Common.delete.localized,
                     action: {
                         AnalyticsService.shared.logEvent(.exerciseDetailsExerciseRemoveCancelButtonTapped)
                     },

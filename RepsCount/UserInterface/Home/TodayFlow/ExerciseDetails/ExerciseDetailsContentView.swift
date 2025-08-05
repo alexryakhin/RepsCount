@@ -42,12 +42,12 @@ struct ExerciseDetailsContentView: View {
                 .keyboardType(.decimalPad)
             TextField("Weight, \(Text(viewModel.measurementUnit.shortName)) (optional)", text: $viewModel.weightInput)
                 .keyboardType(.decimalPad)
-            Button("Add") {
+                            Button(Loc.Common.add.localized) {
                 viewModel.handle(.addSet)
                 isShowingAlert = false
                 AnalyticsService.shared.logEvent(.exerciseDetailsAddSetAlertProceedTapped)
             }
-            Button("Cancel", role: .cancel) {
+            Button(Loc.Common.cancel.localized, role: .cancel) {
                 viewModel.amountInput = ""
                 viewModel.weightInput = ""
                 isShowingAlert = false
@@ -76,7 +76,7 @@ struct ExerciseDetailsContentView: View {
                             isEditingDefaultsAlertPresented = true
                             AnalyticsService.shared.logEvent(.exerciseDetailsEditMenuButtonTapped)
                         } label: {
-                            Label("Edit", systemImage: "pencil.and.ellipsis.rectangle")
+                            Label(Loc.Common.edit.localized, systemImage: "pencil.and.ellipsis.rectangle")
                         }
                     }
                     Section {
@@ -84,7 +84,7 @@ struct ExerciseDetailsContentView: View {
                             viewModel.handle(.deleteExercise)
                             AnalyticsService.shared.logEvent(.exerciseDetailsDeleteMenuButtonTapped)
                         } label: {
-                            Label("Delete exercise", systemImage: "trash")
+                            Label(Loc.ExerciseDetails.deleteExercise.localized, systemImage: "trash")
                         }
                     }
                 } label: {
@@ -92,24 +92,24 @@ struct ExerciseDetailsContentView: View {
                 }
             }
         }
-        .alert("Edit", isPresented: $isEditingDefaultsAlertPresented) {
-            TextField("Sets (optional)", text: $editingDefaultsSetsInput)
+        .alert(Loc.Common.edit.localized, isPresented: $isEditingDefaultsAlertPresented) {
+            TextField(Loc.ExerciseDetails.setsOptional.localized, text: $editingDefaultsSetsInput)
                 .keyboardType(.numberPad)
             let textFieldTitleKey: String = switch viewModel.exercise.model.metricType {
-            case .reps: LocalizationKeys.ExerciseDetails.repsOptional
-            case .time: LocalizationKeys.ExerciseDetails.timeOptional
+            case .reps: Loc.ExerciseDetails.repsOptional
+            case .time: Loc.ExerciseDetails.timeOptional
             @unknown default:
                 fatalError()
             }
-            TextField(textFieldTitleKey, text: $editingDefaultsAmountInput)
+            TextField(textFieldTitleKey.localized, text: $editingDefaultsAmountInput)
                 .keyboardType(.numberPad)
 
-            Button("Cancel", role: .cancel) {
+            Button(Loc.Common.cancel.localized, role: .cancel) {
                 editingDefaultsAmountInput = ""
                 editingDefaultsSetsInput = ""
                 AnalyticsService.shared.logEvent(.exerciseDetailsEditAlertCancelTapped)
             }
-            Button("Apply") {
+            Button(Loc.Common.apply.localized) {
                 viewModel.handle(
                     .updateDefaults(
                         amount: Double(editingDefaultsAmountInput) ?? 0,
@@ -126,7 +126,7 @@ struct ExerciseDetailsContentView: View {
     @ViewBuilder
     private var setsSection: some View {
         if !viewModel.exercise.sets.isEmpty {
-            CustomSectionView(header: "Sets", footer: setSectionFooter) {
+            CustomSectionView(header: Loc.ExerciseDetails.sets.localized, footer: setSectionFooter) {
                 ListWithDivider(Array(viewModel.exercise.sets.enumerated())) { offset, exerciseSet in
                     setCellView(exerciseSet, offset: offset)
                 }

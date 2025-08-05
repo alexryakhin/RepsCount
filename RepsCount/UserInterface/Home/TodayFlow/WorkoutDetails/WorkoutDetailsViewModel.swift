@@ -47,10 +47,10 @@ final class WorkoutDetailsViewModel: BaseViewModel {
         case .markAsComplete:
             showAlert(
                 withModel: .init(
-                    title: LocalizationKeys.WorkoutDetails.markAsComplete,
-                    message: LocalizationKeys.WorkoutDetails.markAsCompleteMessage,
-                    actionText: LocalizationKeys.Common.cancel,
-                    destructiveActionText: LocalizationKeys.Common.proceed,
+                    title: Loc.WorkoutDetails.markAsComplete.localized,
+                    message: Loc.WorkoutDetails.markAsCompleteMessage.localized,
+                    actionText: Loc.Common.cancel.localized,
+                    destructiveActionText: Loc.Common.proceed.localized,
                     action: {
                         AnalyticsService.shared.logEvent(.workoutDetailsMarkAsCompleteCancelTapped)
                     },
@@ -67,10 +67,10 @@ final class WorkoutDetailsViewModel: BaseViewModel {
         case .showDeleteExerciseAlert(let exercise):
             showAlert(
                 withModel: .init(
-                    title: LocalizationKeys.WorkoutDetails.deleteExercise,
-                    message: LocalizationKeys.WorkoutDetails.deleteExerciseMessage,
-                    actionText: LocalizationKeys.Common.cancel,
-                    destructiveActionText: LocalizationKeys.Common.delete,
+                    title: Loc.WorkoutDetails.deleteExercise.localized,
+                    message: Loc.WorkoutDetails.deleteExerciseMessage.localized,
+                    actionText: Loc.Common.cancel.localized,
+                    destructiveActionText: Loc.Common.delete.localized,
                     action: {
                         AnalyticsService.shared.logEvent(.workoutDetailsExerciseRemoveCancelButtonTapped)
                     },
@@ -83,10 +83,10 @@ final class WorkoutDetailsViewModel: BaseViewModel {
         case .showDeleteWorkoutAlert:
             showAlert(
                 withModel: .init(
-                    title: LocalizationKeys.WorkoutDetails.deleteWorkout,
-                    message: LocalizationKeys.WorkoutDetails.deleteWorkoutMessage,
-                    actionText: LocalizationKeys.Common.cancel,
-                    destructiveActionText: LocalizationKeys.Common.delete,
+                    title: Loc.WorkoutDetails.deleteWorkout.localized,
+                    message: Loc.WorkoutDetails.deleteWorkoutMessage.localized,
+                    actionText: Loc.Common.cancel.localized,
+                    destructiveActionText: Loc.Common.delete.localized,
                     action: {
                         AnalyticsService.shared.logEvent(.workoutDetailsDeleteWorkoutCancelTapped)
                     },

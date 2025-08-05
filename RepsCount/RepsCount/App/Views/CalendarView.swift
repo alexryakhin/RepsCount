@@ -18,8 +18,7 @@ struct CalendarView: View {
     
     var body: some View {
         CalendarContentView(viewModel: viewModel)
-            .navigationTitle(LocalizationKeys.Navigation.calendar)
-            .navigationBarTitleDisplayMode(.large)
+            .navigationTitle(Loc.Navigation.calendar.localized)
             .onReceive(viewModel.output) { output in
                 handleOutput(output)
             }

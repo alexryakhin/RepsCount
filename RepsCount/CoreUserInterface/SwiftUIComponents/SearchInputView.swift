@@ -73,7 +73,7 @@ struct SearchInputView: View {
             .clipShape(Capsule())
 
             if focusState {
-                Button("Cancel") {
+                Button(Loc.Common.cancel.localized) {
                     focusState = false
                 }
                 .transition(.move(edge: .trailing))

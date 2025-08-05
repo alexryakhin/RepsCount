@@ -17,7 +17,6 @@ struct WorkoutsListView: View {
     
     var body: some View {
         WorkoutsListContentView(viewModel: viewModel)
-            .navigationTitle(LocalizationKeys.Navigation.allWorkouts)
-            .navigationBarTitleDisplayMode(.large)
+            .navigationTitle(Loc.Navigation.allWorkouts.localized)
     }
 }

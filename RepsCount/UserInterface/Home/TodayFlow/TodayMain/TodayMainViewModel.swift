@@ -72,10 +72,10 @@ final class TodayMainViewModel: BaseViewModel {
         case .showDeleteWorkoutAlert(let workoutInstance):
             showAlert(
                 withModel: .init(
-                    title: LocalizationKeys.Today.deleteWorkout,
-                    message: LocalizationKeys.Today.deleteWorkoutMessage,
-                    actionText: LocalizationKeys.Common.cancel,
-                    destructiveActionText: LocalizationKeys.Common.delete,
+                    title: Loc.Today.deleteWorkout.localized,
+                    message: Loc.Today.deleteWorkoutMessage.localized,
+                    actionText: Loc.Common.cancel.localized,
+                    destructiveActionText: Loc.Common.delete.localized,
                     action: {
                         AnalyticsService.shared.logEvent(.todayScreenWorkoutRemoveCancelButtonTapped)
                     },
@@ -115,7 +115,7 @@ final class TodayMainViewModel: BaseViewModel {
                 self?.plannedWorkouts = plannedEvents
 
                 if todayWorkouts.isEmpty && plannedEvents.isEmpty {
-                    self?.showPlaceholder(title: LocalizationKeys.Today.noWorkouts, subtitle: LocalizationKeys.Today.noWorkoutsDescription)
+                    self?.showPlaceholder(title: Loc.Today.noWorkouts.localized, subtitle: Loc.Today.noWorkoutsDescription.localized)
                 } else {
                     self?.resetAdditionalState()
                 }

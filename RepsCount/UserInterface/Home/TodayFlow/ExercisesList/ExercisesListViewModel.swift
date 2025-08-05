@@ -67,7 +67,7 @@ class ExercisesListViewModel: BaseViewModel {
                     self?.prepareExercisesForDisplay(exercises)
                     self?.resetAdditionalState()
                 } else {
-                    self?.showPlaceholder(title: LocalizationKeys.Lists.noExercisesYet, subtitle: LocalizationKeys.Lists.noExercisesYetDescription)
+                    self?.showPlaceholder(title: Loc.Lists.noExercisesYet.localized, subtitle: Loc.Lists.noExercisesYetDescription.localized)
                 }
             }
             .store(in: &cancellables)

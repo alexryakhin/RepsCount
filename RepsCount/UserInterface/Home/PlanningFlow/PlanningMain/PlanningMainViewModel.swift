@@ -57,7 +57,7 @@ final class PlanningMainViewModel: BaseViewModel {
                     self?.workoutTemplates = templates
                     self?.resetAdditionalState()
                 } else {
-                    self?.showPlaceholder(title: LocalizationKeys.Planning.noTemplates, subtitle: LocalizationKeys.Planning.noTemplatesDescription)
+                    self?.showPlaceholder(title: Loc.Planning.noTemplates.localized, subtitle: Loc.Planning.noTemplatesDescription.localized)
                 }
             }
             .store(in: &cancellables)

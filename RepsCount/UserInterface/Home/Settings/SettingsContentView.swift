@@ -21,19 +21,19 @@ struct SettingsContentView: View {
                         Text(unit.title)
                     }
                 } label: {
-                    Label("Measurement unit", systemImage: "lines.measurement.horizontal")
+                    Label(Loc.Settings.measurementUnit.localized, systemImage: "lines.measurement.horizontal")
 
                 }
 
                 Toggle(isOn: $viewModel.savesLocation) {
-                    Label("Save location", systemImage: "location.fill")
+                    Label(Loc.Settings.saveLocation.localized, systemImage: "location.fill")
                 }
 
                 Button {
                     isShowingGoToSettingsAlert.toggle()
                     AnalyticsService.shared.logEvent(.settingsScreenLanguageButtonTapped)
                 } label: {
-                    Label("Change language", systemImage: "globe")
+                    Label(Loc.Settings.changeLanguage.localized, systemImage: "globe")
                 }
             }
 
@@ -44,27 +44,27 @@ struct SettingsContentView: View {
                     viewModel.handle(.showAboutApp)
                     AnalyticsService.shared.logEvent(.settingsScreenAboutAppButtonTapped)
                 } label: {
-                    Label("About app", systemImage: "info")
+                    Label(Loc.Navigation.aboutApp.localized, systemImage: "info")
                 }
             }
         }
         .listStyle(.insetGrouped)
-        .navigationTitle(LocalizationKeys.Navigation.settings)
+        .navigationTitle(Loc.Navigation.settings.localized)
         .additionalState(viewModel.additionalState)
         .withAlertManager()
         .onAppear {
             AnalyticsService.shared.logEvent(.settingsScreenOpened)
         }
-        .alert("Change language", isPresented: $isShowingGoToSettingsAlert) {
-            Button("Cancel", role: .cancel) {
+        .alert(Loc.Settings.changeLanguage, isPresented: $isShowingGoToSettingsAlert) {
+            Button(Loc.Common.cancel.localized, role: .cancel) {
                 AnalyticsService.shared.logEvent(.settingsScreenLanguageAlertCancelButtonTapped)
             }
-            Button("Go to settings") {
+            Button(Loc.Settings.goToSettings.localized) {
                 viewModel.handle(.showLanguageSettings)
                 AnalyticsService.shared.logEvent(.settingsScreenLanguageAlertProceedButtonTapped)
             }
         } message: {
-            Text("To change the language of the app, go to the Settings app on your device.")
+            Text(Loc.Settings.changeLanguageMessage)
         }
     }
 }

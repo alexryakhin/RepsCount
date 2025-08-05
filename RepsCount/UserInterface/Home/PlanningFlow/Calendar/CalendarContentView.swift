@@ -47,7 +47,7 @@ struct CalendarContentView: View {
             if viewModel.eventsForSelectedDate.isEmpty {
                 EmptyListView(description: "No Workouts Scheduled", background: .clear) {
                     VStack(spacing: 10) {
-                        Button("Schedule a Workout") {
+                        Button(Loc.Calendar.scheduleWorkout.localized) {
                             viewModel.handle(.scheduleWorkout)
                             AnalyticsService.shared.logEvent(.calendarScreenScheduleWorkoutTapped)
                         }

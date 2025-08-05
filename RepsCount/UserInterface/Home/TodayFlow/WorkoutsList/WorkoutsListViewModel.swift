@@ -58,7 +58,7 @@ final class WorkoutsListViewModel: BaseViewModel {
                     self?.prepareWorkoutsForDisplay(workouts)
                     self?.resetAdditionalState()
                 } else {
-                    self?.showPlaceholder(title: LocalizationKeys.Lists.noWorkoutsYet, subtitle: LocalizationKeys.Lists.noWorkoutsYetDescription)
+                    self?.showPlaceholder(title: Loc.Lists.noWorkoutsYet.localized, subtitle: Loc.Lists.noWorkoutsYetDescription.localized)
                 }
             }
             .store(in: &cancellables)

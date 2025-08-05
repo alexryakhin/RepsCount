@@ -19,7 +19,7 @@ struct TodayMainContentView: View {
             }
             .padding(.horizontal, 16)
         }
-        .navigationTitle(LocalizationKeys.Navigation.today)
+        .navigationTitle(Loc.Navigation.today.localized)
         .background(Color(.systemGroupedBackground))
         .sheet(isPresented: $viewModel.isShowingAddWorkoutFromTemplate) {
             templateSelectionView
@@ -43,14 +43,14 @@ struct TodayMainContentView: View {
                             viewModel.handle(.createOpenWorkout)
                             AnalyticsService.shared.logEvent(.todayScreenAddNewWorkoutButtonMenuTapped)
                         } label: {
-                            Label("Add open workout", systemImage: "plus")
+                            Label(Loc.Today.addOpenWorkout.localized, systemImage: "plus")
                         }
                         if viewModel.workoutTemplates.isNotEmpty {
                             Button {
                                 viewModel.handle(.showAddWorkoutFromTemplate)
                                 AnalyticsService.shared.logEvent(.todayScreenAddWorkoutFromTemplatesMenuButtonTapped)
                             } label: {
-                                Label("Add a workout from template", systemImage: "plus.square.on.square")
+                                Label(Loc.Today.addWorkoutFromTemplate.localized, systemImage: "plus.square.on.square")
                             }
                         }
                     }
@@ -59,13 +59,13 @@ struct TodayMainContentView: View {
                             viewModel.handle(.showAllWorkouts)
                             AnalyticsService.shared.logEvent(.todayScreenShowAllWorkoutsMenuButtonTapped)
                         } label: {
-                            Label("Show all workouts", systemImage: "baseball.diamond.bases")
+                            Label(Loc.Today.showAllWorkouts.localized, systemImage: "baseball.diamond.bases")
                         }
                         Button {
                             viewModel.handle(.showAllExercises)
                             AnalyticsService.shared.logEvent(.todayScreenShowAllExercisesMenuButtonTapped)
                         } label: {
-                            Label("Show all exercises", systemImage: "baseball.diamond.bases.outs.indicator")
+                            Label(Loc.Today.showAllExercises.localized, systemImage: "baseball.diamond.bases.outs.indicator")
                         }
                     }
                 } label: {
@@ -161,7 +161,7 @@ struct TodayMainContentView: View {
             }
             .background(Color(.systemGroupedBackground))
             .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle(LocalizationKeys.Calendar.selectTemplate)
+            .navigationTitle(Loc.Calendar.selectTemplate.localized)
         }
     }
 }

@@ -15,17 +15,17 @@ enum MeasurementUnit: Int, CaseIterable {
 
     var title: String {
         switch self {
-        case .kilograms: return LocalizationKeys.Units.kilograms
-        case .pounds: return LocalizationKeys.Units.pounds
-        case .stones: return LocalizationKeys.Units.st
+        case .kilograms: return Loc.Units.kilograms.localized
+        case .pounds: return Loc.Units.pounds.localized
+        case .stones: return Loc.Units.stones.localized
         }
     }
 
     var shortName: String {
         switch self {
-        case .kilograms: return LocalizationKeys.Units.kg
-        case .pounds: return LocalizationKeys.Units.lb
-        case .stones: return LocalizationKeys.Units.st
+        case .kilograms: return Loc.Units.kg.localized
+        case .pounds: return Loc.Units.lb.localized
+        case .stones: return Loc.Units.st.localized
         }
     }
 

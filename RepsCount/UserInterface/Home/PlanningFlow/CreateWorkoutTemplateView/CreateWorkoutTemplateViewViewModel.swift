@@ -87,11 +87,11 @@ final class CreateWorkoutTemplateViewViewModel: BaseViewModel {
 
     private func saveTemplate() {
         guard workoutName.isNotEmpty else {
-            showAlert(withModel: .init(title: LocalizationKeys.Alerts.emptyName, message: LocalizationKeys.Alerts.emptyNameMessage))
+            showAlert(withModel: .init(title: Loc.Alerts.emptyName.localized, message: Loc.Alerts.emptyNameMessage.localized))
             return
         }
         guard exercises.isNotEmpty else {
-            showAlert(withModel: .init(title: LocalizationKeys.Alerts.emptyExercises, message: LocalizationKeys.Alerts.emptyExercisesMessage))
+            showAlert(withModel: .init(title: Loc.Alerts.emptyExercises.localized, message: Loc.Alerts.emptyExercisesMessage.localized))
             return
         }
         workoutTemplatesManager.createNewWorkoutTemplate(

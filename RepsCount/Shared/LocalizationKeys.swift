@@ -7,8 +7,8 @@
 
 import Foundation
 
-enum LocalizationKeys {
-    
+enum Loc {
+
     // MARK: - Common
     
     enum Common {
@@ -35,7 +35,7 @@ enum LocalizationKeys {
         static let calendar = "Calendar"
         static let allWorkouts = "All Workouts"
         static let allExercises = "All Exercises"
-        static let aboutApp = "About App"
+        static let aboutApp = "About app"
         static let workoutDetails = "Workout Details"
         static let exerciseDetails = "Exercise Details"
     }
@@ -121,7 +121,6 @@ enum LocalizationKeys {
     // MARK: - Settings
     
     enum Settings {
-        static let aboutApp = "About app"
         static let measurementUnit = "Measurement unit"
         static let saveLocation = "Save location"
         static let changeLanguage = "Change language"
@@ -129,6 +128,7 @@ enum LocalizationKeys {
         static let support = "Support"
         static let rateApp = "Rate the app"
         static let buyMeCoffee = "Buy Me a Coffee"
+        static let goToSettings = "Go to settings"
         static let appVersion = "App version:"
         static let changeLanguageMessage = "To change the language of the app, go to the Settings app on your device."
     }
@@ -231,6 +231,7 @@ enum LocalizationKeys {
     enum Units {
         static let kilograms = "Kilograms"
         static let pounds = "Pounds"
+        static let stones = "Stones"
         static let kg = "kg"
         static let lb = "lb"
         static let st = "st"
@@ -248,3 +249,14 @@ enum LocalizationKeys {
         static let sunday = "Sunday"
     }
 } 
+
+// MARK: - String Extension for Localization
+extension String {
+    var localized: String {
+        return NSLocalizedString(self, comment: "")
+    }
+
+    func localized(with arguments: CVarArg...) -> String {
+        return String(format: self.localized, arguments: arguments)
+    }
+}

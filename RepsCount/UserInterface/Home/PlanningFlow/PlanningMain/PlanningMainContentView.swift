@@ -17,7 +17,7 @@ struct PlanningMainContentView: View {
             .padding(vertical: 12, horizontal: 16)
         }
         .background(Color(.systemGroupedBackground))
-        .navigationTitle(LocalizationKeys.Navigation.planning)
+        .navigationTitle(Loc.Navigation.planning.localized)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
@@ -38,18 +38,18 @@ struct PlanningMainContentView: View {
 
 
     private var calendarSectionView: some View {
-        CustomSectionView(header: "Calendar") {
+        CustomSectionView(header: Loc.Navigation.calendar.localized) {
             Button {
                 viewModel.handle(.showCalendar)
                 AnalyticsService.shared.logEvent(.planningScreenCalendarTapped)
             } label: {
                 Label {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Schedule workouts")
+                        Text(Loc.Planning.scheduleWorkouts.localized)
                             .font(.headline)
                             .bold()
                             .foregroundStyle(.primary)
-                        Text("Manage your workout schedule here: Create repetition for events, set reminders, and more.")
+                        Text(Loc.Planning.scheduleWorkoutsDescription.localized)
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                     }
@@ -63,7 +63,7 @@ struct PlanningMainContentView: View {
     }
 
     private var templatesSectionView: some View {
-        CustomSectionView(header: "My workout templates") {
+        CustomSectionView(header: Loc.Planning.myWorkoutTemplates.localized) {
             ForEach(viewModel.workoutTemplates) { template in
                 Button {
                     viewModel.handle(.showWorkoutTemplateDetails(template))

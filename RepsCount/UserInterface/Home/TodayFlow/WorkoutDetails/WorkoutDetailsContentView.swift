@@ -31,28 +31,28 @@ struct WorkoutDetailsContentView: View {
                             viewModel.handle(.showAddExercise)
                             AnalyticsService.shared.logEvent(.workoutDetailsAddExerciseMenuButtonTapped)
                         } label: {
-                            Label("Add exercise", systemImage: "plus")
+                            Label(Loc.WorkoutDetails.addExercise.localized, systemImage: "plus")
                         }
 
                         Button {
                             viewModel.handle(.markAsComplete)
                             AnalyticsService.shared.logEvent(.workoutDetailsMarkAsCompleteMenuButtonTapped)
                         } label: {
-                            Label("Mark as complete", systemImage: "flag.fill")
+                            Label(Loc.WorkoutDetails.markAsComplete.localized, systemImage: "flag.fill")
                         }
                     }
                     Button {
                         viewModel.handle(.renameWorkout)
                         AnalyticsService.shared.logEvent(.workoutDetailsRenameMenuButtonTapped)
                     } label: {
-                        Label("Rename", systemImage: "pencil")
+                        Label(Loc.Common.rename.localized, systemImage: "pencil")
                     }
                     Section {
                         Button(role: .destructive) {
                             viewModel.handle(.showDeleteWorkoutAlert)
                             AnalyticsService.shared.logEvent(.workoutDetailsDeleteMenuButtonTapped)
                         } label: {
-                            Label("Delete workout", systemImage: "trash")
+                            Label(Loc.WorkoutDetails.deleteWorkout.localized, systemImage: "trash")
                         }
                     }
                 } label: {
@@ -60,12 +60,12 @@ struct WorkoutDetailsContentView: View {
                 }
             }
         }
-        .alert("Rename workout", isPresented: $viewModel.isShowingAlertToRenameWorkout) {
-            TextField("Enter name", text: $viewModel.nameInput)
-            Button("Cancel", role: .cancel) {
+        .alert(Loc.WorkoutDetails.renameWorkout.localized, isPresented: $viewModel.isShowingAlertToRenameWorkout) {
+            TextField(Loc.WorkoutDetails.enterName.localized, text: $viewModel.nameInput)
+            Button(Loc.Common.cancel.localized, role: .cancel) {
                 AnalyticsService.shared.logEvent(.workoutDetailsRenameWorkoutCancelTapped)
             }
-            Button("Rename") {
+            Button(Loc.Common.rename.localized) {
                 viewModel.handle(.updateName(viewModel.nameInput))
                 AnalyticsService.shared.logEvent(.workoutDetailsRenameWorkoutActionTapped)
             }
@@ -105,17 +105,17 @@ struct WorkoutDetailsContentView: View {
                         }
                     }
                 } header: {
-                    CustomSectionHeader("Exercises")
+                    CustomSectionHeader(Loc.WorkoutDetails.exercises.localized)
                         .padding(.horizontal, 12)
                 }
             }
         } else {
             EmptyListView(
-                label: "No exercises yet",
-                description: "Select 'Add exercise' from the menu in the top right corner",
+                label: Loc.WorkoutDetails.noExercisesYet.localized,
+                description: Loc.WorkoutDetails.noExercisesDescription.localized,
                 background: .clear
             ) {
-                Button("Add exercise") {
+                Button(Loc.WorkoutDetails.addExercise.localized) {
                     viewModel.handle(.showAddExercise)
                     AnalyticsService.shared.logEvent(.workoutDetailsAddExerciseButtonTapped)
                 }
@@ -126,22 +126,22 @@ struct WorkoutDetailsContentView: View {
     }
 
     private var muscleMapSectionView: some View {
-        CustomSectionView(header: "Target muscles") {
+        CustomSectionView(header: Loc.WorkoutDetails.targetMuscles.localized) {
             MuscleMapImageView(exercises: viewModel.workout.exercises.map(\.model), width: 100)
                 .clippedWithPaddingAndBackground()
         }
     }
 
     private var statisticsSectionView: some View {
-        CustomSectionView(header: "Info") {
+        CustomSectionView(header: Loc.WorkoutDetails.info.localized) {
             FormWithDivider {
                 infoCell(
-                    label: LocalizationKeys.WorkoutDetails.exercises,
+                    label: Loc.WorkoutDetails.exercises.localized,
                     info: viewModel.workout.exercises.count.formatted()
                 )
                 if let totalDuration = viewModel.workout.totalDuration?.formatted(with: [.hour, .minute]) {
                     infoCell(
-                        label: LocalizationKeys.Time.time,
+                        label: Loc.Time.time.localized,
                         info: totalDuration
                     )
                 }
@@ -153,7 +153,7 @@ struct WorkoutDetailsContentView: View {
     @ViewBuilder
     private var notesSectionView: some View {
         if let notes = viewModel.workout.workoutTemplate?.notes?.nilIfEmpty {
-            CustomSectionView(header: "Notes") {
+            CustomSectionView(header: Loc.WorkoutDetails.notes.localized) {
                 Text(notes)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .multilineTextAlignment(.leading)

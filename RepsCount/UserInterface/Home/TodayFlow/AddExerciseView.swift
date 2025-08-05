@@ -31,7 +31,7 @@ struct AddExerciseView: View {
                     exerciseCategorySectionView(for: category)
                 }
             }
-            .navigationTitle(LocalizationKeys.WorkoutDetails.addExercise)
+            .navigationTitle(Loc.WorkoutDetails.addExercise.localized)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -56,23 +56,23 @@ struct AddExerciseView: View {
             }
         }
         .alert("Defaults", isPresented: .constant(exerciseModelToAdd != nil), presenting: exerciseModelToAdd) { model in
-            TextField("Sets (optional)", text: $defaultSetsInput)
+            TextField(Loc.ExerciseDetails.setsOptional.localized, text: $defaultSetsInput)
                 .keyboardType(.numberPad)
             let textFieldTitleKey: String = switch model.metricType {
-            case .reps: LocalizationKeys.ExerciseDetails.repsOptional
-            case .time: LocalizationKeys.ExerciseDetails.timeOptional
+            case .reps: Loc.ExerciseDetails.repsOptional
+            case .time: Loc.ExerciseDetails.timeOptional
             @unknown default:
                 fatalError()
             }
-            TextField(textFieldTitleKey, text: $defaultAmountInput)
+            TextField(textFieldTitleKey.localized, text: $defaultAmountInput)
                 .keyboardType(.numberPad)
 
-            Button("Cancel", role: .cancel) {
+                            Button(Loc.Common.cancel.localized, role: .cancel) {
                 defaultSetsInput = ""
                 defaultAmountInput = ""
                 exerciseModelToAdd = nil
             }
-            Button("Add") {
+                            Button(Loc.Common.add.localized) {
                 if let exerciseModelToAdd {
                     exerciseSelected(.init(
                         id: UUID().uuidString,
