@@ -103,9 +103,3 @@ extension CustomDatePicker.PickerMode {
         }
     }
 }
-
-#Preview {
-    CustomDatePicker(
-        date: .constant(nil)
-    )
-}

@@ -1,7 +1,7 @@
 import Combine
 import SwiftUI
 
-final class WorkoutDetailsViewModel: DefaultPageViewModel {
+final class WorkoutDetailsViewModel: BaseViewModel {
 
     enum Input {
         case markAsComplete
@@ -19,7 +19,7 @@ final class WorkoutDetailsViewModel: DefaultPageViewModel {
         case finish
     }
 
-    var onOutput: ((Output) -> Void)?
+    let output = PassthroughSubject<Output, Never>()
 
     @AppStorage(UDKeys.savesLocation) var savesLocation: Bool = true
 
@@ -35,12 +35,9 @@ final class WorkoutDetailsViewModel: DefaultPageViewModel {
 
     // MARK: - Initialization
 
-    init(
-        workout: WorkoutInstance,
-        workoutDetailsManager: WorkoutDetailsManagerInterface
-    ) {
+    init(workout: WorkoutInstance) {
         self.workout = workout
-        self.workoutDetailsManager = workoutDetailsManager
+        self.workoutDetailsManager = ServiceManager.shared.createWorkoutDetailsManager(workoutID: workout.id)
         super.init()
         setupBindings()
     }
@@ -50,10 +47,10 @@ final class WorkoutDetailsViewModel: DefaultPageViewModel {
         case .markAsComplete:
             showAlert(
                 withModel: .init(
-                    title: "Mark as complete",
-                    message: "Are you sure you want to complete this workout? You won't be able to make any changes afterwards",
-                    actionText: "Cancel",
-                    destructiveActionText: "Proceed",
+                    title: LocalizationKeys.WorkoutDetails.markAsComplete,
+                    message: LocalizationKeys.WorkoutDetails.markAsCompleteMessage,
+                    actionText: LocalizationKeys.Common.cancel,
+                    destructiveActionText: LocalizationKeys.Common.proceed,
                     action: {
                         AnalyticsService.shared.logEvent(.workoutDetailsMarkAsCompleteCancelTapped)
                     },
@@ -66,14 +63,14 @@ final class WorkoutDetailsViewModel: DefaultPageViewModel {
         case .showAddExercise:
             isShowingAddExerciseSheet.toggle()
         case .showExerciseDetails(let exercise):
-            onOutput?(.showExerciseDetails(exercise))
+            output.send(.showExerciseDetails(exercise))
         case .showDeleteExerciseAlert(let exercise):
             showAlert(
                 withModel: .init(
-                    title: "Delete exercise",
-                    message: "Are you sure you want to delete this exercise?",
-                    actionText: "Cancel",
-                    destructiveActionText: "Delete",
+                    title: LocalizationKeys.WorkoutDetails.deleteExercise,
+                    message: LocalizationKeys.WorkoutDetails.deleteExerciseMessage,
+                    actionText: LocalizationKeys.Common.cancel,
+                    destructiveActionText: LocalizationKeys.Common.delete,
                     action: {
                         AnalyticsService.shared.logEvent(.workoutDetailsExerciseRemoveCancelButtonTapped)
                     },
@@ -86,10 +83,10 @@ final class WorkoutDetailsViewModel: DefaultPageViewModel {
         case .showDeleteWorkoutAlert:
             showAlert(
                 withModel: .init(
-                    title: "Delete workout",
-                    message: "Are you sure you want to delete this workout?",
-                    actionText: "Cancel",
-                    destructiveActionText: "Delete",
+                    title: LocalizationKeys.WorkoutDetails.deleteWorkout,
+                    message: LocalizationKeys.WorkoutDetails.deleteWorkoutMessage,
+                    actionText: LocalizationKeys.Common.cancel,
+                    destructiveActionText: LocalizationKeys.Common.delete,
                     action: {
                         AnalyticsService.shared.logEvent(.workoutDetailsDeleteWorkoutCancelTapped)
                     },
@@ -123,14 +120,14 @@ final class WorkoutDetailsViewModel: DefaultPageViewModel {
         workoutDetailsManager.errorPublisher
             .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
             .sink { [weak self] error in
-                self?.errorReceived(error, displayType: .alert)
+                self?.showError(error)
             }
             .store(in: &cancellables)
     }
 
     private func deleteWorkout() {
         workoutDetailsManager.deleteWorkout()
-        onOutput?(.finish)
+        output.send(.finish)
     }
 
     private func deleteExercise(_ exercise: Exercise) {

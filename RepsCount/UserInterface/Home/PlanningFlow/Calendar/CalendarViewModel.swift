@@ -1,7 +1,7 @@
 import Combine
 import EventKit
 
-final class CalendarViewModel: DefaultPageViewModel {
+final class CalendarViewModel: BaseViewModel {
 
     enum Input {
         case scheduleWorkout
@@ -14,7 +14,7 @@ final class CalendarViewModel: DefaultPageViewModel {
         case presentDeleteEventAlert(WorkoutEvent)
     }
 
-    var onOutput: ((Output) -> Void)?
+    let output = PassthroughSubject<Output, Never>()
 
     @Published private var events: [WorkoutEvent] = []
     @Published var selectedDate: Date = .now {
@@ -37,8 +37,8 @@ final class CalendarViewModel: DefaultPageViewModel {
 
     // MARK: - Initialization
 
-    init(calendarEventsProvider: WorkoutEventsProviderInterface) {
-        self.calendarEventsProvider = calendarEventsProvider
+    override init() {
+        self.calendarEventsProvider = ServiceManager.shared.workoutEventsProvider
         super.init()
         setupBindings()
     }
@@ -47,9 +47,9 @@ final class CalendarViewModel: DefaultPageViewModel {
         switch input {
         case .scheduleWorkout:
             let configModel = ScheduleEventViewModel.ConfigModel(selectedDate: selectedDate)
-            onOutput?(.scheduleWorkout(configModel: configModel))
+            output.send(.scheduleWorkout(configModel: configModel))
         case .deleteEvent(let event):
-            onOutput?(.presentDeleteEventAlert(event))
+            output.send(.presentDeleteEventAlert(event))
         case .handleDeleteEventAlert(let event, let deleteFutureEvents):
             calendarEventsProvider.deleteEvent(event, shouldDeleteAllFutureEvents: deleteFutureEvents)
             if deleteFutureEvents {

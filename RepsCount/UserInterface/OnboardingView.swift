@@ -67,8 +67,8 @@ struct OnboardingView: View {
     struct OnboardingCase: Identifiable {
         let id = UUID().uuidString
         let icon: String
-        let title: LocalizedStringKey
-        let subTitle: LocalizedStringKey
+            let title: String
+    let subTitle: String
     }
 
     private var onboardingCases = [

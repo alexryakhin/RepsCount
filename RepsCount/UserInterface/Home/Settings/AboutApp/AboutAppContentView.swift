@@ -1,19 +1,17 @@
 import SwiftUI
 import StoreKit
 
-struct AboutAppContentView: PageView {
+struct AboutAppContentView: View {
 
     @Environment(\.requestReview) var requestReview
 
-    typealias ViewModel = AboutAppViewModel
-
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var viewModel: AboutAppViewModel
 
     init(viewModel: AboutAppViewModel) {
         self.viewModel = viewModel
     }
 
-    var contentView: some View {
+    var body: some View {
         List {
             // MARK: - About
 
@@ -76,6 +74,8 @@ struct AboutAppContentView: PageView {
             }
         }
         .listStyle(.insetGrouped)
+        .additionalState(viewModel.additionalState)
+        .withAlertManager()
         .onAppear {
             AnalyticsService.shared.logEvent(.aboutAppScreenOpened)
         }

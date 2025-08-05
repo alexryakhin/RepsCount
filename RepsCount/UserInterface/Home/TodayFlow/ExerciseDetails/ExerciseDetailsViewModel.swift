@@ -1,7 +1,7 @@
 import Combine
 import SwiftUI
 
-final class ExerciseDetailsViewModel: DefaultPageViewModel {
+final class ExerciseDetailsViewModel: BaseViewModel {
 
     @AppStorage(UDKeys.measurementUnit) var measurementUnit: MeasurementUnit = .kilograms
 
@@ -29,7 +29,7 @@ final class ExerciseDetailsViewModel: DefaultPageViewModel {
         case finish
     }
 
-    var onOutput: ((Output) -> Void)?
+    let output = PassthroughSubject<Output, Never>()
 
     // MARK: - Private Properties
 
@@ -38,12 +38,9 @@ final class ExerciseDetailsViewModel: DefaultPageViewModel {
 
     // MARK: - Initialization
 
-    init(
-        exercise: Exercise,
-        exerciseDetailsManager: ExerciseDetailsManagerInterface
-    ) {
+    init(exercise: Exercise) {
         self.exercise = exercise
-        self.exerciseDetailsManager = exerciseDetailsManager
+        self.exerciseDetailsManager = ServiceManager.shared.createExerciseDetailsManager(exerciseID: exercise.id)
         super.init()
         setupBindings()
     }
@@ -61,16 +58,16 @@ final class ExerciseDetailsViewModel: DefaultPageViewModel {
         case .deleteExercise:
             showAlert(
                 withModel: .init(
-                    title: "Delete exercise",
-                    message: "Are you sure you want to delete this exercise?",
-                    actionText: "Cancel",
-                    destructiveActionText: "Delete",
+                    title: LocalizationKeys.ExerciseDetails.deleteExercise,
+                    message: LocalizationKeys.ExerciseDetails.deleteExerciseMessage,
+                    actionText: LocalizationKeys.Common.cancel,
+                    destructiveActionText: LocalizationKeys.Common.delete,
                     action: {
                         AnalyticsService.shared.logEvent(.exerciseDetailsExerciseRemoveCancelButtonTapped)
                     },
                     destructiveAction: { [weak self] in
                         self?.exerciseDetailsManager.deleteExercise()
-                        self?.onOutput?(.finish)
+                        self?.output.send(.finish)
                         AnalyticsService.shared.logEvent(.exerciseDetailsExerciseRemoveButtonTapped)
                     }
                 )
@@ -93,7 +90,7 @@ final class ExerciseDetailsViewModel: DefaultPageViewModel {
         exerciseDetailsManager.errorPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] error in
-                self?.errorReceived(error, displayType: .alert)
+                self?.showError(error)
             }
             .store(in: &cancellables)
     }

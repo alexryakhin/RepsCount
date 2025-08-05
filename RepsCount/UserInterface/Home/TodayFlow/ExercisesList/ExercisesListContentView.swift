@@ -7,9 +7,7 @@
 
 import SwiftUI
 
-struct ExercisesListContentView: PageView {
-
-    typealias ViewModel = ExercisesListViewModel
+struct ExercisesListContentView: View {
 
     struct ListSection: Hashable {
         let date: Date
@@ -17,13 +15,13 @@ struct ExercisesListContentView: PageView {
         let items: [Exercise]
     }
 
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var viewModel: ExercisesListViewModel
 
-    init(viewModel: ViewModel) {
+    init(viewModel: ExercisesListViewModel) {
         self.viewModel = viewModel
     }
 
-    var contentView: some View {
+    var body: some View {
         ScrollView {
             LazyVStack(spacing: 24) {
                 if viewModel.selectedDate == nil {
@@ -65,20 +63,17 @@ struct ExercisesListContentView: PageView {
             }
         }
         .animation(.easeIn, value: viewModel.selectedDate)
+        .additionalState(viewModel.additionalState)
+        .withAlertManager()
         .onAppear {
             AnalyticsService.shared.logEvent(.allExercisesScreenOpened)
         }
     }
 
-    func placeholderView(props: PageState.PlaceholderProps) -> some View {
-        EmptyListView(
-            label: "No exercises yet",
-            description: "Go back and start a workout"
-        )
-    }
+
 
     private func sectionView(for section: ListSection) -> some View {
-        CustomSectionView(header: LocalizedStringKey(section.title)) {
+                    CustomSectionView(header: section.title) {
             ListWithDivider(section.items) { exercise in
                 Button {
                     viewModel.handle(.showExerciseDetails(exercise))

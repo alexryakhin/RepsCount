@@ -31,8 +31,8 @@ final class EventStoreManager: EventStoreManagerInterface {
     private let dataStore: EventDataStore
     private let authorizationStatusSubject = CurrentValueSubject<EKAuthorizationStatus, Never>(.notDetermined)
 
-    init(dataStore: EventDataStore) {
-        self.dataStore = dataStore
+    init() {
+        self.dataStore = ServiceManager.shared.eventDataStore
         authorizationStatusSubject.value = EKEventStore.authorizationStatus(for: .event)
     }
 

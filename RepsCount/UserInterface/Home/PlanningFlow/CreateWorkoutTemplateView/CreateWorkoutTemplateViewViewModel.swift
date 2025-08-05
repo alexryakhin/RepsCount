@@ -1,7 +1,7 @@
 import Combine
 import Foundation
 
-final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
+final class CreateWorkoutTemplateViewViewModel: BaseViewModel {
 
     enum Input {
         case saveTemplate
@@ -18,7 +18,7 @@ final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
         case dismiss
     }
 
-    var onOutput: ((Output) -> Void)?
+    let output = PassthroughSubject<Output, Never>()
 
     @Published var workoutName: String = ""
     @Published var workoutNotes: String = ""
@@ -37,8 +37,8 @@ final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
 
     // MARK: - Initialization
 
-    init(workoutTemplatesManager: WorkoutTemplateManagerInterface) {
-        self.workoutTemplatesManager = workoutTemplatesManager
+    init(workoutTemplateID: String?) {
+        self.workoutTemplatesManager = ServiceManager.shared.createWorkoutTemplateManager(workoutTemplateID: workoutTemplateID ?? "")
         super.init()
         setupBindings()
     }
@@ -87,11 +87,11 @@ final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
 
     private func saveTemplate() {
         guard workoutName.isNotEmpty else {
-            showAlert(withModel: .init(title: "Empty name", message: "Name of the workout template cannot be empty"))
+            showAlert(withModel: .init(title: LocalizationKeys.Alerts.emptyName, message: LocalizationKeys.Alerts.emptyNameMessage))
             return
         }
         guard exercises.isNotEmpty else {
-            showAlert(withModel: .init(title: "Empty exercises", message: "You should add at least one exercise"))
+            showAlert(withModel: .init(title: LocalizationKeys.Alerts.emptyExercises, message: LocalizationKeys.Alerts.emptyExercisesMessage))
             return
         }
         workoutTemplatesManager.createNewWorkoutTemplate(
@@ -99,7 +99,7 @@ final class CreateWorkoutTemplateViewViewModel: DefaultPageViewModel {
             notes: workoutNotes.nilIfEmpty,
             exerciseTemplates: exercises
         )
-        onOutput?(.dismiss)
+        output.send(.dismiss)
     }
 
     private func editDefaults(for exercise: WorkoutTemplateExercise) {

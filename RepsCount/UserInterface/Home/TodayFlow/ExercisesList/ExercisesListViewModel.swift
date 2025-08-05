@@ -6,10 +6,9 @@
 //
 
 import Combine
-import UIKit
 import SwiftUI
 
-class ExercisesListViewModel: DefaultPageViewModel {
+class ExercisesListViewModel: BaseViewModel {
 
     @AppStorage(UDKeys.savesLocation) var savesLocation: Bool = true
 
@@ -22,7 +21,7 @@ class ExercisesListViewModel: DefaultPageViewModel {
         case showExerciseDetails(Exercise)
     }
 
-    var onOutput: ((Output) -> Void)?
+    let output = PassthroughSubject<Output, Never>()
 
     @Published private(set) var sections: [ExercisesListContentView.ListSection] = []
     @Published var selectedDate: Date? {
@@ -36,12 +35,10 @@ class ExercisesListViewModel: DefaultPageViewModel {
     private let exercisesProvider: ExercisesProviderInterface
     private var cancellables: Set<AnyCancellable> = []
 
-    init(
-        locationManager: LocationManagerInterface,
-        exercisesProvider: ExercisesProviderInterface
-    ) {
-        self.locationManager = locationManager
-        self.exercisesProvider = exercisesProvider
+    override init() {
+        let serviceManager = ServiceManager.shared
+        self.locationManager = serviceManager.locationManager
+        self.exercisesProvider = serviceManager.exercisesProvider
         super.init()
         loadingStarted()
         setupBindings()
@@ -50,7 +47,7 @@ class ExercisesListViewModel: DefaultPageViewModel {
     func handle(_ input: Input) {
         switch input {
         case .showExerciseDetails(let exercise):
-            onOutput?(.showExerciseDetails(exercise))
+            output.send(.showExerciseDetails(exercise))
         case .deleteExercise(let exercise):
             deleteExercise(exercise.id)
             AnalyticsService.shared.logEvent(.allExercisesScreenExerciseRemoved)
@@ -70,7 +67,7 @@ class ExercisesListViewModel: DefaultPageViewModel {
                     self?.prepareExercisesForDisplay(exercises)
                     self?.resetAdditionalState()
                 } else {
-                    self?.additionalState = .placeholder()
+                    self?.showPlaceholder(title: LocalizationKeys.Lists.noExercisesYet, subtitle: LocalizationKeys.Lists.noExercisesYetDescription)
                 }
             }
             .store(in: &cancellables)

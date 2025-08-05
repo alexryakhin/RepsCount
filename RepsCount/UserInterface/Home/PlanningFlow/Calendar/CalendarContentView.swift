@@ -1,16 +1,14 @@
 import SwiftUI
 
-struct CalendarContentView: PageView {
+struct CalendarContentView: View {
 
-    typealias ViewModel = CalendarViewModel
-
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var viewModel: CalendarViewModel
 
     init(viewModel: CalendarViewModel) {
         self.viewModel = viewModel
     }
 
-    var contentView: some View {
+    var body: some View {
         ScrollView {
             LazyVStack(spacing: 24) {
                 calendarSectionView
@@ -29,6 +27,8 @@ struct CalendarContentView: PageView {
                 }
             }
         }
+        .additionalState(viewModel.additionalState)
+        .withAlertManager()
         .onAppear {
             AnalyticsService.shared.logEvent(.calendarScreenOpened)
         }

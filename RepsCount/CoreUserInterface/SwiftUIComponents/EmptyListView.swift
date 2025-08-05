@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct EmptyListView<Actions: View>: View {
-    private let label: LocalizedStringKey?
-    private let description: LocalizedStringKey?
+    private let label: String?
+    private let description: String?
     private let background: Color
     private let actions: () -> Actions
 
     init(
-        label: LocalizedStringKey? = nil,
-        description: LocalizedStringKey? = nil,
+        label: String? = nil,
+        description: String? = nil,
         background: Color = Color(.systemGroupedBackground),
         @ViewBuilder actions: @escaping () -> Actions = { EmptyView() }
     ) {

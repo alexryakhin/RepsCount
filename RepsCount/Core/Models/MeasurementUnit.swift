@@ -6,26 +6,26 @@
 //
 
 import Foundation
-import struct SwiftUI.LocalizedStringKey
+import SwiftUI
 
 enum MeasurementUnit: Int, CaseIterable {
     case kilograms
     case pounds
     case stones
 
-    var title: LocalizedStringKey {
+    var title: String {
         switch self {
-        case .kilograms: "Kilograms"
-        case .pounds: "Pounds"
-        case .stones: "Stones"
+        case .kilograms: return LocalizationKeys.Units.kilograms
+        case .pounds: return LocalizationKeys.Units.pounds
+        case .stones: return LocalizationKeys.Units.st
         }
     }
 
-    var shortName: LocalizedStringKey {
+    var shortName: String {
         switch self {
-        case .kilograms: "kg"
-        case .pounds: "lb"
-        case .stones: "st"
+        case .kilograms: return LocalizationKeys.Units.kg
+        case .pounds: return LocalizationKeys.Units.lb
+        case .stones: return LocalizationKeys.Units.st
         }
     }
 

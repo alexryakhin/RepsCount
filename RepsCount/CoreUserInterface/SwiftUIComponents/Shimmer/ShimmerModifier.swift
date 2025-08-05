@@ -85,23 +85,3 @@ struct ShimmerModifier: ViewModifier {
         return count
     }
 }
-
-#Preview {
-    VStack {
-        Text(verbatim: .placeholder(length: 20))
-            .shimmering()
-        Color.red
-            .frame(width: 200, height: 60)
-            .shimmering()
-        ZStack {
-            Color.green
-            Text("AB")
-        }
-        .frame(width: 56, height: 56)
-        .shimmering()
-        .clipShape(Circle())
-        Text(verbatim: .placeholder(length: 400))
-            .shimmering(multiline: true)
-            .padding(.horizontal, 32)
-    }
-}

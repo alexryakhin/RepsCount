@@ -11,17 +11,17 @@ import SwiftUI
 struct ListFlowPicker<SelectionItem: Selectable>: View {
 
     @Binding private var selection: SelectionItem?
-    @Binding private var error: LocalizedStringKey?
+    @Binding private var error: String?
     private let items: [SelectionItem]
-    private let header: LocalizedStringKey
-    private let caption: LocalizedStringKey?
+    private let header: String
+    private let caption: String?
 
     init(
         selection: Binding<SelectionItem?>,
-        error: Binding<LocalizedStringKey?> = .constant(nil),
+        error: Binding<String?> = .constant(nil),
         items: [SelectionItem],
-        header: LocalizedStringKey,
-        caption: LocalizedStringKey? = nil
+        header: String,
+        caption: String? = nil
     ) {
         self._selection = selection
         self._error = error

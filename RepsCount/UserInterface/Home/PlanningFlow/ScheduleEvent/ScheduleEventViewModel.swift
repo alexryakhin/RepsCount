@@ -2,7 +2,7 @@ import Combine
 import EventKit
 import SwiftUI
 
-final class ScheduleEventViewModel: DefaultPageViewModel {
+final class ScheduleEventViewModel: BaseViewModel {
 
     struct ConfigModel {
         let selectedDate: Date
@@ -20,7 +20,7 @@ final class ScheduleEventViewModel: DefaultPageViewModel {
     }
 
     let eventStore: EKEventStore
-    var onOutput: ((Output) -> Void)?
+    let output = PassthroughSubject<Output, Never>()
 
     @AppStorage(UDKeys.addToCalendar) var addToCalendar: Bool = false {
         didSet {
@@ -109,15 +109,11 @@ final class ScheduleEventViewModel: DefaultPageViewModel {
 
     // MARK: - Initialization
 
-    init(
-        configModel: ConfigModel,
-        workoutEventManager: WorkoutEventManagerInterface,
-        workoutTemplatesProvider: WorkoutTemplatesProviderInterface,
-        eventStoreManager: EventStoreManagerInterface
-    ) {
-        self.workoutEventManager = workoutEventManager
-        self.workoutTemplatesProvider = workoutTemplatesProvider
-        self.eventStoreManager = eventStoreManager
+    init(configModel: ConfigModel) {
+        let serviceManager = ServiceManager.shared
+        self.workoutEventManager = serviceManager.createWorkoutEventManager()
+        self.workoutTemplatesProvider = serviceManager.workoutTemplatesProvider
+        self.eventStoreManager = serviceManager.eventStoreManager
         self.eventStore = eventStoreManager.store
         self.selectedDate = configModel.selectedDate
         super.init()
@@ -131,7 +127,7 @@ final class ScheduleEventViewModel: DefaultPageViewModel {
         case .selectTemplate(let template):
             selectedTemplate = template
         case .showCalendarChooser:
-            onOutput?(.showCalendarChooser)
+            output.send(.showCalendarChooser)
         }
     }
 
@@ -188,9 +184,9 @@ final class ScheduleEventViewModel: DefaultPageViewModel {
                     try await eventStoreManager.saveWorkoutEvent(event, calendar: calendar)
                 }
 
-                onOutput?(.dismiss)
+                output.send(.dismiss)
             } catch {
-                errorReceived(error, displayType: .alert)
+                showError(error)
             }
         }
     }
@@ -202,7 +198,7 @@ final class ScheduleEventViewModel: DefaultPageViewModel {
             } catch {
                 await MainActor.run {
                     addToCalendar = false
-                    errorReceived(error, displayType: .alert)
+                    showError(error)
                 }
             }
         }

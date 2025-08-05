@@ -1,8 +1,6 @@
 import SwiftUI
 
-struct ExerciseDetailsContentView: PageView {
-
-    typealias ViewModel = ExerciseDetailsViewModel
+struct ExerciseDetailsContentView: View {
 
     @State private var isShowingAlert = false
     @State private var showConfetti = false
@@ -10,13 +8,13 @@ struct ExerciseDetailsContentView: PageView {
     @State private var editingDefaultsAmountInput: String = ""
     @State private var editingDefaultsSetsInput: String = ""
     @FocusState private var isNotesInputFocused: Bool
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var viewModel: ExerciseDetailsViewModel
 
     init(viewModel: ExerciseDetailsViewModel) {
         self.viewModel = viewModel
     }
 
-    var contentView: some View {
+    var body: some View {
         ScrollView {
             VStack(spacing: 24) {
                 setsSection
@@ -63,6 +61,8 @@ struct ExerciseDetailsContentView: PageView {
         }
         .navigationBarTitleDisplayMode(.inline)
         .animation(.default, value: viewModel.exercise.sets)
+        .additionalState(viewModel.additionalState)
+        .withAlertManager()
         .onAppear {
             AnalyticsService.shared.logEvent(.exerciseDetailsScreenOpened)
         }
@@ -95,9 +95,9 @@ struct ExerciseDetailsContentView: PageView {
         .alert("Edit", isPresented: $isEditingDefaultsAlertPresented) {
             TextField("Sets (optional)", text: $editingDefaultsSetsInput)
                 .keyboardType(.numberPad)
-            let textFieldTitleKey: LocalizedStringKey = switch viewModel.exercise.model.metricType {
-            case .reps: "Reps (optional)"
-            case .time: "Time (sec, optional)"
+            let textFieldTitleKey: String = switch viewModel.exercise.model.metricType {
+            case .reps: LocalizationKeys.ExerciseDetails.repsOptional
+            case .time: LocalizationKeys.ExerciseDetails.timeOptional
             @unknown default:
                 fatalError()
             }
@@ -135,7 +135,7 @@ struct ExerciseDetailsContentView: PageView {
         }
     }
 
-    private var setSectionFooter: LocalizedStringKey? {
+    private var setSectionFooter: String? {
         if viewModel.exercise.defaultAmount != 0 {
             let value: String = switch viewModel.exercise.model.metricType {
             case .reps:
@@ -191,7 +191,7 @@ struct ExerciseDetailsContentView: PageView {
         }
     }
 
-    private func infoCellView(_ text: LocalizedStringKey) -> some View {
+    private func infoCellView(_ text: String) -> some View {
         Text(text)
             .fontWeight(.semibold)
             .frame(maxWidth: .infinity, alignment: .leading)

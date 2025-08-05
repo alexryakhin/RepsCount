@@ -2,18 +2,16 @@ import SwiftUI
 import UniformTypeIdentifiers
 import StoreKit
 
-struct SettingsContentView: PageView {
+struct SettingsContentView: View {
 
-    typealias ViewModel = SettingsViewModel
-
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var viewModel: SettingsViewModel
     @State private var isShowingGoToSettingsAlert: Bool = false
 
     init(viewModel: SettingsViewModel) {
         self.viewModel = viewModel
     }
 
-    var contentView: some View {
+    var body: some View {
         List {
             // MARK: - Settings
 
@@ -51,6 +49,9 @@ struct SettingsContentView: PageView {
             }
         }
         .listStyle(.insetGrouped)
+        .navigationTitle(LocalizationKeys.Navigation.settings)
+        .additionalState(viewModel.additionalState)
+        .withAlertManager()
         .onAppear {
             AnalyticsService.shared.logEvent(.settingsScreenOpened)
         }

@@ -1,7 +1,7 @@
 import Combine
 import SwiftUI
 
-final class AboutAppViewModel: DefaultPageViewModel {
+final class AboutAppViewModel: BaseViewModel {
 
     enum Input {
         // Input actions from the view
@@ -11,7 +11,7 @@ final class AboutAppViewModel: DefaultPageViewModel {
         // Output actions to pass to the view controller
     }
 
-    var onOutput: ((Output) -> Void)?
+    let output = PassthroughSubject<Output, Never>()
 
     @AppStorage(UDKeys.isShowingRating) var isShowingRating: Bool = true
 
@@ -21,7 +21,7 @@ final class AboutAppViewModel: DefaultPageViewModel {
 
     // MARK: - Initialization
 
-    init(arg: Int) {
+    override init() {
         super.init()
         setupBindings()
     }

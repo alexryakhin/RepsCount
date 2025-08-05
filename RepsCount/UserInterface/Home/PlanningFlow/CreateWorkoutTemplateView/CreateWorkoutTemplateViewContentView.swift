@@ -1,10 +1,8 @@
 import SwiftUI
 
-struct CreateWorkoutTemplateViewContentView: PageView {
+struct CreateWorkoutTemplateViewContentView: View {
 
-    typealias ViewModel = CreateWorkoutTemplateViewViewModel
-
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var viewModel: CreateWorkoutTemplateViewViewModel
     @FocusState private var isNameFocused: Bool
     @FocusState private var isNotesFocused: Bool
 
@@ -12,7 +10,7 @@ struct CreateWorkoutTemplateViewContentView: PageView {
         self.viewModel = viewModel
     }
 
-    var contentView: some View {
+    var body: some View {
         ScrollView {
             LazyVStack(spacing: 24) {
                 muscleMapSectionView
@@ -62,9 +60,9 @@ struct CreateWorkoutTemplateViewContentView: PageView {
         .alert("Edit", isPresented: .constant(viewModel.editingDefaultsExercise != nil), presenting: viewModel.editingDefaultsExercise) { exercise in
             TextField("Sets (optional)", text: $viewModel.defaultSetsInput)
                 .keyboardType(.numberPad)
-            let textFieldTitleKey: LocalizedStringKey = switch exercise.exerciseModel.metricType {
-            case .reps: "Reps (optional)"
-            case .time: "Time (sec, optional)"
+            let textFieldTitleKey: String = switch exercise.exerciseModel.metricType {
+            case .reps: LocalizationKeys.ExerciseDetails.repsOptional
+            case .time: LocalizationKeys.ExerciseDetails.timeOptional
             @unknown default:
                 fatalError()
             }
@@ -88,6 +86,8 @@ struct CreateWorkoutTemplateViewContentView: PageView {
                 AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenExerciseAdded)
             }
         }
+        .additionalState(viewModel.additionalState)
+        .withAlertManager()
         .onAppear {
             AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenOpened)
         }

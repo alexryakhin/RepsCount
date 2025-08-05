@@ -73,8 +73,7 @@ struct SearchInputView: View {
             .clipShape(Capsule())
 
             if focusState {
-                StyledButton(text: "Cancel", style: .textMini) {
-                    // cancel
+                Button("Cancel") {
                     focusState = false
                 }
                 .transition(.move(edge: .trailing))

@@ -1,7 +1,7 @@
 import Combine
 import SwiftUI
 
-final class TodayMainViewModel: DefaultPageViewModel {
+final class TodayMainViewModel: BaseViewModel {
 
     @AppStorage(UDKeys.savesLocation) var savesLocation: Bool = true
 
@@ -23,7 +23,7 @@ final class TodayMainViewModel: DefaultPageViewModel {
         case showAllExercises
     }
 
-    var onOutput: ((Output) -> Void)?
+    let output = PassthroughSubject<Output, Never>()
 
     @Published var isShowingAddWorkoutFromTemplate: Bool = false
     @Published private(set) var currentDate = Date.now
@@ -42,18 +42,13 @@ final class TodayMainViewModel: DefaultPageViewModel {
 
     // MARK: - Initialization
 
-    init(
-        calendarEventsProvider: WorkoutEventsProviderInterface,
-        addWorkoutManager: AddWorkoutManagerInterface,
-        workoutsProvider: WorkoutsProviderInterface,
-        workoutTemplatesProvider: WorkoutTemplatesProviderInterface,
-        locationManager: LocationManagerInterface
-    ) {
-        self.calendarEventsProvider = calendarEventsProvider
-        self.addWorkoutManager = addWorkoutManager
-        self.workoutsProvider = workoutsProvider
-        self.workoutTemplatesProvider = workoutTemplatesProvider
-        self.locationManager = locationManager
+    override init() {
+        let serviceManager = ServiceManager.shared
+        self.calendarEventsProvider = serviceManager.workoutEventsProvider
+        self.addWorkoutManager = serviceManager.createAddWorkoutManager()
+        self.workoutsProvider = serviceManager.workoutsProvider
+        self.workoutTemplatesProvider = serviceManager.workoutTemplatesProvider
+        self.locationManager = serviceManager.locationManager
         super.init()
         setupBindings()
     }
@@ -61,15 +56,15 @@ final class TodayMainViewModel: DefaultPageViewModel {
     func handle(_ input: Input) {
         switch input {
         case .showAllWorkouts:
-            onOutput?(.showAllWorkouts)
+            output.send(.showAllWorkouts)
         case .showAllExercises:
-            onOutput?(.showAllExercises)
+            output.send(.showAllExercises)
         case .showAddWorkoutFromTemplate:
             isShowingAddWorkoutFromTemplate.toggle()
         case .createOpenWorkout:
             createOpenWorkout()
         case .showWorkoutDetails(let workoutInstance):
-            onOutput?(.showWorkoutDetails(workoutInstance))
+            output.send(.showWorkoutDetails(workoutInstance))
         case .startPlannedWorkout(let event):
             startPlannedWorkout(with: event)
         case .startWorkoutFromTemplate(let template):
@@ -77,10 +72,10 @@ final class TodayMainViewModel: DefaultPageViewModel {
         case .showDeleteWorkoutAlert(let workoutInstance):
             showAlert(
                 withModel: .init(
-                    title: "Delete workout",
-                    message: "Are you sure you want to delete this workout?",
-                    actionText: "Cancel",
-                    destructiveActionText: "Delete",
+                    title: LocalizationKeys.Today.deleteWorkout,
+                    message: LocalizationKeys.Today.deleteWorkoutMessage,
+                    actionText: LocalizationKeys.Common.cancel,
+                    destructiveActionText: LocalizationKeys.Common.delete,
                     action: {
                         AnalyticsService.shared.logEvent(.todayScreenWorkoutRemoveCancelButtonTapped)
                     },
@@ -120,7 +115,7 @@ final class TodayMainViewModel: DefaultPageViewModel {
                 self?.plannedWorkouts = plannedEvents
 
                 if todayWorkouts.isEmpty && plannedEvents.isEmpty {
-                    self?.additionalState = .placeholder()
+                    self?.showPlaceholder(title: LocalizationKeys.Today.noWorkouts, subtitle: LocalizationKeys.Today.noWorkoutsDescription)
                 } else {
                     self?.resetAdditionalState()
                 }
@@ -146,11 +141,11 @@ final class TodayMainViewModel: DefaultPageViewModel {
         Task { @MainActor in
             do {
                 if let workoutInstance = try await addWorkoutManager.addWorkout(from: event, savesLocation: savesLocation) {
-                    onOutput?(.showWorkoutDetails(workoutInstance))
+                    output.send(.showWorkoutDetails(workoutInstance))
                     HapticManager.shared.triggerNotification(type: .success)
                 }
             } catch {
-                errorReceived(error, displayType: .alert)
+                showError(error)
             }
         }
     }
@@ -158,11 +153,11 @@ final class TodayMainViewModel: DefaultPageViewModel {
     private func createOpenWorkout() {
         do {
             if let workoutInstance = try addWorkoutManager.addOpenWorkout() {
-                onOutput?(.showWorkoutDetails(workoutInstance))
+                output.send(.showWorkoutDetails(workoutInstance))
                 HapticManager.shared.triggerNotification(type: .success)
             }
         } catch {
-            errorReceived(error, displayType: .alert)
+            showError(error)
         }
     }
 
@@ -170,11 +165,11 @@ final class TodayMainViewModel: DefaultPageViewModel {
         Task { @MainActor in
             do {
                 if let workoutInstance = try await addWorkoutManager.addWorkout(from: template, savesLocation: savesLocation) {
-                    onOutput?(.showWorkoutDetails(workoutInstance))
+                    output.send(.showWorkoutDetails(workoutInstance))
                     HapticManager.shared.triggerNotification(type: .success)
                 }
             } catch {
-                errorReceived(error, displayType: .alert)
+                showError(error)
             }
         }
     }

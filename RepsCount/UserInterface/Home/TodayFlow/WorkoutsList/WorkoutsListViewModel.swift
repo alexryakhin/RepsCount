@@ -1,7 +1,7 @@
 import Combine
 import Foundation
 
-final class WorkoutsListViewModel: DefaultPageViewModel {
+final class WorkoutsListViewModel: BaseViewModel {
 
     enum Input {
         case showWorkoutDetails(WorkoutInstance)
@@ -12,7 +12,7 @@ final class WorkoutsListViewModel: DefaultPageViewModel {
         case showWorkoutDetails(WorkoutInstance)
     }
 
-    var onOutput: ((Output) -> Void)?
+    let output = PassthroughSubject<Output, Never>()
 
     @Published private(set) var sections: [WorkoutsListContentView.ListSection] = []
     @Published var selectedDate: Date? {
@@ -29,8 +29,8 @@ final class WorkoutsListViewModel: DefaultPageViewModel {
 
     // MARK: - Initialization
 
-    init(workoutsProvider: WorkoutsProviderInterface) {
-        self.workoutsProvider = workoutsProvider
+    override init() {
+        self.workoutsProvider = ServiceManager.shared.workoutsProvider
         super.init()
         setupBindings()
     }
@@ -38,7 +38,7 @@ final class WorkoutsListViewModel: DefaultPageViewModel {
     func handle(_ input: Input) {
         switch input {
         case .showWorkoutDetails(let workout):
-            onOutput?(.showWorkoutDetails(workout))
+            output.send(.showWorkoutDetails(workout))
         case .deleteWorkout(let workout):
             deleteWorkout(workout.id)
             AnalyticsService.shared.logEvent(.allWorkoutsScreenWorkoutRemoved)
@@ -58,7 +58,7 @@ final class WorkoutsListViewModel: DefaultPageViewModel {
                     self?.prepareWorkoutsForDisplay(workouts)
                     self?.resetAdditionalState()
                 } else {
-                    self?.additionalState = .placeholder()
+                    self?.showPlaceholder(title: LocalizationKeys.Lists.noWorkoutsYet, subtitle: LocalizationKeys.Lists.noWorkoutsYetDescription)
                 }
             }
             .store(in: &cancellables)

@@ -17,23 +17,7 @@
 	<string>Add repeating workouts to a calendar that you choose</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>That&apos;s only needed to save your exercise&apos;s location</string>
-	<key>UIApplicationSceneManifest</key>
-	<dict>
-		<key>UIApplicationSupportsMultipleScenes</key>
-		<false/>
-		<key>UISceneConfigurations</key>
-		<dict>
-			<key>UIWindowSceneSessionRoleApplication</key>
-			<array>
-				<dict>
-					<key>UISceneConfigurationName</key>
-					<string>Default Configuration</string>
-					<key>UISceneDelegateClassName</key>
-					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
-				</dict>
-			</array>
-		</dict>
-	</dict>
+
 	<key>NSCalendarsUsageDescription</key>
 	<string>Add repeating workouts to a calendar that you choose</string>
 	<key>UIBackgroundModes</key>

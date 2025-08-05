@@ -1,18 +1,16 @@
 import SwiftUI
 
-struct TodayMainContentView: PageView {
-
-    typealias ViewModel = TodayMainViewModel
+struct TodayMainContentView: View {
 
     @AppStorage(UDKeys.isShowingOnboarding) var isShowingOnboarding: Bool = true
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var viewModel: TodayMainViewModel
 
     init(viewModel: TodayMainViewModel) {
         self.viewModel = viewModel
     }
 
-    var contentView: some View {
-        ScrollViewWithCustomNavBar {
+    var body: some View {
+        ScrollView {
             LazyVStack(spacing: 24) {
                 todayWorkoutsSectionView
                     .animation(.default, value: viewModel.todayWorkouts)
@@ -20,9 +18,8 @@ struct TodayMainContentView: PageView {
                     .animation(.default, value: viewModel.plannedWorkouts)
             }
             .padding(.horizontal, 16)
-        } navigationBar: {
-            navigationBarView
         }
+        .navigationTitle(LocalizationKeys.Navigation.today)
         .background(Color(.systemGroupedBackground))
         .sheet(isPresented: $viewModel.isShowingAddWorkoutFromTemplate) {
             templateSelectionView
@@ -32,34 +29,49 @@ struct TodayMainContentView: PageView {
         } content: {
             OnboardingView()
         }
+        .additionalState(viewModel.additionalState)
+        .withAlertManager()
         .onAppear {
             AnalyticsService.shared.logEvent(.todayScreenOpened)
             viewModel.handle(.updateDate)
         }
-    }
-
-    func placeholderView(props: PageState.PlaceholderProps) -> some View {
-        VStack {
-            navigationBarView
-            Spacer()
-            EmptyListView(label: "No Workout Planned", description: "You haven't planned any workouts for today.") {
-                VStack(spacing: 10) {
-                    if viewModel.workoutTemplates.isNotEmpty {
-                        Button("Add Workout from Templates") {
-                            viewModel.handle(.showAddWorkoutFromTemplate)
-                            AnalyticsService.shared.logEvent(.todayScreenAddWorkoutFromTemplatesButtonTapped)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Menu {
+                    Section {
+                        Button {
+                            viewModel.handle(.createOpenWorkout)
+                            AnalyticsService.shared.logEvent(.todayScreenAddNewWorkoutButtonMenuTapped)
+                        } label: {
+                            Label("Add open workout", systemImage: "plus")
                         }
-                        .buttonStyle(.borderedProminent)
+                        if viewModel.workoutTemplates.isNotEmpty {
+                            Button {
+                                viewModel.handle(.showAddWorkoutFromTemplate)
+                                AnalyticsService.shared.logEvent(.todayScreenAddWorkoutFromTemplatesMenuButtonTapped)
+                            } label: {
+                                Label("Add a workout from template", systemImage: "plus.square.on.square")
+                            }
+                        }
                     }
-
-                    Button("Start a new workout") {
-                        viewModel.handle(.createOpenWorkout)
-                        AnalyticsService.shared.logEvent(.todayScreenAddNewWorkoutButtonTapped)
+                    Section {
+                        Button {
+                            viewModel.handle(.showAllWorkouts)
+                            AnalyticsService.shared.logEvent(.todayScreenShowAllWorkoutsMenuButtonTapped)
+                        } label: {
+                            Label("Show all workouts", systemImage: "baseball.diamond.bases")
+                        }
+                        Button {
+                            viewModel.handle(.showAllExercises)
+                            AnalyticsService.shared.logEvent(.todayScreenShowAllExercisesMenuButtonTapped)
+                        } label: {
+                            Label("Show all exercises", systemImage: "baseball.diamond.bases.outs.indicator")
+                        }
                     }
-                    .buttonStyle(.bordered)
+                } label: {
+                    Image(systemName: "ellipsis.circle")
                 }
             }
-            Spacer()
         }
     }
 
@@ -127,42 +139,6 @@ struct TodayMainContentView: PageView {
                     .foregroundStyle(.primary)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-
-            Menu {
-                Section {
-                    Button {
-                        viewModel.handle(.createOpenWorkout)
-                        AnalyticsService.shared.logEvent(.todayScreenAddNewWorkoutButtonMenuTapped)
-                    } label: {
-                        Label("Add open workout", systemImage: "plus")
-                    }
-                    if viewModel.workoutTemplates.isNotEmpty {
-                        Button {
-                            viewModel.handle(.showAddWorkoutFromTemplate)
-                            AnalyticsService.shared.logEvent(.todayScreenAddWorkoutFromTemplatesMenuButtonTapped)
-                        } label: {
-                            Label("Add a workout from template", systemImage: "plus.square.on.square")
-                        }
-                    }
-                }
-                Section {
-                    Button {
-                        viewModel.handle(.showAllWorkouts)
-                        AnalyticsService.shared.logEvent(.todayScreenShowAllWorkoutsMenuButtonTapped)
-                    } label: {
-                        Label("Show all workouts", systemImage: "baseball.diamond.bases")
-                    }
-                    Button {
-                        viewModel.handle(.showAllExercises)
-                        AnalyticsService.shared.logEvent(.todayScreenShowAllExercisesMenuButtonTapped)
-                    } label: {
-                        Label("Show all exercises", systemImage: "baseball.diamond.bases.outs.indicator")
-                    }
-                }
-            } label: {
-                Image(systemName: "ellipsis.circle")
-                    .frame(sideLength: 24)
-            }
         }
         .padding(vertical: 12, horizontal: 16)
     }
@@ -185,7 +161,7 @@ struct TodayMainContentView: PageView {
             }
             .background(Color(.systemGroupedBackground))
             .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("Select a template")
+            .navigationTitle(LocalizationKeys.Calendar.selectTemplate)
         }
     }
 }

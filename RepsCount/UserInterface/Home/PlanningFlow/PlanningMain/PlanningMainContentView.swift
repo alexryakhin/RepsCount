@@ -1,16 +1,14 @@
 import SwiftUI
 
-struct PlanningMainContentView: PageView {
+struct PlanningMainContentView: View {
 
-    typealias ViewModel = PlanningMainViewModel
-
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var viewModel: PlanningMainViewModel
 
     init(viewModel: PlanningMainViewModel) {
-        self.viewModel = viewModel
+        self._viewModel = ObservedObject(wrappedValue: viewModel)
     }
 
-    var contentView: some View {
+    var body: some View {
         ScrollView {
             LazyVStack(spacing: 24) {
                 calendarSectionView
@@ -19,6 +17,7 @@ struct PlanningMainContentView: PageView {
             .padding(vertical: 12, horizontal: 16)
         }
         .background(Color(.systemGroupedBackground))
+        .navigationTitle(LocalizationKeys.Navigation.planning)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
@@ -29,20 +28,14 @@ struct PlanningMainContentView: PageView {
                 }
             }
         }
+        .additionalState(viewModel.additionalState)
+        .withAlertManager()
         .onAppear {
             AnalyticsService.shared.logEvent(.planningScreenOpened)
         }
     }
 
-    func placeholderView(props: PageState.PlaceholderProps) -> some View {
-        EmptyListView(label: "No Workouts Created", description: "You haven't created any workout templates yet.") {
-            Button("Create New Workout Template") {
-                viewModel.handle(.createWorkoutTemplate)
-                AnalyticsService.shared.logEvent(.planningScreenAddTemplateButtonTapped)
-            }
-            .buttonStyle(.borderedProminent)
-        }
-    }
+
 
     private var calendarSectionView: some View {
         CustomSectionView(header: "Calendar") {

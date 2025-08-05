@@ -1,7 +1,7 @@
 import Combine
 import SwiftUI
 
-final class SettingsViewModel: DefaultPageViewModel {
+final class SettingsViewModel: BaseViewModel {
 
     enum Input {
         case showAboutApp
@@ -12,7 +12,7 @@ final class SettingsViewModel: DefaultPageViewModel {
         case showAboutApp
     }
 
-    var onOutput: ((Output) -> Void)?
+    let output = PassthroughSubject<Output, Never>()
 
     @AppStorage(UDKeys.savesLocation) var savesLocation: Bool = true {
         didSet {
@@ -43,8 +43,8 @@ final class SettingsViewModel: DefaultPageViewModel {
         }
     }
 
-    init(locationManager: LocationManagerInterface) {
-        self.locationManager = locationManager
+    override init() {
+        self.locationManager = ServiceManager.shared.locationManager
         super.init()
         setupBindings()
     }
@@ -52,7 +52,7 @@ final class SettingsViewModel: DefaultPageViewModel {
     func handle(_ input: Input) {
         switch input {
         case .showAboutApp:
-            onOutput?(.showAboutApp)
+            output.send(.showAboutApp)
         case .showLanguageSettings:
             showLanguageSettings()
         }

@@ -31,7 +31,7 @@ struct AddExerciseView: View {
                     exerciseCategorySectionView(for: category)
                 }
             }
-            .navigationTitle("Add exercise")
+            .navigationTitle(LocalizationKeys.WorkoutDetails.addExercise)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -58,9 +58,9 @@ struct AddExerciseView: View {
         .alert("Defaults", isPresented: .constant(exerciseModelToAdd != nil), presenting: exerciseModelToAdd) { model in
             TextField("Sets (optional)", text: $defaultSetsInput)
                 .keyboardType(.numberPad)
-            let textFieldTitleKey: LocalizedStringKey = switch model.metricType {
-            case .reps: "Reps (optional)"
-            case .time: "Time (sec, optional)"
+            let textFieldTitleKey: String = switch model.metricType {
+            case .reps: LocalizationKeys.ExerciseDetails.repsOptional
+            case .time: LocalizationKeys.ExerciseDetails.timeOptional
             @unknown default:
                 fatalError()
             }

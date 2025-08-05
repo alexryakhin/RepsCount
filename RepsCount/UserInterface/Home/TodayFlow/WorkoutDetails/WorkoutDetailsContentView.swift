@@ -1,16 +1,14 @@
 import SwiftUI
 
-struct WorkoutDetailsContentView: PageView {
+struct WorkoutDetailsContentView: View {
 
-    typealias ViewModel = WorkoutDetailsViewModel
-
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var viewModel: WorkoutDetailsViewModel
 
     init(viewModel: WorkoutDetailsViewModel) {
         self.viewModel = viewModel
     }
 
-    var contentView: some View {
+    var body: some View {
         ScrollView {
             LazyVStack(spacing: 24) {
                 HStack(spacing: 8) {
@@ -79,6 +77,8 @@ struct WorkoutDetailsContentView: PageView {
                 HapticManager.shared.triggerNotification(type: .success)
             }
         }
+        .additionalState(viewModel.additionalState)
+        .withAlertManager()
         .onAppear {
             AnalyticsService.shared.logEvent(.workoutDetailsScreenOpened)
         }
@@ -136,12 +136,12 @@ struct WorkoutDetailsContentView: PageView {
         CustomSectionView(header: "Info") {
             FormWithDivider {
                 infoCell(
-                    label: "Exercises",
+                    label: LocalizationKeys.WorkoutDetails.exercises,
                     info: viewModel.workout.exercises.count.formatted()
                 )
                 if let totalDuration = viewModel.workout.totalDuration?.formatted(with: [.hour, .minute]) {
                     infoCell(
-                        label: "Time",
+                        label: LocalizationKeys.Time.time,
                         info: totalDuration
                     )
                 }
@@ -162,7 +162,7 @@ struct WorkoutDetailsContentView: PageView {
         }
     }
 
-    private func infoCell(label: LocalizedStringKey, info: String) -> some View {
+    private func infoCell(label: String, info: String) -> some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(label)
                 .fontWeight(.semibold)
