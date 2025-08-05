@@ -4,7 +4,7 @@ import SwiftUI
 
 final class ScheduleEventViewModel: BaseViewModel {
 
-    struct ConfigModel {
+    struct ConfigModel: Hashable {
         let selectedDate: Date
     }
 

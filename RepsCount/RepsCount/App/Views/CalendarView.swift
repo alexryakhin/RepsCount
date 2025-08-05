@@ -12,7 +12,7 @@ struct CalendarView: View {
     // MARK: - Properties
     
     @StateObject private var viewModel = CalendarViewModel()
-    @Environment(\.dismiss) private var dismiss
+    @Binding var navigationPath: NavigationPath
     
     // MARK: - Body
     
@@ -29,9 +29,7 @@ struct CalendarView: View {
     private func handleOutput(_ output: CalendarViewModel.Output) {
         switch output {
         case .scheduleWorkout(let configModel):
-            // Navigate to schedule event view
-            // This would typically push to a new view, but for now we'll dismiss
-            dismiss()
+            navigationPath.append(configModel)
         case .presentDeleteEventAlert(let event):
             // Handle delete event alert
             break

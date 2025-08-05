@@ -11,7 +11,7 @@ struct ExerciseDetailsView: View {
     
     // MARK: - Properties
     
-    let exercise: Exercise?
+    let exercise: Exercise
 
     @StateObject private var viewModel: ExerciseDetailsViewModel
     
@@ -20,25 +20,6 @@ struct ExerciseDetailsView: View {
     init(exercise: Exercise) {
         self.exercise = exercise
         self._viewModel = StateObject(wrappedValue: ExerciseDetailsViewModel(exercise: exercise))
-    }
-    
-    init(exerciseID: String) {
-        self.exercise = nil
-        self._viewModel = StateObject(
-            wrappedValue: ExerciseDetailsViewModel(
-                exercise: Exercise(
-                    model: .barbellRows,
-                    id: exerciseID,
-                    timestamp: .now,
-                    sets: [],
-                    notes: "",
-                    location: nil,
-                    workoutInstanceId: nil,
-                    defaultAmount: .zero,
-                    defaultSets: .zero
-                )
-            )
-        )
     }
     
     // MARK: - Body

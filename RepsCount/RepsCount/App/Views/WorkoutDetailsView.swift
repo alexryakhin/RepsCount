@@ -11,16 +11,16 @@ struct WorkoutDetailsView: View {
     
     // MARK: - Properties
     
-    let workout: WorkoutInstance?
-    let workoutID: String?
+    let workout: WorkoutInstance
+    @Binding var navigationPath: NavigationPath
     
     @StateObject private var viewModel: WorkoutDetailsViewModel
     
     // MARK: - Initialization
     
-    init(workout: WorkoutInstance) {
+    init(workout: WorkoutInstance, navigationPath: Binding<NavigationPath>) {
         self.workout = workout
-        self.workoutID = nil
+        self._navigationPath = navigationPath
         self._viewModel = StateObject(wrappedValue: WorkoutDetailsViewModel(workout: workout))
     }
     
@@ -29,5 +29,21 @@ struct WorkoutDetailsView: View {
     var body: some View {
         WorkoutDetailsContentView(viewModel: viewModel)
             .navigationTitle(Loc.Navigation.workoutDetails.localized)
+            .onReceive(viewModel.output) { output in
+                handleOutput(output)
+            }
+    }
+    
+    // MARK: - Private Methods
+    
+    private func handleOutput(_ output: WorkoutDetailsViewModel.Output?) {
+        guard let output = output else { return }
+        switch output {
+        case .showExerciseDetails(let exercise):
+            navigationPath.append(exercise)
+        case .finish:
+            // Handle finish if needed
+            break
+        }
     }
 }

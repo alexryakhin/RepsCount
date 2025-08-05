@@ -44,7 +44,7 @@ struct MainAppView: View {
                     }
             }
             .navigationDestination(for: WorkoutInstance.self) { workout in
-                WorkoutDetailsView(workout: workout)
+                WorkoutDetailsView(workout: workout, navigationPath: $navigationPath)
             }
             .navigationDestination(for: Exercise.self) { exercise in
                 ExerciseDetailsView(exercise: exercise)
@@ -55,21 +55,19 @@ struct MainAppView: View {
             .navigationDestination(for: String.self) { id in
                 switch id {
                 case "workouts_list":
-                    WorkoutsListView()
+                    WorkoutsListView(navigationPath: $navigationPath)
                 case "exercises_list":
-                    ExercisesListView()
+                    ExercisesListView(navigationPath: $navigationPath)
                 case "calendar":
-                    CalendarView()
+                    CalendarView(navigationPath: $navigationPath)
                 case "about_app":
                     AboutAppView()
                 default:
-                    if id.hasPrefix("exercise_") {
-                        let exerciseID = String(id.dropFirst("exercise_".count))
-                        ExerciseDetailsView(exerciseID: exerciseID)
-                    } else {
-                        EmptyView()
-                    }
+                    EmptyView()
                 }
+            }
+            .navigationDestination(for: ScheduleEventViewModel.ConfigModel.self) { configModel in
+                ScheduleEventView(configModel: configModel)
             }
         }
         .sheet(isPresented: $isShowingOnboarding) {
