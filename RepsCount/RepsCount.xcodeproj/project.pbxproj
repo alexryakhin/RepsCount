@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		530C58C92E41FA2500D1639D /* RepsCountWatchApp.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 530C58BF2E41FA2400D1639D /* RepsCountWatchApp.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5374D5362E418F75002EEB84 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 5374D5352E418F75002EEB84 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		5374D5382E418F7C002EEB84 /* Flow in Frameworks */ = {isa = PBXBuildFile; productRef = 5374D5372E418F7C002EEB84 /* Flow */; };
 		53F4CEAB2D8003CF004551D5 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 53F4CEAA2D8003CF004551D5 /* FirebaseCore */; };
@@ -15,7 +16,28 @@
 		53F4CF2F2D8013B9004551D5 /* SwinjectAutoregistration in Frameworks */ = {isa = PBXBuildFile; productRef = 53F4CF2E2D8013B9004551D5 /* SwinjectAutoregistration */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		530C58C72E41FA2500D1639D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 53F4CE672D80004A004551D5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 530C58BE2E41FA2400D1639D;
+			remoteInfo = "RepsCountWatchApp Watch App";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
+		530C58CD2E41FA2500D1639D /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				530C58C92E41FA2500D1639D /* RepsCountWatchApp.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		53F4CEBF2D801271004551D5 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -29,6 +51,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		530C58BF2E41FA2400D1639D /* RepsCountWatchApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RepsCountWatchApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5374D5F22E419024002EEB84 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		53F4CE6F2D80004A004551D5 /* RepsCount.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RepsCount.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -44,6 +67,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		530C58C02E41FA2400D1639D /* RepsCountWatchApp */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = RepsCountWatchApp;
+			sourceTree = "<group>";
+		};
 		53F4CE712D80004A004551D5 /* RepsCount */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -80,6 +108,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		530C58BC2E41FA2400D1639D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		53F4CE6C2D80004A004551D5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -102,6 +137,7 @@
 				53F4CE712D80004A004551D5 /* RepsCount */,
 				53F4CED72D8012AA004551D5 /* Core */,
 				53F4CEE82D8012B6004551D5 /* CoreUserInterface */,
+				530C58C02E41FA2400D1639D /* RepsCountWatchApp */,
 				53F4CF152D801346004551D5 /* Frameworks */,
 				53F4CEC62D8012A1004551D5 /* Services */,
 				53F4CF0A2D8012C9004551D5 /* Shared */,
@@ -114,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				53F4CE6F2D80004A004551D5 /* RepsCount.app */,
+				530C58BF2E41FA2400D1639D /* RepsCountWatchApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -129,6 +166,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		530C58BE2E41FA2400D1639D /* RepsCountWatchApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 530C58CA2E41FA2500D1639D /* Build configuration list for PBXNativeTarget "RepsCountWatchApp" */;
+			buildPhases = (
+				530C58BB2E41FA2400D1639D /* Sources */,
+				530C58BC2E41FA2400D1639D /* Frameworks */,
+				530C58BD2E41FA2400D1639D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				530C58C02E41FA2400D1639D /* RepsCountWatchApp */,
+			);
+			name = RepsCountWatchApp;
+			packageProductDependencies = (
+			);
+			productName = "RepsCountWatchApp Watch App";
+			productReference = 530C58BF2E41FA2400D1639D /* RepsCountWatchApp.app */;
+			productType = "com.apple.product-type.application";
+		};
 		53F4CE6E2D80004A004551D5 /* RepsCount */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 53F4CE9C2D80004C004551D5 /* Build configuration list for PBXNativeTarget "RepsCount" */;
@@ -137,10 +196,12 @@
 				53F4CE6C2D80004A004551D5 /* Frameworks */,
 				53F4CE6D2D80004A004551D5 /* Resources */,
 				53F4CEBF2D801271004551D5 /* Embed Frameworks */,
+				530C58CD2E41FA2500D1639D /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				530C58C82E41FA2500D1639D /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				53F4CE712D80004A004551D5 /* RepsCount */,
@@ -170,9 +231,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1620;
+				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
+					530C58BE2E41FA2400D1639D = {
+						CreatedOnToolsVersion = 16.4;
+					};
 					53F4CE6E2D80004A004551D5 = {
 						CreatedOnToolsVersion = 16.2;
 					};
@@ -204,11 +268,19 @@
 			projectRoot = "";
 			targets = (
 				53F4CE6E2D80004A004551D5 /* RepsCount */,
+				530C58BE2E41FA2400D1639D /* RepsCountWatchApp */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		530C58BD2E41FA2400D1639D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		53F4CE6D2D80004A004551D5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -219,6 +291,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		530C58BB2E41FA2400D1639D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		53F4CE6B2D80004A004551D5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -228,7 +307,75 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		530C58C82E41FA2500D1639D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 530C58BE2E41FA2400D1639D /* RepsCountWatchApp */;
+			targetProxy = 530C58C72E41FA2500D1639D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		530C58CB2E41FA2500D1639D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = RepsCountWatchApp/RepsCountWatchApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 69S862NXBP;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = RepsCount;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "dor.reps-counter.app";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "dor.reps-counter.app.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.5;
+			};
+			name = Debug;
+		};
+		530C58CC2E41FA2500D1639D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = RepsCountWatchApp/RepsCountWatchApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 69S862NXBP;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = RepsCount;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "dor.reps-counter.app";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "dor.reps-counter.app.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.5;
+			};
+			name = Release;
+		};
 		53F4CE9D2D80004C004551D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -427,6 +574,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		530C58CA2E41FA2500D1639D /* Build configuration list for PBXNativeTarget "RepsCountWatchApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				530C58CB2E41FA2500D1639D /* Debug */,
+				530C58CC2E41FA2500D1639D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		53F4CE6A2D80004A004551D5 /* Build configuration list for PBXProject "RepsCount" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

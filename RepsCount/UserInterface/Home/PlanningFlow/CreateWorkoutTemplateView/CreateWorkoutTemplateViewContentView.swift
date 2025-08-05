@@ -12,22 +12,15 @@ struct CreateWorkoutTemplateViewContentView: View {
 
     var body: some View {
         ScrollView {
-            LazyVStack(spacing: 24) {
+            LazyVStack(spacing: 20) {
                 muscleMapSectionView
                 workoutNameSectionView
                 notesSectionView
                 selectedExerciseSectionView
-                Button {
-                    viewModel.handle(.toggleAddExerciseSheet)
-                    AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenAddExerciseButtonTapped)
-                } label: {
-                    Text("Add exercises")
-                        .bold()
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                }
-                .clippedWithPaddingAndBackground()
+                addExerciseButtonView
             }
-            .padding(vertical: 12, horizontal: 16)
+            .padding(.horizontal, 20)
+            .padding(.top, 8)
         }
         .background(Color(.systemGroupedBackground))
         .toolbar {
@@ -94,58 +87,118 @@ struct CreateWorkoutTemplateViewContentView: View {
     }
 
     private var muscleMapSectionView: some View {
-        CustomSectionView(header: Loc.Planning.muscleGroupsToTarget.localized) {
-            MuscleMapImageView(exercises: viewModel.exercises.map(\.exerciseModel), width: 250)
-                .clippedWithPaddingAndBackground()
+        VStack(spacing: 16) {
+            HStack {
+                Text(Loc.Planning.muscleGroupsToTarget.localized)
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.primary)
+                
+                Spacer()
+            }
+            
+            ZStack {
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(Color(.secondarySystemGroupedBackground))
+                    .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 2)
+                
+                MuscleMapImageView(exercises: viewModel.exercises.map(\.exerciseModel), width: 250)
+                    .padding(20)
+            }
         }
     }
 
     private var workoutNameSectionView: some View {
-        CustomSectionView(header: Loc.Planning.workoutName.localized) {
+        VStack(spacing: 16) {
+            HStack {
+                Text(Loc.Planning.workoutName.localized)
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.primary)
+                
+                Spacer()
+                
+                if isNameFocused {
+                    Button(Loc.Common.done.localized) {
+                        viewModel.handle(.updateName)
+                        isNameFocused = false
+                        AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenNameChanged)
+                    }
+                    .font(.subheadline)
+                    .fontWeight(.medium)
+                    .foregroundColor(.blue)
+                }
+            }
+            
             TextField(
                 "Legs day",
                 text: $viewModel.workoutName,
                 axis: .vertical
             )
             .focused($isNameFocused)
-            .clippedWithPaddingAndBackground()
-        } headerTrailingContent: {
-            if isNameFocused {
-                Button(Loc.Common.done.localized) {
-                    viewModel.handle(.updateName)
-                    isNameFocused = false
-                    AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenNameChanged)
-                }
-            }
+            .font(.subheadline)
+            .padding(20)
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(Color(.secondarySystemGroupedBackground))
+                    .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 2)
+            )
         }
     }
 
     private var notesSectionView: some View {
-        CustomSectionView(header: Loc.WorkoutDetails.notes.localized) {
+        VStack(spacing: 16) {
+            HStack {
+                Text(Loc.WorkoutDetails.notes.localized)
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.primary)
+                
+                Spacer()
+                
+                if isNotesFocused {
+                    Button(Loc.Common.done.localized) {
+                        viewModel.handle(.updateNotes)
+                        isNotesFocused = false
+                        AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenNotesChanged)
+                    }
+                    .font(.subheadline)
+                    .fontWeight(.medium)
+                    .foregroundColor(.blue)
+                }
+            }
+            
             TextField(
                 "Something you might need",
                 text: $viewModel.workoutNotes,
                 axis: .vertical
             )
             .focused($isNotesFocused)
-            .clippedWithPaddingAndBackground()
-        } headerTrailingContent: {
-            if isNotesFocused {
-                Button(Loc.Common.done.localized) {
-                    viewModel.handle(.updateNotes)
-                    isNotesFocused = false
-                    AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenNotesChanged)
-                }
-            }
+            .font(.subheadline)
+            .padding(20)
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(Color(.secondarySystemGroupedBackground))
+                    .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 2)
+            )
         }
     }
 
     @ViewBuilder
     private var selectedExerciseSectionView: some View {
         if viewModel.exercises.isNotEmpty {
-            VStack(spacing: 8) {
-                Section {
-                    ListWithDivider(viewModel.exercises) { exercise in
+            VStack(spacing: 16) {
+                HStack {
+                    Text(Loc.Planning.selectedExercises.localized)
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.primary)
+                    
+                    Spacer()
+                }
+                
+                VStack(spacing: 8) {
+                    ForEach(viewModel.exercises) { exercise in
                         SwipeToDeleteView {
                             WorkoutTemplateExerciseRow(exercise: exercise) {
                                 viewModel.handle(.editDefaults(exercise))
@@ -156,13 +209,53 @@ struct CreateWorkoutTemplateViewContentView: View {
                             viewModel.handle(.removeExercise(exercise))
                             AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenExerciseRemoveButtonTapped)
                         }
+                        .clippedWithBackground()
                     }
-                    .clippedWithBackground()
-                } header: {
-                    CustomSectionHeader(Loc.Planning.selectedExercises.localized)
-                        .padding(.horizontal, 12)
                 }
             }
         }
+    }
+    
+    private var addExerciseButtonView: some View {
+        Button {
+            viewModel.handle(.toggleAddExerciseSheet)
+            AnalyticsService.shared.logEvent(.workoutTemplateDetailsScreenAddExerciseButtonTapped)
+        } label: {
+            HStack(spacing: 16) {
+                ZStack {
+                    Circle()
+                        .fill(Color.blue.opacity(0.1))
+                        .frame(width: 48, height: 48)
+                    
+                    Image(systemName: "plus")
+                        .font(.title2)
+                        .foregroundColor(.blue)
+                }
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Add exercises")
+                        .font(.headline)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.primary)
+                    
+                    Text("Select exercises for your template")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }
+                
+                Spacer()
+                
+                Image(systemName: "chevron.right")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+            .padding(20)
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(Color(.secondarySystemGroupedBackground))
+                    .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 2)
+            )
+        }
+        .buttonStyle(ScaleButtonStyle())
     }
 }

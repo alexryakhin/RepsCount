@@ -8,12 +8,14 @@ final class PlanningMainViewModel: BaseViewModel {
         case showWorkoutTemplateDetails(WorkoutTemplate)
         case deleteWorkoutTemplate(WorkoutTemplate)
         case showCalendar
+        case showTrainingPlans
     }
 
     enum Output {
         case createWorkoutTemplate
         case editWorkoutTemplate(WorkoutTemplate)
         case showCalendar
+        case showTrainingPlans
     }
 
     let output = PassthroughSubject<Output, Never>()
@@ -44,6 +46,8 @@ final class PlanningMainViewModel: BaseViewModel {
             workoutTemplatesProvider.delete(with: template.id)
         case .showCalendar:
             output.send(.showCalendar)
+        case .showTrainingPlans:
+            output.send(.showTrainingPlans)
         }
     }
 

@@ -2,6 +2,47 @@ import SwiftUI
 
 struct ExerciseDetailsContentView: View {
 
+    struct StatCardView: View {
+        let title: String
+        let value: String
+        let icon: String
+        let color: Color
+
+        var body: some View {
+            VStack(spacing: 12) {
+                ZStack {
+                    Circle()
+                        .fill(color.opacity(0.1))
+                        .frame(width: 48, height: 48)
+
+                    Image(systemName: icon)
+                        .font(.title2)
+                        .foregroundColor(color)
+                }
+
+                VStack(spacing: 4) {
+                    Text(value)
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        .foregroundColor(.primary)
+                        .multilineTextAlignment(.center)
+
+                    Text(title)
+                        .font(.caption)
+                        .fontWeight(.medium)
+                        .foregroundColor(.secondary)
+                        .multilineTextAlignment(.center)
+                }
+            }
+            .frame(maxWidth: .infinity)
+            .padding(16)
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(Color(.tertiarySystemGroupedBackground))
+            )
+        }
+    }
+
     @State private var isShowingAlert = false
     @State private var showConfetti = false
     @State private var isEditingDefaultsAlertPresented: Bool = false
@@ -16,13 +57,14 @@ struct ExerciseDetailsContentView: View {
 
     var body: some View {
         ScrollView {
-            VStack(spacing: 24) {
+            VStack(spacing: 20) {
                 setsSection
                 totalSection
                 mapSection
                 notesSection
             }
-            .padding(vertical: 12, horizontal: 16)
+            .padding(.horizontal, 20)
+            .padding(.top, 8)
         }
         .background(
             Color(.systemGroupedBackground).ignoresSafeArea().displayConfetti(isActive: $showConfetti)
@@ -169,25 +211,58 @@ struct ExerciseDetailsContentView: View {
     }
 
     private var totalSection: some View {
-        CustomSectionView(header: "Total") {
-            FormWithDivider {
+        VStack(spacing: 16) {
+            HStack {
+                Text("Total")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.primary)
+                
+                Spacer()
+            }
+            
+            LazyVGrid(columns: [
+                GridItem(.flexible()),
+                GridItem(.flexible())
+            ], spacing: 12) {
                 switch viewModel.exercise.model.metricType {
                 case .reps:
-                    infoCellView("Reps: \(viewModel.totalAmount.formatted())")
+                    StatCardView(
+                        title: "Total Reps",
+                        value: viewModel.totalAmount.formatted(),
+                        icon: "number.circle.fill",
+                        color: .blue
+                    )
                 case .time:
-                    infoCellView("Combined time: \(viewModel.totalAmount.formatted(with: [.minute, .second]))")
+                    StatCardView(
+                        title: "Total Time",
+                        value: viewModel.totalAmount.formatted(with: [.minute, .second]),
+                        icon: "clock.fill",
+                        color: .green
+                    )
                 @unknown default:
                     fatalError()
                 }
-                infoCellView("Sets: \(viewModel.exercise.sets.count.formatted())")
+                
+                StatCardView(
+                    title: "Sets",
+                    value: viewModel.exercise.sets.count.formatted(),
+                    icon: "list.bullet.circle.fill",
+                    color: .orange
+                )
+                
                 if viewModel.exercise.sets.count > 1,
                    let firstSetDate = viewModel.exercise.sets.first?.timestamp,
                    let lastSetDate = viewModel.exercise.sets.last?.timestamp {
                     let distance = firstSetDate.distance(to: lastSetDate)
-                    infoCellView("Time: \(distance.formatted(with: [.hour, .minute, .second]))")
+                    StatCardView(
+                        title: "Duration",
+                        value: distance.formatted(with: [.hour, .minute, .second]),
+                        icon: "timer",
+                        color: .purple
+                    )
                 }
             }
-            .clippedWithBackground()
         }
     }
 
@@ -201,42 +276,75 @@ struct ExerciseDetailsContentView: View {
     @ViewBuilder
     private var mapSection: some View {
         if let location = viewModel.exercise.location {
-            CustomSectionView(header: "Map") {
-                MapView(location: .init(latitude: location.latitude, longitude: location.longitude))
-                    .overlay(alignment: .bottomLeading) {
-                        if let address = location.address {
-                            Text(address)
-                                .font(.subheadline)
-                                .padding(vertical: 8, horizontal: 12)
-                                .clippedWithBackgroundMaterial(.thinMaterial)
-                                .padding(8)
-                                .multilineTextAlignment(.leading)
+            VStack(spacing: 16) {
+                HStack {
+                    Text("Map")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.primary)
+                    
+                    Spacer()
+                }
+                
+                ZStack {
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(Color(.secondarySystemGroupedBackground))
+                        .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 2)
+                    
+                    MapView(location: .init(latitude: location.latitude, longitude: location.longitude))
+                        .overlay(alignment: .bottomLeading) {
+                            if let address = location.address {
+                                Text(address)
+                                    .font(.subheadline)
+                                    .padding(vertical: 8, horizontal: 12)
+                                    .clippedWithBackgroundMaterial(.thinMaterial)
+                                    .padding(8)
+                                    .multilineTextAlignment(.leading)
+                            }
                         }
-                    }
+                }
             }
         }
     }
 
     @ViewBuilder
     private var notesSection: some View {
-        CustomSectionView(header: "Notes") {
+        VStack(spacing: 16) {
+            HStack {
+                Text("Notes")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.primary)
+                
+                Spacer()
+                
+                if isNotesInputFocused {
+                    Button {
+                        isNotesInputFocused = false
+                        viewModel.handle(.updateNotes)
+                        AnalyticsService.shared.logEvent(.exerciseDetailsNotesEdited)
+                    } label: {
+                        Text("Done")
+                            .font(.subheadline)
+                            .fontWeight(.medium)
+                            .foregroundColor(.blue)
+                    }
+                }
+            }
+            
             TextField(
                 "Enter your notes here...",
                 text: $viewModel.exercise.notes,
                 axis: .vertical
             )
             .focused($isNotesInputFocused)
-            .clippedWithPaddingAndBackground()
-        } headerTrailingContent: {
-            if isNotesInputFocused {
-                Button {
-                    isNotesInputFocused = false
-                    viewModel.handle(.updateNotes)
-                    AnalyticsService.shared.logEvent(.exerciseDetailsNotesEdited)
-                } label: {
-                    Text("Done")
-                }
-            }
+            .font(.subheadline)
+            .padding(20)
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(Color(.secondarySystemGroupedBackground))
+                    .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 2)
+            )
         }
     }
 

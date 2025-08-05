@@ -138,6 +138,18 @@ enum AnalyticsEvent: String {
     case twitterButtonTapped
     case instagramButtonTapped
 
+    case trainingLoadOpened
+    case runDetailsScreenOpened
+    case fitnessScreenOpened
+    case analyticsDashboardOpened
+    case planningScreenTrainingPlansTapped
+    case trainingPlansOpened
+    case trainingPlanStartCancelled
+    case trainingPlanStarted
+    case customPlanCreationStarted
+    case trainingPlanEditStarted
+    case trainingPlanDeleted
+
     var parameters: [String: Any]? {
         switch self {
         case .appOpened:

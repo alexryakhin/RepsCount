@@ -20,6 +20,10 @@
 
 	<key>NSCalendarsUsageDescription</key>
 	<string>Add repeating workouts to a calendar that you choose</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>RepsCount needs access to read your health data to display your workout history and fitness metrics</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>RepsCount needs access to write workout data to HealthKit to sync your exercises with the Health app</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

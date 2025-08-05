@@ -15,12 +15,15 @@ final class TodayMainViewModel: BaseViewModel {
         case startPlannedWorkout(WorkoutEvent)
         case startWorkoutFromTemplate(WorkoutTemplate)
         case updateDate
+        case startRun
+        case showRunDetails(RunInstance)
     }
 
     enum Output {
         case showWorkoutDetails(WorkoutInstance)
         case showAllWorkouts
         case showAllExercises
+        case showRunDetails(RunInstance)
     }
 
     let output = PassthroughSubject<Output, Never>()
@@ -30,6 +33,18 @@ final class TodayMainViewModel: BaseViewModel {
     @Published private(set) var plannedWorkouts: [WorkoutEvent] = []
     @Published private(set) var todayWorkouts: [WorkoutInstance] = []
     @Published private(set) var workoutTemplates: [WorkoutTemplate] = []
+    @Published private(set) var recoveryScore: Int = 85
+    @Published private(set) var dailyStrain: Int = 65
+    @Published private(set) var recentRuns: [RunInstance] = []
+    
+    // New properties for enhanced dashboard
+    @Published private(set) var sleepScore: Int = 72
+    @Published private(set) var stressCurrent: Int = 28
+    @Published private(set) var stressHighest: Int = 95
+    @Published private(set) var stressLowest: Int = 6
+    @Published private(set) var stressAverage: Int = 30
+    @Published private(set) var stressLevel: String = "Low"
+    @Published private(set) var energyLevel: Int = 60
 
     // MARK: - Private Properties
 
@@ -51,6 +66,8 @@ final class TodayMainViewModel: BaseViewModel {
         self.locationManager = serviceManager.locationManager
         super.init()
         setupBindings()
+        // Load mock recovery and strain data
+        loadMockRecoveryData()
     }
 
     func handle(_ input: Input) {
@@ -90,6 +107,20 @@ final class TodayMainViewModel: BaseViewModel {
                 currentDate = .now
                 calendarEventsProvider.fetchEvents()
             }
+        case .startRun:
+            // Mock run creation
+            let mockRun = RunInstance(
+                id: UUID(),
+                date: Date(),
+                distance: 0.0,
+                duration: 0,
+                pace: 0.0,
+                heartRate: 0,
+                type: .simple
+            )
+            output.send(.showRunDetails(mockRun))
+        case .showRunDetails(let run):
+            output.send(.showRunDetails(run))
         }
     }
 
@@ -176,5 +207,26 @@ final class TodayMainViewModel: BaseViewModel {
 
     private func deleteWorkout(_ workout: WorkoutInstance) {
         workoutsProvider.delete(with: workout.id)
+    }
+    
+    private func loadMockRecoveryData() {
+        // Mock recovery and strain data
+        recoveryScore = Int.random(in: 70...95)
+        dailyStrain = Int.random(in: 40...80)
+        sleepScore = Int.random(in: 60...85)
+        
+        // Mock stress data
+        stressCurrent = Int.random(in: 20...40)
+        stressHighest = Int.random(in: 80...100)
+        stressLowest = Int.random(in: 5...15)
+        stressAverage = Int.random(in: 25...45)
+        stressLevel = stressCurrent < 30 ? "Low" : stressCurrent < 60 ? "Medium" : "High"
+        energyLevel = Int.random(in: 50...80)
+        
+        // Mock recent runs
+        recentRuns = [
+            RunInstance(id: UUID(), date: Date().addingTimeInterval(-86400), distance: 5.2, duration: 1800, pace: 5.8, heartRate: 145, type: .simple),
+            RunInstance(id: UUID(), date: Date().addingTimeInterval(-172800), distance: 3.1, duration: 1200, pace: 6.2, heartRate: 135, type: .simple)
+        ]
     }
 }

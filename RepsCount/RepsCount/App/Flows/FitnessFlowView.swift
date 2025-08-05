@@ -1,5 +1,5 @@
 //
-//  TodayFlowView.swift
+//  FitnessFlowView.swift
 //  RepsCount
 //
 //  Created by Aleksandr Riakhin on 3/8/25.
@@ -7,18 +7,18 @@
 
 import SwiftUI
 
-struct TodayFlowView: View {
+struct FitnessFlowView: View {
     
     // MARK: - Properties
     
     @Binding var navigationPath: NavigationPath
-    @StateObject private var viewModel = TodayMainViewModel()
+    @StateObject private var viewModel = FitnessMainViewModel()
     
     // MARK: - Body
     
     var body: some View {
         NavigationView {
-            TodayMainContentView(viewModel: viewModel)
+            FitnessMainContentView(viewModel: viewModel)
                 .onReceive(viewModel.output) { output in
                     handleOutput(output)
                 }
@@ -27,17 +27,14 @@ struct TodayFlowView: View {
     
     // MARK: - Private Methods
     
-    private func handleOutput(_ output: TodayMainViewModel.Output) {
+    private func handleOutput(_ output: FitnessMainViewModel.Output) {
         switch output {
-        case .showWorkoutDetails(let workout):
-            navigationPath.append(workout)
-        case .showAllWorkouts:
-            navigationPath.append("workouts_list")
-        case .showAllExercises:
-            navigationPath.append("exercises_list")
+        case .showAnalyticsDashboard:
+            navigationPath.append("analytics_dashboard")
+        case .showTrainingLoad:
+            navigationPath.append("training_load")
         case .showRunDetails(let run):
             navigationPath.append(run)
         }
     }
-}
-
+} 

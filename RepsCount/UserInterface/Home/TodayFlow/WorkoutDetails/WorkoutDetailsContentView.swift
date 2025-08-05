@@ -2,6 +2,46 @@ import SwiftUI
 
 struct WorkoutDetailsContentView: View {
 
+    struct StatCardView: View {
+        let title: String
+        let value: String
+        let icon: String
+        let color: Color
+
+        var body: some View {
+            HStack(spacing: 16) {
+                ZStack {
+                    Circle()
+                        .fill(color.opacity(0.1))
+                        .frame(width: 48, height: 48)
+
+                    Image(systemName: icon)
+                        .font(.title2)
+                        .foregroundColor(color)
+                }
+
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(title)
+                        .font(.subheadline)
+                        .fontWeight(.medium)
+                        .foregroundColor(.secondary)
+
+                    Text(value)
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(.primary)
+                }
+
+                Spacer()
+            }
+            .padding(16)
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(Color(.tertiarySystemGroupedBackground))
+            )
+        }
+    }
+
     @ObservedObject var viewModel: WorkoutDetailsViewModel
 
     init(viewModel: WorkoutDetailsViewModel) {
@@ -10,16 +50,16 @@ struct WorkoutDetailsContentView: View {
 
     var body: some View {
         ScrollView {
-            LazyVStack(spacing: 24) {
-                HStack(spacing: 8) {
+            LazyVStack(spacing: 20) {
+                HStack(spacing: 12) {
                     muscleMapSectionView
                     statisticsSectionView
                 }
                 exercisesSectionView
                 notesSectionView
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 12)
+            .padding(.horizontal, 20)
+            .padding(.top, 8)
         }
         .background(Color(.systemGroupedBackground))
         .animation(.default, value: viewModel.workout)
@@ -126,38 +166,82 @@ struct WorkoutDetailsContentView: View {
     }
 
     private var muscleMapSectionView: some View {
-        CustomSectionView(header: Loc.WorkoutDetails.targetMuscles.localized) {
-            MuscleMapImageView(exercises: viewModel.workout.exercises.map(\.model), width: 100)
-                .clippedWithPaddingAndBackground()
+        VStack(spacing: 16) {
+            HStack {
+                Text(Loc.WorkoutDetails.targetMuscles.localized)
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.primary)
+                
+                Spacer()
+            }
+            
+            ZStack {
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(Color(.secondarySystemGroupedBackground))
+                    .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 2)
+                
+                MuscleMapImageView(exercises: viewModel.workout.exercises.map(\.model), width: 120)
+                    .padding(20)
+            }
         }
     }
 
     private var statisticsSectionView: some View {
-        CustomSectionView(header: Loc.WorkoutDetails.info.localized) {
-            FormWithDivider {
-                infoCell(
-                    label: Loc.WorkoutDetails.exercises.localized,
-                    info: viewModel.workout.exercises.count.formatted()
+        VStack(spacing: 16) {
+            HStack {
+                Text(Loc.WorkoutDetails.info.localized)
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.primary)
+                
+                Spacer()
+            }
+            
+            VStack(spacing: 12) {
+                StatCardView(
+                    title: Loc.WorkoutDetails.exercises.localized,
+                    value: viewModel.workout.exercises.count.formatted(),
+                    icon: "dumbbell.fill",
+                    color: .blue
                 )
+                
                 if let totalDuration = viewModel.workout.totalDuration?.formatted(with: [.hour, .minute]) {
-                    infoCell(
-                        label: Loc.Time.time.localized,
-                        info: totalDuration
+                    StatCardView(
+                        title: Loc.Time.time.localized,
+                        value: totalDuration,
+                        icon: "clock.fill",
+                        color: .green
                     )
                 }
             }
-            .clippedWithBackground()
         }
     }
 
     @ViewBuilder
     private var notesSectionView: some View {
         if let notes = viewModel.workout.workoutTemplate?.notes?.nilIfEmpty {
-            CustomSectionView(header: Loc.WorkoutDetails.notes.localized) {
+            VStack(spacing: 16) {
+                HStack {
+                    Text(Loc.WorkoutDetails.notes.localized)
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.primary)
+                    
+                    Spacer()
+                }
+                
                 Text(notes)
+                    .font(.subheadline)
+                    .foregroundColor(.primary)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .multilineTextAlignment(.leading)
-                    .clippedWithPaddingAndBackground()
+                    .padding(20)
+                    .background(
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(Color(.secondarySystemGroupedBackground))
+                            .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 2)
+                    )
             }
         }
     }

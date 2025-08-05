@@ -44,6 +44,8 @@ struct PlanningFlowView: View {
             navigationPath.append(template)
         case .showCalendar:
             navigationPath.append("calendar")
+        case .showTrainingPlans:
+            navigationPath.append("training_plans")
         }
     }
 }

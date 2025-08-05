@@ -27,6 +27,14 @@ struct MainAppView: View {
                         )
                     }
                 
+                FitnessFlowView(navigationPath: $navigationPath)
+                    .tabItem {
+                        Label(
+                            TabBarItem.fitness.localizedTitle,
+                            systemImage: TabBarItem.fitness.icon
+                        )
+                    }
+                
                 PlanningFlowView(navigationPath: $navigationPath)
                     .tabItem {
                         Label(
@@ -62,6 +70,12 @@ struct MainAppView: View {
                     CalendarView(navigationPath: $navigationPath)
                 case "about_app":
                     AboutAppView()
+                case "analytics_dashboard":
+                    AnalyticsDashboardView()
+                case "training_load":
+                    TrainingLoadView()
+                case "training_plans":
+                    TrainingPlansView()
                 default:
                     EmptyView()
                 }
@@ -69,11 +83,15 @@ struct MainAppView: View {
             .navigationDestination(for: ScheduleEventViewModel.ConfigModel.self) { configModel in
                 ScheduleEventView(configModel: configModel)
             }
+            .navigationDestination(for: RunInstance.self) { run in
+                RunDetailsView(run: run)
+            }
         }
         .sheet(isPresented: $isShowingOnboarding) {
             isShowingOnboarding = false
         } content: {
             OnboardingView()
         }
+        .healthKitPermissionFlow()
     }
 }
